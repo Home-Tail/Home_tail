@@ -32,7 +32,7 @@
 	        <ul class="navbar-nav ml-auto">
 	        <!-- 테스트 -->
 	        	<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	        	<li class="nav-item"><a href="../report/list.jsp" class="nav-link">신고/제보</a></li>
+	        	<li class="nav-item"><a href="../report/main.do" class="nav-link">신고/제보</a></li>
 	        	<li class="nav-item"><a href="project.html" class="nav-link">임시보호</a></li>
 	        	<li class="nav-item"><a href="../adopt/list.do" class="nav-link">입양</a></li>
 	        	<li class="nav-item"><a href="team.html" class="nav-link">봉사/후원</a></li>

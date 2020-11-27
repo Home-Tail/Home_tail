@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>list</h3>
+<img src="${vo.poster }" style="width: 500px; height: 500px">
+${vo.title }
 </body>
 </html>
