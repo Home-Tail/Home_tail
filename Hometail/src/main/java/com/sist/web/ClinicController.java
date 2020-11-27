@@ -29,7 +29,7 @@ public String clinic_list(String page,Model model)
 		page="1";
 	int curpage=Integer.parseInt(page);
 	
-	int rowSize=14;
+	int rowSize=10;
 	int start = (curpage * rowSize) - (rowSize - 1);
 	int end = curpage * rowSize;
 	

@@ -33,7 +33,15 @@
           	<c:forEach var="vo" items="${list }">
           		<div class="col-md-6 ftco-animated">
 		            <div class="blog-entry">
-		              <a href="../clinic/detail.do?no=${vo.clno }" class="block-20" style="background-image: url('images/image_1.jpg');">
+		              <a href="../clinic/detail.do?no=${vo.clno }">
+		              <c:choose>
+		               <c:when test="${vo.poster==null }">
+		                <img src="../images/aa.jpg"  class="block-20" width=420 height=100>
+		               </c:when>
+		               <c:otherwise>
+		                <img src="${vo.poster }" class="block-20" width=420 height=100>
+		               </c:otherwise>
+		              </c:choose>
 		              </a>
 		              <div class="text d-flex py-4">
 		                <div class="meta mb-3">
