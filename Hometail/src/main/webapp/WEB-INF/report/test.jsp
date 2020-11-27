@@ -6,136 +6,71 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-
-// Colors
-$color-primary: #0c8040;
-$color-secondary: #626262;
-$color-border: #ccd7d7;
-
-// Media Queries breakpoints
-$small: 480px;
-$medium: 768px;
-$large: 992px;
-$x-large: 1200px;
-
-@mixin hide-menu-items($index) {
-  &:nth-child(n + #{$index + 1}) {
-    display: none;
-  }
-
-  &:nth-child(#{$index}) .menu__link {
-    border-right: 0;
-  }
-}
-
-.divxx {
-  display: flex;
-  align-items: center;
-  height: 100vh;
-  background: #fefefe;
-}
-
-a {
-  outline: 0;
-  text-decoration: none;
-}
-
-.navigationXX {
-  width: 100%;
-  border-bottom: 3px solid $color-border;
-  font-family: 'Pathway Gothic One', sans-serif;
-  font-size: 22px;
-}
-
-.menuXX {
-  display: flex;
-  justify-content: center;
-  max-width: 1150px;
-  margin: 0 auto;
-  padding-left: 0;
-}
-
-.menu__itemXX {
-  display: inline-block;
-	white-space: nowrap;
-
-  @media screen and (max-width: $small) {
-    @include hide-menu-items(2);
-  }
-
-  @media screen and (max-width: $medium) {
-    @include hide-menu-items(3);
-  }
-
-  @media screen and (max-width: $large) {
-    @include hide-menu-items(4);
-  }
-
-  &:last-child .menu__link {
-    border-right: 0;
-  }
-}
-
-.menu__link {
-  display: block;
-  padding: 6px 30px 3px;
-  border-right: 2px dotted $color-border;
-
-  &:hover,
-  &:focus {
-    .menu__first-word {
-      transform: translate3d(0, -105%, 0);
-    }
-
-    .menu__second-word {
-      transform: translate3d(0, 105%, 0);
-    }
-  }
-
-  @media screen and (min-width: $medium) {
-    padding: 6px 40px 3px;
-  }
-}
-
-.menu__titleXX {
-  display: inline-block;
-  overflow: hidden;
-}
-
-.menu__first-wordXX,
-.menu__second-wordXX {
-  display: inline-block;
+.navXX {
   position: relative;
-  transition: transform .3s;
-
-  &::before {
-    position: absolute;
-    content: attr(data-hover);
-  }
+  display: flex;
+  width: 640px;
+  margin: 4em auto;
 }
-
-.menu__first-word {
-  color: $color-primary;
-
-  &::before {
-    top: 105%;
-    color: $color-secondary;
-  }
+.navXX .aXX {
+  display: block;
+  width: 20%;
+  padding: .75em 0;
+  color: #333;
+  text-decoration: none;
+  text-align: center;
 }
-
-.menu__second-word {
-  color: $color-secondary;
-
-  &::before {
-    bottom: 105%;
-    color: $color-primary;
-  }
+.nav-underlineXX {
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 20%;
+  height: 2px;
+  background: #333;
+  transition: all .3s ease-in-out;
 }
-
-
+.navXX .aXX:nth-child(1).is-current ~ .nav-underline {
+  left: 0;
+}
+.navXX .aXX:nth-child(2).is-current ~ .nav-underline {
+  left: 20%;
+}
+.navXX .aXX:nth-child(3).is-current ~ .nav-underline {
+  left: 40%;
+}
+.navXX .aXX:nth-child(4).is-current ~ .nav-underline {
+  left: 60%;
+}
+.navXX .aXX:nth-child(5).is-current ~ .nav-underline {
+  left: 80%;
+}
+.navXX .aXX:nth-child(1):hover ~ .nav-underline {
+  left: 0;
+}
+.navXX .aXX:nth-child(2):hover ~ .nav-underline {
+  left: 20%;
+}
+.navXX .aXX:nth-child(3):hover ~ .nav-underline {
+  left: 40%;
+}
+.navXX .aXX:nth-child(4):hover ~ .nav-underline {
+  left: 60%;
+}
+.navXX .aXX:nth-child(5):hover ~ .nav-underline {
+  left: 80%;
+}
 </style>
 </head>
 <body>
-test
+<div>
+<nav clas="navXX">
+  <a class="aXX" href="#">Primary</a>
+  <a class="aXX" href="#">Secondary</a>
+  <a class="aXX" href="#" class="is-current">Tertiary</a>
+  <a class="aXX" href="#">Quaternary</a>
+  <a class="aXX" href="#">Quinary</a>
+  <div class="nav-underlineXX"></div>
+</nav>
+</div>
 </body>
 </html>
