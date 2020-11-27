@@ -43,6 +43,19 @@ public class BoardController {
 		   model.addAttribute("list", list);
 		   return "board/list";
 	}
+	@RequestMapping("board/board_list.do")
+	public String board_board_list(String page,Model model)
+	{
+		if(page==null)
+			   page="1";
+		   int curpage=Integer.parseInt(page);
+		   List<BoardVO> list=dao.aReviewBoardListData(curpage);
+		   int totalpage=dao.boardTotalPage();
+		   model.addAttribute("curpage", curpage);
+		   model.addAttribute("totalpage", totalpage);	   
+		   model.addAttribute("list", list);
+		   return "board/board_list";
+	}
 	@RequestMapping("board/insert.do")
 	public String board_insert()
 	{
@@ -58,7 +71,7 @@ public class BoardController {
 	   public String board_detailData(int board_no, Model model)
 	   {
 		  // int curpage=Integer.parseInt(page);
-		   BoardVO vo=dao.freeBoardDetailData(board_no);
+		   BoardVO vo=dao.aReviewBoardDetailData(board_no);
 		   //List<ReplyVO> list=dao.replyListData(3, no, curpage);
 		   model.addAttribute("vo", vo);
 		   //model.addAttribute("list", list);

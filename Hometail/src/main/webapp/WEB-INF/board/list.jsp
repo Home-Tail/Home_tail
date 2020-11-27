@@ -7,33 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
-	$(function(){
-		$('.cate').hover(function(){
-			$(this).css("cursor", "pointer")
-		}, function(){
-			$(this).css("cursor", "")
-		});
-		
-		$('.cate').click(function(){
-			let no=$(this).attr("value");
-			$.ajax({
-				type:'POST',
-				url:'../recommend/recomm_list.do',
-				data:{"no":no},
-				success:function(res)
-				{
-					$('#print').html(res);
-				}
-			});
-		});
-	});
-</script>
 </head>
 <body>
-<div class="container">
-     <div class="row">
 	        <!-- <div class="col-md-2">
 	        	<table>
 	        		<tr>
@@ -109,10 +84,10 @@
             <div class="sidebar-box ftco-animate">
             	<h3>Category</h3>
               <ul class="categories">
-                <li><span class="cate" value="1">자유게시판</span></li>
-                <li><span class="cate" value="2">입양후기</span>
-                <li><span class="cate" value="3">봉사후기</span>
-                <li><span class="cate" value="4">Q&A</span>
+                <li><span class="btn cate" value="1">자유게시판</span></li>
+                <li><span class="btn cate" value="2">입양후기</span>
+                <li><span class="btn cate" value="3">봉사후기</span>
+                <li><span class="btn cate" value="4">Q&A</span>
               </ul>
             </div>
             </div>
@@ -121,7 +96,7 @@
           	 <c:forEach var="vo" items="${list }">
           		<div class="col-md-4 ftco-animate">
 		            <div class="blog-entry">
-		              <a href="blog-single.html" class="block-20" style="background-image: url('${vo.poster}');">
+		              <a href="../board/detail.do?board_no=${vo.board_no }" class="block-20" style="background-image: url('${vo.poster}');">
 		              </a>
 		              <div class="text d-flex py-4">
 		                <div class="meta mb-3">
