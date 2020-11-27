@@ -41,8 +41,6 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5f479a055a85358bb537395d0d7aeb6&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript">
  $(function(){
-	 
- 
  		var aJsonArray_p = new Array();
  		var jsondata_p;
 
