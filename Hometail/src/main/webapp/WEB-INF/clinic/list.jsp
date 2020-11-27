@@ -63,7 +63,7 @@
 		            <div class="block-27">
 		              <ul>
 		                 <c:if test="${curpage>BLOCK }">
-                              <li class="page_item">
+                              <li page="${startPage-1 }">
                                   <a class="page-link" >
                                     &lt;
                                     </a>
@@ -82,7 +82,7 @@
                               </c:if>
                               </c:forEach>
                               <c:if test="${endPage<totalpage }">
-                              <li class="page_item">
+                              <li page=${endPage+1 }>
                                   <a class="page-link">
                                       &gt;
                                   </a>

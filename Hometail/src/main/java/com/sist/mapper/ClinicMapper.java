@@ -14,7 +14,7 @@ public List<ClinicVO> clinicListData(Map map);
 @Select("SELECT CEIL(COUNT(*)/10.0) FROM clinic")
 public int clinicTotalPage();
 
-@Select("SELECT clno,title,tel,addr,post FROM clinic WHERE clno=#{clno}")
+@Select("SELECT clno,title,tel,addr,post,poster FROM clinic WHERE clno=#{clno}")
 public ClinicVO clinicDetailData(int clno);
 }
 

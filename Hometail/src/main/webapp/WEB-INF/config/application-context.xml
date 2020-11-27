@@ -51,6 +51,11 @@
        p:sqlSessionFactory-ref="ssf"
        p:mapperInterface="com.sist.mapper.ReportMapper"
      />
+     <bean id="mapper3"
+       class="org.mybatis.spring.mapper.MapperFactoryBean"
+       p:sqlSessionFactory-ref="ssf"
+       p:mapperInterface="com.sist.mapper.CenterServiceMapper"
+     />
     <!-- ViewResolver -->
     <bean id="tilesViewResolver"
        class="org.springframework.web.servlet.view.UrlBasedViewResolver"
