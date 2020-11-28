@@ -18,11 +18,14 @@
   </definition>
   <definition name="join" template="/WEB-INF/member/join.jsp">
   </definition> -->
-    <definition name="list" template="/WEB-INF/clinic/list.jsp">
+  <definition name="list" template="/WEB-INF/clinic/list.jsp">
   </definition>
   
  <!-- 신고&제보list by이석주 -->
-    <definition name="report_list" template="/WEB-INF/report/list.jsp">
+  <definition name="report_list" template="/WEB-INF/report/list.jsp">
+  </definition>
+ <!-- 주변찾기 -->
+  <definition name="report_around" template="/WEB-INF/report/around.jsp">
   </definition>
   
   

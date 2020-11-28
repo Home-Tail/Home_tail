@@ -31,7 +31,6 @@ public class ReportController {
 	@RequestMapping("report/list.do")
 	public String report_list(String page,int cate,Model model)
 	{
-		System.out.println("report/list.do 실행");
 		 if(page==null)
 			  page="1";
 		 int curpage=Integer.parseInt(page);
@@ -100,6 +99,13 @@ public class ReportController {
 		model.addAttribute("vo", vo);
 		
 		return "report/detail";
+	}
+	
+	@RequestMapping("report/around.do")
+	public String report_Around(String no,Model model)
+	{
+		System.out.println("report/around.do실행");
+		return "report_around";
 	}
 	
 	
