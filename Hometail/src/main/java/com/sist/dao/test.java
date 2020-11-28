@@ -15,5 +15,4 @@ public class test {
 		System.out.println(".gitignore 테스트 2020 11 28 14:03");
 		System.out.println(".gitignore 테스트 2020 11 28 14:12");
 	}
-
 }
