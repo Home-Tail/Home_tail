@@ -22,7 +22,7 @@ public class CenterServiceController {
 		}
 		System.out.println("Json" + data);
 
-		return "center/service";
+		return "../center/service";
 	}
 
 	@RequestMapping("service_map.do")
@@ -32,7 +32,7 @@ public class CenterServiceController {
 		System.out.println("지번 주소" + vo.getLotno_addr());
 		System.out.println("도로명 주소 " + vo.getRoadno_addr());
 
-		return "center/service";
+		return "../center/service";
 	}
 
 	@RequestMapping("center_date.do")

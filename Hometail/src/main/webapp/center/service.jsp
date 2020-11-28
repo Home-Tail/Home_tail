@@ -111,9 +111,9 @@
 						aJon_p.REFINE_WGS84_LAT = obj_p.REFINE_WGS84_LAT; // 
 						aJon_p.latlng = new kakao.maps.LatLng(obj_p.REFINE_WGS84_LAT,obj_p.REFINE_WGS84_LOGT);
 						aJsonArray_p.push(aJon_p);
-						mapdata_p = aJsonArray_p;
+						mapdata_p= aJsonArray_p;
 				})
-			});
+			
 			
  			  $.getJSON("medical.json",function(data){
 // 	 			  $( "#tabs" ).tabs();
@@ -408,6 +408,7 @@
  			 	    return marker;
  			 	}
  			  });
+			});
  });
 </script>
 </head>

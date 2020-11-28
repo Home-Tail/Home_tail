@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
   </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<body>
 
 <%-- Header 영역 --%>
 <tiles:insertAttribute name="header"/>

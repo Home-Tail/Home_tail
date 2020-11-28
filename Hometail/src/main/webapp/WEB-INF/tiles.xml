@@ -25,6 +25,15 @@
     <definition name="report_list" template="/WEB-INF/report/list.jsp">
   </definition>
   
+  
+  
+  <!-- 지승구  -->
+  <definition name="reserve_date" template="../center/reserve_date.jsp">
+  </definition>
+  
+  <definition name="reserve_time" template="../center/reserve_time.jsp">
+  </definition>
+  
 </tiles-definitions>
 
 
