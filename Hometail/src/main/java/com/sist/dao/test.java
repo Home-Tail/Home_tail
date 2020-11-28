@@ -7,6 +7,7 @@ public class test {
 		System.out.println("test");
 		System.out.println("희진님다음테스트");
 		System.out.println("희진님다음테스트");
+		System.out.println("승구님다음테스트 2020 11 28 13:29");
 	}
 
 }
