@@ -11,6 +11,7 @@ public class test {
 		System.out.println("다음테스트 2020 11 28 13:35");
 		System.out.println(".gitignore 테스트 2020 11 28 13:41");
 		System.out.println(".gitignore 테스트 2020 11 28 13:52");
+		System.out.println(".gitignore 테스트 2020 11 28 14:01");
 	}
 
 }
