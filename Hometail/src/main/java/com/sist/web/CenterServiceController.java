@@ -26,19 +26,23 @@ public class CenterServiceController {
 	}
 
 	@RequestMapping("service_map.do")
-	public String center_service_map(Model model, CenterVO vo) {
+	public String center_service_map(Model model, CenterVO vo,String strYear,String strMonth,String strDay,String time) {
 		System.out.println("위치값" + vo.getLoc());
 		System.out.println("위치값" + vo.getTel());
 		System.out.println("지번 주소" + vo.getLotno_addr());
 		System.out.println("도로명 주소 " + vo.getRoadno_addr());
-
+		System.out.println("년도 "+strYear);
+		System.out.println(" 월  "+strMonth);
+		System.out.println(" 일  "+strDay);
+		System.out.println("시간 "+time);
+		
 		return "../center/service";
 	}
 
 	@RequestMapping("center_date.do")
 	public String center_date(Model model,String strYear,String strMonth,String tno)
 	{
-	
+		System.out.println("=======================");
 			  if(tno==null)
 				  tno="1";
 			  

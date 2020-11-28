@@ -409,6 +409,8 @@
  			 	}
  			  });
 			});
+			
+		    
  });
 </script>
 </head>
@@ -475,10 +477,15 @@
 				<tr>
 					<th>우편번호</th>
 					<td id="post" name="post"></td>
-					<input type="hidden" id="post2"  name="post">
+					<input type=hidden id="post2"  name="post">
 				</tr>
+                  <input type=hidden name="strYear" id="strYear">
+                  <input type=hidden name="strMonth" id="strMonth">
+                  <input type=hidden name="strDay" id="strDay">
+                  <input type=hidden name="time" id="time">
 			</table>
-	                <input type="submit" value="예약" class="btn btn-primary py-3 px-5">	
+<!--                   <input type=submit value="예매하기" class="btn btn-lg btn-primary"> -->
+	              <input type="button" value="예약" class="btn btn-primary py-3 px-5">	
 			</form>
 	              </div>
 	        <div class="col-sm-12">
@@ -487,11 +494,9 @@
 	        	
 				<div class="col-sm-6" id="reserve_time">
 				</div>
-	        	
 	        </div>
 			</div>
 			 <div class="col-sm-12">
-			 
          <div id="tabs">
            <ul>
              <li><a href="#tabs-1">치료기관 </a></li>

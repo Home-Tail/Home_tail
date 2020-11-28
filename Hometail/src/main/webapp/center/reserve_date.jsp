@@ -45,26 +45,61 @@ $(function(){
 		let year=$(this).val();
 		$.ajax({
 			type:'post',
-			url:'../reserve/date.do',
-			data:{"year":year},
+			url:'../center/center_date.do',
+			data:{"strYear":year},
 			success:function(result)
 			{
-				$('#date_info').html(result);
+				$('#reserve_date').html(result);
 			}
 		})
-	})
+	});
 	$('#month').change(function(){
 		let month=$(this).val();
 		$.ajax({
 			type:'post',
-			url:'../reserve/date.do',
-			data:{"month":month},
+			url:'../center/center_date.do',
 			success:function(result)
 			{
-				$('#date_info').html(result);
+				$('#reserve_date').html(result);
 			}
 		})
 	});
+	
+	// 예약일 클릭시 
+	// <span data-year="2020"> => attr("data-year")
+	// <span>28</span> => text()
+	// <input type=text> <select> ==> val()
+	$('.rdays_ok').click(function(){
+		let year=$(this).attr("data-year");
+		let month=$(this).attr("data-month");
+		let day=$(this).text();
+		let rday=year+"년도 "+month+"월 "+day+"일";
+		console.log('year은?'+year);
+		console.log('month은?'+month);
+		console.log('day은?'+day.trim());
+		$('#strYear').val(year);
+		$('#strMonth').val(month);
+		$('#strDay').val(day.trim());
+// 		$('#movie_reserve').text(rday);
+		$('#day').val(rday);
+		
+		// 시간 출력 
+		/*
+		    result => text,html,xml,json
+		    @Controller , @RestController
+		*/
+// 		$.ajax({
+// 			type:'post',
+// 			url:'../reserve/time.do',
+// 			data:{"day":day},
+// 			success:function(result)
+// 			{
+// 				$('#time_info').html(result);
+// 			}
+// 		})
+	})
+        
+});
 </script>
 </head>
 <body>
@@ -132,7 +167,7 @@ $(function(){
              <c:set var="bg" value="text-center"/>
            </c:if>
            
-           <td class="${bg }"><font color="${color }">
+           <td class="${bg }"><font color="${color }" class="rdays_ok" data-year=${year } data-month=${month }>
             <c:if test="${i==rdays[i] }">
              <span class="rdays_ok" data-year=${year } data-month=${month }>${i }</span>
             </c:if>
