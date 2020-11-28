@@ -8,12 +8,58 @@
 <head>
 <title>Insert title here</title>
 
+<style type="text/css">
+div.containerX a
+{
+    color: #FFF;
+    text-decoration: none;
+    font: 20px Raleway;
+    margin: 0px 10px;
+    padding: 10px 10px;
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
+}
+
+div.topBotomBordersOut a:before, div.topBotomBordersOut a:after
+{
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 2px;
+    background: #0082C6;
+    content: "";
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+div.topBotomBordersOut a:before
+{
+    top: 0px;
+    transform: translateY(10px);
+}
+
+div.topBotomBordersOut a:after
+{
+    bottom: 0px;
+    transform: translateY(-10px);
+}
+
+
+div.topBotomBordersOut a:hover:before, div.topBotomBordersOut a:hover:after
+{
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+</style>
+
 <script type="text/javascript">
 
 
 $(function() {
 	//전체,실종,제보,완료 버튼 누를때마다 카테고리 변경 용도
-	$('.btn').click(function(){
+	$('div .containerX a').click(function(){
 		cate=$(this).attr("cate");
 		$.ajax({
 				type:'post',
@@ -49,10 +95,13 @@ $(function() {
 	  <div class="row">
         <div class="col-lg-12" >
         	<!-- 카테고리 버튼 -->
-			<a cate=0 class="btn  px-3 py-6 mt-3 mb-3" style="margin-left: 10px; cursor: pointer; color: white; background-color:black" >전체</a>
-			<a cate=1 class="btn  px-3 py-6 mt-3 mb-3" style="margin-left: 10px; cursor: pointer; color: white; background-color:#ff00a9">실종</a>
-			<a cate=2 class="btn  px-3 py-6 mt-3 mb-3" style="margin-left: 10px; cursor: pointer; color: white; background-color:#28a745">제보</a>
-			<a cate=3 class="btn  px-3 py-6 mt-3 mb-3" style="margin-left: 10px; cursor: pointer; color: white; background-color:#939782">완료</a>
+			<div class="containerX blue topBotomBordersOut" style="margin-bottom: 20px; margin-top: 20px;">
+			  <a cate=0 style="color: black; font-weight: 800;">전체</a>
+			  <a cate=1 style="color: black; font-weight: 800;">실종</a>
+			  <a cate=2 style="color: black; font-weight: 800;">제보</a>
+			  <a cate=3 style="color: black; font-weight: 800;">완료</a>
+			  <a style="color: black; font-weight: 800;">주변</a>
+			</div>
 		<div class="row">
 			
 			<!-- 실제 리스트 출력 -->

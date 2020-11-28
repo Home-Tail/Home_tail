@@ -8,7 +8,7 @@ public interface ReportMapper {
 	@Select("SELECT petno,id,title,cate,kind,sub_kind,poster,sex,age,weight,color,pdate,loc,num "
 			+ "FROM (SELECT petno,id,title,cate,kind,sub_kind,poster,sex,age,weight,color,pdate,loc,rownum as num "
 	  		+ "FROM (SELECT petno,id,title,cate,kind,sub_kind,poster,sex,age,weight,color,pdate,loc "
-	  		+ "FROM pet_board ORDER BY petno DESC)) "
+	  		+ "FROM pet_board WHERE cate BETWEEN 1 AND 3 ORDER BY petno DESC)) "
 	  		+"WHERE num BETWEEN #{start} AND #{end}")
 		public List<ReportVO> reportListData(Map map);
 

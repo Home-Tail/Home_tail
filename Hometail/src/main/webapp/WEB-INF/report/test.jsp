@@ -6,71 +6,148 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.navXX {
-  position: relative;
-  display: flex;
-  width: 640px;
-  margin: 4em auto;
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+.bodyXX{
+  font-family:'Open Sans', sans-serif;
+  width:90%;
+  margin:0 auto;
+  padding:2em 0 6em;
 }
-.navXX .aXX {
-  display: block;
-  width: 20%;
-  padding: .75em 0;
-  color: #333;
-  text-decoration: none;
-  text-align: center;
+
+.wrapper{
+  margin:3em 0;
 }
-.nav-underlineXX {
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 20%;
-  height: 2px;
-  background: #333;
-  transition: all .3s ease-in-out;
+.a,.a:visited,.a:hover,.a:active{
+  -webkit-backface-visibility:hidden;
+          backface-visibility:hidden;
+	position:relative;
+  transition:0.5s color ease;
+	text-decoration:none;
+	color:#81b3d2;
+	font-size:2.5em;
 }
-.navXX .aXX:nth-child(1).is-current ~ .nav-underline {
-  left: 0;
+.a:hover{
+	color:#d73444;
 }
-.navXX .aXX:nth-child(2).is-current ~ .nav-underline {
-  left: 20%;
+.a.before:before,.a.after:after{
+  content: "";
+  transition:0.5s all ease;
+  -webkit-backface-visibility:hidden;
+          backface-visibility:hidden;
+  position:absolute;
 }
-.navXX .aXX:nth-child(3).is-current ~ .nav-underline {
-  left: 40%;
+.a.before:before{
+  top:-0.25em;
 }
-.navXX .aXX:nth-child(4).is-current ~ .nav-underline {
-  left: 60%;
+.a.after:after{
+  bottom:-0.25em;
 }
-.navXX .aXX:nth-child(5).is-current ~ .nav-underline {
-  left: 80%;
+.a.before:before,.a.after:after{
+  height:5px;
+  height:0.35rem;
+  width:0;
+  background:#d73444;
 }
-.navXX .aXX:nth-child(1):hover ~ .nav-underline {
-  left: 0;
+.a.first:after{
+  left:0;
 }
-.navXX .aXX:nth-child(2):hover ~ .nav-underline {
-  left: 20%;
+.a.second:after{
+  right:0;
 }
-.navXX .aXX:nth-child(3):hover ~ .nav-underline {
-  left: 40%;
+.a.third:after,.a.sixth:before,.a.sixth:after{
+  left:50%;
+  -webkit-transform:translateX(-50%);
+          transform:translateX(-50%);
 }
-.navXX .aXX:nth-child(4):hover ~ .nav-underline {
-  left: 60%;
+.a.fourth:before,.a.fourth:after{
+  left:0;
 }
-.navXX .aXX:nth-child(5):hover ~ .nav-underline {
-  left: 80%;
+.a.fifth:before,.a.fifth:after{
+  right:0;
+}
+.a.seventh:before{
+  right:0;
+}
+.a.seventh:after{
+  left:0;
+}
+.a.eigth:before{
+  left:0;
+}
+.a.eigth:after{
+  right:0;
+}
+.a.before:hover:before,.a.after:hover:after{
+  width:100%;
+}
+.square{
+  box-sizing:border-box;
+  margin-left:-0.4em;
+  position:relative;
+  font-size:1.5em;
+  overflow:hidden;
+}
+.square .a{
+  position:static;
+  font-size:100%;
+  padding:0.2em 0.4em;
+}
+.square:before,.square:after{
+  content: "";
+  box-sizing:border-box;
+  transition:0.25s all ease;
+  -webkit-backface-visibility:hidden;
+          backface-visibility:hidden;
+  position:absolute;
+  width:5px;
+  width:0.35rem;
+  height:0;
+  background:#d73444;
+}
+.square:before{
+  left:0;
+  bottom:-0.2em;
+}
+.square.individual:before{
+  transition-delay:0.6s;
+}
+.square:after{
+  right:0;
+  top:-0.2em;
+}
+.square.individual:after{
+  transition-delay:0.2s;
+}
+.square .a:before{
+  left:0;
+  transition:0.25s all ease;
+}
+.square .a:after{
+  right:0;
+  transition:0.25s all ease;
+}
+.square.individual .a:after{
+  transition:0.25s all ease 0.4s;
+}
+.square:hover:before,.square:hover:after{
+  height:calc(100% + 0.4em);
+}
+.square:hover .a:before,.square:hover .a:after{
+  width:100%;
 }
 </style>
 </head>
 <body>
-<div>
-<nav clas="navXX">
-  <a class="aXX" href="#">Primary</a>
-  <a class="aXX" href="#">Secondary</a>
-  <a class="aXX" href="#" class="is-current">Tertiary</a>
-  <a class="aXX" href="#">Quaternary</a>
-  <a class="aXX" href="#">Quinary</a>
-  <div class="nav-underlineXX"></div>
-</nav>
+
+<div class="bodyXX">
+<div class="wrapper">
+  <span class="square">
+    <a class="a tenth before after" href="#">Cool Square Simultaneous</a>
+  </span>
 </div>
+</div>
+
 </body>
 </html>
