@@ -14,6 +14,10 @@ public class TempDAO {
 	public List<TempVO> TempListData(Map map) {
 		return mapper.TempListData(map);
 	}
+	
+	public TempVO TempDetailData(int petno) {
+		return mapper.TempDetailData(petno);
+	}
 
 	public int TempTotalPage() {
 		return mapper.TempTotalPage();

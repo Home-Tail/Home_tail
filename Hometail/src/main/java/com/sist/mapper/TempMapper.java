@@ -14,12 +14,16 @@ public interface TempMapper {
 	@Select("SELECT petno,id,title,cate,kind,poster,pdate,loc,num "
 			+ "FROM (SELECT petno,id,title,cate,kind,poster,pdate,loc,rownum as num "
 			+ "FROM (SELECT petno,id,title,cate,kind,poster,pdate,loc "
-			+ "FROM pet_board WHERE cate BETWEEN 4 AND 5 ORDER BY petno DESC)) "
+			+ "FROM pet_board WHERE cate BETWEEN 5 AND 6 ORDER BY petno DESC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<TempVO> TempListData(Map map);
 
 	@Select("SELECT CEIL(COUNT(*)/8.0) FROM pet_board")
 	public int TempTotalPage();
+
+	@Select("SELECT * FROM pet_board WHERE petno=#{petno}") 
+	public TempVO TempDetailData(int petno);
+	
 
 	/*
 	 * @Select("SELECT petno,id,title,cate,kind,poster,pdate,loc,num " +

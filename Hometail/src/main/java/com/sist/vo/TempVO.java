@@ -5,7 +5,14 @@ import java.util.Date;
 public class TempVO {
 	private int petno,cate,kind;
 	private String id,title,poster,loc,tel,content;
-	private Date regdate;
+	private Date regdate,pdate;
+	
+	public Date getPdate() {
+		return pdate;
+	}
+	public void setPdate(Date pdate) {
+		this.pdate = pdate;
+	}
 	public int getPetno() {
 		return petno;
 	}

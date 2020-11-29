@@ -45,14 +45,16 @@ public class TempController {
 		return "temp/list";
 	}
 
-	/*
-	 * @RequestMapping("Temp/detail.do") public String Temp_Detail(String
-	 * no,Model model) {
-	 * 
-	 * TempVO vo=dao.TempDetailData(Integer.parseInt(no));
-	 * model.addAttribute("vo", vo);
-	 * 
-	 * return "Temp/detail"; }
-	 */
+	
+	 @RequestMapping("temp/detail.do") 
+	 public String Temp_Detail(String no,Model model) {
+	  
+	  TempVO vo=dao.TempDetailData(Integer.parseInt(no));
+	  model.addAttribute("vo", vo);
+	  
+	 return "temp/detail";
+	 
+	 }
+	
 
 }
