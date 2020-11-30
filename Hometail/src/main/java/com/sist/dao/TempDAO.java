@@ -4,6 +4,7 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.sist.mapper.TempMapper;
+import com.sist.vo.BoardVO;
 import com.sist.vo.TempVO;
 
 @Repository
@@ -21,6 +22,11 @@ public class TempDAO {
 
 	public int TempTotalPage() {
 		return mapper.TempTotalPage();
+	}
+	
+	public TempVO TempInsertData(TempVO vo)
+	{
+		return mapper.TempInsertData();
 	}
 
 	/*

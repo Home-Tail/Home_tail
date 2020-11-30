@@ -14,34 +14,49 @@
 			<table class="table">
 				<tr>
 					<th width=100 class="text-center danger" style="font-size:20px">제목</th>
-					<td width=100 class="text-center">${vo.title }</td>
+					<td width=100 class="text-left" colspan=3 style="color:black;">${vo.title }</td>
 				</tr>
+				<tr>
+					
+					
+					<th width=20% class="text-center danger">작성일</th>
+					<td width=30% class="text-left"><fmt:formatDate
+							value="${vo.regdate}" pattern="yyyy-MM-dd" /></td>
+				</tr>
+
 				<tr>
 					<th width=20% class="text-center danger">작성자</th>
-					<td width=30% class="text-center">${vo.id }</td>
+					<td width=30% class="text-left">${vo.id }</td>
+					
+					<th width=20% class="text-center danger">연락처</th>
+					<td width=30% class="text-left">${vo.tel }</td>
 				</tr>
-
 				<tr>
-					<th width=20% class="text-center danger">작성일</th>
-					<td width=30% class="text-center"><fmt:formatDate
-							value="${vo.regdate}" pattern="yyyy-MM-dd" /></td>
+					<th width=20% class="text-center danger">발견날짜</th>
+					<td width=30% class="text-left"><fmt:formatDate
+							value="${vo.pdate}" pattern="yyyy-MM-dd" /></td>
 
 					<th width=20% class="text-center danger">발견지역</th>
-					<td width=30% class="text-center">${vo.loc }</td>
+					<td width=30% class="text-left">${vo.loc }</td>
+					
 				</tr>
 				
+				
+				<tr>
+					<td colspan=4 class="text-center">
+						<img src="${vo.poster }" width=400px height=400px> <p><p>${vo.content }</p></p>
+					</td>
+					
+					
+				</tr>
+				
+				<tr>
+				<td></td>
+				</tr>
 			</table>
 			
-				<table class="table"></table>
 				</div>
-				<div style="text-align: center;">
-					<span ><img src="${vo.poster }" width=400px height=400px></span>
-				</div>
-				<div style="text-align: center;">
-				<span>${vo.content }</span>
-				</div>
-			
-				<div class="text-right">
+				<div class="text-right" style="padding-bottom:50px;">
 				<a href="list.do" class="btn btn-sm btn-primary py-2 px-4">&nbsp;목록&nbsp;</a>
 				</div>
 	</div>

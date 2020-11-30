@@ -26,7 +26,15 @@
 	  			<div class="container">
         		<div class="col-lg-12">
         		<div class="row">
-			
+        			<tr>
+		      			 <td>
+		        			<a href="../temp/insert.do" class="btn btn-sm btn-primary py-2 px-4">등록하기</a>
+		       			</td>
+		    		 </tr>
+					 <table class="table">
+		     			
+		  			 </table>
+		  			 
 			 		<c:forEach var="vo"  items="${list }">
 					<div class="col-md-3 ftco-animated">
 			   		<div class="blog-entry">
