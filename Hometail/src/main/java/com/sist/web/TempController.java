@@ -4,11 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartRequest;
+
 import com.sist.dao.TempDAO;
 import com.sist.vo.BoardVO;
 import com.sist.vo.TempVO;
-
+import java.io.IOException;
 import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class TempController {
@@ -62,11 +66,18 @@ public class TempController {
 	}
 
 	@RequestMapping("temp/insert_ok.do")
-	public String temp_insert_ok(TempVO vo) 
+	public String temp_insert_ok(TempVO vo,HttpServletRequest request) 
 	{
+		/*request.setCharacterEncoding("utf-8");*/
+		
+		String path="C:\\Users\\YOONDO\\springDev\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail"; 
+		String enctype= "UTF-8";
+		int size = 1024 * 1024 * 100;
+		MultipartRequest mr = null;
+		/*mr = new MultipartRequest(request, path, size, enctype,new DefaultFileRenamePolicy()); */
+		
 		vo.setPoster("없음");
 		vo.setTel("010-1111-1111");
-		
 		System.out.println("아이디"+vo.getId());
 		System.out.println("제목"+vo.getTitle());
 		System.out.println("카테"+vo.getCate());

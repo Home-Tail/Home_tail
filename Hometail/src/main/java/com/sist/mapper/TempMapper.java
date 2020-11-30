@@ -24,10 +24,10 @@ public interface TempMapper {
 	@Select("SELECT * FROM pet_board WHERE petno=#{petno}") 
 	public TempVO TempDetailData(int petno);
 	
-	@Insert("INSERT INTO pet_board(petno,id,title,cate,kind,SUB_KIND,poster,regdate,pdate,loc,tel,content) "
+	@Select("INSERT INTO pet_board(petno,id,title,cate,kind,SUB_KIND,poster,regdate,pdate,loc,tel,content) "
 			+ "VALUES("
-			+ "(SELECT NVL(MAX(petno+1),1) FROM pet_board),"
-			+ "#{id},"
+			+ "(SELECT NVL(MAX(petno+1),1) FROM pet_board)," 	
+			+ "#{id}," 
 			+ "#{title},"
 			+ "#{cate},"
 			+ "1,"
@@ -38,7 +38,7 @@ public interface TempMapper {
 			+ "#{loc},"
 			+ "#{tel},"
 			+ "#{content})")
-	public TempVO TempInsertData();
+	public TempVO TempInsertData(TempVO vo);
 	
 	/*
 	 * @Select("SELECT petno,id,title,cate,kind,poster,pdate,loc,num " +

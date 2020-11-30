@@ -26,7 +26,7 @@ public class TempDAO {
 	
 	public TempVO TempInsertData(TempVO vo)
 	{
-		return mapper.TempInsertData();
+		return mapper.TempInsertData(vo);
 	}
 
 	/*
