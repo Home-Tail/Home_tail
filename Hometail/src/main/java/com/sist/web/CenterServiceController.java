@@ -1,14 +1,20 @@
 package com.sist.web;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.vo.CenterVO;
 
 @Controller
@@ -16,12 +22,31 @@ import com.sist.vo.CenterVO;
 public class CenterServiceController {
 
 	@RequestMapping("service.do")
-	public String board_list(Model model, String data) {
+	public String board_list(Model model, String data,HttpServletRequest request) throws IOException {
 		if (data == null) {
 			System.out.println("data은 NULL");
 		}
 		System.out.println("Json" + data);
+		//=====================================
+		
+		System.out.println("========Model 업데이트 부분 ========");
+		HttpSession session = request.getSession();
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} // 한글 디코딩
 
+		String path = "C:\\webDev\\webStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Home_fit\\challenge_poster";
+		String enctype = "UTF-8"; // 한글파일명을 사용 여부
+		int size = 1024 * 1024 * 100;// 파일의 최대크기
+
+		// MultipartRequest : 사용자가 보내준 데이터를 받는다 (request=>파일을 받을 수 없다 , 일반데이터만 받는다)
+		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
+
+
+		
+		//=====================================
 		return "../center/service";
 	}
 

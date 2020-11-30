@@ -6,12 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 public class MainController {
 	@RequestMapping("main/main.do")
-	public String main_main(String page,Model model)
+	public String main_main(String page,Model model,HttpSession session)
 	{
+		
+		System.out.println(session.getAttribute("id"));
 		return "main";
 	}
 	@RequestMapping("adopt/list.do")

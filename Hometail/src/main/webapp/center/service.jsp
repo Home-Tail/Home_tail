@@ -378,7 +378,7 @@
 
  			 	            // 마커를 생성하고 지도에 표시합니다
  			 	            var marker = addMarker(new kakao.maps.LatLng(places[i].y, places[i].x), order);
-
+			
  			 	            // 마커와 검색결과 항목을 클릭 했을 때
  			 	            // 장소정보를 표출하도록 클릭 이벤트를 등록합니다
  			 	            (function(marker, place) {
@@ -404,14 +404,39 @@
 
  			 	    marker.setMap(map); // 지도 위에 마커를 표출합니다
  			 	    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
-
+			 
  			 	    return marker;
  			 	}
  			  });
 			});
-			
-		    
- });
+});
+ 
+function button_click(){
+ console.log('클릭클릭');
+	let loc=$('#loc2').val();
+	if(loc.trim()=="")
+	{
+		$('#text_view').focus();
+		$('#text_view').text('*위치를 선택해 주세요.*');
+		console.log('보호소선택');
+		return;
+	}
+	let strDay=$('#strDay').val();
+	console.log('날짜선택'+strDay);
+	if(strDay.trim()=="")
+	{
+		$('#text_view').focus();
+		$('#text_view').text('*날짜를 선택해 주세요.*');
+		return;
+	}
+	let time=$('#time').val();
+	console.log('시간선택'+time);
+	if(time.trim()=="")
+	{
+		$('#text_view').focus();
+		$('#text_view').text('*시간을 선택해 주세요.*');
+	}
+}
 </script>
 </head>
 <body>
@@ -442,10 +467,9 @@
 			           보호소
 			        </li>  
 			    </ul>
-			    
 			</div>
 			<div style="width:1200px; height:350px; padding: 0px 0px 0px 750px;  float: left;">
-			<form action="../center/service_map.do" method="post">
+			<form action="../center/service_map.do" method="post" name="ReserveFrm">
 			<table class="table">
 				<h3>정보 내역</h3>
 				<tr>
@@ -485,8 +509,9 @@
                   <input type=hidden name="time" id="time">
 			</table>
 <!--                   <input type=submit value="예매하기" class="btn btn-lg btn-primary"> -->
-	              <input type="button" value="예약" class="btn btn-primary py-3 px-5">	
+	              <input type="button" value="예약" onclick="button_click();" class="btn btn-primary">
 			</form>
+	              <p id="text_view" style="color:red;"></p>
 	              </div>
 	        <div class="col-sm-12">
 				<div class="col-sm-6" id="reserve_date">

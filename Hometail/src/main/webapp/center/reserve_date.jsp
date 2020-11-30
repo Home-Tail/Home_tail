@@ -58,6 +58,7 @@ $(function(){
 		$.ajax({
 			type:'post',
 			url:'../center/center_date.do',
+			data:{"strMonth":month},
 			success:function(result)
 			{
 				$('#reserve_date').html(result);
