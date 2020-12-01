@@ -2,6 +2,9 @@ package com.sist.web;
 
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,6 +60,7 @@ public class BoardController {
 		
 		if(page==null)
 			   page="1";
+		
 		   int curpage=Integer.parseInt(page);
 		   int acurpage=Integer.parseInt(page);
 		   int qcurpage=Integer.parseInt(page);
@@ -138,12 +142,33 @@ public class BoardController {
 		   return "board_detail"; 
 	   }
 	
-	// 삭제 연습 여기부터 해!
 	@RequestMapping("board/delete_ok.do")
-	   public String board_delete_ok(String no, String id, BoardVO vo)
+	   public String board_delete_ok(BoardVO vo,HttpSession session)
 	   {
-			int board_no=Integer.parseInt(no); 
+		String id= (String) session.getAttribute("id");
+		System.out.println("삭제 글번호 : "+vo.getBoard_no());
+		System.out.println("삭제 아이디 : "+id);
+			int board_no=vo.getBoard_no(); 
 			dao.boardDelete(board_no, id);
 		   return "redirect:../board/list.do";
 	   } 
+	
+	// 수정
+	@RequestMapping("board/update.do")
+	public String board_update(String board_no, Model model)
+	   {
+		   int bno=Integer.parseInt(board_no);
+		   BoardVO vo=dao.boardUpdateList(bno);
+		   model.addAttribute("vo", vo);
+		   return "board_update"; 
+	   }
+	/*이부분 해야해
+	@RequestMapping("board/update_ok.do")
+	   public String board_update_ok(BoardVO vo,HttpSession session)
+	   {
+		   int bno=Integer.parseInt(board_no);
+			dao.boardUpdateData(bno);
+		   return "redirect:../board/list.do";
+	   } 
+	   */
 }

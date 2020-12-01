@@ -16,7 +16,7 @@
        <tr>
         <th class="text-right" width=30%>이름</th>
         <td>
-          <input type=text name=id size=80>
+          <input type=text name=id size=80 value="${sessionScope.id }" readonly>
         </td>
        </tr>
        <tr>

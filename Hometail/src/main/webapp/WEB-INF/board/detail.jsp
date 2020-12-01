@@ -7,6 +7,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#update').click(function(){
+			$.ajax({
+				type:'POST',
+				url:'../board/update.do',
+				data:{'board_no':${vo.board_no}},
+				success:function(res) 
+				{
+					$('#print').html(res);
+				}
+			});
+		});
+	});
+</script> 
 </head>
 <body>
    <div class="container">
@@ -39,10 +55,10 @@
 	        <tr>
 	          <td colspan="4" class="text-right">
 	          <c:if test="${sessionScope.id==vo.id }">
-		            <a href="#" class="btn btn-sm btn-success">수정</a>
-		            <a href="../board/delete_ok.do" class="btn btn-sm btn-info">삭제</a>
+		            <span class="btn btn-sm btn-success" id="update">수정</span>
+		            <a href="../board/delete_ok.do?board_no=${vo.board_no }" class="btn btn-sm btn-info">삭제</a>
 		      </c:if>      
-	            <a href="#" class="btn btn-sm btn-warning">목록</a>
+	            <a href="javascript:history.back()" class="btn btn-sm btn-warning">목록</a>
 	          </td>
 	        </tr>
 	      </table>

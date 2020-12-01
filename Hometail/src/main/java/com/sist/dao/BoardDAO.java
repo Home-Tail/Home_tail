@@ -293,6 +293,53 @@ public class BoardDAO {
 		dbConn.disConnection();
 		return vo;
 	}
+	
+	// 수정	boardUpdateList
+	public BoardVO boardUpdateList(int bno)
+	{
+		BoardVO vo=new BoardVO();
+		try
+		{
+			dbConn.getConnection();
+			String sql="{CALL boardUpdateList(?,?)}";
+			cs=dbConn.getConn().prepareCall(sql);
+			cs.setInt(1, bno);
+			cs.registerOutParameter(2, OracleTypes.CURSOR);
+			cs.executeQuery();
+			ResultSet rs=(ResultSet)cs.getObject(2);
+			rs.next();
+			vo.setBoard_no(rs.getInt(1));
+			vo.setId(rs.getString(2));
+			vo.setCate(rs.getInt(3));
+			vo.setTitle(rs.getString(4));
+			vo.setContent(rs.getString(5));
+			vo.setRegdate(rs.getDate(6));
+			vo.setHit(rs.getInt(7));
+			vo.setPoster(rs.getString(8));
+			rs.close();
+		}catch(Exception ex){}
+		dbConn.disConnection();
+		return vo;
+	}
+	/* 이부분 해야해
+	public void boardUpdateData(BoardVO vo)
+	{
+		try
+		{
+			dbConn.getConnection();
+			String sql="{CALL boardUpdateData(?,?,?,?,?)}";
+			cs=dbConn.getConn().prepareCall(sql);
+			cs.setInt(1, vo.getBoard_no());
+			cs.setString(2, vo.getId());
+			cs.setString(3, vo.getTitle());
+			cs.setString(4, vo.getContent());
+			cs.setString(5, vo.getPoster());
+			
+			cs.executeQuery();
+		}catch(Exception ex){}
+		dbConn.disConnection();
+	}
+	*/
 }
 
 
