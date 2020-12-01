@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -38,9 +39,13 @@
 	        	<li class="nav-item"><a href="../center/service.do" class="nav-link">봉사/후원</a></li>
 	        	<li class="nav-item"><a href="../clinic/main.do" class="nav-link">동물병원</a></li>
 	          <li class="nav-item"><a href="../board/list.do" class="nav-link">커뮤니티</a></li>
-	          <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#myModal">로그인</a>
-              </li>
+	        <c:if test="${sessionScope.id==null }">   
+	          	<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#myModal">로그인</a></li>
+	        </c:if>
+			<c:if test="${sessionScope.id!=null }">       
+				<li class="nav-item"><a href="../main/logout.do" class="nav-link">로그아웃</a></li>
+	        </c:if>
+	        
 	        </ul> 
 	      </div> 
 	    </div>

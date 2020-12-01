@@ -31,12 +31,14 @@ public class LoginRestController {
 	   else
 	   {
 		   vo=dao.Login_info(id);
-		   
 		  //ㅏ아이디 있을때 처리  
 		   if(vo.getPassword().equals(pwd))
 		   {
 			   result="3";
+			   
 			   System.out.println("비밀번호"+vo.getPassword());
+			   System.out.println("이름"+vo.getName());
+			   System.out.println("아이디 뭐지"+vo.getId());
 			   session.setAttribute("id",vo.getId());
 			   session.setAttribute("name", vo.getName());
 		   }
@@ -45,7 +47,14 @@ public class LoginRestController {
 			   result="2";
 		   }
 	   }
-	   return result;
+	   return "redirect:../main/main.do";
+   }
+   @RequestMapping("main/logout.do")
+   public String main_logout(HttpSession session)
+   {
+	   session.invalidate();
+	   
+	   return "redirect:../main/main.do";
    }
 }
 

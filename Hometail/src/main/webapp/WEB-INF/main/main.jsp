@@ -141,5 +141,46 @@
 
   </div>
 </div>
+
+
+<div id="mailbox" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Login</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+         <tr>
+           <td width=25% class="text-right">아이디 입력 공란</td>
+           <td width=75%>
+             <input type=text id="id" class="input-sm" size=15>
+           </td>
+         </tr>
+         <tr>
+           <td width=25% class="text-right">
+           	편지함 내용 ! 
+           </td>
+         </tr> 
+         <tr>
+           <td class="text-center" colspan="2">
+             <span style="color:red" id="result"></span>
+           </td>
+         </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <input type=button class="btn btn-success" value="로그인" id="logBtn">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 </body>
 </html>

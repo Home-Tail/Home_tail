@@ -10,6 +10,6 @@ public interface CenterServiceMapper {
 	@Select("SELECT COUNT(*) FROM tail_user WHERE id=#{id}")
 	public int isLogin(String id);
 	
-	@Select("SELECT password,name FROM tail_user WHERE id=#{id}")
+	@Select("SELECT * FROM tail_user WHERE id=#{id}")
 	public MemberVO Login_info(String id);
 }

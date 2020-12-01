@@ -14,8 +14,9 @@ public class MainController {
 	@RequestMapping("main/main.do")
 	public String main_main(String page,Model model,HttpSession session)
 	{
+		System.out.println("아이디"+session.getAttribute("id"));
+		System.out.println("이름"+session.getAttribute("name"));
 		
-		System.out.println(session.getAttribute("id"));
 		return "main";
 	}
 	@RequestMapping("adopt/list.do")
