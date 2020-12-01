@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.ClinicMapper;
 import com.sist.vo.ClinicVO;
+import com.sist.vo.ReplyVO;
 @Repository
 public class ClinicDAO {
 	@Autowired
@@ -22,5 +23,13 @@ public class ClinicDAO {
 	public ClinicVO clinicDetailData(int clno)
 	{
 		return mapper.clinicDetailData(clno);
+	}
+	public ReplyVO clinicReplyInsert()
+	{
+		return mapper.clinicReplyInsert();
+	}
+	public List<ReplyVO> clinicReplyList(int clno)
+	{
+		return mapper.clinicReplyList(clno);
 	}
 }
