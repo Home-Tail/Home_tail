@@ -11,37 +11,41 @@
 <body>
    <div class="container">
      <div class="row">
-      <table class="table">
-        <tr>
-          <td colspan=4 class="text-center"><img src="${vo.poster }" width=400px height=400px></td>
-        </tr>
-        <tr>
-          <th width=20% class="text-center danger">이름</th>
-          <td width=30% class="text-center">${vo.id }</td>
-          <th width=20% class="text-center danger">조회수</th>
-          <td width=30% class="text-center">${vo.hit }</td>
-        </tr>
-        <tr>
-          <th width=20% class="text-center danger">제목</th>
-          <td class="text-left">${vo.title }</td>
-          <th width=20% class="text-center danger">작성일</th>
-          <td width=30% class="text-center"> 
-            <fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="4" class="text-left" valign="top" height=200>
-            ${vo.content }
-          </td>
-        </tr>
-        <tr>
-          <td colspan="4" class="text-right">
-            <a href="#" class="btn btn-sm btn-success">수정</a>
-            <a href="#" class="btn btn-sm btn-info">삭제</a>
-            <a href="list.do" class="btn btn-sm btn-warning">목록</a>
-          </td>
-        </tr>
-      </table>
+	      <table class="table">
+	      <c:if test="${!empty vo.poster }">
+		        <tr>
+		          <td colspan=4 class="text-center"><img src="${vo.poster }" width=400px height=400px></td>
+		        </tr>
+		   </c:if>
+	        <tr>
+	          <th width=20% class="text-center danger">이름</th>
+	          <td width=30% class="text-center">${vo.id }</td>
+	          <th width=20% class="text-center danger">조회수</th>
+	          <td width=30% class="text-center">${vo.hit }</td>
+	        </tr>
+	        <tr>
+	          <th width=20% class="text-center danger">제목</th>
+	          <td class="text-left">${vo.title }</td>
+	          <th width=20% class="text-center danger">작성일</th>
+	          <td width=30% class="text-center"> 
+	            <fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
+	          </td>
+	        </tr>
+	        <tr>
+	          <td colspan="4" class="text-left" valign="top" height=200>
+	            ${vo.content }
+	          </td>
+	        </tr>
+	        <tr>
+	          <td colspan="4" class="text-right">
+	          <c:if test="${sessionScope.id==vo.id }">
+		            <a href="#" class="btn btn-sm btn-success">수정</a>
+		            <a href="../board/delete_ok.do" class="btn btn-sm btn-info">삭제</a>
+		      </c:if>      
+	            <a href="#" class="btn btn-sm btn-warning">목록</a>
+	          </td>
+	        </tr>
+	      </table>
      </div>
    </div>
 </body>

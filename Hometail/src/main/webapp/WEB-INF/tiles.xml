@@ -37,6 +37,14 @@
   <definition name="reserve_time" template="../center/reserve_time.jsp">
   </definition>
   
+  <!-- 정희진 게시판 -->
+  
+ <definition name="cboard_list" template="/WEB-INF/board/cboard_list.jsp"> 
+  </definition> 
+ <definition name="board_insert" template="/WEB-INF/board/board_insert.jsp"> 
+  </definition> 
+ <definition name="board_detail" template="/WEB-INF/board/detail.jsp"> 
+  </definition> 
 </tiles-definitions>
 
 

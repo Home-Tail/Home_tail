@@ -17,7 +17,7 @@ import com.sist.vo.AdoptVO;
 
 @Controller
 @RequestMapping("adopt/")
-//14TgnPt3OEfqQoUdJkyU
+//14TgnPt3OEfqQoUdJkyU  
 //ToQcRMWa8c
 public class AdoptController {
 	@Autowired
