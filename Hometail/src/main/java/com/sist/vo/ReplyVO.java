@@ -16,12 +16,6 @@ import java.util.*;
 	root	NUMBER		NOT NULL,
 	depth	NUMBER		NOT NULL
 	
-	
-	
-	********* sqldeveloper에서 id2 => id로 꼭 수정하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	********* maploc 데이터타입 number=>VARCHAR2(1000)로 수정하기!!!!!!!!!!!!!!!!!!!!!!!!!!
-	
-	
  */
 public class ReplyVO {
 	private int replyno,petno,board_no,clno,group_id,group_step,group_tap,root,depth;
