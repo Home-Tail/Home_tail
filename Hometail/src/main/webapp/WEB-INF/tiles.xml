@@ -18,7 +18,13 @@
   </definition>
   <definition name="join" template="/WEB-INF/member/join.jsp">
   </definition> -->
+   <!-- 김수정 clinic -->
   <definition name="list" template="/WEB-INF/clinic/list.jsp">
+  </definition>
+  
+   <definition name="clinic_list" template="/WEB-INF/clinic/list.jsp">
+  </definition>
+   <definition name="clinic_find" template="/WEB-INF/clinic/clinic_find.jsp">
   </definition>
   
  <!-- 신고&제보list by이석주 -->

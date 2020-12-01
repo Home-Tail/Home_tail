@@ -24,12 +24,18 @@ public class ClinicDAO {
 	{
 		return mapper.clinicDetailData(clno);
 	}
-	public ReplyVO clinicReplyInsert()
-	{
-		return mapper.clinicReplyInsert();
-	}
-	public List<ReplyVO> clinicReplyList(int clno)
-	{
-		return mapper.clinicReplyList(clno);
-	}
+	
+	public List<ClinicVO> clinicLocationFindData(String gu)
+    {
+   	 return mapper.clinicLocationFindData(gu);
+    }
+	
+//	public ReplyVO clinicReplyInsert()
+//	{
+//		return mapper.clinicReplyInsert();
+//	}
+//	public List<ReplyVO> clinicReplyList(int clno)
+//	{
+//		return mapper.clinicReplyList(clno);
+//	}
 }

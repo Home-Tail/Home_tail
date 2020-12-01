@@ -2,13 +2,17 @@ package com.sist.web;
 
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.dao.ClinicDAO;
 import com.sist.vo.ClinicVO;
+import com.sist.vo.ReplyVO;
 
 @Controller
 
@@ -29,7 +33,7 @@ public String clinic_list(String page,Model model)
 		page="1";
 	int curpage=Integer.parseInt(page);
 	
-	int rowSize=10;
+	int rowSize=6;
 	int start = (curpage * rowSize) - (rowSize - 1);
 	int end = curpage * rowSize;
 	
@@ -62,7 +66,37 @@ public String clinic_Detail(String no,Model model)
 {
 	System.out.println("호출");
 	ClinicVO vo=dao.clinicDetailData(Integer.parseInt(no));
+//	List<ReplyVO> clist=dao.clinicReplyList(Integer.parseInt(no));
 	model.addAttribute("vo", vo);
 	return "clinic/detail";
 }
+
+@RequestMapping("clinic/clinic_find.do")
+public String ClinicLocationFindData(String no,Model model)
+{
+	   System.out.println(no);
+	   String[] gu= { "전체", "강서구", "양천구", "구로구", "마포구", "영등포구", "금천구",
+				      "은평구", "서대문구", "동작구", "관악구", "종로구", "중구", "용산구", "서초구", "강북구",
+				      "성북구", "도봉구", "동대문구", "성동구", "강남구", "노원구", "중랑구", "광진구", "송파구",
+				      "강동구" };
+	   List<ClinicVO> list=new ArrayList<ClinicVO>();
+	   if(no!=null)
+	   {
+		   System.out.println(gu[Integer.parseInt(no)]);
+		   list=dao.clinicLocationFindData(gu[Integer.parseInt(no)]);
+	   }
+	   model.addAttribute("list", list);
+	   model.addAttribute("count", list.size());
+	   return "clinic_find";
+}
+
+//@RequestMapping("clinic/reply_insert.do")
+//public String clinic_Reply_Insert(RedirectAttributes attr,int clno,String content,HttpSession session,Model model)
+//{
+//	String id=(String)session.getAttribute("id");
+//	ReplyVO cvo=dao.clinicReplyInsert();
+//
+//	model.addAttribute("cvo", cvo);
+//	return "redirect:../clinic/detail.do";
+//}
 }
