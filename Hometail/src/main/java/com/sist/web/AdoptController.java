@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.dao.AdoptDAO;
 import com.sist.vo.AdoptVO;
-//import com.sist.vo.adopt_newsVO;
+import com.sist.vo.adopt_newsVO;
 
 @Controller
 @RequestMapping("adopt/")
-//14TgnPt3OEfqQoUdJkyU  
-//ToQcRMWa8c
 public class AdoptController {
 	@Autowired
 	private AdoptDAO adao;
@@ -59,12 +57,12 @@ public class AdoptController {
 	public String adopt_detail(int no,Model model) {
 		AdoptVO vo=adao.adoptDetailData(no);
 		
-		//String punumber=vo.getPunumber();
-		//StringTokenizer st=new StringTokenizer(punumber,"-");
-		//String result="";
-		//List<adopt_newsVO> list=adao.adoptnewsData(result);
+		String punumber=vo.getPunumber();
+		StringTokenizer st=new StringTokenizer(punumber,"-");
+		String result="";
+		List<adopt_newsVO> list=adao.adoptnewsData(result);
 		model.addAttribute("vo", vo);
-		//model.addAttribute("list", list);
+		model.addAttribute("list", list);
 		return "adopt/detail";
 	}
 }

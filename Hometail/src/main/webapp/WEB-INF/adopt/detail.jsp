@@ -8,6 +8,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+     <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript">
+    let u=0;
+    $(function(){
+  	  $('.up').click(function(){
+  		 $('.updates').hide();
+  		 let no=$(this).attr("value");
+  		 if(u==0)
+  		 {
+  			 $('#u'+no).show();
+  			 $(this).text("취소");
+  			 u=1;
+  		 }
+  		 else
+  		 {
+  			 $('#u'+no).hide();
+  			 $(this).text("수정");
+  			 u=0;
+  		 }
+  	  });
+    })
+	</script>
+    
 <body>
 
 <!-- list -->
@@ -78,12 +102,84 @@
                  <div id="piechart" style="width: 500px; height: 250px;"></div>
                </td>
              </tr>
-            </table>	
+            </table>
+            <table class="table">
+              <tr>
+               <td>
+               <h3>댓글</h3>
+                 <form method="post" action="../adopt/reply_insert.do">
+	                 <input type="hidden" name="cno" value="${vo.adno }">
+	                 <textarea rows="3" cols="93" name="msg" style="float: left" placeholder="내용을 입력하세요."></textarea>
+	                 <input type=submit value="등록" class="btn btn-sm btn-primary px-4"
+	                  style="float: left;height: 74px">
+                  </form>
+               </td>
+              </tr>
+            </table>
 		    </div>  
           </div>
  <!-- list end -->
-          <div class="col-lg-4 sidebar ftco-animate">
+           <div class="col-lg-4 sidebar ftco-animate">
+            <div class="sidebar-box ftco-animate"> 
+            	<h3>입양가능한 List</h3>
+              <table class="table">
+              
+            </table>
+            
+       <hr>
+      </div>
+
             <div class="sidebar-box ftco-animate">
+              <h3>주변 지도</h3>
+            <table class="table">
+              <tr>
+               <td class="text-center">
+                <div id="map" style="width:100%;height:350px;"></div>
+                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b7e8bc1d2f7bde96cce0a16b1cec2ee0&libraries=services"></script>
+                <script>
+                var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        	    mapOption = {
+        	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        	        level: 3 // 지도의 확대 레벨
+        	    };  
+        	
+        	// 지도를 생성합니다    
+        	var map = new kakao.maps.Map(mapContainer, mapOption); 
+        	
+        	// 주소-좌표 변환 객체를 생성합니다
+        	var geocoder = new kakao.maps.services.Geocoder();
+        	
+        	// 주소로 좌표를 검색합니다
+        	geocoder.addressSearch('${vo.area}', function(result, status) {
+        	
+        	    // 정상적으로 검색이 완료됐으면 
+        	     if (status === kakao.maps.services.Status.OK) {
+        	
+        	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        	
+        	        // 결과값으로 받은 위치를 마커로 표시합니다
+        	        var marker = new kakao.maps.Marker({
+        	            map: map,
+        	            position: coords
+        	        });
+        	
+        	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        	        var infowindow = new kakao.maps.InfoWindow({
+        	            content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.center}</div>'
+        	        });
+        	        infowindow.open(map, marker);
+        	
+        	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        	        map.setCenter(coords);
+        	    } 
+        	});    
+                </script>
+               </td>
+              </tr>
+            </table>
+            </div>
+            <div class="sidebar-box ftco-animate">
+            	<div class="sidebar-box ftco-animate"> 
             	<h3>관련 뉴스</h3>
               <table class="table">
               <c:forEach var="nvo" items="${list }">
@@ -95,68 +191,9 @@
                 </tr>
               </c:forEach>
             </table>
-            </div>
-
-            <div class="sidebar-box ftco-animate">
-              <h3>Popular Articles</h3>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="sidebar-box ftco-animate">
-              <h3>Tag Cloud</h3>
-              <ul class="tagcloud m-0 p-0">
-                <a href="#" class="tag-cloud-link">House</a>
-                <a href="#" class="tag-cloud-link">Office</a>
-                <a href="#" class="tag-cloud-link">Land</a>
-                <a href="#" class="tag-cloud-link">Building</a>
-                <a href="#" class="tag-cloud-link">Table</a>
-                <a href="#" class="tag-cloud-link">Intrior</a>
-                <a href="#" class="tag-cloud-link">Exterior</a>
-              </ul>
-            </div>
-
-            <div class="sidebar-box ftco-animate">
-            	<h3>Archives</h3>
-              <ul class="categories">
-              	<li><a href="#">December 2018 <span>(30)</span></a></li>
-              	<li><a href="#">Novemmber 2018 <span>(20)</span></a></li>
-                <li><a href="#">September 2018 <span>(6)</span></a></li>
-                <li><a href="#">August 2018 <span>(8)</span></a></li>
-              </ul>
-            </div>
-          
+            
+       <hr>
+      </div>
 			</div>
 		</section>
 </body>

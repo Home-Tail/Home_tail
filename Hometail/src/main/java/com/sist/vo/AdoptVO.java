@@ -1,7 +1,7 @@
 package com.sist.vo;
 import java.util.*;
 public class AdoptVO {
-	private int no,age;
+	private int adno,age;
 	private double weight;
 	private String id,cate,kind,sub_kind,poster,sex,color,
 			point,punumber,area,center,tel;
@@ -13,11 +13,12 @@ public class AdoptVO {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	public int getNo() {
-		return no;
+	
+	public int getAdno() {
+		return adno;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setAdno(int adno) {
+		this.adno = adno;
 	}
 	public int getAge() {
 		return age;

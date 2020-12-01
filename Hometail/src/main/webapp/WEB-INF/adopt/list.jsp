@@ -42,7 +42,7 @@
 	    				<img src="${vo.poster}" alt="" width="350" height="250">
 	    				<div class="text">
 	    					<span>공고번호</span>
-	    					<h3><a href="../adopt/detail.do?no=${vo.no }">${vo.punumber }</a></h3>
+	    					<h3><a href="../adopt/detail.do?no=${vo.adno }">${vo.punumber }</a></h3>
 	    				</div>
 	    				
     				</div>
