@@ -7,76 +7,219 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+      let u=0;
+      $(function(){
+    	  $('.up').click(function(){
+    		 $('.updates').hide();
+    		 let no=$(this).attr("value");
+    		 if(u==0)
+    		 {
+    			 $('#u'+no).show();
+    			 $(this).text("취소");
+    			 u=1;
+    		 }
+    		 else
+    		 {
+    			 $('#u'+no).hide();
+    			 $(this).text("수정");
+    			 u=0;
+    		 }
+    	  });
+      })
+</script>
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-<!--           <div class="col-md-12"> -->
+<div class="latest-products">
+      <div style="height: 130px"></div>
+      <div class="container">
+        <div class="row">
+<!--           <table class="table"> -->
+<!--             <tr> -->
+<%--               <c:forTokens var="poster" items="${vo.poster }" delims="^"> --%>
+<%--                <td><img src="${vo.poster }" width=210 height=200></td> --%>
+<%--               </c:forTokens> --%>
+<%-- 			  <td><img src="${vo.poster }" width=210 height=200></td> --%>
+<!--             </tr> -->
+<!--           </table> -->
+        </div>
+        <div style="height:20px"></div>
+        <div class="row">
+          <div class="col-md-7">
             <table class="table">
-            	<tr>
-            		<td colspan=4><h3>${vo.title }</h3></td>   
-            	</tr>
-            	<tr>     
-            		<td>작성자:</td>
-            		<td>${vo.id }</td>
-					<td>작성일:</td>
-            		<td><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/></td>      
-             	</tr>
-            	
-            	<tr>
-             	<td colspan=4>
-<%--              	<img src="${vo.poster }" style="width: 100px; height: 100px"> --%>
-             	
-<!--        		<section class="ftco-section ftco-client"> -->
-			<div class="container">
-				<div class="row justify-content-start mb-2 pb-2">
-        	</div>
-	        <div class="row ftco-animate">
-	          <div class="col-md-12">
-	            <div class="carousel-client owl-carousel" >
-	              <div class="item" class="client text-center p-5" style="width: 200px; height: 200px">
-	
-					<img src="${vo.poster }" style="width: 200px; height: 200px">
-	              </div>
-	              <div class="item" class="client text-center p-5" style="width: 200px; height: 200px">
-	
-					<img src="${vo.poster }" style="width: 200px; height: 200px">
-	              </div>
-	              <div class="item" class="client text-center p-5" style="width: 200px; height: 200px">
-	
-					<img src="${vo.poster }" style="width: 200px; height: 200px">
-	              </div>
-<!-- 	              <div class="item" class="client text-center p-5" style="width: 200px; height: 200px"> -->
-	
-<%-- 					<img src="${vo.poster }" style="width: 200px; height: 200px"> --%>
-<!-- 	              </div> -->
-	            </div>
-	          </div>
-	        </div>
-			</div>
-<!-- 	</section> -->
-             	
-             	</td>
+             <tr>
+              <td>
+               <td><img src="${vo.poster }" width=210 height=200></td>
+               <td><img src="${vo.poster }" width=210 height=200></td>
+               <td><img src="${vo.poster }" width=210 height=200></td>
+              </td>
              </tr>
             </table>
-            <table class="table">              
+            <table class="table">
+             <tr>
+              <td>
+               <h3>
+                <c:choose>
+             	 <c:when test="${vo.cate eq 1 }">
+               	  <span style="color:#ff00a9;">[실종]</span> 
+              	 </c:when>
+              	 <c:when test="${vo.cate eq 2 }">
+               	  <span style="color:#28a745;">[제보]</span>
+              	 </c:when>
+              	 <c:when test="${vo.cate eq 3 }">
+               	  <span style="color:#939782;">[완료]</span>
+              	 </c:when>
+              	</c:choose>
+              	  ${vo.title }
+               </h3>
+              </td>
+             </tr>
+            </table>
+            <table class="table">
               <tr>
-                <td width=20%>냥</td>
-                <td width=80%></td>
+                <td width=20%>분류</td>
+                <td width=80%>${vo.kind }</td>
               </tr>
               <tr>
-                <td width=20%>냥냥</td>
-                <td width=80%></td>
+                <td width=20%>품종</td>
+                <td width=80%>${vo.sub_kind }</td>
               </tr>
               <tr>
-                <td width=20%>냐옹</td>
-                <td width=80%></td>
+                <td width=20%>성별</td>
+                <td width=80%>${vo.sex }</td>
+              </tr>
+              <tr>
+                <td width=20%>나이</td>
+                <td width=80%>${vo.age }</td>
+              </tr>
+              <tr>
+                <td width=20%>몸무게</td>
+                <td width=80%>${vo.weight }</td>
+              </tr>
+              <tr>
+                <td width=20%>특징</td>
+                <td width=80%>${vo.point }</td>
+              </tr>
+              <tr>
+                <td width=20%>실종일</td>
+                <td width=80%><fmt:formatDate value="${vo.pdate }" pattern="yyyy-MM-dd"/></td>  
+              </tr>
+              <tr>
+                <td width=20%>실종장소</td>
+                <td width=80%>${vo.loc }</td>
+              </tr>
+              <tr>
+                <td width=20%>전화번호</td>
+                <td width=80%>${vo.tel }</td>
+              </tr>
+              <tr>
+                <td width=20%>내용</td>
+                <td width=80%>${vo.content }</td>
               </tr>
             </table>
 
+<!--             <table class="table"> -->
+<!--               <tr> -->
+<!--                <td> -->
+<%--                  <c:forEach var="rvo" items="${rList }"> --%>
+<!--                    <table class="table table-striped"> -->
+<!--                     <tr> -->
+<%--                      <td class="text-left">◑${rvo.name }(${rvo.dbday })</td> --%>
+<!--                      <td class="text-right"> -->
+<%--                       <c:if test="${sessionScope.id==rvo.id }"> --%>
+<%--                        <span value="${rvo.no }" class="btn btn-xs btn-success up">수정</span> --%>
+<%--                        <a href="../food/reply_delete.do?no=${rvo.no }&cno=${vo.no}" class="btn btn-xs btn-info">삭제</a> --%>
+<%--                       </c:if> --%>
+<!--                      </td> -->
+<!--                     </tr> -->
+<!--                     <tr> -->
+<!--                       <td colspan="2"> -->
+<%--                        <pre style="white-space: pre-wrap;border:none;background-color: white">${rvo.msg }</pre> --%>
+<!--                       </td> -->
+<!--                     </tr> -->
+<%--                     <tr class="updates" id="u${rvo.no }" style="display:none"> --%>
+<!-- 		               <td colspan="2"> -->
+<!-- 		                 <form method="post" action="../food/reply_update.do"> -->
+<%-- 			                 <input type="hidden" name="cno" value="${vo.no }"> --%>
+<%-- 			                 <input type="hidden" name="no" value="${rvo.no }"> --%>
+<%-- 			                 <textarea rows="3" cols="60" name="msg" style="float: left">${rvo.msg }</textarea> --%>
+<!-- 			                 <input type=submit value="댓글수정" class="btn btn-sm btn-primary" -->
+<!-- 			                  style="float: left;height: 73px"> -->
+<!-- 		                  </form> -->
+<!-- 		               </td> -->
+<!-- 		              </tr> -->
+<!--                    </table> -->
+<%--                  </c:forEach> --%>
+<!--                </td> -->
+<!--               </tr> -->
+<!--             </table> -->
+            <table class="table">
+              <tr>
+               <td>
+                 <form method="post" action="../report/reply_insert.do">
+	                 <input type="hidden" name="cno" value="${vo.petno }">
+	                 <textarea rows="3" cols="63" name="msg" style="float: left"></textarea>
+	                 <input type=submit value="댓글쓰기" class="btn btn-sm btn-primary"
+	                  style="float: left;height: 73px">
+                  </form>
+               </td>
+              </tr>
+            </table>
           </div>
-		</div>
-
+          <div class="col-md-5">
+            <h3>실종 장소</h3>
+            <table class="table">
+              <tr>
+               <td class="text-center">
+                <div id="map" style="width:100%;height:350px;"></div>
+                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38f29003dfceb26147055ab6401f2dcf&libraries=services"></script>
+                <script>
+                var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        	    mapOption = {
+        	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        	        level: 3 // 지도의 확대 레벨
+        	    };  
+        	
+        	// 지도를 생성합니다    
+        	var map = new kakao.maps.Map(mapContainer, mapOption); 
+        	
+        	// 주소-좌표 변환 객체를 생성합니다
+        	var geocoder = new kakao.maps.services.Geocoder();
+        	
+        	// 주소로 좌표를 검색합니다
+        	geocoder.addressSearch('${vo.loc}', function(result, status) {
+        	
+        	    // 정상적으로 검색이 완료됐으면 
+        	     if (status === kakao.maps.services.Status.OK) {
+        	
+        	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        	
+        	        // 결과값으로 받은 위치를 마커로 표시합니다
+        	        var marker = new kakao.maps.Marker({
+        	            map: map,
+        	            position: coords
+        	        });
+        	
+        	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        	        var infowindow = new kakao.maps.InfoWindow({
+        	            content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.title}</div>'
+        	        });
+        	        infowindow.open(map, marker);
+        	
+        	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        	        map.setCenter(coords);
+        	    } 
+        	});    
+           </script>
+          </td>
+         </tr>
+        </table>
+       <hr>
+      </div>
+     </div>
+   </div>
+  </div>
 </body>
 </html>
