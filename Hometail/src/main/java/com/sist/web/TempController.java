@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartRequest;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.dao.TempDAO;
 import com.sist.vo.BoardVO;
 import com.sist.vo.TempVO;
@@ -66,26 +67,42 @@ public class TempController {
 	}
 
 	@RequestMapping("temp/insert_ok.do")
-	public String temp_insert_ok(TempVO vo,HttpServletRequest request) 
+	public String temp_insert_ok(HttpServletRequest request) throws IOException 
 	{
+		TempVO vo = new TempVO();
 		/*request.setCharacterEncoding("utf-8");*/
 		
-		String path="C:\\Users\\YOONDO\\springDev\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail"; 
-		String enctype= "UTF-8";
+		String path="C:\\Users\\YOONDO\\springDev\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\TempPoster"; 
+		String enctype= "UTF-8";  
 		int size = 1024 * 1024 * 100;
-		MultipartRequest mr = null;
-		/*mr = new MultipartRequest(request, path, size, enctype,new DefaultFileRenamePolicy()); */
+		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
 		
-		vo.setPoster("없음");
-		vo.setTel("010-1111-1111");
-		System.out.println("아이디"+vo.getId());
-		System.out.println("제목"+vo.getTitle());
-		System.out.println("카테"+vo.getCate());
-		System.out.println("사진"+vo.getPoster());
-		System.out.println("날짜"+vo.getDb_pdate());
-		System.out.println("위치"+vo.getLoc());
-		System.out.println("텔"+vo.getTel());
-		System.out.println("콘텐츠" + vo.getContent());
+	   
+	    //아이디
+	    vo.setId(mr.getParameter("id"));
+	    //제목
+	    vo.setTitle(mr.getParameter("title"));
+	    //카테
+	    vo.setCate(Integer.parseInt(mr.getParameter("cate")));
+	    //날짜
+	    vo.setDb_pdate(mr.getParameter("db_pdate"));
+	    //위치
+	    vo.setLoc(mr.getParameter("loc"));
+	    //내용
+	    vo.setContent(mr.getParameter("content"));
+	    //번호
+	    vo.setTel(mr.getParameter("tel"));
+	    //사진
+		vo.setPoster(mr.getFilesystemName("poster"));
+		
+//		System.out.println("아이디"+vo.getId());
+//		System.out.println("제목"+vo.getTitle());
+//		System.out.println("카테"+vo.getCate());
+//		System.out.println("사진"+vo.getPoster());
+//		System.out.println("날짜"+vo.getDb_pdate());
+//		System.out.println("위치"+vo.getLoc());
+//		System.out.println("텔"+vo.getTel());
+//		System.out.println("콘텐츠" + vo.getContent());
 		dao.TempInsertData(vo);
 		return "redirect:../temp/list.do";
 	}

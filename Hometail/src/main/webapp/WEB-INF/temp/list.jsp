@@ -38,7 +38,7 @@
 			 		<c:forEach var="vo"  items="${list }">
 					<div class="col-md-3 ftco-animated">
 			   		<div class="blog-entry">
-			     		<a href="../temp/detail.do?no=${vo.petno }" class="block-20" style="background-image: url('${vo.poster}');">
+			     		<a href="../temp/detail.do?no=${vo.petno }" class="block-20" style="background-image: url('../TempPoster/${vo.poster}');">
 			     		</a>
 				     	<div class="text d-flex py-4">
 				        <div class="desc pl-4XX" style="width: calc(100%);">

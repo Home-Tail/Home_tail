@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<div class="container">
 		<div class="row">
 			<table class="table">
@@ -44,22 +45,68 @@
 				
 				<tr>
 					<td colspan=4 class="text-center">
-						<img src="${vo.poster }" width=400px height=400px> <p><p>${vo.content }</p></p>
-					</td>
-					
-					
+						<img src="../TempPoster/${vo.poster }" width=400px height=400px> <p><p>${vo.content }</p></p>
+					</td>	
 				</tr>
+				
+				
+				<tr>
+				<th></th>
+				</tr>
+				
+		
+      	</table>		
+      	
+      	
+      	<!----------------- 댓글폼 ------------------>		
+      	
+      	<div class="container" style="margin:10px">
+        <label for="content">comment</label>
+        <form name="commentInsertForm">
+            <div class="input-group">
+               <input type="hidden" name="bno" value="${detail.bno}"/>
+               <input type="text" class="form-control" size=100 id="content" name="content"  placeholder="내용을 입력하세요.">
+               <span class="input-group-btn">
+                    <button class="btn btn-sm btn-primary py-2 px-4" style="margin:5px" type="button" name="commentInsertBtn">등록</button>
+               </span>
+              </div>
+       		 </form>
+    		</div>
+    
+    			<div class="container">
+       			 <div class="commentList"></div>
+    			</div>
+			
+					
 				
 				<tr>
 				<td></td>
-				</tr>
-			</table>
+				</tr>	
+				
+				
+				</div>
+				
 			
+			
+				
+				
+				<!-----------------목록버튼 ------------- -->
+				
+			
+				<table class="table">
+				<div class="text-right" style="padding-right:300px; margin:10px">
+					
+				<tr>
+				<td></td>
+				<tr>
+				<a href="list.do" class="btn btn-sm btn-primary py-3 px-4">&nbsp;목록&nbsp;</a>
+				</table>
 				</div>
-				<div class="text-right" style="padding-bottom:50px;">
-				<a href="list.do" class="btn btn-sm btn-primary py-2 px-4">&nbsp;목록&nbsp;</a>
-				</div>
-	</div>
+				
+				</div>	
+				
+				
+	
 
 </body>
 </html>

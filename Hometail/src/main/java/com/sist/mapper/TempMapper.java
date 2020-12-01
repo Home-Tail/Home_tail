@@ -40,6 +40,8 @@ public interface TempMapper {
 			+ "#{content})")
 	public TempVO TempInsertData(TempVO vo);
 	
+	
+	
 	/*
 	 * @Select("SELECT petno,id,title,cate,kind,poster,pdate,loc,num " +
 	 * "FROM (SELECT petno,id,title,cate,kind,poster,pdate,loc,num,rownum as num "

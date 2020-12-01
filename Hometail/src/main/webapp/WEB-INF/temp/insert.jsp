@@ -14,7 +14,7 @@
    <div class="container">
    <h1  class="text-left">등록하기</h1>
     <div class="row">
-     <form method=post action="insert_ok.do">
+     <form method="post" action="insert_ok.do" enctype="multipart/form-data">
      <table class="table">
      
     <!--  <tr>

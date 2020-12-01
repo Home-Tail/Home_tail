@@ -54,7 +54,7 @@ public class BoardDAO {
 			ex.getStackTrace();
 			System.out.println(ex.getMessage());
 		}
-		dbConn.disConnection();
+		dbConn.disConnection(); 
 		// dbConn.disConnection
 		return list;
 	}

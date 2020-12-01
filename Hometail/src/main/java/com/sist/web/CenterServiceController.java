@@ -41,7 +41,7 @@ public class CenterServiceController {
 		String enctype = "UTF-8"; // 한글파일명을 사용 여부
 		int size = 1024 * 1024 * 100;// 파일의 최대크기
 
-		// MultipartRequest : 사용자가 보내준 데이터를 받는다 (request=>파일을 받을 수 없다 , 일반데이터만 받는다)
+		// MultipartRequest : 사용자가 보내준 데이터를 받는다 (request=>파일을 받을 수 없다 , 일반데이터만 받는다) 
 		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
 
 
