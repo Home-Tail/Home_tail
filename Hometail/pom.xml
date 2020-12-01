@@ -64,7 +64,6 @@
 		    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons.logging-1.1.1.jar</systemPath>
 		</dependency>
 		
-		
 	    <!-- Jsoup -->
 	    <dependency>
 		    <groupId>org.jsoup</groupId>

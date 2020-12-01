@@ -48,6 +48,21 @@
 		    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ojdbc14.jar</systemPath>
 		</dependency>
 		
+		<dependency>
+			<groupId>servlets.com</groupId>
+			<artifactId>cos</artifactId>
+			<version>05Nov2002</version>
+			<scope>system</scope>
+		    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/cos-05Nov2002.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.1.1</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons.logging-1.1.1.jar</systemPath>
+		</dependency>
 		
 	    <!-- Jsoup -->
 	    <dependency>

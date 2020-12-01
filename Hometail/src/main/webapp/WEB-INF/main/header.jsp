@@ -38,6 +38,9 @@
 	        	<li class="nav-item"><a href="../center/service.do" class="nav-link">봉사/후원</a></li>
 	        	<li class="nav-item"><a href="../clinic/main.do" class="nav-link">동물병원</a></li>
 	          <li class="nav-item"><a href="../board/list.do" class="nav-link">커뮤니티</a></li>
+	          <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#myModal">로그인</a>
+              </li>
 	        </ul> 
 	      </div> 
 	    </div>
