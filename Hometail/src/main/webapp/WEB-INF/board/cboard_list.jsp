@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%-- SimpleDateFormat --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -29,7 +30,6 @@
 				}
 			});
 		});
-
 		$('.detail').click(function(){
 			var cate= $(this).attr("data-value");
 		    var board_no = $(this).attr("data-cate");
@@ -45,7 +45,6 @@
 				}
 			});
 		});
-
 		//페이지 넘기는 용도
 	
 		$('.page').click(function(){
@@ -61,7 +60,6 @@
 					}
 				})
 		});
-
 	});
 </script> 
 </head>
@@ -141,7 +139,18 @@
 	          		<div class="col-md-4 ftco-animated">
 			            <div class="blog-entry">
 			            <!-- 사진 출력 -->
-			              <span class="btn block-20 detail" data-value="${no }" data-cate="${rvo.board_no }" style="background-image: url('../boardPoster/${rvo.poster}'); border-radius:0;"></span>
+			            
+			              <c:set var = "po" value = "${rvo.poster}"/>
+					      <c:choose>
+					         <c:when test = "${fn:contains(rvo.poster, 'adoptreview')}">
+					           <span class="btn block-20 detail" style="background-image: url('${rvo.poster}'); border-radius:0;" data-value="${no }" data-cate="${rvo.board_no }" ></span>
+					         </c:when>
+					         <c:otherwise>
+					           <span class="btn block-20 detail" style="background-image: url('../boardPoster/${rvo.poster}'); border-radius:0;" data-value="${no }" data-cate="${rvo.board_no }" ></span>
+					         </c:otherwise>
+					      </c:choose>
+			            
+			              <%-- <span class="btn block-20 detail" style="background-image: url('../boardPoster/${rvo.poster}'); border-radius:0;"></span> --%>
          			     <input type=hidden value="${rvo.board_no }" class="bn">
 			              <div class="text d-flex py-4">
 			                <div class="meta mb-3">

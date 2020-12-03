@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,7 +45,17 @@
 	      <table class="table">
 	      <c:if test="${!empty vo.poster }">
 		        <tr>
-		          <td colspan=4 class="text-center"><img src="${vo.poster }" width=400px height=400px></td>
+		        <td colspan=4 class="text-center">
+		       		 <c:set var = "po" value = "${vo.poster}"/>
+					      <c:choose>
+					         <c:when test = "${fn:contains(vo.poster, 'adoptreview')}">
+					            <img src="${vo.poster }" width=400px height=400px>
+					         </c:when>
+					         <c:otherwise>
+					          	<img src="../boardPoster/${vo.poster}" width=400px height=400px>
+					          </c:otherwise>
+					      </c:choose>
+					 </td>
 		        </tr>
 		   </c:if>
 	        <tr>
