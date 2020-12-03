@@ -10,7 +10,8 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$('#update').click(function(){
+		$('.update').click(function(){
+			let board_no = $(this).attr("value");		
 			$.ajax({
 				type:'POST',
 				url:'../board/update.do',
@@ -68,7 +69,7 @@
 	        <tr>
 	          <td colspan="4" class="text-right">
 	          <c:if test="${sessionScope.id==vo.id }">
-		            <span class="btn btn-sm btn-success" id="update">수정</span>
+		            <span class="btn btn-sm btn-success update" value="${ vo.board_no}">수정</span>
 		            <a href="../board/delete_ok.do?board_no=${vo.board_no }" class="btn btn-sm btn-info">삭제</a>
 		      </c:if>      
 	            <span class="btn btn-sm btn-primary back" value="${cate }">목록</span>
