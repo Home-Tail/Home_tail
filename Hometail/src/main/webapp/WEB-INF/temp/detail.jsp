@@ -9,7 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<div class="container">
 		<div class="row">
 			<table class="table">
@@ -18,13 +17,10 @@
 					<td width=100 class="text-left" colspan=3 style="color:black;">${vo.title }</td>
 				</tr>
 				<tr>
-					
-					
 					<th width=20% class="text-center danger">작성일</th>
 					<td width=30% class="text-left"><fmt:formatDate
 							value="${vo.regdate}" pattern="yyyy-MM-dd" /></td>
 				</tr>
-
 				<tr>
 					<th width=20% class="text-center danger">작성자</th>
 					<td width=30% class="text-left">${vo.id }</td>
@@ -41,23 +37,14 @@
 					<td width=30% class="text-left">${vo.loc }</td>
 					
 				</tr>
-				
-				
-				<tr>
-					<td colspan=4 class="text-center">
-						<img src="../TempPoster/${vo.poster }" width=400px height=400px> <p><p>${vo.content }</p></p>
-					</td>	
-				</tr>
-				
-				
-				<tr>
-				<th></th>
-				</tr>
-				
-		
-      	</table>		
-      	
-      	
+            <tr>
+               <td colspan=4 class="text-center">
+                  <img src="../TempPoster/${vo.poster }" width=400px height=400px> <p><p>${vo.content }</p></p>
+               <a href="../temp/update.do?petno=${vo.petno }" class="btn btn-sm btn-primary" style="margin:10px">수정</a>          
+               <a href="../temp/delete.do?petno=${vo.petno }" class="btn btn-sm btn-primary">삭제</a>
+               </td>
+            </tr>
+         </table>      
       	<!----------------- 댓글폼 ------------------>		
       	
       	<div class="container" style="margin:10px">
@@ -76,37 +63,19 @@
     			<div class="container">
        			 <div class="commentList"></div>
     			</div>
-			
-					
-				
 				<tr>
 				<td></td>
 				</tr>	
-				
-				
 				</div>
-				
-			
-			
-				
-				
 				<!-----------------목록버튼 ------------- -->
-				
-			
 				<table class="table">
 				<div class="text-right" style="padding-right:300px; margin:10px">
-					
 				<tr>
 				<td></td>
 				<tr>
 				<a href="list.do" class="btn btn-sm btn-primary py-3 px-4">&nbsp;목록&nbsp;</a>
 				</table>
 				</div>
-				
 				</div>	
-				
-				
-	
-
 </body>
 </html>

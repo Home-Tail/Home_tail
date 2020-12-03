@@ -3,7 +3,7 @@ package com.sist.vo;
 import java.util.Date;
 
 public class TempVO {
-	private int petno, cate, kind;
+	private int petno, cate, kind, pwd;
 	private String id, title, poster, loc, tel, content;
 	private Date regdate, pdate;
 	private String db_pdate;
@@ -22,6 +22,14 @@ public class TempVO {
 
 	public void setPdate(Date pdate) {
 		this.pdate = pdate;
+	}
+
+	public int getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(int pwd) {
+		this.pwd = pwd;
 	}
 
 	public int getPetno() {

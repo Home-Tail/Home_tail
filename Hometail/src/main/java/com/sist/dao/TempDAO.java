@@ -28,6 +28,17 @@ public class TempDAO {
 	{
 		return mapper.TempInsertData(vo);
 	}
+	
+	public TempVO TempUpdateData(TempVO vo)
+	{
+		return mapper.TempUpdateData(vo);
+	}
+
+	public TempVO TempDeleteData(TempVO vo)
+	   {
+	      return mapper.TempDeleteData(vo);
+	   }
+	   
 
 	/*
 	 * public int tempTotalPage() { return mapper.tempTotalPage(); }

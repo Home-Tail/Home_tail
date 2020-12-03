@@ -34,14 +34,31 @@ public interface TempMapper {
 			+ "1,"
 			+ "#{poster},"
 			+ "SYSDATE,"
-			+ "SYSDATE,"
+			+ "SYSDATE," 
 			+ "#{loc},"
 			+ "#{tel},"
 			+ "#{content})")
 	public TempVO TempInsertData(TempVO vo);
 	
+	@Select("UPDATE pet_board SET "
+			+ "cate=#{cate},"
+			+ "title=#{title},"
+			+ "kind=1,"
+			+ "sub_kind=1,"
+			+ "poster=#{poster},"
+			+ "pdate=#{db_pdate},"
+			+ "loc=#{loc},"
+			+ "tel=#{tel},"
+			+ "content=#{content} "
+			+ "WHERE petno=#{petno}")
+	public TempVO TempUpdateData(TempVO vo);
+
+
+	@Select("DELETE FROM pet_board WHERE petno=#{petno} ")
+	public TempVO TempDeleteData(TempVO vo);
 	
 	
+
 	/*
 	 * @Select("SELECT petno,id,title,cate,kind,poster,pdate,loc,num " +
 	 * "FROM (SELECT petno,id,title,cate,kind,poster,pdate,loc,num,rownum as num "
