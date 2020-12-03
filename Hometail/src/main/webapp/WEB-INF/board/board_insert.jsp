@@ -10,8 +10,7 @@
 <body>
 <div class="container">
     <div class="row">
-     <form method=post action="insert_ok.do">
-     <input type=hidden value=${no } name=no>
+     <form method=post action="insert_ok.do" enctype="multipart/form-data">
      <table class="table">
        <tr>
         <th class="text-right" width=30%>이름</th>
@@ -31,8 +30,18 @@
           <textarea rows="8" cols="80" name=content></textarea>
         </td>
        </tr>
+       <c:if test="${no==2 }">
+	      <tr>
+		     <th class="text-center danger" width=20%>첨부파일</th>
+		     <td>
+		     <input type="file" class="input-sm" name="poster">
+		      
+		      </td>
+	     </tr>
+	     </c:if>
        <tr>
         <td colspan="2" class="text-center">
+        <input type=hidden value="${no }" name=no>
           <input type=submit value="글쓰기" class="btn btn-sm btn-primary">
           <input type=button value="취소" onclick="javascript:history.back()" class="btn btn-sm btn-default">
         </td>

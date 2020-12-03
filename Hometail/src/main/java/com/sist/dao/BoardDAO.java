@@ -236,6 +236,22 @@ public class BoardDAO {
 		}catch(Exception ex){}
 		dbConn.disConnection();
 	}
+	public void aBoardInsert(BoardVO vo)
+	{
+		try
+		{
+			dbConn.getConnection();
+			String sql="{CALL aBoardInsert(?,?,?,?)}";
+			cs=dbConn.getConn().prepareCall(sql);
+			cs.setString(1, vo.getId());
+			cs.setString(2, vo.getTitle());
+			cs.setString(3, vo.getContent());
+			cs.setString(4, vo.getPoster());
+			
+			cs.executeQuery();
+		}catch(Exception ex){}
+		dbConn.disConnection();
+	}
 	public void qnaBoardInsert(BoardVO vo)
 	{
 		try

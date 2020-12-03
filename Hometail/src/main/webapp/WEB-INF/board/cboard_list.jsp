@@ -67,6 +67,7 @@
 </head>
 <body>
 	<c:if test="${no==1 }">
+		<c:if test="${sessionScope.id!=null }">
 	       <table class="table">
 	         <tr>
 	           <td>
@@ -74,6 +75,7 @@
 	           </td>
 	         </tr>
 	       </table>
+	       </c:if>
        <table class="table table-striped">
          <tr class="danger">
            <th class="text-center" width=10%>번호</th>
@@ -126,10 +128,20 @@
            </div>
         </c:if>
         <c:if test="${no==2 }">
+		<c:if test="${sessionScope.id!=null }">
+	        <table class="table">
+		         <tr>
+		           <td>
+		             <span class="btn btn-sm btn-primary" id="new" value="${no }">새글</span>
+		           </td>
+		         </tr>
+		       </table>
+		    </c:if>
 	        <c:forEach var="rvo" items="${rList }">
 	          		<div class="col-md-4 ftco-animated">
 			            <div class="blog-entry">
-			              <span class="btn block-20 detail" data-value="${no }" data-cate="${rvo.board_no }" style="background-image: url('${rvo.poster}'); border-radius:0;"></span>
+			            <!-- 사진 출력 -->
+			              <span class="btn block-20 detail" data-value="${no }" data-cate="${rvo.board_no }" style="background-image: url('../boardPoster/${rvo.poster}'); border-radius:0;"></span>
          			     <input type=hidden value="${rvo.board_no }" class="bn">
 			              <div class="text d-flex py-4">
 			                <div class="meta mb-3">
@@ -172,13 +184,15 @@
            </div>
 		</c:if>
 		<c:if test="${no==4 }">
-	       <table class="table">
-	         <tr>
-	           <td>
-	             <span class="btn btn-sm btn-primary" id="new">새글</span>
-	           </td>
-	         </tr>
-	       </table>
+		<c:if test="${sessionScope.id!=null }">
+		       <table class="table">
+		         <tr>
+		           <td>
+		             <span class="btn btn-sm btn-primary" id="new">새글</span>
+		           </td>
+		         </tr>
+		       </table>
+		 </c:if>      
        <table class="table table-striped">
          <tr class="danger">
            <th class="text-center" width=10%>번호</th>

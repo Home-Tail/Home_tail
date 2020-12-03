@@ -3,14 +3,18 @@ package com.sist.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.io.IOException;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.dao.BoardDAO;
 import com.sist.vo.BoardVO;
 
@@ -113,14 +117,32 @@ public class BoardController {
 		return "board_insert";
 	}   
 	@RequestMapping("board/insert_ok.do")
-	   public String board_insert_ok(BoardVO vo, String no)
+	   public String board_insert_ok(BoardVO vo, String no, HttpServletRequest request,HttpSession session) throws IOException 
 	   {
-			System.out.println("받은 no:"+no);
-			int cate=Integer.parseInt(no); 
-			System.out.println("cate"+cate);
+		// 사진 경로
+		String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\boardPoster"; 
+		String enctype= "UTF-8";  
+		int size = 1024 * 1024 * 100;
+		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
+		
+			System.out.println("받은 no:"+mr.getParameter("no"));
+			String id = String.valueOf( session.getAttribute("id"));
+			int cate=	Integer.parseInt(mr.getParameter("no"));
+			
+//			vo.setBoard_no(Integer.parseInt(mr.getParameter("board_no")));
+//			vo.setId(mr.getParameter("id"));
+			vo.setId(id);
+			vo.setTitle(mr.getParameter("title"));
+			vo.setContent(mr.getParameter("content"));
+			
 			if(cate==1)
 			{
 				dao.freeBoardInsert(vo);
+			}
+			else if(cate==2)
+			{
+				vo.setPoster(mr.getFilesystemName("poster"));
+				dao.aBoardInsert(vo);
 			}
 			else if(cate==4)
 			{
