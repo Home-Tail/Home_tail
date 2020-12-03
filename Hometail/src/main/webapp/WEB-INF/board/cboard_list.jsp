@@ -31,15 +31,13 @@
 		});
 
 		$('.detail').click(function(){
-			
-			
 			var cate= $(this).attr("data-value");
 		    var board_no = $(this).attr("data-cate");
-		    console.log('cate'+cate);
-		    console.log('board_no'+board_no);
+		    console.log('cate는'+cate);
+		    console.log('board_no는'+board_no);
 			$.ajax({
 				type:'POST',
-				url:'../board/detail.do',
+				url:'../board/detail.do?cate='+cate,
 				data:{'board_no':board_no},
 				success:function(res) 
 				{

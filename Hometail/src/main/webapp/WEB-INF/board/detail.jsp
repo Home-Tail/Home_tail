@@ -14,13 +14,26 @@
 			$.ajax({
 				type:'POST',
 				url:'../board/update.do',
-				data:{'board_no':${vo.board_no}},
+				data:{'board_no':board_no},
 				success:function(res) 
 				{
 					$('#print').html(res);
 				}
 			});
 		});
+		 $('.back').click(function(){
+			 no=$(this).attr("value");
+				console.log(no+'클릭');
+				$.ajax({
+					type:'POST',
+					url:'../board/cboard_list.do',
+					data:{"no":no},
+					success:function(res)
+					{
+						$('#print').html(res);
+					}
+				});
+			});
 	});
 </script> 
 </head>
@@ -58,7 +71,7 @@
 		            <span class="btn btn-sm btn-success" id="update">수정</span>
 		            <a href="../board/delete_ok.do?board_no=${vo.board_no }" class="btn btn-sm btn-info">삭제</a>
 		      </c:if>      
-	            <a href="javascript:history.back()" class="btn btn-sm btn-warning">목록</a>
+	            <span class="btn btn-sm btn-primary back" value="${cate }">목록</span>
 	          </td>
 	        </tr>
 	      </table>

@@ -32,7 +32,6 @@
 		
 		
 		$('.cate').click(function(){
-			
 			no=$(this).attr("value");
 			console.log(no+'클릭');
 			$.ajax({

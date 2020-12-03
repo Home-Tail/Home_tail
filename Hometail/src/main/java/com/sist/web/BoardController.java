@@ -51,13 +51,13 @@ public class BoardController {
 	@RequestMapping("board/cboard_list.do")
 	public String board_cboard_list(String page,Model model,String no)
 	{
-		System.out.println("no값은"+no);
 		if(no==null)
 		{
 			System.out.println("no는 null");
 			no="1";
 		} 
-		
+
+
 		if(page==null)
 			   page="1";
 		
@@ -129,15 +129,18 @@ public class BoardController {
 		   return "redirect:../board/list.do";
 	   } 
 	@RequestMapping("board/detail.do")
-	   public String board_detail(String board_no, Model model)
+	   public String board_detail(String board_no, Model model,String cate)
 	   {
+			
 		   int bno=Integer.parseInt(board_no);
 		   System.out.println("디테일 넘버 : "+bno);
+		   System.out.println("카테고리 넘버:"+cate);
 		   //System.out.println("cate번호 "+cate);
 		   BoardVO vo=dao.BoardDetailData(bno);
 		   //BoardVO vo=dao.BoardDetailData(no);
 		   //List<ReplyVO> list=dao.replyListData(3, no, curpage);
 		   model.addAttribute("vo", vo);
+		   model.addAttribute("cate",cate);
 		   //model.addAttribute("list", list);
 		   return "board_detail"; 
 	   }
@@ -162,13 +165,14 @@ public class BoardController {
 		   model.addAttribute("vo", vo);
 		   return "board_update"; 
 	   }
-	/*이부분 해야해
+	
 	@RequestMapping("board/update_ok.do")
-	   public String board_update_ok(BoardVO vo,HttpSession session)
+	   public String board_update_ok(BoardVO vo, String bno)
 	   {
-		   int bno=Integer.parseInt(board_no);
-			dao.boardUpdateData(bno);
+		 int board_no=Integer.parseInt(bno);
+		   System.out.println("수정넘버 : "+board_no);
+			dao.boardUpdateData(vo, board_no);
 		   return "redirect:../board/list.do";
 	   } 
-	   */
+	  
 }

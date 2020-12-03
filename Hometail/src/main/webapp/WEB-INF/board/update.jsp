@@ -16,6 +16,7 @@
         <th class="text-right" width=30%>이름</th>
         <td>
           <input type=text name=id size=50 value="${vo.id }" readonly>
+          <input type=hidden name=bno value="${vo.board_no }">
         </td>
        </tr>
        <tr>

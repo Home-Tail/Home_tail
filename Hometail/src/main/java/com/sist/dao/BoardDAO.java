@@ -321,25 +321,22 @@ public class BoardDAO {
 		dbConn.disConnection();
 		return vo;
 	}
-	/* 이부분 해야해
-	public void boardUpdateData(BoardVO vo)
+	public void boardUpdateData(BoardVO vo, int board_no)
 	{
 		try
 		{
 			dbConn.getConnection();
-			String sql="{CALL boardUpdateData(?,?,?,?,?)}";
+			String sql="{CALL boardUpdateData(?, ?, ?)}";
 			cs=dbConn.getConn().prepareCall(sql);
-			cs.setInt(1, vo.getBoard_no());
-			cs.setString(2, vo.getId());
-			cs.setString(3, vo.getTitle());
-			cs.setString(4, vo.getContent());
-			cs.setString(5, vo.getPoster());
-			
+			cs.setInt(1, board_no);
+			cs.setString(2, vo.getTitle());
+			cs.setString(3, vo.getContent());
 			cs.executeQuery();
+						
 		}catch(Exception ex){}
 		dbConn.disConnection();
 	}
-	*/
+	
 }
 
 
