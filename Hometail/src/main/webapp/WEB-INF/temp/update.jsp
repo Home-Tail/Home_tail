@@ -1,3 +1,6 @@
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -43,11 +46,11 @@
         </td>
        </tr>
        
-       <tr>
+       <%-- <tr>
         <th class="text-center danger" width=20%>작성자</th>
         <td width=25%>
           <input type=text name=id size=20 value="${vo.id }">
-        </td>
+        </td> --%>
         
         <tr>
         <th class="text-center danger" width=20%>연락처</th>

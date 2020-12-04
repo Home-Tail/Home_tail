@@ -15,6 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class TempController {
@@ -68,19 +69,22 @@ public class TempController {
 	}
 
 	@RequestMapping("temp/insert_ok.do")
-	public String temp_insert_ok(HttpServletRequest request) throws IOException 
+	public String temp_insert_ok(HttpServletRequest request, HttpSession session) throws IOException 
 	{
 		TempVO vo = new TempVO();
 		/*request.setCharacterEncoding("utf-8");*/
 		
 		String path="C:\\Users\\YOONDO\\springDev\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\TempPoster"; 
 		String enctype= "UTF-8";  
+		
+		String id = String.valueOf( session.getAttribute("id"));
+		
 		int size = 1024 * 1024 * 100;
 		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
 		
 	   
 	    //아이디
-	    vo.setId(mr.getParameter("id"));
+	    vo.setId("id");
 	    //제목
 	    vo.setTitle(mr.getParameter("title"));
 	    //카테
@@ -190,20 +194,19 @@ public class TempController {
 		   return "redirect:../temp/detail.do?no="+petno;
 	   }
 	
-	   @RequestMapping("temp/delete.do")
-	   public String temp_delete(int petno, Model model)
-	   {
-	           
-	      return "temp/delete";
-	   }
 	   
-	  /* @RequestMapping("temp/delete_ok.do")
-	   public String temp_delete_ok(HttpServletRequest request) throws IOException 
+	   
+	   @RequestMapping("temp/delete_ok.do")
+	   public String temp_delete_ok(HttpServletRequest request, int petno) throws IOException 
 	   {
-	      
-	      dao.TempDeleteData(vo);
+	      dao.TempDeleteData(petno);
 	      return "redirect:../temp/list.do";
 	   }
-*/
+
 
 }
+
+
+
+
+

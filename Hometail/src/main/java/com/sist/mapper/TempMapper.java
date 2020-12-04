@@ -54,8 +54,8 @@ public interface TempMapper {
 	public TempVO TempUpdateData(TempVO vo);
 
 
-	@Select("DELETE FROM pet_board WHERE petno=#{petno} ")
-	public TempVO TempDeleteData(TempVO vo);
+	@Select("DELETE FROM pet_board WHERE petno=#{petno}")
+	public TempVO TempDeleteData(int petno);
 	
 	
 

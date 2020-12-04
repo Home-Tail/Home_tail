@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,7 +12,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<table class="table">
+			<table class="table" style="width:800px; margin:0px auto; margin-top:50px;">
 				<tr>
 					<th width=100 class="text-center danger" style="font-size:20px">제목</th>
 					<td width=100 class="text-left" colspan=3 style="color:black;">${vo.title }</td>
@@ -38,11 +39,35 @@
 					
 				</tr>
             <tr>
-               <td colspan=4 class="text-center">
-                  <img src="../TempPoster/${vo.poster }" width=400px height=400px> <p><p>${vo.content }</p></p>
-               <a href="../temp/update.do?petno=${vo.petno }" class="btn btn-sm btn-primary" style="margin:10px">수정</a>          
-               <a href="../temp/delete.do?petno=${vo.petno }" class="btn btn-sm btn-primary">삭제</a>
+               <td colspan=4>
+               
+               <c:set var = "po" value = "${vo.poster}"/>
+					      <c:choose>
+					         <c:when test = "${fn:contains(vo.poster, 'zooseyo')}">
+					            <img src="${vo.poster }" width=400px height=400px>
+					         </c:when>
+					         <c:when test = "${fn:contains(vo.poster, 'myohagae')}">
+					            <img src="${vo.poster }" width=400px height=400px>
+					         </c:when>
+					         <c:otherwise>
+					          	<img src="../TempPoster/${vo.poster}" width=400px height=400px>
+					          </c:otherwise>
+					      </c:choose>
+               
+                  <%-- <img src="../TempPoster/${vo.poster }" width=400px height=400px><br>${vo.content } --%>
+               
                </td>
+            </tr>
+            <tr>
+            	<td style="border-top:none;">${vo.content }</td>
+            </tr>
+            <tr>
+            <td class="text-right" colspan=4>
+            <c:if test="${sessionScope.id==vo.id }">
+            <a href="../temp/update.do?petno=${vo.petno }" class="btn btn-sm btn-primary" style="margin:10px">수정</a>          
+               <a href="../temp/delete_ok.do?petno=${vo.petno }" class="btn btn-sm btn-primary">삭제</a>
+             </c:if>       
+            </td>
             </tr>
          </table>      
       	<!----------------- 댓글폼 ------------------>		

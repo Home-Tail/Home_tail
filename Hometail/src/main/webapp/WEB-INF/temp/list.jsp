@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +30,8 @@
         			<tr>
 		      			 <td>
 		        			<a href="../temp/insert.do" class="btn btn-sm btn-primary py-2 px-4">등록하기</a>
+		        			<a href="../temp/insert.do" class="btn btn-sm btn-primary py-2 px-4">등록하기</a>
+		        			<a href="../temp/insert.do" class="btn btn-sm btn-primary py-2 px-4">등록하기</a>
 		       			</td>
 		    		 </tr>
 					 <table class="table">
@@ -38,8 +41,22 @@
 			 		<c:forEach var="vo"  items="${list }">
 					<div class="col-md-3 ftco-animated">
 			   		<div class="blog-entry">
-			     		<a href="../temp/detail.do?no=${vo.petno }" class="block-20" style="background-image: url('../TempPoster/${vo.poster}');">
-			     		</a>
+			   		
+			   			<c:set var = "po" value = "${vo.poster}"/>
+					      <c:choose>
+					         <c:when test = "${fn:contains(vo.poster, 'zooseyo')}">
+					            <a href="../temp/detail.do?no=${vo.petno }" class="block-20" style="background-image: url('${vo.poster}');"></a>
+					         </c:when>
+					         <c:when test = "${fn:contains(vo.poster, 'myohagae')}">
+					          <a href="../temp/detail.do?no=${vo.petno }" class="block-20" style="background-image: url('${vo.poster}');"></a>
+					         </c:when>
+					         <c:otherwise>
+					          	<a href="../temp/detail.do?no=${vo.petno }" class="block-20" style="background-image: url('../TempPoster/${vo.poster}');"></a>
+					          </c:otherwise>
+					      </c:choose>
+			   		
+			   		
+			     		
 				     	<div class="text d-flex py-4">
 				        <div class="desc pl-4XX" style="width: calc(100%);">
 			     
@@ -62,8 +79,6 @@
 			   </div>
 			 </div>
 			</c:forEach>
-			</div>
-			</section>
 			
 			<div class="row no-gutters my-5">
 			  <div class="col text-center">
@@ -94,6 +109,10 @@
 			    </div>
 			  </div>
 		</div>
+			</div>
+			</section>
+			
+			
 		</div>
    	  </div>
 	</div>

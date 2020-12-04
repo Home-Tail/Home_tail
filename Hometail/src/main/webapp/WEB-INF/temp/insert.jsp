@@ -48,8 +48,10 @@
        <tr>
         <th class="text-center danger" width=20%>작성자</th>
         <td width=25%>
-          <input type=text name=id size=20>
-        </td>
+          	<td>
+         <input type=text name=id size=20 value="${sessionScope.id }" readonly>
+        	</td>
+        
         
         <tr>
         <th class="text-center danger" width=20%>연락처</th>

@@ -34,9 +34,9 @@ public class TempDAO {
 		return mapper.TempUpdateData(vo);
 	}
 
-	public TempVO TempDeleteData(TempVO vo)
+	public TempVO TempDeleteData(int petno)
 	   {
-	      return mapper.TempDeleteData(vo);
+	      return mapper.TempDeleteData(petno);
 	   }
 	   
 
