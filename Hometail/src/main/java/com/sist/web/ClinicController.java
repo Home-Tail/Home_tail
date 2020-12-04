@@ -64,9 +64,10 @@ public String clinic_list(String page,Model model)
 @RequestMapping("clinic/detail.do")
 public String clinic_Detail(String no,Model model)
 {
-	System.out.println("호출");
 	ClinicVO vo=dao.clinicDetailData(Integer.parseInt(no));
-//	List<ReplyVO> clist=dao.clinicReplyList(Integer.parseInt(no));
+	List<ReplyVO> clist=dao.clinicReplyList(Integer.parseInt(no));
+	System.out.println(clist.size());
+	model.addAttribute("clist", clist);
 	model.addAttribute("vo", vo);
 	return "clinic/detail";
 }
@@ -89,14 +90,15 @@ public String ClinicLocationFindData(String no,Model model)
 	   model.addAttribute("count", list.size());
 	   return "clinic_find";
 }
-
-//@RequestMapping("clinic/reply_insert.do")
-//public String clinic_Reply_Insert(RedirectAttributes attr,int clno,String content,HttpSession session,Model model)
-//{
+@RequestMapping("clinic/clinic_reply.do")
+public String ClinicReplyInsert(String clno,ReplyVO vo)
+{
+	System.out.println("test");
 //	String id=(String)session.getAttribute("id");
-//	ReplyVO cvo=dao.clinicReplyInsert();
-//
-//	model.addAttribute("cvo", cvo);
-//	return "redirect:../clinic/detail.do";
-//}
+//	vo.setId(id);
+	vo.setClno(Integer.parseInt(clno));
+	dao.clinicReplyInsert(vo);
+      
+   return "redirect:../clinic/detail.do?no="+clno;
+}
 }

@@ -94,7 +94,6 @@ public class ReportController {
 	@RequestMapping("report/detail.do")
 	public String report_Detail(String no,Model model)
 	{
-		
 		ReportVO vo=dao.reportDetailData(Integer.parseInt(no));
 		model.addAttribute("vo", vo);
 		

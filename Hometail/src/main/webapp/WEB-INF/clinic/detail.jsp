@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
- <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bb.jpg');" data-stellar-background-ratio="0.5">
+ <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/cc.jpg');" data-stellar-background-ratio="0.5">
 <!--       <div class="overlay"></div> -->
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -47,37 +47,35 @@
             <p style="font-size:25">주소 : ${vo.addr }</p>
 			<p style="font-size:25">도로명우편번호 : ${vo.post }</p>
 
+		`
             <div class="pt-5 mt-5">
               <h3 class="mb-5 h4 font-weight-bold">Comments</h3>
               <ul class="comment-list">
-
+				<c:forEach var="cvo" items="${clist }">
                 <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
-                  </div>
                   <div class="comment-body">
-                    <h3>John Doe</h3>
-                    <div class="meta mb-2">January 03, 2019 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                    <h3>${cvo.id }</h3>
+                    <div class="meta mb-2">${cvo.regdate }</div>
+                    <p>${cvo.content }</p>
                     <p><a href="#" class="reply">Reply</a></p>
                   </div>
 
                 </li>
-
+				</c:forEach>
               </ul>
               <!-- END comment-list -->
               
               <div class="comment-form-wrap pt-5">
                 <h3 class="mb-5 h4 font-weight-bold">Leave a comment</h3>
-                <form action="../clinic/reply_insert.do" class="p-5 bg-light">
+                <form method="post" action="../clinic/clinic_reply.do" class="p-5 bg-light">
+                <input type="hidden" name="clno" value="${vo.clno }">
                   <div class="form-group">
-                    <label for="name"></label>
-                    
+                    <label for="name">Name</label>
                   </div>
 
                   <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="content" cols="30" rows="10" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
                     <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">

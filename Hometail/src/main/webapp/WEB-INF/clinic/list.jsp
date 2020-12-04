@@ -24,8 +24,12 @@
 	 }) 
 })
  });
-
 </script>
+<style>
+#climage{
+border-style: outset;border-color: #b3e5fc;
+}
+</style>
 </head>
 <body>
           	<div class="row">
@@ -35,10 +39,10 @@
 		              <a href="../clinic/detail.do?no=${vo.clno }">
 		              <c:choose>
 		               <c:when test="${vo.poster==null }">
-		                <img src="../images/aa.jpg"  class="block-20" width=420 height=100>
+		                <img src="../images/aa.jpg"  class="block-20" width=420 height=100 id="climage">
 		               </c:when>
 		               <c:otherwise>
-		                <img src="${vo.poster }" class="block-20" width=420 height=100>
+		                <img src="${vo.poster }" class="block-20" width=420 height=100 id="climage">
 		               </c:otherwise>
 		              </c:choose>
 		              </a>

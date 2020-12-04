@@ -19,7 +19,7 @@ import java.util.*;
  */
 public class ReplyVO {
 	private int replyno,petno,board_no,clno,group_id,group_step,group_tap,root,depth;
-	private String id,loc,maploc;
+	private String id,loc,maploc,content;
 	private Date regdate,rdate;
 	
 	public int getReplyno() {
@@ -36,6 +36,12 @@ public class ReplyVO {
 	}
 	public int getBoard_no() {
 		return board_no;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public void setBoard_no(int board_no) {
 		this.board_no = board_no;

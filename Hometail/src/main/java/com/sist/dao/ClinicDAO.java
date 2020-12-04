@@ -29,13 +29,13 @@ public class ClinicDAO {
     {
    	 return mapper.clinicLocationFindData(gu);
     }
+	public void clinicReplyInsert(ReplyVO vo)
+	{
+		mapper.clinicReplyInsert(vo);
+	}
+	public List<ReplyVO> clinicReplyList(int clno)
+	{
+		return mapper.clinicReplyList(clno);
+	}
 	
-//	public ReplyVO clinicReplyInsert()
-//	{
-//		return mapper.clinicReplyInsert();
-//	}
-//	public List<ReplyVO> clinicReplyList(int clno)
-//	{
-//		return mapper.clinicReplyList(clno);
-//	}
 }

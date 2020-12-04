@@ -26,6 +26,8 @@
   </definition>
    <definition name="clinic_find" template="/WEB-INF/clinic/clinic_find.jsp">
   </definition>
+  <definition name="clinic_reply" template="/WEB-INF/clinic/clinic_reply.jsp">
+  </definition>
   
  <!-- 신고&제보list by이석주 -->
   <definition name="report_list" template="/WEB-INF/report/list.jsp">
