@@ -47,15 +47,9 @@ public class LoginRestController {
 			   result="2";
 		   }
 	   }
-	   return "redirect:../main/main.do";
+	   return result;
    }
-   @RequestMapping("main/logout.do")
-   public String main_logout(HttpSession session)
-   {
-	   session.invalidate();
-	   
-	   return "redirect:../main/main.do";
-   }
+
 }
 
 
