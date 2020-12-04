@@ -342,11 +342,12 @@ public class BoardDAO {
 		try
 		{
 			dbConn.getConnection();
-			String sql="{CALL boardUpdateData(?, ?, ?)}";
+			String sql="{CALL boardUpdateData(?, ?, ?,?)}";
 			cs=dbConn.getConn().prepareCall(sql);
 			cs.setInt(1, board_no);
 			cs.setString(2, vo.getTitle());
 			cs.setString(3, vo.getContent());
+			cs.setString(4, vo.getPoster());
 			cs.executeQuery();
 						
 		}catch(Exception ex){}

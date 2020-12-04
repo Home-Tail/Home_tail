@@ -189,11 +189,25 @@ public class BoardController {
 	   }
 	
 	@RequestMapping("board/update_ok.do")
-	   public String board_update_ok(BoardVO vo, String bno)
+	   public String board_update_ok(BoardVO vo,HttpServletRequest request, HttpSession session) throws IOException 
 	   {
-		 int board_no=Integer.parseInt(bno);
+			System.out.println("update 호출");
+			String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\boardPoster"; 
+			String enctype= "UTF-8";  
+			int size = 1024 * 1024 * 100;
+			MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
+		
+			String id = String.valueOf(session.getAttribute("id"));
+			int board_no=	Integer.parseInt(mr.getParameter("bno"));
+			vo.setContent(mr.getParameter("content"));
+			vo.setTitle(mr.getParameter("title"));
+			vo.setPoster(mr.getFilesystemName("poster"));
+			System.out.println("!!"+vo.getContent());
+			System.out.println("!!"+vo.getTitle());
+			System.out.println("!!"+board_no);
 		   System.out.println("수정넘버 : "+board_no);
-			dao.boardUpdateData(vo, board_no);
+		   	System.out.println("사진"+vo.getPoster());
+			dao.boardUpdateData(vo,board_no);
 		   return "redirect:../board/list.do";
 	   } 
 	  

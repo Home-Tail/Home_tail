@@ -10,7 +10,7 @@
 <body>
   <div class="container">
     <div class="row">
-     <form method=post action="update_ok.do">
+     <form method=post action="update_ok.do" enctype="multipart/form-data">
      <table class="table" style="width:600px;">
        <tr>
         <th class="text-right" width=30%>이름</th>
@@ -31,6 +31,15 @@
           <textarea rows="8" cols="55" name=content>${vo.content }</textarea>
         </td>
        </tr>
+       <c:if test="${!empty vo.poster }">
+	      <tr>
+		     <th class="text-center danger" width=20%>첨부파일</th>
+		     <td>
+		     <input type="file" class="input-sm" name="poster">
+		      
+		      </td>
+	     </tr>
+	     </c:if>
        <tr>
         <td colspan="2" class="text-center">
           <input type=submit value="수정하기">
