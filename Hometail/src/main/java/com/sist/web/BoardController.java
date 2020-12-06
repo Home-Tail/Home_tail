@@ -1,12 +1,11 @@
 package com.sist.web;
 
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.sist.vo.ReplyVO;
 import com.sist.dao.BoardDAO;
 import com.sist.vo.BoardVO;
+
+import oracle.jdbc.OracleTypes;
 
 @Controller
 public class BoardController {
@@ -157,13 +159,13 @@ public class BoardController {
 		   int bno=Integer.parseInt(board_no);
 		   System.out.println("디테일 넘버 : "+bno);
 		   System.out.println("카테고리 넘버:"+cate);
-		   //System.out.println("cate번호 "+cate);
 		   BoardVO vo=dao.BoardDetailData(bno);
-		   //BoardVO vo=dao.BoardDetailData(no);
-		   //List<ReplyVO> list=dao.replyListData(3, no, curpage);
 		   model.addAttribute("vo", vo);
 		   model.addAttribute("cate",cate);
-		   //model.addAttribute("list", list);
+		   // 댓글
+		   List<ReplyVO> rlist=dao.boardReplyList(bno);
+		   System.out.println("rlist는"+rlist.size());
+		   model.addAttribute("rlist",rlist);
 		   return "board_detail"; 
 	   }
 	
@@ -210,5 +212,19 @@ public class BoardController {
 			dao.boardUpdateData(vo,board_no);
 		   return "redirect:../board/list.do";
 	   } 
-	  
+	// 댓글
+	@RequestMapping("board/board_reply_insert.do")
+	   public String boardReplyInsert(ReplyVO vo, HttpSession session)
+	   {
+		  System.out.println("호출");
+		   vo.setId((String)session.getAttribute("id"));
+		   //vo.setName((String)session.getAttribute("name"));
+		  // System.out.println("카테고리"+cate);
+		   System.out.println("내용:"+vo.getContent());
+		   /*int rcate=Integer.parseInt(cate);
+		   vo.setCate(rcate);*/
+		   
+		   dao.boardReplyInsert(vo);
+		   return "redirect:detail.do?board_no="+vo.getBoard_no();
+	   }
 }

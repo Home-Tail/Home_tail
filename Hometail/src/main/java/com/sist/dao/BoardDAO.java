@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.vo.BoardVO;
+import com.sist.vo.ReplyVO;
 
 import oracle.jdbc.OracleTypes;
 import java.util.*;
@@ -353,7 +354,57 @@ public class BoardDAO {
 		}catch(Exception ex){}
 		dbConn.disConnection();
 	}
-	
+
+	  // 댓글
+	public List<ReplyVO> boardReplyList(int board_no)
+  {
+  	List<ReplyVO> rlist=new ArrayList<ReplyVO>();
+  	
+  	try
+  	{
+  		dbConn.getConnection();
+  		String sql="{CALL boardReplyList(?, ?)}";
+  		cs=dbConn.getConn().prepareCall(sql);
+  		cs.setInt(1, board_no);
+  		cs.registerOutParameter(2, OracleTypes.CURSOR);
+  		cs.executeQuery();
+  		ResultSet rs=(ResultSet)cs.getObject(2);
+  		while(rs.next())
+  		{
+  			ReplyVO vo=new ReplyVO();
+  			vo.setReplyno(rs.getInt(1));
+  			vo.setBoard_no(rs.getInt(2));
+  			vo.setId(rs.getString(3));
+  			vo.setContent(rs.getString(4));
+  			vo.setDb_regdate(rs.getString(5));
+  			rlist.add(vo);
+  		}
+  		rs.close();
+  	}catch(Exception ex){
+  		System.out.println(ex.getMessage());
+  		ex.getStackTrace();
+  	}
+  	dbConn.disConnection();
+  	return rlist;
+  }
+	public void boardReplyInsert(ReplyVO vo)
+    {
+    	try
+    	{
+        	dbConn.getConnection();
+    		String sql="{CALL boardReplyInsert(?, ?, ?)}";
+    		cs=dbConn.getConn().prepareCall(sql);
+    		cs.setInt(1, vo.getBoard_no());
+    		cs.setString(2, vo.getId());
+    		cs.setString(3, vo.getContent());
+    		cs.executeQuery();
+    		
+    	}catch(Exception ex){
+    		System.out.println(ex.getMessage());
+    		ex.getStackTrace();
+    	}
+    	 dbConn.disConnection();
+    }
 }
 
 

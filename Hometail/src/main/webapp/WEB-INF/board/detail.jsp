@@ -36,6 +36,23 @@
 					}
 				});
 			});
+		/* https://codevang.tistory.com/286
+		$('#replyBtn').on('click', function() {
+				var form = $("form[name=replyForm]").serialize();
+				$.ajax({
+					url : "../board/detail.do",
+					type : "POST",
+					dataType : "json",
+					data : form,
+					success : function(data) {
+						var txt = data.bGoodCount;
+						$('#print').text(txt);
+					},
+					error : function() {
+					alert("X");
+					}
+				});
+			}); */
 	});
 </script> 
 </head>
@@ -87,7 +104,58 @@
 	          </td>
 	        </tr>
 	      </table>
+	             <!-- 댓글 출력 -->
+       		<table class="table">
+       		<tr>
+       			<td>
+       				<c:forEach var="rvo" items="${rlist }">
+       					<table class="table">
+       						<tr>
+       							<td class="text-left">
+       								☆${rvo.id }(${rvo.db_regdate })
+       							</td>
+       							<%-- 수정
+       							<td class="text-right">
+       								<c:if test="${sessionScope.id==rvo.id }">
+       									<span href="#" class="btn btn-xs btn-warning upBtn" data-no="${rvo.no }">수정</span>
+       									<a href="reply_delete.do?no=${rvo.no }&cno=${vo.board_no}" class="btn btn-xs btn-danger">삭제</a>
+       								</c:if>
+       							</td> --%>
+       						</tr>
+       						<tr>
+       							<td colspan=2>
+       							<pre style="white-space:pre-line; border=none; background-color:white;">
+       								${rvo.content }
+       							</pre>
+       							</td>
+       						</tr>
+			       			<%-- 수정하기 
+			       			<tr id="reply_up${rvo.no }" class="update" style="display:none;">
+			       				<td colspan=2>
+			       					<form method=post action="reply_update.do">
+				       					<input type=hidden name=cno value=${vo.no }>
+				       					<input type=hidden name=no value=${rvo.no }>
+				       					<textarea rows="5" cols="50" style="float:left; margin-right:10px;" name=msg>${rvo.msg }</textarea>
+				       					<input type=submit class="btn btn-sm btn-primary" value="수정하기" style="height:105px; float:left;">
+			       					</form>
+			       				</td>
+			       			</tr> --%>
+       					</table>
+       				</c:forEach>
+       			</td>
+       		</tr>
+       			<tr>
+       				<td>
+       					<form method=post action="board_reply_insert.do" id="replyForm" name="replyForm">
+	       					<input type=hidden name=board_no value=${vo.board_no }>
+	       					<input type=hidden name=cate value=${cate }> 
+	       					<textarea rows="2" cols="100" style="float:left; margin-right:20px;" name=content></textarea>
+	       					<input type=submit class="btn btn-sm btn-primary" value="댓글쓰기" style="height:50px; float:left;" id="replyBtn">
+       					</form>
+       				</td>
+       			</tr>
+       		</table>
+       	</div>
      </div>
-   </div>
 </body>
 </html>

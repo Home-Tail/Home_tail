@@ -55,6 +55,8 @@
   </definition> 
  <definition name="board_update" template="/WEB-INF/board/update.jsp"> 
   </definition> 
+ <definition name="board_update" template="/WEB-INF/board/update.jsp"> 
+  </definition> 
 </tiles-definitions>
 
 

@@ -18,10 +18,18 @@ import java.util.*;
 	
  */
 public class ReplyVO {
-	private int replyno,petno,board_no,clno,group_id,group_step,group_tap,root,depth;
+	private int replyno,petno,board_no,clno,group_id,group_step,group_tap,root,depth,cate;
 	private String id,loc,maploc,content;
 	private Date regdate,rdate;
+	private String db_regdate;
 	
+	
+	public String getDb_regdate() {
+		return db_regdate;
+	}
+	public void setDb_regdate(String db_regdate) {
+		this.db_regdate = db_regdate;
+	}
 	public int getReplyno() {
 		return replyno;
 	}
@@ -111,6 +119,12 @@ public class ReplyVO {
 	}
 	public void setRdate(Date rdate) {
 		this.rdate = rdate;
+	}
+	public int getCate() {
+		return cate;
+	}
+	public void setCate(int cate) {
+		this.cate = cate;
 	}
 	
 }

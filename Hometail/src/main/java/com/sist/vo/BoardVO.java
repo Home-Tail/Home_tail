@@ -5,6 +5,7 @@ import java.util.Date;
 public class BoardVO {
 	private int board_no;
 	private String id;
+	private String name;
 	private int cate;
 	private String title;
 	private String content;
@@ -58,6 +59,12 @@ public class BoardVO {
 	}
 	public void setPoster(String poster) {
 		this.poster = poster;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }
