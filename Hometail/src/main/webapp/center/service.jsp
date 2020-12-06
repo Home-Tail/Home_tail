@@ -421,7 +421,7 @@ function button_click(){
 		console.log('보호소선택');
 		return;
 	}
-	let strDay=$('#strDay').val();
+	let strDay=$('#rday').val();
 	console.log('날짜선택'+strDay);
 	if(strDay.trim()=="")
 	{
@@ -435,6 +435,10 @@ function button_click(){
 	{
 		$('#text_view').focus();
 		$('#text_view').text('*시간을 선택해 주세요.*');
+	}
+	else
+	{
+		ReserveFrm.submit();	
 	}
 }
 </script>
@@ -503,9 +507,10 @@ function button_click(){
 					<td id="post" name="post"></td>
 					<input type=hidden id="post2"  name="post">
 				</tr>
-                  <input type=hidden name="strYear" id="strYear">
-                  <input type=hidden name="strMonth" id="strMonth">
-                  <input type=hidden name="strDay" id="strDay">
+<!--                   <input type=hidden name="strYear" id="strYear"> -->
+<!--                   <input type=hidden name="strMonth" id="strMonth"> -->
+<!--                   <input type=hidden name="strDay" id="strDay"> -->
+                  <input type=hidden name="rday" id="rday">
                   <input type=hidden name="time" id="time">
 			</table>
 <!--                   <input type=submit value="예매하기" class="btn btn-lg btn-primary"> -->

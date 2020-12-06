@@ -20,7 +20,12 @@
     <link rel="stylesheet" href="../css/flaticon.css">
     <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
-  </head>
+<style>
+#sootag{
+	margin: 0 0px 4px 13px;
+}
+</style>
+</head>
 <body>
    	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
@@ -38,15 +43,15 @@
 	        	<li class="nav-item"><a href="../adopt/list.do" class="nav-link">입양</a></li>
 	        	<li class="nav-item"><a href="../center/service.do" class="nav-link">봉사/후원</a></li>
 	        	<li class="nav-item"><a href="../clinic/main.do" class="nav-link">동물병원</a></li>
-	          <li class="nav-item"><a href="../board/list.do" class="nav-link">커뮤니티</a></li>
+	            <li class="nav-item"><a href="../board/list.do" class="nav-link">커뮤니티</a></li>
 	        <c:if test="${sessionScope.id==null }">   
 	          	<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#myModal">로그인</a></li>
 	        </c:if>
 			<c:if test="${sessionScope.id!=null }">       
 				<li class="nav-item"><a href="../main/logout.do" class="nav-link">로그아웃</a></li>
 	        </c:if>
-	        
 	        </ul> 
+	        	<li class="nav-item" id="sootag"><button><a href="../mypage/mytest.do"><img src="../user.png" width=20 height=20></a></button></li>
 	      </div> 
 	    </div>
 	  </nav>

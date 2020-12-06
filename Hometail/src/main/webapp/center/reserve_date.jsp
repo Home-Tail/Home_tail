@@ -74,15 +74,16 @@ $(function(){
 		let year=$(this).attr("data-year");
 		let month=$(this).attr("data-month");
 		let day=$(this).text();
-		let rday=year+"년도 "+month+"월 "+day+"일";
+		let rday=year+"-"+month+"-"+day.trim();
 		console.log('year은?'+year);
 		console.log('month은?'+month);
 		console.log('day은?'+day.trim());
-		$('#strYear').val(year);
-		$('#strMonth').val(month);
-		$('#strDay').val(day.trim());
+		console.log('rday은?'+rday.trim());
+// 		$('#strYear').val(year);
+// 		$('#strMonth').val(month);
+// 		$('#strDay').val(day.trim());
 // 		$('#movie_reserve').text(rday);
-		$('#day').val(rday);
+		$('#rday').val(rday);
 		
 		// 시간 출력 
 		/*

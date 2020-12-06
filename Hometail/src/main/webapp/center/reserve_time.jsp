@@ -25,17 +25,17 @@ function doOpenCheck(chk){
  	 <table class="table" style="margin-top: 150px;">
      <tr>
       <td>
-        	<input type="checkbox" name="xxx" value="오전" onclick="doOpenCheck(this);">&nbsp;&nbsp;오전반&nbsp;&nbsp;[09:30~12:30]
+        	<input type="checkbox" name="xxx" value="오전반 [09:30~12:30]" onclick="doOpenCheck(this);">&nbsp;&nbsp;오전반&nbsp;&nbsp;[09:30~12:30]
       </td>
       </tr>
       <tr>
       <td>
-          	<input type="checkbox" name="xxx" value="오후" onclick="doOpenCheck(this);">&nbsp;&nbsp;오후반&nbsp;&nbsp;[13:30~16:30]
+          	<input type="checkbox" name="xxx" value="오후반 [13:30~16:30]" onclick="doOpenCheck(this);">&nbsp;&nbsp;오후반&nbsp;&nbsp;[13:30~16:30]
       </td>
       </tr>
       <tr>
       <td>
-          	<input type="checkbox" name="xxx" value="종일" onclick="doOpenCheck(this);">&nbsp;&nbsp;종일반&nbsp;&nbsp;[09:30~16:30]
+          	<input type="checkbox" name="xxx" value="종일반 [09:30~16:30]" onclick="doOpenCheck(this);">&nbsp;&nbsp;종일반&nbsp;&nbsp;[09:30~16:30]
       </td>
      </tr>
    </table>

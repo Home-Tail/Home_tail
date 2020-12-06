@@ -3,6 +3,7 @@ package com.sist.mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.sist.vo.MemberVO;
+import com.sist.vo.Center_reserveVO;
 
 public interface CenterServiceMapper {
 
@@ -12,4 +13,19 @@ public interface CenterServiceMapper {
 	
 	@Select("SELECT * FROM tail_user WHERE id=#{id}")
 	public MemberVO Login_info(String id);
+	
+	@Select("INSERT INTO center_reserve VALUES("
+			+ "(select NVL(max(no+1),1) from center_reserve),"
+			+ "#{id},"
+			+ "#{name},"
+			+ "#{loc},"
+			+ "#{tel},"
+			+ "#{lotno_addr}," 	
+			+ "#{roadno_addr},"
+			+ "#{db_reserve_day},"
+			+ "SYSDATE,"
+			+ "#{time},"
+			+ "'N')")
+	public Center_reserveVO center_reserve(Center_reserveVO vo);
+	
 }
