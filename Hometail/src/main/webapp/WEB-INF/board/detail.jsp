@@ -36,23 +36,59 @@
 					}
 				});
 			});
-		/* https://codevang.tistory.com/286
-		$('#replyBtn').on('click', function() {
-				var form = $("form[name=replyForm]").serialize();
-				$.ajax({
-					url : "../board/detail.do",
-					type : "POST",
-					dataType : "json",
-					data : form,
-					success : function(data) {
-						var txt = data.bGoodCount;
-						$('#print').text(txt);
-					},
-					error : function() {
-					alert("X");
+		 let i=0;
+		 $(function(){
+		 	$('.upBtn').click(function(){
+		 		$('.rupdate').hide();
+		 		let no=$(this).attr("data-no");
+		 		if(i==0)
+		 		{
+		 			$(this).text("취소");
+		 			$('#reply_up'+no).show();
+		 			i=1;
+		 		}
+		 		else
+		 		{
+		 			$(this).text("수정");
+		 			$('#reply_up'+no).hide();
+		 			i=0;	
+		 		}
+		 	})
+		 	
+		 });
+		 $('#replyBtn').click(function(){
+			 // board_no, content
+			    var board_no = $('#for_test').attr("value");
+			   var content =$('#reply_content').val();
+			   console.log('board_no : '+board_no);
+			   console.log('reply_content : '+reply_content);
+				 $.ajax({
+					type:'POST',
+					url:'../board/board_reply_insert.do?board_no='+board_no,
+					data:{'content':content},
+					success:function(res) 
+					{
+						$('#print').html(res);
 					}
-				});
-			}); */
+				}); 			 
+		 })
+		 /* 여기부터 해!
+		 $('#replyUpdate').click(function(){
+			 // board_no, content
+			    var board_no = $('#for_test').attr("value");
+			   var content =$('#reply_content').val();
+			   console.log('board_no : '+board_no);
+			   console.log('reply_content : '+reply_content);
+				 $.ajax({
+					type:'POST',
+					url:'../board/reply_update.do?replyno='+replyno,
+					data:{'content':content},
+					success:function(res) 
+					{
+						$('#print').html(res);
+					}
+				}); 			 
+		 }) */
 	});
 </script> 
 </head>
@@ -114,13 +150,12 @@
        							<td class="text-left">
        								☆${rvo.id }(${rvo.db_regdate })
        							</td>
-       							<%-- 수정
        							<td class="text-right">
        								<c:if test="${sessionScope.id==rvo.id }">
-       									<span href="#" class="btn btn-xs btn-warning upBtn" data-no="${rvo.no }">수정</span>
-       									<a href="reply_delete.do?no=${rvo.no }&cno=${vo.board_no}" class="btn btn-xs btn-danger">삭제</a>
+       									<span href="#" class="btn btn-xs btn-primary upBtn" data-no="${rvo.replyno }">수정</span>
+       									<a href="reply_delete.do?replyno=${rvo.replyno }&board_no=${vo.board_no}" class="btn btn-xs btn-primary">삭제</a>
        								</c:if>
-       							</td> --%>
+       							</td> 
        						</tr>
        						<tr>
        							<td colspan=2>
@@ -129,17 +164,16 @@
        							</pre>
        							</td>
        						</tr>
-			       			<%-- 수정하기 
-			       			<tr id="reply_up${rvo.no }" class="update" style="display:none;">
+			       			<tr id="reply_up${rvo.replyno }" class="rupdate" style="display:none;">
 			       				<td colspan=2>
 			       					<form method=post action="reply_update.do">
-				       					<input type=hidden name=cno value=${vo.no }>
-				       					<input type=hidden name=no value=${rvo.no }>
-				       					<textarea rows="5" cols="50" style="float:left; margin-right:10px;" name=msg>${rvo.msg }</textarea>
-				       					<input type=submit class="btn btn-sm btn-primary" value="수정하기" style="height:105px; float:left;">
+				       					<input type=hidden name=board_no value=${vo.board_no }>
+				       					<input type=hidden name=replyno value=${rvo.replyno }>
+				       					<textarea rows="2" cols="100" style="float:left; margin-right:20px;" name=content>${rvo.content }</textarea>
+				       					<input type=submit class="btn btn-sm btn-primary" value="수정하기" style="height:50px; float:left;" id="replyUpdate">
 			       					</form>
 			       				</td>
-			       			</tr> --%>
+			       			</tr> 
        					</table>
        				</c:forEach>
        			</td>
@@ -147,10 +181,10 @@
        			<tr>
        				<td>
        					<form method=post action="board_reply_insert.do" id="replyForm" name="replyForm">
-	       					<input type=hidden name=board_no value=${vo.board_no }>
+	       					<input type=hidden id="for_test" name=board_no value="${vo.board_no }">
 	       					<input type=hidden name=cate value=${cate }> 
-	       					<textarea rows="2" cols="100" style="float:left; margin-right:20px;" name=content></textarea>
-	       					<input type=submit class="btn btn-sm btn-primary" value="댓글쓰기" style="height:50px; float:left;" id="replyBtn">
+	       					<textarea rows="2" cols="100" style="float:left; margin-right:20px;" name=content id="reply_content"></textarea>
+	       					<input type=button class="btn btn-sm btn-primary" value="댓글쓰기" style="height:50px; float:left;" id="replyBtn">
        					</form>
        				</td>
        			</tr>

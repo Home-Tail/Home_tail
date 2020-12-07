@@ -93,6 +93,7 @@ public class BoardController {
 		   List<BoardVO> rList=dao.aReviewBoardListData(acurpage); 
 		   List<BoardVO> qList=dao.qnaBoardListData(qcurpage);
 		   
+		   
 		   model.addAttribute("no", no);
 		   model.addAttribute("rList", rList);
 		   model.addAttribute("fList", fList);
@@ -226,5 +227,19 @@ public class BoardController {
 		   
 		   dao.boardReplyInsert(vo);
 		   return "redirect:detail.do?board_no="+vo.getBoard_no();
+	   }
+	   @RequestMapping("board/reply_delete.do")
+	   public String reply_delete(int replyno, int board_no)
+	   {
+		   System.out.println("댓글삭제번호 : "+replyno);
+		   //int rno=Integer.parseInt(replyno);
+		   dao.replyDelete(replyno);
+		   return "redirect:detail.do?board_no="+board_no;
+	   }
+	   @RequestMapping("board/reply_update.do")
+	   public String reply_update(int replyno, int board_no, String content)
+	   {
+		   dao.replyUpdate(replyno, content);
+		   return "redirect:detail.do?board_no="+board_no;
 	   }
 }

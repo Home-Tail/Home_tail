@@ -405,6 +405,33 @@ public class BoardDAO {
     	}
     	 dbConn.disConnection();
     }
+	public void replyDelete(int replyno)
+	{
+		try
+		{
+			dbConn.getConnection();
+			String sql="{CALL replyDelete(?)}";
+			cs=dbConn.getConn().prepareCall(sql);
+			cs.setInt(1, replyno);
+			cs.executeQuery();
+						
+		}catch(Exception ex){}
+		dbConn.disConnection();
+	}
+	public void replyUpdate(int replyno, String content)
+    {
+    	try
+    	{
+    		dbConn.getConnection();
+    		String sql="{CALL replyUpdate(?, ?)}";
+    		cs=dbConn.getConn().prepareCall(sql);
+    		cs.setInt(1, replyno);
+    		cs.setString(2, content);
+    		cs.executeQuery();
+    		
+    	}catch(Exception ex){}
+    	dbConn.disConnection();
+    }
 }
 
 
