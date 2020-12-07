@@ -86,7 +86,9 @@
            <tr>
                <td class="text-center" width=10%>${fvo.board_no }</td>
 	           <td class="text-left" width=45%>
-	             <span class="btn detail" data-value="${no }" data-cate="${fvo.board_no }">${fvo.title }</span> 
+	             <span class="btn detail" data-value="${no }" data-cate="${fvo.board_no }">${fvo.title } 
+	             	<c:if test="${fvo.reply_count!=0 }"><sup style="color:blue;">(${fvo.reply_count })</sup></c:if>
+	             </span> 
                <input type=hidden value="${fvo.board_no }" class="bn">
 	           </td>
 	           <td class="text-center" width=15%>${fvo.id }</td>
@@ -158,7 +160,8 @@
 			                  <div>${rvo.id }</div>
 			                </div>
 			                <div class="desc pl-3">
-				                <h3 class="heading">${rvo.title }</h3>
+				                <h3 class="heading">${rvo.title }
+				                <c:if test="${rvo.reply_count!=0 }"><sup style="color:blue;">(${rvo.reply_count })</sup></c:if></h3>
 				              </div>
 			              </div>
 			            </div>
@@ -214,7 +217,9 @@
            <tr>
                <td class="text-center" width=10%>${qvo.board_no }</td>
 	           <td class="text-left" width=45%>
-	             <span class="btn detail" data-value="${no }" data-cate="${qvo.board_no }">${qvo.title }</span>
+	             <span class="btn detail" data-value="${no }" data-cate="${qvo.board_no }">${qvo.title } 
+	             <c:if test="${qvo.reply_count!=0 }"><sup style="color:blue;">(${qvo.reply_count })</sup></c:if>
+	            </span>
                <input type=hidden value="${qvo.board_no }" class="bn">
 	           </td>
 	           <td class="text-center" width=15%>${qvo.id }</td>

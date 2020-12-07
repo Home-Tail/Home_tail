@@ -12,6 +12,15 @@ public class BoardVO {
 	private Date regdate;
 	private int hit;
 	private String poster;
+	//댓글 수 파악
+	private int reply_count;
+			
+	public int getReply_count() {
+		return reply_count;
+	}
+	public void setReply_count(int reply_count) {
+		this.reply_count = reply_count;
+	}
 	public int getBoard_no() {
 		return board_no;
 	}

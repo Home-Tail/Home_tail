@@ -432,6 +432,31 @@ public class BoardDAO {
     	}catch(Exception ex){}
     	dbConn.disConnection();
     }
+	// 리스트 별 댓글 카운드 가져오기
+    public int Reply_count(int board_no)
+    {
+    	int count=0;
+    	try
+    	{
+    		dbConn.getConnection();
+    		String sql="SELECT COUNT(*) FROM reply where board_no=?";
+    		ps=dbConn.getConn().prepareStatement(sql);
+    		ps.setInt(1,board_no);
+    		ResultSet rs=ps.executeQuery();
+    		rs.next();
+    		count=rs.getInt(1);
+    		rs.close();
+
+    	}catch(Exception ex)
+    	{
+    		System.out.println(ex.getMessage());
+    	}
+    	finally
+    	{
+    		dbConn.disConnection();
+    	}
+    	return count;
+    }
 }
 
 

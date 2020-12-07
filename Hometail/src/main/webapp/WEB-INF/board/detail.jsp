@@ -10,7 +10,23 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-	$(function(){
+	$(function(){ 
+		 $('#boardDel').click(function(){
+			 // board_no, content
+			    var board_no = $('#delBoard_no').val();
+			    var cate = $('#delCate').val();
+			   console.log('삭제 board_no : '+board_no);
+			   console.log('삭제 cate : '+cate);
+				  $.ajax({
+					type:'POST',
+					data:{'cate':cate},
+					url:'../board/delete_ok.do?board_no='+board_no,
+					success:function(res) 
+					{
+						$('#print').html(res);
+					}
+				}); 			 
+		 })
 		$('.update').click(function(){
 			let board_no = $(this).attr("value");		
 			$.ajax({
@@ -36,6 +52,8 @@
 					}
 				});
 			});
+		 
+		 
 		 let i=0;
 		 $(function(){
 		 	$('.upBtn').click(function(){
@@ -69,26 +87,48 @@
 					success:function(res) 
 					{
 						$('#print').html(res);
-					}
+					},
+					 error : function(error) {
+					        alert("로그인 해주세요!");
+					    }
 				}); 			 
 		 })
-		 /* 여기부터 해!
+
 		 $('#replyUpdate').click(function(){
 			 // board_no, content
-			    var board_no = $('#for_test').attr("value");
-			   var content =$('#reply_content').val();
-			   console.log('board_no : '+board_no);
-			   console.log('reply_content : '+reply_content);
+			    var board_no = $('#reUpBno').attr("value");
+			   var replyno=$('#reUpRno').attr("value");
+			   var content =$('#reUpContent').val();
+			   console.log('수정 board_no : '+board_no);
+			   console.log('수정 replyno : '+replyno);
+			   console.log('수정 content : '+content);
 				 $.ajax({
 					type:'POST',
-					url:'../board/reply_update.do?replyno='+replyno,
+					url:'../board/reply_update.do?board_no='+board_no+'&replyno='+replyno,
 					data:{'content':content},
 					success:function(res) 
 					{
 						$('#print').html(res);
 					}
 				}); 			 
-		 }) */
+		 })
+		 
+		 $('#reDelBtn').click(function(){
+			 // board_no, content
+			    var board_no = $('#del_bno').attr("value");
+			   var replyno=$(this).attr("data-no");
+			   console.log('삭제 replyno : '+replyno);
+			   console.log('삭제 board_no : '+board_no);
+				  $.ajax({
+					type:'POST',
+					url:'../board/reply_delete.do?board_no='+board_no+'&replyno='+replyno,
+					success:function(res) 
+					{
+						$('#print').html(res);
+					}
+				}); 			 
+		 })
+		 
 	});
 </script> 
 </head>
@@ -133,8 +173,10 @@
 	        <tr>
 	          <td colspan="4" class="text-right">
 	          <c:if test="${sessionScope.id==vo.id }">
-		            <span class="btn btn-sm btn-success update" value="${ vo.board_no}">수정</span>
-		            <a href="../board/delete_ok.do?board_no=${vo.board_no }" class="btn btn-sm btn-info">삭제</a>
+				     <input type=hidden name=delBoard_no value=${vo.board_no } id="delBoard_no">
+				     <input type=hidden name=delCate value=${cate } id="delCate">
+		            <span class="btn btn-sm btn-primary update" value="${ vo.board_no}" id="boardUp">수정</span>
+		            <span class="btn btn-sm btn-primary" value="${ vo.board_no}" id="boardDel">삭제</span>
 		      </c:if>      
 	            <span class="btn btn-sm btn-primary back" value="${cate }">목록</span>
 	          </td>
@@ -152,8 +194,9 @@
        							</td>
        							<td class="text-right">
        								<c:if test="${sessionScope.id==rvo.id }">
-       									<span href="#" class="btn btn-xs btn-primary upBtn" data-no="${rvo.replyno }">수정</span>
-       									<a href="reply_delete.do?replyno=${rvo.replyno }&board_no=${vo.board_no}" class="btn btn-xs btn-primary">삭제</a>
+				       					<input type=hidden name=del_bno value=${vo.board_no } id="del_bno">
+       									<span class="btn btn-xs btn-primary upBtn" data-no="${rvo.replyno }">수정</span>
+       									<span class="btn btn-xs btn-primary reDel" data-no="${rvo.replyno }" id="reDelBtn">삭제</span>
        								</c:if>
        							</td> 
        						</tr>
@@ -164,30 +207,32 @@
        							</pre>
        							</td>
        						</tr>
-			       			<tr id="reply_up${rvo.replyno }" class="rupdate" style="display:none;">
-			       				<td colspan=2>
-			       					<form method=post action="reply_update.do">
-				       					<input type=hidden name=board_no value=${vo.board_no }>
-				       					<input type=hidden name=replyno value=${rvo.replyno }>
-				       					<textarea rows="2" cols="100" style="float:left; margin-right:20px;" name=content>${rvo.content }</textarea>
-				       					<input type=submit class="btn btn-sm btn-primary" value="수정하기" style="height:50px; float:left;" id="replyUpdate">
-			       					</form>
-			       				</td>
-			       			</tr> 
+				       			<tr id="reply_up${rvo.replyno }" class="rupdate" style="display:none;">
+				       				<td colspan=2>
+				       					<form method=post action="reply_update.do">
+					       					<input type=hidden name=board_no value=${vo.board_no } id="reUpBno">
+					       					<input type=hidden name=replyno value=${rvo.replyno } id="reUpRno">
+					       					<textarea rows="2" cols="100" style="float:left; margin-right:20px;" name=content id="reUpContent">${rvo.content }</textarea>
+					       					<input type=button class="btn btn-sm btn-primary" value="수정하기" style="height:50px; float:left;" id="replyUpdate">
+				       					</form>
+				       				</td>
+				       			</tr> 
        					</table>
        				</c:forEach>
        			</td>
        		</tr>
-       			<tr>
-       				<td>
-       					<form method=post action="board_reply_insert.do" id="replyForm" name="replyForm">
-	       					<input type=hidden id="for_test" name=board_no value="${vo.board_no }">
-	       					<input type=hidden name=cate value=${cate }> 
-	       					<textarea rows="2" cols="100" style="float:left; margin-right:20px;" name=content id="reply_content"></textarea>
-	       					<input type=button class="btn btn-sm btn-primary" value="댓글쓰기" style="height:50px; float:left;" id="replyBtn">
-       					</form>
-       				</td>
-       			</tr>
+       		<c:if test="${sessionScope.id!=null }">
+	       			<tr>
+	       				<td>
+	       					<form method=post action="board_reply_insert.do" id="replyForm" name="replyForm">
+		       					<input type=hidden id="for_test" name=board_no value="${vo.board_no }">
+		       					<input type=hidden name=cate value=${cate }> 
+		       					<textarea rows="2" cols="100" style="float:left; margin-right:20px;" name=content id="reply_content"></textarea>
+		       					<input type=button class="btn btn-sm btn-primary" value="댓글쓰기" style="height:50px; float:left;" id="replyBtn">
+	       					</form>
+	       				</td>
+	       			</tr>
+	       	</c:if>
        		</table>
        	</div>
      </div>

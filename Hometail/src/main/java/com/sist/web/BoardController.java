@@ -55,7 +55,7 @@ public class BoardController {
 		   return "board/list";
 	}
 	@RequestMapping("board/cboard_list.do")
-	public String board_cboard_list(String page,Model model,String no)
+	public String board_cboard_list(String page,Model model,String no,String board_no)
 	{
 		if(no==null)
 		{
@@ -93,7 +93,24 @@ public class BoardController {
 		   List<BoardVO> rList=dao.aReviewBoardListData(acurpage); 
 		   List<BoardVO> qList=dao.qnaBoardListData(qcurpage);
 		   
-		   
+		   for(BoardVO vo:fList)
+		   {
+				int count= dao.Reply_count(vo.getBoard_no());
+				//System.out.println("count는"+count);
+		   		vo.setReply_count(count);
+		   }
+		   for(BoardVO vo:rList)
+		   {
+				int count= dao.Reply_count(vo.getBoard_no());
+				//System.out.println("count는"+count);
+		   		vo.setReply_count(count);
+		   }
+		   for(BoardVO vo:qList)
+		   {
+				int count= dao.Reply_count(vo.getBoard_no());
+				//System.out.println("count는"+count);
+		   		vo.setReply_count(count);
+		   }
 		   model.addAttribute("no", no);
 		   model.addAttribute("rList", rList);
 		   model.addAttribute("fList", fList);
@@ -151,7 +168,7 @@ public class BoardController {
 			{
 				dao.qnaBoardInsert(vo);
 			}
-		   return "redirect:../board/list.do";
+		   return "redirect:../board/cboard_list.do?no="+cate;
 	   } 
 	@RequestMapping("board/detail.do")
 	   public String board_detail(String board_no, Model model,String cate)
@@ -171,14 +188,15 @@ public class BoardController {
 	   }
 	
 	@RequestMapping("board/delete_ok.do")
-	   public String board_delete_ok(BoardVO vo,HttpSession session)
+	   public String board_delete_ok(BoardVO vo,HttpSession session, int cate)
 	   {
 		String id= (String) session.getAttribute("id");
 		System.out.println("삭제 글번호 : "+vo.getBoard_no());
 		System.out.println("삭제 아이디 : "+id);
 			int board_no=vo.getBoard_no(); 
 			dao.boardDelete(board_no, id);
-		   return "redirect:../board/list.do";
+			//int cno=Integer.parseInt(cate);
+		   return "redirect:../board/cboard_list.do?no="+cate;
 	   } 
 	
 	// 수정
@@ -211,7 +229,7 @@ public class BoardController {
 		   System.out.println("수정넘버 : "+board_no);
 		   	System.out.println("사진"+vo.getPoster());
 			dao.boardUpdateData(vo,board_no);
-		   return "redirect:../board/list.do";
+		   return "redirect:../board/detail.do?board_no="+board_no;
 	   } 
 	// 댓글
 	@RequestMapping("board/board_reply_insert.do")
