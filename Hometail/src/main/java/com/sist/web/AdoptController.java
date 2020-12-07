@@ -55,12 +55,16 @@ public class AdoptController {
 	}
 	@RequestMapping("detail.do")
 	public String adopt_detail(int no,Model model) {
-		AdoptVO vo=adao.adoptDetailData(no);
+AdoptVO vo=adao.adoptDetailData(no);
 		
 		String punumber=vo.getPunumber();
-		StringTokenizer st=new StringTokenizer(punumber,"-");
-		String result="";
-		List<adopt_newsVO> list=adao.adoptnewsData(result);
+		// StringTokenizer st=new StringTokenizer(punumber,"-");
+		String regex = punumber.split("-")[0];
+		
+		// String result="";
+		List<adopt_newsVO> list=adao.adoptnewsData(regex);
+		List<AdoptVO> aList=adao.adoptCate10();
+		model.addAttribute("aList", aList);
 		model.addAttribute("vo", vo);
 		model.addAttribute("list", list);
 		return "adopt/detail";

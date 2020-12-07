@@ -123,7 +123,15 @@
             <div class="sidebar-box ftco-animate"> 
             	<h3>입양가능한 List</h3>
               <table class="table">
-              
+              <c:forEach var="vo" items="${aList }">
+		         <tr>
+		           <td>
+		            <a href="../adopt/detail.do?no=${vo.adno }"><img src="${vo.poster }" width=35 height=35></a>
+		           </td>
+		           <td>${vo.cate }</td>
+		           <td>${vo.punumber }</td>
+		         </tr>
+		       </c:forEach>
             </table>
             
        <hr>

@@ -25,10 +25,15 @@ public int adoptTotalPage();
 public AdoptVO adoptDetailData(int adno);
 
 @Select("SELECT title,poster,link,rownum "
-	+ "FROM adopt_news "
-	+ "WHERE rownum<=5 AND "
-	+ "REGEXP_LIKE(title,#{finddata})")
-public List<adopt_newsVO> adoptnewsData(String finddata);
-	
+		+ "FROM adopt_news "
+		+ "WHERE rownum<=5 AND "
+		+ "REGEXP_LIKE(title,#{finddata})")
+	public List<adopt_newsVO> adoptnewsData(String finddata);
+
+	@Select("SELECT adno,poster,punumber,cate,rownum "
+			+ "FROM adoption "
+			+ "WHERE rownum<=10 "
+			+ "AND REGEXP_LIKE(cate,'공고중')")
+	public List<AdoptVO> adoptCate10();
 	
 }

@@ -19,21 +19,64 @@
         </div>
       </div>
 </section>
+
+<!-- cate -->
+
+ <!-- cate end -->
+<%-- <section class="ftco-section ftco-client">
+			<div class="container">
+        <div class="row ftco-animate">
+          <div class="col-md-12">
+            <div class="carousel-client owl-carousel">
+            <c:forEach var="vo" items="${aList }">
+              <div>
+                <a href="../adopt/detail.do?no=${vo.adno }" class="client text-center p-5">
+                	<tr>
+		           <td>
+		            <img src="${vo.poster }" width=35 height=35>
+		           </td>
+		           <td>${vo.cate }</td>
+		           <td>${vo.punumber }</td>
+		         </tr>
+                </a>
+              </div>
+			  </c:forEach>
+            </div>
+          </div>
+        </div>
+			</div>
+		</section> --%>
+<!-- cate end -->
 <!-- list -->
 	<section class="ftco-section">
-		<!-- <div class="container">
+		 <div class="container">
     		<div class="row justify-content-start mb-5 pb-2">
           <div class="col-md-4 heading-section ftco-animate">
           	<span class="subheading subheading-with-line"><small class="pr-2 bg-light">Search</small></span>
             <h2 class="mb-4">검색</h2>
           </div>
           <div class="col-md-8 pl-md-5 heading-section ftco-animate">
-          	<div class="pl-md-4 border-line">
-	          	<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-          	</div>
+          	<form name="form1" method="post" action="list.do">
+			    <select name="search_option">
+			        <option value="all" 
+			<c:if test="${map.search_option == 'all'}">selected</c:if>
+			        전체>ㅈ</option>
+			        <option value="title" 
+			<c:if test="${map.search_option == 'punumber'}">selected</c:if>
+			        >공고번호</option>
+			        <option value="content" 
+			<c:if test="${map.search_option == 'cate'}">selected</c:if>
+			        >축종</option>
+			
+			
+			    </select>
+			    <input name="keyword" value="${map.keyword}">
+			    <input type="submit" value="조회">
+			</form>
+          	
           </div>
         </div>
-    	</div> -->
+    	</div>
     	<div class="container">
     		<div class="row">
     		<c:forEach var="vo" items="${list }">

@@ -23,4 +23,7 @@ public class AdoptDAO {
 	public List<adopt_newsVO> adoptnewsData(String finddata) {
 		return mapper.adoptnewsData(finddata);
 	}
+	public List<AdoptVO> adoptCate10() {
+		return mapper.adoptCate10();
+	}
 }
