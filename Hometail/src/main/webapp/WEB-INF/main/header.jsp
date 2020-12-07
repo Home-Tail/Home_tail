@@ -51,6 +51,9 @@
 				<li class="nav-item"><a href="../main/logout.do" class="nav-link">로그아웃</a></li>
 	        </c:if>
 	        </ul> 
+	        <c:if test="${count>=1 }">
+	        	<sup style="color: red;">new</sup>
+	        </c:if>
 	        	<li class="nav-item" id="sootag"><button><a href="../mypage/mytest.do"><img src="../user.png" width=20 height=20></a></button></li>
 	      </div> 
 	    </div>
