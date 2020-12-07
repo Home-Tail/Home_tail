@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.dao.MemberDAO;
+import com.sist.vo.Center_reserveVO;
 
 import java.util.*;
 
@@ -20,12 +21,18 @@ public class MainController {
 		System.out.println("아이디" + session.getAttribute("id"));
 		System.out.println("이름" + session.getAttribute("name"));
 		int count=0;
+		List<Center_reserveVO> list = new ArrayList<Center_reserveVO>();
+		
+		
 		if(session.getAttribute("id")!=null)
 		{
 			String id = String.valueOf(session.getAttribute("id"));
 			count = dao.msg_check(id);
 			System.out.println("값"+count);
+			
+			list=dao.msg_data(id);
 		}
+		model.addAttribute("list",list);
 		model.addAttribute("count",count);
 		return "main";
 	}

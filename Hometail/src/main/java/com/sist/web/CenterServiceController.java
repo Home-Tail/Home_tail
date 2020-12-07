@@ -54,24 +54,32 @@ public class CenterServiceController {
 		System.out.println("도로명 주소 " + vo.getRoadno_addr());
 		System.out.println("날짜 "+rday);
 		System.out.println("시간 "+time);
+		System.out.println("병원명"+vo.getName());
 		rvo.setId(id);
 		rvo.setName(name);
 		rvo.setLoc(vo.getLoc());
 		rvo.setTel(vo.getTel());
 		rvo.setLotno_addr(vo.getLotno_addr());
 		rvo.setRoadno_addr(vo.getRoadno_addr());
+		rvo.setHospital_name(vo.getName());
 		rvo.setDb_reserve_day(rday);
 		rvo.setTime(time);
 		dao.center_reserve(rvo);
 		return "../center/service";
 	}	
-		
+	@RequestMapping("msg_detail.do")
+	public String msg_detail(Model model)
+	{		  
+		System.out.println("호출");
+		String result="hi";
+		return result;
+	}		  
 	@RequestMapping("center_date.do")
 	public String center_date(Model model,String strYear,String strMonth,String tno)
-	{	
+	{		  
 		System.out.println("=======================");
 			  if(tno==null)
-				  tno="1";
+			  	  tno="1";
 			  
 			  Date date=null;
 				try {
@@ -122,13 +130,13 @@ public class CenterServiceController {
 			  //int i=0;
 //			  while(st2.hasMoreTokens())
 //			  {
-//				  String d=st2.nextToken();
-//				  days[Integer.parseInt(d)]=Integer.parseInt(d);
+//			  	  String d=st2.nextToken();
+//			  	  days[Integer.parseInt(d)]=Integer.parseInt(d);
 //			  }
-			  
+		 	  
 			  for(int k:days)
 			  {
-//				  System.out.println("k="+k);
+//			  	  System.out.println("k="+k);
 			  }
 			  
 			  model.addAttribute("rdays", days);

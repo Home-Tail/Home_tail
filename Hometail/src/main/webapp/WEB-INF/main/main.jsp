@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -99,7 +101,18 @@
     			}
     		});
     	});
+	    	$('#msg_content').click(function(){
+	    	 console.log('클릭클릭');
+// 	    	 var content = $('#msg_content').attr("data-value");
+// 	    	 var no = $('#msg_content').attr("data-no");
+// 	    	 console.log('내용'+content);
+// 	    	 console.log('번호'+no);
+	//     	 $('#detail_content').text(content);
+	//     	 $('#mailbox_detail').show();
+	    });
+
     });
+    	
     </script>
     
     <div id="myModal" class="modal fade" role="dialog">
@@ -137,49 +150,85 @@
         <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
       </div>
     </div>
-
   </div>
 </div>
 
-
 <div id="mailbox" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
+    <div class="modal-dialog modal-lg">
     <!-- Modal content-->
-    <div class="modal-content">
+    <div class="modal-content" style="border: 4px solid gold">
+	<img src="../message_icon.png" style="margin-left: 350px;" class="nav-item" id="sootag" width=100 height=80>
       <div class="modal-header">
-        <h4>Login</h4>
+        <h4>${sessionScope.name} Message 함</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
+      <p></p>
       <div class="modal-body">
         <table class="table">
-         <tr>
-           <td width=25% class="text-right">아이디 입력 공란</td>
-           <td width=75%>
-             <input type=text id="id" class="input-sm" size=15>
-           </td>
-         </tr>
-         <tr>
-           <td width=25% class="text-right">
-           	편지함 내용 ! 
-           </td>
-         </tr> 
-         <tr>
-           <td class="text-center" colspan="2">
-             <span style="color:red" id="result"></span>
-           </td>
-         </tr>
+         	<tr>
+         		<th>
+         			도착일
+         		</th>
+         		<th>
+         			내용
+         		</th>
+         		<th>
+         			위치
+         		</th>
+         		<th>
+         			전화번호
+         		</th>
+         	</tr>
+        	<c:forEach var="vo" items="${list }">
+         	<tr>														
+         		<td>													
+         			<c:if test="${count>=1 }">							
+	        			<sup style="color: red;">new</sup>				
+	        		</c:if>												
+         			<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/>  
+         		</td>													
+         		<td>													
+         			<a id="msg_content" data-value="${vo.hospital_name}" data-no="${vo.no }" >안녕하세요 ${sessionScope.name } ${vo.hospital_name }</a>
+<!--          			data-toggle="modal" data-target="#mailbox_detail"  -->
+         		</td>													
+         		<td id="msg_loc">													
+         			${vo.loc}											
+         		</td>													
+         		<td>													
+         			${vo.tel }											
+         		</td>
+         	</tr>
+         </c:forEach>
         </table>
       </div>
       <div class="modal-footer">
-        <input type=button class="btn btn-success" value="로그인" id="logBtn">
-        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">닫기</button>
       </div>
     </div>
 
   </div>
 </div>
 
+<div id="mailbox_detail" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content" style="border: 4px solid gold">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+		<table class="table">
+			<tr>
+				<td id="detail_content">
+				</td>
+			</tr>
+		</table>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
 
+  </div>
+</div>
 </body>
 </html>

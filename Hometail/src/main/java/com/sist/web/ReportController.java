@@ -37,7 +37,7 @@ public class ReportController {
 		 
 		 //전체보기
 		 if(cate==0)
-		 {
+		 {			
 			 System.out.println("cate==0");
 			 Map map=new HashMap();
 			 int rowSize=8;

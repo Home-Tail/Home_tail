@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.MemberMapper;
 import com.sist.vo.Center_reserveVO;
+import java.util.*;
 
 @Repository
 public class MemberDAO {
@@ -14,5 +15,10 @@ public class MemberDAO {
 	public int msg_check(String id)	
 	{
 		return mapper.msg_check(id);
+	}
+	
+	public List<Center_reserveVO> msg_data(String id)
+	{
+		return mapper.msg_data(id);
 	}
 }

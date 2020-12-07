@@ -25,7 +25,8 @@ public interface CenterServiceMapper {
 			+ "#{db_reserve_day},"
 			+ "SYSDATE,"
 			+ "#{time},"
-			+ "'N')")
+			+ "'N',"
+			+ "#{hospital_name})")
 	public Center_reserveVO center_reserve(Center_reserveVO vo);
 	
 }

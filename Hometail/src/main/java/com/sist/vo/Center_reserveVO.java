@@ -4,19 +4,28 @@ import java.util.Date;
 
 public class Center_reserveVO {
 	private int no;
-	private String id; 
+	private String id;
 	private String name;
 	private String loc;
 	private String tel;
 	private String lotno_addr;
 	private String roadno_addr;
-	private Date reserve_day;
+	private String reserve_day;
 	private String db_reserve_day;
 	private Date regdate;
 	private String check_msg;
 	private String time;
+	private String hospital_name;
 	
 	
+	public String getHospital_name() {
+		return hospital_name;
+	}
+
+	public void setHospital_name(String hospital_name) {
+		this.hospital_name = hospital_name;
+	}
+
 	public String getTime() {
 		return time;
 	}
@@ -81,11 +90,11 @@ public class Center_reserveVO {
 		this.roadno_addr = roadno_addr;
 	}
 
-	public Date getReserve_day() {
+	public String getReserve_day() {
 		return reserve_day;
 	}
 
-	public void setReserve_day(Date reserve_day) {
+	public void setReserve_day(String reserve_day) {
 		this.reserve_day = reserve_day;
 	}
 
