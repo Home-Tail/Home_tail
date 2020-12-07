@@ -9,6 +9,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.dao.TempDAO;
 import com.sist.vo.BoardVO;
+import com.sist.vo.ReportVO;
 import com.sist.vo.TempVO;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -21,36 +22,74 @@ import javax.servlet.http.HttpSession;
 public class TempController {
 	@Autowired
 	private TempDAO dao;
+	
+	@RequestMapping("temp/main.do")
+	public String temp_main()
+	{
+		return "temp/main";
+	}
 
 	@RequestMapping("temp/list.do")
-	public String Temp_list(String page, Model model) {
+	public String Temp_list(String page, int cate, Model model) {
 
 		System.out.println("list호출");
 		if (page == null)
 			page = "1";
 		int curpage = Integer.parseInt(page);
-		Map map = new HashMap();
-		int rowSize = 12;
-		int start = (rowSize * curpage) - (rowSize - 1);
-		int end = rowSize * curpage;
-		map.put("start", start);
-		map.put("end", end);
-		List<TempVO> list = dao.TempListData(map);
-		int totalpage = dao.TempTotalPage();
-		// �쟾�넚
-		int BLOCK = 6;
-		int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
-		int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
-		if (endPage > totalpage)
-			endPage = totalpage;
-		model.addAttribute("list", list);
-		model.addAttribute("curpage", curpage);
-		model.addAttribute("totalpage", totalpage);
-		model.addAttribute("BLOCK", BLOCK);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		// model.addAttribute("main_jsp", "../temp/list.jsp");
-		return "temp/list";
+		
+		 //전체보기
+		 if(cate==0)
+		 {			
+			 System.out.println("cate==0");
+			Map map = new HashMap();
+			int rowSize = 12;
+			int start = (rowSize * curpage) - (rowSize - 1);
+			int end = rowSize * curpage;
+			map.put("start", start);
+			map.put("end", end);
+			List<TempVO> list = dao.TempListData(map);
+			int totalpage = dao.TempTotalPage();
+			// �쟾�넚
+			int BLOCK = 6;
+			int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+			int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+			if (endPage > totalpage)
+				endPage = totalpage;
+			
+			model.addAttribute("list", list);
+			model.addAttribute("curpage", curpage);
+			model.addAttribute("totalpage", totalpage);
+			model.addAttribute("BLOCK", BLOCK);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+		 }
+		 //카테고리별 보기
+		 if(cate!=0)
+		 {
+			 System.out.println("cate!=0");
+			 Map map=new HashMap();
+			 int rowSize=8;
+			 int start=(rowSize*curpage)-(rowSize-1);
+			 int end=rowSize*curpage;
+			 map.put("start", start);
+			 map.put("end", end);
+			 map.put("cate", cate);
+			 List<TempVO> list=dao.TempCateData(map);
+			 int totalpage=dao.TempCateTotalPage(cate);
+			 int BLOCK=5;
+			 int startPage=((curpage-1)/BLOCK*BLOCK)+1;    
+			 int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK; 
+		       		if(endPage>totalpage)
+		       			endPage=totalpage;
+		       		
+       		 model.addAttribute("curpage", curpage);
+	   		 model.addAttribute("totalpage", totalpage);
+	   		 model.addAttribute("list", list);
+	   		 model.addAttribute("startPage", startPage);
+	   		 model.addAttribute("endPage", endPage);
+	   		 model.addAttribute("BLOCK", BLOCK);			     
+		 }
+		return "temp_list";
 	}
 
 	@RequestMapping("temp/detail.do")

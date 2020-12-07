@@ -8,6 +8,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.update').click(function(){
+			let petno = $(this).attr("value");		
+			$.ajax({
+				type:'POST',
+				url:'../temp/update.do',
+				data:{'petno':petno},
+				success:function(res) 
+				{
+					$('#print').html(res);
+				}
+			});
+		});
+		
+		
+		
+		 $('.back').click(function(){
+			 petno=$(this).attr("value");
+				console.log(petno+'클릭');
+				$.ajax({
+					type:'POST',
+					url:'../temp/list.do',
+					data:{"petno":petno},
+					success:function(res)
+					{
+						$('#print').html(res);
+					}
+				});
+			});
+	})
+	
+</script> 
 </head>
 <body>
 	<div class="container">
@@ -64,6 +98,7 @@
             <tr>
             <td class="text-right" colspan=4>
             <c:if test="${sessionScope.id==vo.id }">
+                <span class="btn btn-sm btn-success update" value="${ vo.petno}">수정</span>
             <a href="../temp/update.do?petno=${vo.petno }" class="btn btn-sm btn-primary" style="margin:10px">수정</a>          
                <a href="../temp/delete_ok.do?petno=${vo.petno }" class="btn btn-sm btn-primary">삭제</a>
              </c:if>       
@@ -98,7 +133,7 @@
 				<tr>
 				<td></td>
 				<tr>
-				<a href="list.do" class="btn btn-sm btn-primary py-3 px-4">&nbsp;목록&nbsp;</a>
+				 <span class="btn btn-sm btn-primary py-3 px-4 back" value="${cate }">목록</span>
 				</table>
 				</div>
 				</div>	

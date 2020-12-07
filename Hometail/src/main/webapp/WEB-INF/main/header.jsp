@@ -39,7 +39,7 @@
 	        <!-- 테스트 -->
 	        	<li class="nav-item active"><a href="../main/main.do" class="nav-link">Home</a></li>
 	        	<li class="nav-item"><a href="../report/main.do" class="nav-link">신고/제보</a></li>
-	        	<li class="nav-item"><a href="../temp/list.do" class="nav-link">임시보호</a></li>
+	        	<li class="nav-item"><a href="../temp/main.do" class="nav-link">임시보호</a></li>
 	        	<li class="nav-item"><a href="../adopt/list.do" class="nav-link">입양</a></li>
 	        	<li class="nav-item"><a href="../center/service.do" class="nav-link">봉사/후원</a></li>
 	        	<li class="nav-item"><a href="../clinic/main.do" class="nav-link">동물병원</a></li>
