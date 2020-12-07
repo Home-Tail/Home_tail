@@ -36,7 +36,6 @@
  <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-
   <script src="../js/jquery.min.js"></script>
   <script src="../js/jquery-migrate-3.0.1.min.js"></script>
   <script src="../js/popper.min.js"></script>
@@ -102,23 +101,27 @@
     			}
     		});
     	});
-	    	$('#msg_content').click(function(){
-	    	 console.log('클릭클릭');
-// 	    	 var content = $('#msg_content').attr("data-value");
-// 	    	 var no = $('#msg_content').attr("data-no");
-// 	    	 console.log('내용'+content);
-// 	    	 console.log('번호'+no);
-	//     	 $('#detail_content').text(content);
-	//     	 $('#mailbox_detail').show();
+	    	$('.msg_content').click(function(){
+// 	    	 var content = $(this).text();
+	    	 var name = $(this).attr("data-value");
+	    	 var time = $('.reserve_time').val();
+	    	 var reserve_day = $('.reserve_day').val();
+	    	 var msg ='안녕하세요 ${sessionScope.name}님 저희 '+name+'의 봉사 예약을 진심으로 감사드립니다.'
+	    	 +'주소,날짜,시간은 예약하신 시간으로 설정되었습니다.';
+	    	 var loc = $('.msg_loc').text();
+	    	 console.log('이름'+name);
+	    	 console.log('위치'+loc);
+	    	 console.log('시간'+time);
+	    	 console.log('날짜'+reserve_day);
+	    	 console.log('메시지'+msg);
+	    	 $('#detail_msg').text(msg);	    	 
+	    	 $('#detail_name').text(name);
+	    	 $('#detail_loc').text(loc);
 	    });
-
     });
-    	
     </script>
-    
     <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -151,84 +154,89 @@
         <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
-</div>
-
+  </div>					
+</div>						
+							
 <div id="mailbox" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-    <!-- Modal content-->
-    <div class="modal-content" style="border: 4px solid gold">
+    <div class="modal-dialog" style="max-width:1000px;  width: 1000px;">
+<!--      Modal content -->	
+    <div class="modal-content" style="border: 4px solid gold;">
 	<img src="../message_icon.png" style="margin-left: 350px;" class="nav-item" id="sootag" width=100 height=80>
       <div class="modal-header">
         <h4>${sessionScope.name} Message 함</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <p></p>
+      </div>				
+      <p></p>				
       <div class="modal-body">
         <table class="table">
-         	<tr>
-         		<th>
-         			도착일
-         		</th>
-         		<th>
-         			내용
-         		</th>
-         		<th>
-         			위치
-         		</th>
-         		<th>
-         			전화번호
-         		</th>
-         	</tr>
+         	<tr>			
+         		<th>도착일</th>
+         		<th>내용</th>			
+         		<th>위치</th>			
+         		<th>전화번호</th>		
+         	</tr>					
         	<c:forEach var="vo" items="${list }">
+        	<input type="hidden" class="reserve_time" value="${vo.time}">
+        	<input type="hidden" class="reserve_day" value="${vo.reserve_day}">
          	<tr>														
          		<td>													
          			<c:if test="${count>=1 }">							
-	        			<sup style="color: red;">new</sup>				
+	        			<sup style="color: red;">new</sup>				 
 	        		</c:if>												
          			<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/>  
          		</td>													
          		<td>													
-         			<a id="msg_content" data-value="${vo.hospital_name}" data-no="${vo.no }" >안녕하세요 ${sessionScope.name } ${vo.hospital_name }</a>
-<!--          			data-toggle="modal" data-target="#mailbox_detail"  -->
+         			<a class="msg_content" data-toggle="modal" data-target="#mailbox_detail" data-value="${vo.hospital_name}">안녕하세요 ${sessionScope.name } ${vo.hospital_name }</a>
+<%--        			data-toggle="modal" data-target="#mailbox_detail"   --%>
          		</td>													
-         		<td id="msg_loc">													
+       	  		<td class="msg_loc">													
          			${vo.loc}											
          		</td>													
          		<td>													
-         			${vo.tel }											
-         		</td>
-         	</tr>
-         </c:forEach>
-        </table>
+         			${vo.tel}		
+         		</td>		
+         	</tr>			
+         </c:forEach>		
+        </table>			
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info" data-dismiss="modal">닫기</button>
       </div>
     </div>
-
   </div>
 </div>
-
 <div id="mailbox_detail" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
     <!-- Modal content-->
-    <div class="modal-content" style="border: 4px solid gold">
+    <div class="modal-content" style="border: 4px solid black">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
 		<table class="table">
 			<tr>
-				<td id="detail_content">
+				<th width=20% class="text-center">보낸이</th>
+				<td class="text-left" id="detail_name">
 				</td>
+			</tr>
+			<tr>
+				<th>
+					내용
+				</th>
+			</tr>
+			<tr>
+				<td colspan="3" id="detail_msg">
+				
+				</td>
+<!-- 				<td id="detail_loc"> -->
+<!-- 				</td> -->
 			</tr>
 		</table>
       </div>
       <div class="modal-footer">
+       	 	<button type="button" class="btn btn-info" data-dismiss="modal">확인</button>
       </div>
     </div>
-
   </div>
 </div>
 </body>
