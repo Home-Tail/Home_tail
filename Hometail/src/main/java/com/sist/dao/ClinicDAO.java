@@ -37,5 +37,9 @@ public class ClinicDAO {
 	{
 		return mapper.clinicReplyList(clno);
 	}
+	public void clinicReplyUpdate(ReplyVO vo)
+	{
+		mapper.clinicReplyUpdate(vo);
+	}
 	
 }

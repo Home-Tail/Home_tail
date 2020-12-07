@@ -27,11 +27,14 @@ public ClinicVO clinicDetailData(int clno);
 		 +"addr LIKE '%'||#{gu}||'%'")	
  public List<ClinicVO> clinicLocationFindData(String gu);
 
-@Insert("INSERT INTO reply(cate,replyno,clno,id,content,regdate) VALUES(1,(SELECT NVL(MAX(replyno)+1,1) FROM reply),#{clno},'shim',#{content},SYSDATE)")
+@Insert("INSERT INTO reply(cate,replyno,clno,id,content,regdate) VALUES(1,(SELECT NVL(MAX(replyno)+1,1) FROM reply),#{clno},#{id},#{content},SYSDATE)")
 public void clinicReplyInsert(ReplyVO vo);
 
 @Select("SELECT replyno,clno,id,content,regdate FROM reply WHERE clno=#{clno}")
 public List<ReplyVO> clinicReplyList(int clno);
+
+@Update("UPDATE reply SET content=#{content} WHERE replyno=#{replyno} AND clno=#{clno}")
+public void clinicReplyUpdate(ReplyVO vo);
 }
 
 

@@ -91,14 +91,20 @@ public String ClinicLocationFindData(String no,Model model)
 	   return "clinic_find";
 }
 @RequestMapping("clinic/clinic_reply.do")
-public String ClinicReplyInsert(String clno,ReplyVO vo)
+public String ClinicReplyInsert(String clno,ReplyVO vo,HttpSession session)
 {
 	System.out.println("test");
-//	String id=(String)session.getAttribute("id");
-//	vo.setId(id);
+	String id=(String)session.getAttribute("id");
+	vo.setId(id);
 	vo.setClno(Integer.parseInt(clno));
 	dao.clinicReplyInsert(vo);
       
    return "redirect:../clinic/detail.do?no="+clno;
+}
+@RequestMapping("clinic/clinic_reply_update.do")
+public String clinicReplyUpdate(ReplyVO vo)
+{	
+	dao.clinicReplyUpdate(vo);
+	return "redirect:../clinic/detail.do?no="+vo.getClno();
 }
 }

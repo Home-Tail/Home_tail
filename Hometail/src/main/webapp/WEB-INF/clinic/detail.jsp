@@ -1,11 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+let u=0;
+$(function(){
+	  $('.up').click(function(){
+		 $('.updates').hide();
+		 let no=$(this).attr("value");
+		 if(u==0)
+		 {
+			 $('#u'+no).show();
+			 $(this).text("취소");
+			 u=1;
+		 }
+		 else
+		 {
+			 $('#u'+no).hide();
+			 $(this).text("수정");
+			 u=0;
+		 }
+	  });
+})
+</script>
+</script>
 </head>
 <body>
  <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/cc.jpg');" data-stellar-background-ratio="0.5">
@@ -55,12 +79,31 @@
                 <li class="comment">
                   <div class="comment-body">
                     <h3>${cvo.id }</h3>
-                    <div class="meta mb-2">${cvo.regdate }</div>
+                    <div class="meta mb-2"><fmt:formatDate value="${cvo.regdate }" pattern=""/></div>
                     <p>${cvo.content }</p>
-                    <p><a href="#" class="reply">Reply</a></p>
+                    <c:if test="${sessionScope.id==cvo.id }">
+                       <p><span value="${cvo.replyno}" class="btn btn-xs btn-dark up">수정</span></p>
+                       <a href="#" class="btn btn-xs btn-info">삭제</a>
+                      </c:if>
                   </div>
 
                 </li>
+                
+                <div class="comment-form-wrap pt-5 updates" id="u${cvo.replyno }">
+                <h3 class="mb-5 h4 font-weight-bold">update a comment</h3>
+              <form method="post" action="../clinic/clinic_reply_update.do" class="p-5 bg-light">
+                <input type="hidden" name="clno" value="${cvo.clno }">
+                <input type="hidden" name="replyno" value="${cvo.replyno}">
+                  <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="content" cols="30" rows="10" class="form-control">${cvo.content }</textarea>
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                  </div>
+
+                </form>
+            </div>
 				</c:forEach>
               </ul>
               <!-- END comment-list -->
@@ -69,10 +112,6 @@
                 <h3 class="mb-5 h4 font-weight-bold">Leave a comment</h3>
                 <form method="post" action="../clinic/clinic_reply.do" class="p-5 bg-light">
                 <input type="hidden" name="clno" value="${vo.clno }">
-                  <div class="form-group">
-                    <label for="name">Name</label>
-                  </div>
-
                   <div class="form-group">
                     <label for="message">Message</label>
                     <textarea name="content" cols="30" rows="10" class="form-control"></textarea>
@@ -83,7 +122,7 @@
 
                 </form>
               </div>
-            </div>
+              
           </div> <!-- .col-md-8 -->
           <div class="col-lg-4">
 			<div id="maps" style="width: 150%; height: 400px;"></div>
