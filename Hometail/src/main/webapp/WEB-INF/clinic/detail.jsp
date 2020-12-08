@@ -11,25 +11,35 @@
 <script type="text/javascript">
 let u=0;
 $(function(){
+	$('.updates').hide();
 	  $('.up').click(function(){
 		 $('.updates').hide();
+		 $('.insert').hide();
 		 let no=$(this).attr("value");
+		 console.log('번호값:'+no);
 		 if(u==0)
 		 {
+			 console.log('돈다돌아');
 			 $('#u'+no).show();
 			 $(this).text("취소");
 			 u=1;
 		 }
 		 else
 		 {
-			 $('#u'+no).hide();
-			 $(this).text("수정");
-			 u=0;
+		 	 console.log('else 돈다돌아');
+		 	 $('#u'+no).hide();
+		 	$('.insert').show();
+		 	 $(this).text("수정");
+		 	 u=0;
 		 }
 	  });
-})
+})		 
 </script>
-</script>
+<style type="text/css">
+.font-weight-bold22{
+
+}
+</style>
 </head>
 <body>
  <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/cc.jpg');" data-stellar-background-ratio="0.5">
@@ -72,24 +82,22 @@ $(function(){
 			<p style="font-size:25">도로명우편번호 : ${vo.post }</p>
 
 		`
-            <div class="pt-5 mt-5">
-              <h3 class="mb-5 h4 font-weight-bold">Comments</h3>
+              <h3 class="mb-5 h4 font-weight-bold22">Comments</h3>
               <ul class="comment-list">
 				<c:forEach var="cvo" items="${clist }">
                 <li class="comment">
                   <div class="comment-body">
                     <h3>${cvo.id }</h3>
-                    <div class="meta mb-2"><fmt:formatDate value="${cvo.regdate }" pattern=""/></div>
+                    <fmt:formatDate value="${cvo.regdate }" pattern="YYYY-MM-dd"/>
                     <p>${cvo.content }</p>
                     <c:if test="${sessionScope.id==cvo.id }">
-                       <p><span value="${cvo.replyno}" class="btn btn-xs btn-dark up">수정</span></p>
-                       <a href="#" class="btn btn-xs btn-info">삭제</a>
+                       <span value="${cvo.replyno}" class="btn btn-xs btn-default up">수정</span>
+                       <a href="../clinic/clinic_reply_delete.do?clno=${cvo.clno }&replyno=${cvo.replyno}" class="btn btn-xs btn-default">삭제</a>
                       </c:if>
                   </div>
-
                 </li>
-                
-                <div class="comment-form-wrap pt-5 updates" id="u${cvo.replyno }">
+               
+                <div class="comment-form-wrap pt-5 updates" id="u${cvo.replyno }" value="${cvo.replyno }">
                 <h3 class="mb-5 h4 font-weight-bold">update a comment</h3>
               <form method="post" action="../clinic/clinic_reply_update.do" class="p-5 bg-light">
                 <input type="hidden" name="clno" value="${cvo.clno }">
@@ -104,17 +112,17 @@ $(function(){
 
                 </form>
             </div>
-				</c:forEach>
+				 </c:forEach>
               </ul>
               <!-- END comment-list -->
               
-              <div class="comment-form-wrap pt-5">
+              <div class="comment-form-wrap pt-5 insert">
                 <h3 class="mb-5 h4 font-weight-bold">Leave a comment</h3>
-                <form method="post" action="../clinic/clinic_reply.do" class="p-5 bg-light">
+                <form method="post" action="../clinic/clinic_reply.do">
                 <input type="hidden" name="clno" value="${vo.clno }">
                   <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea name="content" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="content" cols="30" rows="5" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
                     <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
@@ -124,7 +132,7 @@ $(function(){
               </div>
               
           </div> <!-- .col-md-8 -->
-          <div class="col-lg-4">
+          	         <div class="col-lg-4">
 			<div id="maps" style="width: 150%; height: 400px;"></div>
 
 			<script type="text/javascript"
@@ -173,10 +181,9 @@ $(function(){
 									}
 								});
 			</script>
-			</div>
-		</div>
-		
 	</div>
+		</div>
+	
 		</section>
     
 

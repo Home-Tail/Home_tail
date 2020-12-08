@@ -72,6 +72,7 @@
 				</c:forEach>
 			</div>
 			<div id="print" class="row">
+			
 			</div>
 		</div>
 			

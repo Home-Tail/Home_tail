@@ -1,6 +1,7 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -23,7 +24,7 @@ public ClinicVO clinicDetailData(int clno);
 
 @Select("SELECT clno,addr,title,rownum "
 		 +"FROM clinic "
-		 +"WHERE rownum<=7 AND "
+		 +"WHERE rownum<=6 AND "
 		 +"addr LIKE '%'||#{gu}||'%'")	
  public List<ClinicVO> clinicLocationFindData(String gu);
 
@@ -35,6 +36,9 @@ public List<ReplyVO> clinicReplyList(int clno);
 
 @Update("UPDATE reply SET content=#{content} WHERE replyno=#{replyno} AND clno=#{clno}")
 public void clinicReplyUpdate(ReplyVO vo);
+
+@Delete("DELETE FROM reply WHERE replyno=#{replyno} and cate=1")
+public void clinicReplyDelete(ReplyVO vo);
 }
 
 

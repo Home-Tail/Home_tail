@@ -41,5 +41,8 @@ public class ClinicDAO {
 	{
 		mapper.clinicReplyUpdate(vo);
 	}
-	
+	public void clinicReplyDelete(ReplyVO vo)
+	{
+		mapper.clinicReplyDelete(vo);
+	}
 }

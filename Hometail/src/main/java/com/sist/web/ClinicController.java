@@ -107,4 +107,10 @@ public String clinicReplyUpdate(ReplyVO vo)
 	dao.clinicReplyUpdate(vo);
 	return "redirect:../clinic/detail.do?no="+vo.getClno();
 }
+@RequestMapping("clinic/clinic_reply_delete.do")
+public String clinicReplyDelete(ReplyVO vo)
+{
+	dao.clinicReplyDelete(vo);
+	return "redirect:../clinic/detail.do?no="+vo.getClno();
+}
 }

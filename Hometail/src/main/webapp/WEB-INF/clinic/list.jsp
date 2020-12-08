@@ -39,10 +39,10 @@ border-style: outset;border-color: #b3e5fc;
 		              <a href="../clinic/detail.do?no=${vo.clno }">
 		              <c:choose>
 		               <c:when test="${vo.poster==null }">
-		                <img src="../images/aa.jpg"  class="block-20" width=420 height=100 id="climage">
+		                <img src="../images/aa.jpg"  class="block-20" width=120% height=80% id="climage">
 		               </c:when>
 		               <c:otherwise>
-		                <img src="${vo.poster }" class="block-20" width=420 height=100 id="climage">
+		                <img src="${vo.poster }" class="block-20" width=120% height=80% id="climage">
 		               </c:otherwise>
 		              </c:choose>
 		              </a>
