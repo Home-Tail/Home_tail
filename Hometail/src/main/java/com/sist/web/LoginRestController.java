@@ -49,7 +49,6 @@ public class LoginRestController {
 	   }
 	   return result;
    }
-
 }
 
 

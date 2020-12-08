@@ -68,7 +68,6 @@
     			$('#pwd').focus();
     			return;
     		}
-    		
     		$.ajax({
     			type:'POST',
     			url:'../main/login.do',
@@ -101,24 +100,63 @@
     			}
     		});
     	});
+			$('#msg_check').click(function(){
+				
+				var temp=$('.no_value').val();
+		    	console.log('temp값은?'+temp);
+		    	
+				location.href="../main/msg_check.do?no="+temp;
+			})
 	    	$('.msg_content').click(function(){
 // 	    	 var content = $(this).text();
 	    	 var name = $(this).attr("data-value");
-	    	 var time = $('.reserve_time').val();
-	    	 var reserve_day = $('.reserve_day').val();
+	    	 var time = $(this).attr("reserve_time");
+	    	 var reserve_day = $(this).attr("reserve_day");
+	    	 var reserve_regdate = $(this).attr("reserve_regdate");
+	    	 var loc= $(this).attr("reserve_loc");
+	    	 var tel= $(this).attr("reserve_tel");
+	    	 var addr= $(this).attr("reserve_roadno_addr");
+	    	 var no= $(this).attr("reserve_no");
+	    	 
+	    	 var temp=$('.no_value').val();
+	    	 console.log('temp값은?'+temp);
+	    	 var i=',';			 
+	    	 if(temp.trim()!=null)
+	    	 {
+	    		
+	    		console.log('찍히려나'+(temp+i+no));
+	    		$('.no_value').val(temp+i+no);	 
+	    	 }
+	    	 if(temp.trim()=='')
+	    	 {					 
+	    		console.log('찍히려나'+(temp+no));
+	    		$('.no_value').val(temp+no);
+	    	 }					 
+	    	 
 	    	 var msg ='안녕하세요 ${sessionScope.name}님 저희 '+name+'의 봉사 예약을 진심으로 감사드립니다.'
 	    	 +'주소,날짜,시간은 예약하신 시간으로 설정되었습니다.';
-	    	 var loc = $('.msg_loc').text();
-	    	 console.log('이름'+name);
-	    	 console.log('위치'+loc);
+			 
+	    	 console.log('번호'+no);
+	    	 console.log('병원이름'+name);	  
 	    	 console.log('시간'+time);
-	    	 console.log('날짜'+reserve_day);
+	    	 console.log('예약 날짜'+reserve_day);
+	    	 console.log('날짜'+reserve_regdate);
+	    	 console.log('위치'+loc); 	  
+	    	 console.log('번호'+tel); 	  
 	    	 console.log('메시지'+msg);
-	    	 $('#detail_msg').text(msg);	    	 
+	    	 console.log('주소'+addr);
+	    	 console.log('==================');
+	    	 
+	    	 $('#detail_msg').text(msg);
 	    	 $('#detail_name').text(name);
 	    	 $('#detail_loc').text(loc);
-	    });
-    });
+	    	 $('#detail_addr').text(addr);
+	    	 $('#detail_time').text(time);
+	    	 $('#reserve_regdate').text(reserve_regdate);
+	    	 
+	    	 
+	    });	 
+    });		 
     </script>
     <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -151,12 +189,12 @@
       </div>
       <div class="modal-footer">
         <input type=button class="btn btn-success" value="로그인" id="logBtn">
+        <input type="hidden" class="no_value" value="">
         <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-      </div>
-    </div>
+      </div>		
+    </div>			
   </div>					
 </div>						
-							
 <div id="mailbox" class="modal fade" role="dialog">
     <div class="modal-dialog" style="max-width:1000px;  width: 1000px;">
 <!--      Modal content -->	
@@ -165,76 +203,109 @@
       <div class="modal-header">
         <h4>${sessionScope.name} Message 함</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>				
-      <p></p>				
-      <div class="modal-body">
-        <table class="table">
-         	<tr>			
-         		<th>도착일</th>
+      </div>					
+      <p></p>					
+      <div class="modal-body">	
+        <table class="table">	
+         	<tr>				
+         		<th>도착일</th>	
          		<th>내용</th>			
          		<th>위치</th>			
-         		<th>전화번호</th>		
+         		<th>전화번호</th>	
+         		<th></th>		
          	</tr>					
-        	<c:forEach var="vo" items="${list }">
-        	<input type="hidden" class="reserve_time" value="${vo.time}">
-        	<input type="hidden" class="reserve_day" value="${vo.reserve_day}">
+        	<c:forEach var="vo" items="${rlist }">
          	<tr>														
          		<td>													
-         			<c:if test="${count>=1 }">							
+         			${vo.db_reserve_day}
+         		</td>													
+         		<td>													
+         			<c:if test="${vo.check_msg=='N'}">							
 	        			<sup style="color: red;">new</sup>				 
 	        		</c:if>												
-         			<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/>  
-         		</td>													
-         		<td>													
-         			<a class="msg_content" data-toggle="modal" data-target="#mailbox_detail" data-value="${vo.hospital_name}">안녕하세요 ${sessionScope.name } ${vo.hospital_name }</a>
+         			<a class="msg_content" data-toggle="modal" data-target="#mailbox_detail"
+         			reserve_time="${vo.time}"
+         			reserve_day="${vo.reserve_day}"
+         			reserve_roadno_addr="${vo.roadno_addr}"
+         			reserve_loc="${vo.loc}" 
+         			reserve_regdate="${vo.db_reserve_day }" 
+         			reserve_tel="${vo.tel }"
+         			reserve_no="${vo.no }"
+         			data-value="${vo.hospital_name}">안녕하세요 ${sessionScope.name }님  ${vo.hospital_name }</a>
 <%--        			data-toggle="modal" data-target="#mailbox_detail"   --%>
          		</td>													
-       	  		<td class="msg_loc">													
+       	  		<td> 													
          			${vo.loc}											
          		</td>													
-         		<td>													
+         		<td> 													
          			${vo.tel}		
-         		</td>		
-         	</tr>			
-         </c:forEach>		
-        </table>			
-      </div>
+         		</td>			
+         	</tr>	 				
+         </c:forEach>			
+        </table>	 			
+      </div>		 					
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!--       data-dismiss="modal" -->
+        <button type="button" class="btn btn-info" id="msg_check">닫기</button>
+      </div>					
+    </div>						
+  </div>						
+</div>							
 <div id="mailbox_detail" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
     <!-- Modal content-->
     <div class="modal-content" style="border: 4px solid black">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
+      </div>	
       <div class="modal-body">
 		<table class="table">
-			<tr>
+			<tr>	
 				<th width=20% class="text-center">보낸이</th>
 				<td class="text-left" id="detail_name">
 				</td>
+				<th width=20% class="text-center">날짜</th>
+				<td class="text-left" id="reserve_regdate"></td>
 			</tr>
+		</table>
+		
+		<table> 
 			<tr>
 				<th>
 					내용
 				</th>
 			</tr>
+
 			<tr>
 				<td colspan="3" id="detail_msg">
 				
 				</td>
+				<td></td>
 <!-- 				<td id="detail_loc"> -->
 <!-- 				</td> -->
+			</tr>
+		</table>
+		<table style="margin-top: 50px;">		
+			<tr>
+				<th width=10% class="text-center">시간 :</th>
+				<td class="text-left" id="detail_time">
+				</td>
+			</tr>
+			<tr>
+				<th width=10% class="text-center">위치 :</th>
+				<td class="text-left" id="detail_loc">
+				</td>
+			</tr>
+			<tr>	
+				<th width=10% class="text-center">장소 :</th>
+				<td class="text-left" id="detail_addr">
+				</td>
 			</tr>
 		</table>
       </div>
       <div class="modal-footer">
        	 	<button type="button" class="btn btn-info" data-dismiss="modal">확인</button>
+<!--        	 	data-dismiss="modal" -->
       </div>
     </div>
   </div>
