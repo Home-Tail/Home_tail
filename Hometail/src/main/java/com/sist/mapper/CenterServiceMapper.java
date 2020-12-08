@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.MemberVO;
+import com.sist.vo.CenterVO;
 import com.sist.vo.Center_reserveVO;
 
 public interface CenterServiceMapper {
@@ -41,4 +42,7 @@ public interface CenterServiceMapper {
 	
 	@Select("UPDATE center_reserve set check_msg='Y' WHERE id=#{id} AND no=#{no}")
 	public void check_update(Center_reserveVO vo);
+	
+	@Select("SELECT * FROM center where classification=2")
+	public List<CenterVO> shelter_data();
 }

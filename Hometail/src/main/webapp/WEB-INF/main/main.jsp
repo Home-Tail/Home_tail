@@ -91,7 +91,7 @@
     				}
     				else
     				{
-    					$('#myModal').modal("hide");
+    					$('#myModal').modal("hide");	
     					$('#id').val("");
     					$('#pwd').val("");
     					$('#result').text("");
@@ -117,7 +117,6 @@
 	    	 var tel= $(this).attr("reserve_tel");
 	    	 var addr= $(this).attr("reserve_roadno_addr");
 	    	 var no= $(this).attr("reserve_no");
-	    	 
 	    	 var temp=$('.no_value').val();
 	    	 console.log('temp값은?'+temp);
 	    	 var i=',';			 
@@ -153,7 +152,6 @@
 	    	 $('#detail_addr').text(addr);
 	    	 $('#detail_time').text(time);
 	    	 $('#reserve_regdate').text(reserve_regdate);
-	    	 
 	    	 
 	    });	 
     });		 

@@ -40,6 +40,3 @@ public void clinicReplyUpdate(ReplyVO vo);
 @Delete("DELETE FROM reply WHERE replyno=#{replyno} and cate=1")
 public void clinicReplyDelete(ReplyVO vo);
 }
-
-
-

@@ -1,13 +1,18 @@
 package com.sist.web;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.sist.dao.CenterServiceDAO;
 import com.sist.vo.CenterVO;
 import com.sist.vo.Center_reserveVO;
+
+import twitter4j.JSONArray;
 
 @Controller
 @RequestMapping("center/")
@@ -155,5 +162,41 @@ public class CenterServiceController {
 	{
 		
 		return "reserve_time";
+	}
+	
+	@RequestMapping("shelter.do")
+	public String shelter(Model model)
+	{ 
+		List<CenterVO> list = new ArrayList<CenterVO>();
+		JSONObject shelter_data = new JSONObject();
+		
+		
+		list = dao.shelter_data();
+		System.out.println("list 사이즈:"+list.size());
+		org.json.simple.JSONArray js = new org.json.simple.JSONArray();
+		for(CenterVO vo:list)
+		{
+			JSONObject shelter = new JSONObject();
+			shelter.put("shelter_name",vo.getName());
+			shelter.put("loc",vo.getLoc());
+			shelter.put("post",vo.getPost());
+			shelter.put("addr",vo.getLotno_addr());
+			js.add(shelter);
+		}
+		System.out.println("나오려나"+shelter_data);
+		shelter_data.put("datas",js.toString());
+		String result = shelter_data.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
+		
+		System.out.println("JSON설정후"+result);
+		try {
+			//C:\SpringDev\SpringStudy\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Hometail
+            FileWriter file = new FileWriter("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\myJson.json");
+            file.write(result);
+            file.flush();
+            file.close();
+     } catch(IOException e) {
+            e.printStackTrace();
+     }
+		return "../center/shelter";
 	}
 }

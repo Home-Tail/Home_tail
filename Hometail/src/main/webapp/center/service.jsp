@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
 .row {
@@ -31,8 +30,7 @@
 .map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap {position:relative;width:100%;height:350px;}
 </style>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5f479a055a85358bb537395d0d7aeb6"></script>
@@ -181,15 +179,15 @@
 //  			   	    }
 //  			   	];
 //  			   	positions.push(mapdata);
- 			   // 마커 이미지의 이미지 주소입니다
- 			   var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+ 			   	// 마커 이미지의 이미지 주소입니다
+ 			   	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
  			   
- 			   // 마커 이미지의 이미지 크기 입니다
-			   var imageSize = new kakao.maps.Size(24, 35); 
+ 			   	// 마커 이미지의 이미지 크기 입니다
+			   	var imageSize = new kakao.maps.Size(24, 35); 
 			   	    
-			   // 마커 이미지를 생성합니다    
-			   var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
- 			   for(var j=0;j<mapdata_p.length;j++)
+			   	// 마커 이미지를 생성합니다    
+			   	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+ 			   	for(var j=0;j<mapdata_p.length;j++)
  			   {
  				  var marker= new kakao.maps.Marker({
  					  	map: map, // 마커를 표시할 지도
@@ -454,7 +452,7 @@ function button_click(){
           </div>
         </div>
       </div>
-      </Section>
+      </section>
 <div class="container">
 	<div class="col-lg-12" style="padding-top: 30px;">
 <!-- 		    <div id="maps" class="col-lg-6" style="width:700px;height:600px; border:1px solid black; float: left;"></div> -->

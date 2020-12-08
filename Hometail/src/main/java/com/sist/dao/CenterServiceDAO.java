@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.CenterServiceMapper;
+import com.sist.vo.CenterVO;
 import com.sist.vo.Center_reserveVO;
 
 @Repository
@@ -32,5 +33,10 @@ public class CenterServiceDAO {
 	public List<Center_reserveVO> msg_data(String id)
 	{
 		return mapper.msg_data(id);
+	}
+	
+	public List<CenterVO> shelter_data()
+	{
+		return mapper.shelter_data();
 	}
 }	

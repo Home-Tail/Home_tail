@@ -41,7 +41,16 @@
 	        	<li class="nav-item"><a href="../report/main.do" class="nav-link">신고/제보</a></li>
 	        	<li class="nav-item"><a href="../temp/main.do" class="nav-link">임시보호</a></li>
 	        	<li class="nav-item"><a href="../adopt/list.do" class="nav-link">입양</a></li>
-	        	<li class="nav-item"><a href="../center/service.do" class="nav-link">봉사/후원</a></li>
+	        	
+	        	<li class="nav-item submenu dropdown">
+	               <a href="../center/service.do" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+	                 aria-expanded="false">봉사/후원</a>
+	               <ul class="dropdown-menu">
+			       <li class="nav-item"><a href="../center/service.do" class="nav-link" style="color: black;">봉사/후원</a></li>
+			       <li class="nav-item"><a href="../center/shelter.do" class="nav-link" style="color: black;">보호소</a></li>
+	               </ul>
+	            </li>
+	        	
 	        	<li class="nav-item"><a href="../clinic/main.do" class="nav-link">동물병원</a></li>
 	            <li class="nav-item"><a href="../board/list.do" class="nav-link">커뮤니티</a></li>
 	        <c:if test="${sessionScope.id==null }">   
