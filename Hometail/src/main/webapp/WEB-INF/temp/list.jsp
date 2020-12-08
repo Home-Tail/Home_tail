@@ -11,7 +11,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 
-
+$.ajaxSettings.traditional = true;
 $(function() {
 	//버튼 누를때마다 카테고리 변경 용도
 	$('div .containerX a').click(function(){
@@ -32,22 +32,23 @@ $(function() {
 	// 로그인 안했을때 글등록하기 버튼 미노출
 	$(function(){
 			
-			$('#new').hover(function(){
+		/* 	$('#new').hover(function(){
 				$(this).css("cursor", "pointer")
 			}, function(){
 				$(this).css("cursor", "")
-			});
+			}); */
 			
 			//등록하기 
 			
 			$('#new').click(function(){
+				console.log('새글 클릭');
 			$.ajax({
 				type:'POST',
+				data:{cate:cate},
 				url:'../temp/insert.do',
-				data:{no:no},
-				success:function(res)
+				success:function(result)
 				{
-					$('#print').html(res);
+					$('#tagin').html(result);
 				}
 			});
 		});

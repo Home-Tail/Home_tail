@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.dao.TempDAO;
-import com.sist.vo.BoardVO;
-import com.sist.vo.ReportVO;
 import com.sist.vo.TempVO;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -205,30 +203,7 @@ public class TempController {
 			    vo.setDb_pdate(db_pdate);
 			    vo.setCate(Integer.parseInt(cate));
 			    vo.setPetno(Integer.parseInt(petno));
-			   
-		   /*
-		    *   vo.setId(mr.getParameter("id"));
-			    //제목
-			    vo.setTitle(mr.getParameter("title"));
-			    //카테
-			    vo.setCate(Integer.parseInt(mr.getParameter("cate")));
-			    //날짜
-			    vo.setDb_pdate(mr.getParameter("db_pdate"));
-			    //위치
-			    vo.setLoc(mr.getParameter("loc"));
-			    //내용
-			    vo.setContent(mr.getParameter("content"));
-			    //번호
-			    vo.setTel(mr.getParameter("tel"));
-			    //사진
-				vo.setPoster(mr.getFilesystemName("poster"));
-		    */
-		    /*String petno=request.getParameter("petno");*/
-		   
-		   
-		    
-		    
-		    // DAO로 전송 
+		 
 		    dao.TempUpdateData(vo);
 		   return "redirect:../temp/detail.do?no="+petno;
 	   }
@@ -239,7 +214,7 @@ public class TempController {
 	   public String temp_delete_ok(HttpServletRequest request, int petno) throws IOException 
 	   {
 	      dao.TempDeleteData(petno);
-	      return "redirect:../temp/list.do";
+	      return "redirect:../temp/main.do";
 	   }
 
 
