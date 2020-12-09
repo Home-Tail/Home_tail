@@ -8,8 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Insert title here</title>
 <body>
-<section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
+<section class="hero-wrap hero-wrap-2" style="background-image: url('../images/adopt.jpg');" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -23,7 +22,7 @@
 <!-- cate -->
 
  <!-- cate end -->
-<%-- <section class="ftco-section ftco-client">
+ <%-- <section class="ftco-section ftco-client">
 			<div class="container">
         <div class="row ftco-animate">
           <div class="col-md-12">
@@ -45,11 +44,11 @@
           </div>
         </div>
 			</div>
-		</section> --%>
+		</section>  --%>
 <!-- cate end -->
 <!-- list -->
 	<section class="ftco-section">
-		 <div class="container">
+		 <%-- <div class="container">
     		<div class="row justify-content-start mb-5 pb-2">
           <div class="col-md-4 heading-section ftco-animate">
           	<span class="subheading subheading-with-line"><small class="pr-2 bg-light">Search</small></span>
@@ -76,7 +75,7 @@
           	
           </div>
         </div>
-    	</div>
+    	</div> --%>
     	<div class="container">
     		<div class="row">
     		<c:forEach var="vo" items="${list }">

@@ -1,12 +1,48 @@
 package com.sist.vo;
 import java.util.*;
 public class AdoptVO {
-	private int adno,age;
+	private int adno,age,addo,retu,prot,natu,annou,death;
 	private double weight;
 	private String id,cate,kind,sub_kind,poster,sex,color,
 			point,punumber,area,center,tel;
 	private Date regdate,term;
 	
+	public int getAddo() {
+		return addo;
+	}
+	public void setAddo(int addo) {
+		this.addo = addo;
+	}
+	public int getRetu() {
+		return retu;
+	}
+	public void setRetu(int retu) {
+		this.retu = retu;
+	}
+	public int getProt() {
+		return prot;
+	}
+	public void setProt(int prot) {
+		this.prot = prot;
+	}
+	public int getNatu() {
+		return natu;
+	}
+	public void setNatu(int natu) {
+		this.natu = natu;
+	}
+	public int getAnnou() {
+		return annou;
+	}
+	public void setAnnou(int annou) {
+		this.annou = annou;
+	}
+	public int getDeath() {
+		return death;
+	}
+	public void setDeath(int death) {
+		this.death = death;
+	}
 	public double getWeight() {
 		return weight;
 	}

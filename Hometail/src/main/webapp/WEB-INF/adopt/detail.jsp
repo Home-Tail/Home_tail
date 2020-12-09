@@ -11,6 +11,30 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
      <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
     <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['상태', '상황'],
+        ['입양',     <c:out value="${vo.addo}"/>],
+        ['반환',     <c:out value="${vo.retu}"/>],
+        ['보호중',     <c:out value="${vo.prot}"/>],
+        ['자연사',     <c:out value="${vo.natu}"/>],
+        ['공고중',     <c:out value="${vo.annou}"/>],
+        ['안락사',     <c:out value="${vo.death}"/>]
+      ]);
+
+      var options = {
+        title: '지역별 상태',
+        is3D:true
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+      chart.draw(data, options);
+    }
     let u=0;
     $(function(){
   	  $('.up').click(function(){
@@ -95,6 +119,13 @@
                 <td width=20%>보호센터 전화번호</td>
                 <td width=80%>${vo.tel }</td>
               </tr>
+            </table>
+            <table class="table">
+             <tr>
+               <td>
+                 <div id="piechart" style="width: 500px; height: 250px;"></div>
+               </td>
+             </tr>
             </table>
             <table class="table">
              <tr>
