@@ -120,7 +120,7 @@ $(function() {
 			  <a cate=4 style="color: black; font-weight: 800;">주변</a>
 			</div>
 			<div>
-				<a href="../report/detail_insert.do">글쓰기</a>
+				<a href="../report/insert.do">글쓰기</a>
 			</div>
 		<div class="row">
 			
