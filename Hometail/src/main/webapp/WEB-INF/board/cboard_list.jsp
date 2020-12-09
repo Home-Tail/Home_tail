@@ -186,7 +186,6 @@
                            </li>
                     </c:if>
                   </c:forEach>
-                 
                  <c:if test="${aendPage<aTotalpage }">
                     <li page="${aendPage+1 }" class="page"><a style="cursor: pointer;">&gt;</a></li>
                  </c:if>

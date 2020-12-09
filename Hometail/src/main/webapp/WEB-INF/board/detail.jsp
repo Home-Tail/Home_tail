@@ -238,7 +238,7 @@
 					<c:when test = "${cate==4 && sessionScope.id != 'admin'}">
 					    <tr>
 	       				<td class="text-center" colspan=2>
-	       					<span style="color:red; font-weight:bold;">* 답변은 관리자만 작성 가능합니다. *</span>
+	       					<span style="color:red; font-weight:bold;">* 답변은 관리자만 작성 가능합니다. </span>
 	       				</td>
 	       			</tr>
 					</c:when>
