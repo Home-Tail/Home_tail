@@ -41,7 +41,7 @@ $(function() {
          <div class="row">
 		  <div class="col-md-12">
 		    <h3 class="text-center">제보하기</h3>
-		    <form method="post" id="report_board" action="../report/detail_insert_ok.do">
+		    <form method="post" id="report_board" action="../report/insert_ok.do">
 		   <table class="table table-hover">
 		     <tr>
 		       <th class="danger text-right" width=15%>카테고리</th>
