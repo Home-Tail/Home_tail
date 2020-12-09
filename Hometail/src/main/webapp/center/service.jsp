@@ -69,8 +69,6 @@
 					$('#reserve_time').html(data);
 				}
 			  });
-			
-			
 			$.getJSON("protection.json",function(data){
 				$.each(data["datas"],function(index,value){
 						jsondata_p= JSON.stringify(value);
@@ -180,10 +178,10 @@
 //  			   	];
 //  			   	positions.push(mapdata);
  			   	// 마커 이미지의 이미지 주소입니다
- 			   	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
- 			   
+ 			   	var imageSrc = "hospital.png";
+//  			    	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
  			   	// 마커 이미지의 이미지 크기 입니다
-			   	var imageSize = new kakao.maps.Size(24, 35); 
+			   	var imageSize = new kakao.maps.Size(35, 35); 
 			   	    
 			   	// 마커 이미지를 생성합니다    
 			   	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
@@ -265,20 +263,24 @@
 			            };
 			          }
  			   }
- 			   
+ 				var imageSrc = "shelter.png";
+//		    	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+		   	// 마커 이미지의 이미지 크기 입니다
+	   			var imageSize = new kakao.maps.Size(35, 35); 
+	   			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
  			   for (var i = 0; i < mapdata.length; i ++) {
  			   	// 마커를 생성합니다
  				var marker= new kakao.maps.Marker({
  			   	        map: map, // 마커를 표시할 지도
  			   	        position: mapdata[i].latlng, // 마커를 표시할 위치
  			   	        title: mapdata[i].RSCU_INST_NM+'|'+mapdata[i].SIGUN_NM+'|'+mapdata[i].RSCU_INST_TELNO
- 			   	        +'|'+mapdata[i].REFINE_ZIPNO+'|'+mapdata[i].REFINE_LOTNO_ADDR+'|'+mapdata[i].REFINE_ROADNM_ADDR // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+ 			   	        +'|'+mapdata[i].REFINE_ZIPNO+'|'+mapdata[i].REFINE_LOTNO_ADDR+'|'+mapdata[i].REFINE_ROADNM_ADDR, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 //  			   	        loc: mapdata[i].SIGUN_NM,		// 지역 위치
 //  			   	        tel: mapdata[i].RSCU_INST_TELNO, // 전화 번호
 //  			   	        post: mapdata[i].REFINE_ZIPNO,	// 우편 번호
 //  			   	        lotno_addr: mapdata[i].REFINE_LOTNO_ADDR, // 도로명 주소
 //  			   	        roadnm_addr: mapdata[i].REFINE_ROADNM_ADDR, //지번 주소
-//  			   	        image : markerImage // 마커 이미지 
+ 			   	        image : markerImage // 마커 이미지 
  			   	        
  			   	    });
  				    var infowindow = new kakao.maps.InfoWindow({
@@ -457,7 +459,7 @@ function button_click(){
 	<div class="col-lg-12" style="padding-top: 30px;">
 <!-- 		    <div id="maps" class="col-lg-6" style="width:700px;height:600px; border:1px solid black; float: left;"></div> -->
 				
-			<div class="map_wrap col-" style="float: left; padding-top: 100px;"  >
+			<div class="map_wrap" style="float: left; padding-top: 100px;"  >
 			    <div id="maps" style="width:700px;height:600px; border:1px solid black; float: left;"></div>
 			    <ul id="category">
 			        <li id="MT1" data-order="1"> 

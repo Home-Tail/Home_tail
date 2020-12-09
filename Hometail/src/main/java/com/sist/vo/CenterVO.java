@@ -23,8 +23,17 @@ public class CenterVO {
 	private int post;
 	private String lotno_addr;
 	private String roadno_addr;
-	private int wgs84_x;
-	private int wgs84_y;
+	private Double wgs84_x;
+	private Double wgs84_y;
+	private String poster;
+	
+	
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -73,18 +82,19 @@ public class CenterVO {
 	public void setRoadno_addr(String roadno_addr) {
 		this.roadno_addr = roadno_addr;
 	}
-	public int getWgs84_x() {
+	public Double getWgs84_x() {
 		return wgs84_x;
 	}
-	public void setWgs84_x(int wgs84_x) {
+	public void setWgs84_x(Double wgs84_x) {
 		this.wgs84_x = wgs84_x;
 	}
-	public int getWgs84_y() {
+	public Double getWgs84_y() {
 		return wgs84_y;
 	}
-	public void setWgs84_y(int wgs84_y) {
+	public void setWgs84_y(Double wgs84_y) {
 		this.wgs84_y = wgs84_y;
 	}
+	
 	
 	
 }

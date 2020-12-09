@@ -1,7 +1,11 @@
 package com.sist.web;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -176,24 +180,36 @@ public class CenterServiceController {
 		org.json.simple.JSONArray js = new org.json.simple.JSONArray();
 		for(CenterVO vo:list)
 		{
+			System.out.println("좌표"+vo.getWgs84_x());
+			System.out.println("좌표"+vo.getWgs84_y());
+			
 			JSONObject shelter = new JSONObject();
-			shelter.put("shelter_name",vo.getName());
-			shelter.put("loc",vo.getLoc());
-			shelter.put("post",vo.getPost());
-			shelter.put("addr",vo.getLotno_addr());
+			shelter.put("NO",""+vo.getNo()+"");
+			shelter.put("SHELTER_NAME",vo.getName());
+			shelter.put("LOC",vo.getLoc()); 
+			shelter.put("TEL",vo.getTel());
+			shelter.put("POST",""+vo.getPost()+"");
+			shelter.put("POSTER",vo.getPoster());
+			shelter.put("ADDR",vo.getLotno_addr());
+			shelter.put("WGS84_X",vo.getWgs84_x());
+			shelter.put("WGS84_Y",vo.getWgs84_y());
 			js.add(shelter);
 		}
-		System.out.println("나오려나"+shelter_data);
 		shelter_data.put("datas",js.toString());
+		System.out.println("나오려나"+shelter_data);
 		String result = shelter_data.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
 		
 		System.out.println("JSON설정후"+result);
+		File path = new File("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\myJson.json");
 		try {
 			//C:\SpringDev\SpringStudy\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Hometail
             FileWriter file = new FileWriter("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\myJson.json");
-            file.write(result);
-            file.flush();
-            file.close();
+            BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path.getPath()),"UTF-8"));
+            output.write(result);
+            output.close();
+//            file.write(result);
+//            file.flush();
+//            file.close();
      } catch(IOException e) {
             e.printStackTrace();
      }
