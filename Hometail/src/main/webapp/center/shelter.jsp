@@ -91,14 +91,20 @@ $(function(){
 		    <div id="maps" style="width:1000px;height:600px; border:1px solid black; float: left;"></div>
 		</div>
 		
-		<div class="map_wrap col-lg-12" style="float: left; padding-top: 100px;">
+		<div class="map_wrap col-lg-12" style="float: left; padding-top: 100px; height: 500px;">
 			<div class="map_wrap col-lg-6" style="float: left; padding-top: 100px;">
-				
+				<table>
+					<tr>
+						<th>요청 보호소</th>
+						<td></td>
+					</tr>
+				</table>
 			</div>
 			<div class="map_wrap col-lg-6" style="float: left; padding-top: 100px;">
 		
 			</div>
 		</div>
+		<h4	>요청 하기</h4>
 		
 	</div>
   </body>
