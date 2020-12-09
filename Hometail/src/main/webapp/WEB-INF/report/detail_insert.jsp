@@ -49,8 +49,7 @@ $(function() {
 		         <select form="report_board">
 		         	<option value="cate0">전체</option>
 		         	<option value="cate1">실종</option>
-		         	<option value="cate2">제보</option>
-		         	<option value="cate3">완료</option>
+		         	<option value="cate2">목격</option>
 		         </select>
 		       </td>
 		     </tr>
@@ -97,12 +96,7 @@ $(function() {
 		     <tr>
 		       <th class="danger text-right" width=15%>몸무게</th>
 		       <td width=85%>
-		         <select form="report_board">
-		         	<option value="weight0">몸무게 모름</option>
-		         	<option value="weight1">1kg</option>
-		         	<option value="weight2">2kg</option>
-		         	<option value="weight3">3kg</option>
-		         </select>
+		         <input type=text name=weight size=45 class="input-sm">
 		       </td>
 		     </tr>
 		     <tr>
