@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sist.dao.ClinicDAO;
 import com.sist.vo.ClinicVO;
 import com.sist.vo.ReplyVO;
+import com.sist.vo.ReserveVO;
 
 @Controller
 
@@ -111,6 +112,12 @@ public String clinicReplyUpdate(ReplyVO vo)
 public String clinicReplyDelete(ReplyVO vo)
 {
 	dao.clinicReplyDelete(vo);
+	return "redirect:../clinic/detail.do?no="+vo.getClno();
+}
+@RequestMapping("clinic/clinic_reserve_insert.do")
+public String clinicReserveInsert(int resno,ReserveVO vo,HttpSession session)
+{
+	dao.clinicReserveInsert(vo);
 	return "redirect:../clinic/detail.do?no="+vo.getClno();
 }
 }

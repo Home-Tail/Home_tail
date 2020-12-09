@@ -32,68 +32,55 @@ border-style: outset;border-color: #b3e5fc;
 </style>
 </head>
 <body>
-          	<div class="row">
-          	<c:forEach var="vo" items="${list }">
-          		<div class="col-md-4 ftco-animated">
+         <div class="row">
+         <c:forEach var="vo" items="${list }">
+          		<div class="col-md-6 ftco-animated">
 		            <div class="blog-entry">
 		              <a href="../clinic/detail.do?no=${vo.clno }">
 		              <c:choose>
 		               <c:when test="${vo.poster==null }">
-		                <img src="../images/aa.jpg"  class="block-20" width=120% height=80% id="climage">
+		                <img src="../images/aa.jpg"  class="block-20" width=100% height=80% id="climage">
 		               </c:when>
 		               <c:otherwise>
-		                <img src="${vo.poster }" class="block-20" width=120% height=80% id="climage">
+		                <img src="${vo.poster }" class="block-20" width=100% height=80% id="climage">
 		               </c:otherwise>
 		              </c:choose>
 		              </a>
-		              <div class="text d-flex py-4">
-		                <div class="meta mb-3">
-		                  <div><a href="#">Jan. 20, 2019</a></div>
-		                  <div><a href="#">Admin</a></div>
-		                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-		                </div>
 		                <div class="desc pl-3">
 			                <h3 class="heading"><a href="../clinic/detail.do?no=${vo.clno }">${vo.title }</a></h3>
 			              </div>
-		              </div>
 		            </div>
 		          </div>
 		          </c:forEach>
           	</div>
-
-	<div class="row no-gutters my-5">
-		          <div class="col text-center">
-		            <div class="block-27">
-		              <ul>
-		                 <c:if test="${curpage>BLOCK }">
-                              <li page="${startPage-1 }">
-                                  <a class="page-link" >
-                                    &lt;
-                                    </a>
-                              </li>
-                              </c:if>
-                              <c:forEach var="i" begin="${startPage }" end="${endPage }">
-                              <c:if test="${i==curpage }">
-                              <li class="page_item active" page="${i}">
-                                  <a class="page-link">${i }</a>
-                              </li>
-                              </c:if>
-                              <c:if test="${i!=curpage }">
-                              	<li class="page_item" page="${i}">
-                                  <a class="page-link">${i }</a>
-                              </li>
-                              </c:if>
-                              </c:forEach>
-                              <c:if test="${endPage<totalpage }">
-                              <li page=${endPage+1 }>
-                                  <a class="page-link">
-                                      &gt;
-                                  </a>
-                              </li>
-                            </c:if>
-		              </ul>
-		            </div>
-		          </div>
-		        </div>
+      					<div class="row no-gutters my-5">
+			  <div class="col text-center">
+			    <div class="block-27">
+			      <ul>
+			      	<c:if test="${curpage>BLOCK }">
+			        	<li page="${startPage-1 }"><a style="cursor: pointer;">&lt;</a></li>
+			        </c:if>
+			        
+			        <c:forEach var="i" begin="${startPage }" end="${endPage }">
+			         	<c:if test="${i==curpage }">
+		                     <li class="active" page="${i }">
+		                         <a style="cursor: pointer;">${i }</a>
+		                     </li> 
+			            </c:if>
+			            <c:if test="${i!=curpage }">
+		                     <li page="${i }">
+		                         <a style="cursor: pointer;">${i }</a>
+		                     </li>
+			        	</c:if>
+			         </c:forEach>
+			        
+			        <c:if test="${endPage<totalpage }">
+			        	<li page="${endPage+1 }"><a style="cursor: pointer;">&gt;</a></li>
+			        </c:if>
+			        
+			      </ul>
+			    </div>
+			  </div>
+		</div>
 </body>
 </html>

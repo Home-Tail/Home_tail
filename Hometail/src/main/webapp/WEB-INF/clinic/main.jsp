@@ -56,27 +56,49 @@
       </div>
 </section>
 
-		<div class="row">
-			<div class="col-lg-8" id="tagin">
-			<!-- 리스트 ajax -->
-			</div>
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-lg-8" id="tagin"> -->
+ 			<!-- 리스트 ajax --> 
+<!-- 			</div> -->
 			
-			<div class="col-lg-4">
-			<div id="a">
+<!-- 			<div class="col-lg-4"> -->
+<!-- 			<div id="a"> -->
+<!-- 				<img id="seoul_1" src="../map/1111.png"> -->
+<%-- 				<c:forEach var="i" begin="1" end="25"> --%>
+<%-- 					<img id="gu${i }" src="../map/gu_${i }_off.png" --%>
+<%-- 						onmouseover="this.src='../map/gu_${i}_on.png'" --%>
+<%-- 						onmouseout="this.src='../map/gu_${i}_off.png'" class="images" --%>
+<%-- 						data-value="${i }"> --%>
+<%-- 				</c:forEach> --%>
+<!-- 			</div> -->
+<!-- 			<div id="print" class="row"> -->
+			
+<!-- 			</div> -->
+<!-- 		</div> -->
+			
+ 			<!-- END COL --> 
+<!-- 		</div> -->
+
+			<div class="container">
+				<div class="row">
+          <div class="col-md-7" id="tagin">
+          	<!-- ajax -->
+          </div>
+
+          <div class="col-md-5 sidebar ftco-animate">
+            	<div id="a">
 				<img id="seoul_1" src="../map/1111.png">
 				<c:forEach var="i" begin="1" end="25">
 					<img id="gu${i }" src="../map/gu_${i }_off.png"
 						onmouseover="this.src='../map/gu_${i}_on.png'"
-						onmouseout="this.src='../map/gu_${i}_off.png'" class="images"
-						data-value="${i }">
+						onmouseout="this.src='../map/gu_${i}_off.png'" class="images" data-value="${i }">
 				</c:forEach>
+ 			</div> 
+ 			<div id="print" class="row">
+ 			<!-- 리스트 출력 -->
+ 			</div>
+          </div>
+        </div>
 			</div>
-			<div id="print" class="row">
-			
-			</div>
-		</div>
-			
-			<!-- END COL -->
-		</div>
 </body>
 </html>
