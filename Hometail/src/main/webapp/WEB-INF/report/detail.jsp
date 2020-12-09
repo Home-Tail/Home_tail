@@ -32,10 +32,12 @@
 </script>
 </head>
 <body>
+
 <div class="latest-products">
-      <div style="height: 130px"></div>
       <div class="container">
-        <div class="row">
+		<hr>
+		<div style="height: 50px"></div>
+<!--         <div class="row"> -->
 <!--           <table class="table"> -->
 <!--             <tr> -->
 <%--               <c:forTokens var="poster" items="${vo.poster }" delims="^"> --%>
@@ -44,7 +46,7 @@
 <%-- 			  <td><img src="${vo.poster }" width=210 height=200></td> --%>
 <!--             </tr> -->
 <!--           </table> -->
-        </div>
+<!--         </div> -->
         <div style="height:20px"></div>
         <div class="row">
           <div class="col-md-7">
@@ -80,7 +82,18 @@
             <table class="table">
               <tr>
                 <td width=20%>분류</td>
-                <td width=80%>${vo.kind }</td>
+                <c:choose>
+             	 <c:when test="${vo.kind eq 1 }">
+               	  <td width=80%>개</td>
+              	 </c:when>
+              	 <c:when test="${vo.kind eq 2 }">
+               	  <td width=80%>고양이</td>
+              	 </c:when>
+              	 <c:when test="${vo.kind eq 3 }">
+               	  <td width=80%>기타</td>
+              	 </c:when>
+                </c:choose>
+<%--                 <td width=80%>${vo.kind }</td> --%>
               </tr>
               <tr>
                 <td width=20%>품종</td>
@@ -92,7 +105,7 @@
               </tr>
               <tr>
                 <td width=20%>나이</td>
-                <td width=80%>${vo.age }</td>
+                <td width=80%>${vo.age }살</td>
               </tr>
               <tr>
                 <td width=20%>몸무게</td>
@@ -119,7 +132,8 @@
                 <td width=80%>${vo.content }</td>
               </tr>
             </table>
-
+            <hr>
+			<div style="height:100px"></div>			
 <!--             <table class="table"> -->
 <!--               <tr> -->
 <!--                <td> -->
@@ -155,17 +169,27 @@
 <!--                </td> -->
 <!--               </tr> -->
 <!--             </table> -->
+
+<!-- 			<div style="height:100px"></div> -->
             <table class="table">
               <tr>
                <td>
                  <form method="post" action="../report/reply_insert.do">
 	                 <input type="hidden" name="cno" value="${vo.petno }">
-	                 <textarea rows="3" cols="63" name="msg" style="float: left"></textarea>
-	                 <input type=submit value="댓글쓰기" class="btn btn-sm btn-primary"
-	                  style="float: left;height: 73px">
+	                 <textarea rows="2" cols="70" name="msg" style="float: left"></textarea>
+	                 <input type=submit value="댓글쓰기" class="btn btn-sm btn-primary" style="width:100px; height: 67px; margin-left:5px;">
                   </form>
                </td>
               </tr>
+<!--               <tr> -->
+<!--                <td> -->
+<!--                  <form method="post" action="../report/reply_map_insert.do"> -->
+<%-- 	                 <input type="hidden" name="cno" value="${vo.petno }"> --%>
+<!-- 	                 <textarea rows="2" cols="70" name="msg" style="float: left"></textarea> -->
+<!-- 	                 <input type=submit value="댓글쓰기" class="btn btn-sm btn-primary" style="width:100px; height: 67px; margin-left:5px;"> -->
+<!--                   </form> -->
+<!--                </td> -->
+<!--               </tr> -->
             </table>
           </div>
           <div class="col-md-5">
@@ -220,6 +244,8 @@
       </div>
      </div>
    </div>
+   <div style="height:300px"></div>
   </div>
+  
 </body>
 </html>

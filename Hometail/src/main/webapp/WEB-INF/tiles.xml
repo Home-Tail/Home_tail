@@ -38,6 +38,7 @@
   
   
   
+  
   <!-- 지승구  -->
   <definition name="reserve_date" template="../center/reserve_date.jsp">
   </definition>

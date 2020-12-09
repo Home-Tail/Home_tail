@@ -107,6 +107,12 @@ public class ReportController {
 		return "report_around";
 	}
 	
+	@RequestMapping("report/detail_insert.do")
+	public String report_Detail_Insert()
+	{
+		System.out.println("report/detail_insert.do실행");
+		return "report/detail_insert";
+	}
 	
 }
 
