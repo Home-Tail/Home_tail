@@ -41,8 +41,8 @@ public void clinicReplyUpdate(ReplyVO vo);
 @Delete("DELETE FROM reply WHERE replyno=#{replyno} and cate=1")
 public void clinicReplyDelete(ReplyVO vo);
 
-@Insert("INSERT INTO reserve(resno,clno,id,resdate,owner,pname,content,name) VALUES((SELECT NVL(MAX(resno)+1,1) FROM reserve),#{clno},#{id},#{resdate},#{owner},#{pname},#{content},#{time})")
-public void clinicReserveInsert(ReserveVO vo);
+@Insert("INSERT INTO reserve(resno,clno,id,resdate,owner,pname,content,time) VALUES((SELECT NVL(MAX(resno)+1,1) FROM reserve),#{clno},#{id},#{resdate},#{owner},#{pname},#{content},#{time})")
+public void clinicReserveInsert(ReserveVO rvo);
 
 @Select("SELECT resno,clno,id,resdate,owner,pname,content,name FROM reserve WHERE resno=#{resno}")
 public List<ReserveVO> clinicReserveList(int resno);

@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=18b988d228ba568335019cf062c1ebf7"></script>
 <script type="text/javascript">
  $(function(){ 
@@ -27,32 +29,47 @@
 </script>
 <style>
 #climage{
-border-style: outset;border-color: #b3e5fc;
+border-style: solid;border-color: #B0E0E6;
+border-radius: 25px;
+}
+.heading{
+font-family: 'Jua', sans-serif;
 }
 </style>
 </head>
 <body>
-         <div class="row">
+        
+        
+        <div class="row">
          <c:forEach var="vo" items="${list }">
           		<div class="col-md-6 ftco-animated">
 		            <div class="blog-entry">
-		              <a href="../clinic/detail.do?no=${vo.clno }">
-		              <c:choose>
+		             <c:choose>
 		               <c:when test="${vo.poster==null }">
-		                <img src="../images/aa.jpg"  class="block-20" width=100% height=80% id="climage">
-		               </c:when>
-		               <c:otherwise>
-		                <img src="${vo.poster }" class="block-20" width=100% height=80% id="climage">
-		               </c:otherwise>
-		              </c:choose>
+		              <a href="../clinic/detail.do?no=${vo.clno }" id="climage" class="block-20" style="background-image: url('../images/aa.jpg');">
 		              </a>
+		              </c:when>
+		              <c:otherwise>
+		              <a href="../clinic/detail.do?no=${vo.clno }" id="climage" class="block-20" style="background-image: url('${vo.poster}');">
+		              </a>
+		              </c:otherwise>
+		              </c:choose>
+		              <div class="text d-flex py-4">
+		                <div class="meta mb-3">
+		                </div>
 		                <div class="desc pl-3">
-			                <h3 class="heading"><a href="../clinic/detail.do?no=${vo.clno }">${vo.title }</a></h3>
+		                <h3 class="heading"><a href="../clinic/detail.do?no=${vo.clno }">${vo.title }</a></h3>
 			              </div>
+		              </div>
 		            </div>
 		          </div>
-		          </c:forEach>
+		         </c:forEach>
           	</div>
+          	
+
+          
+
+          
       					<div class="row no-gutters my-5">
 			  <div class="col text-center">
 			    <div class="block-27">

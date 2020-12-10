@@ -78,14 +78,14 @@
 			
  			<!-- END COL --> 
 <!-- 		</div> -->
-
+<section class="ftco-section">
 			<div class="container">
 				<div class="row">
-          <div class="col-md-7" id="tagin">
+          <div class="col-lg-8" id="tagin">
           	<!-- ajax -->
           </div>
 
-          <div class="col-md-5 sidebar ftco-animate">
+          <div class="col-lg-4 sidebar ftco-animate">
             	<div id="a">
 				<img id="seoul_1" src="../map/1111.png">
 				<c:forEach var="i" begin="1" end="25">
@@ -100,5 +100,6 @@
           </div>
         </div>
 			</div>
+			</section>
 </body>
 </html>

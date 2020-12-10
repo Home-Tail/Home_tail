@@ -5,6 +5,7 @@ import java.util.*;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,6 @@ import com.sist.vo.ReserveVO;
 public class ClinicController {
 @Autowired
 private ClinicDAO dao;
-
 @RequestMapping("clinic/main.do")
 public String main()
 {
@@ -63,8 +63,10 @@ public String clinic_list(String page,Model model)
 }
 
 @RequestMapping("clinic/detail.do")
+
 public String clinic_Detail(String no,Model model)
 {
+	
 	ClinicVO vo=dao.clinicDetailData(Integer.parseInt(no));
 	List<ReplyVO> clist=dao.clinicReplyList(Integer.parseInt(no));
 	System.out.println(clist.size());
@@ -115,9 +117,18 @@ public String clinicReplyDelete(ReplyVO vo)
 	return "redirect:../clinic/detail.do?no="+vo.getClno();
 }
 @RequestMapping("clinic/clinic_reserve_insert.do")
-public String clinicReserveInsert(int resno,ReserveVO vo,HttpSession session)
+public String clinicReserveInsert(ReserveVO rvo)
 {
-	dao.clinicReserveInsert(vo);
-	return "redirect:../clinic/detail.do?no="+vo.getClno();
+
+	System.out.println(rvo.getClno());
+	System.out.println(rvo.getId());
+	System.out.println(rvo.getResdate());
+	System.out.println(rvo.getOwner());
+	System.out.println(rvo.getPname());
+	System.out.println(rvo.getContent());
+	System.out.println(rvo.getTime());
+	dao.clinicReserveInsert(rvo);
+	
+	return "redirect:../clinic/detail.do?no="+rvo.getClno();
 }
 }

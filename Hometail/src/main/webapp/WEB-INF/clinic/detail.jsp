@@ -32,6 +32,29 @@
 			}
 		});
 	})
+	
+$(function(){
+	$('#btnXX').click(function(){
+		let owner=$('#owner').val();
+		let pname=$('#pname').val();
+		let content=$('#content').val();
+		if(owner=="")
+		{
+			$('#owner').focus();
+			return;
+		}
+		if(pname=="")
+		{
+			$('#owner').focus();
+			return;
+		}
+		if(content=="")
+		{
+			$('#content').focus();
+			return;
+		}
+	})
+})
 </script>
 <style type="text/css">
 .btn {
@@ -52,6 +75,15 @@
 	background: #FFB6C1;
 	color: Purple;
 }
+#btn22 {
+	border-color: #DB7093;
+	color: Purple;
+}
+
+#btn22:hover {
+	background: #FFB6C1;
+	color: Purple;
+}
 
 .button {
 	border: 2px solid black;
@@ -69,6 +101,10 @@
 	background: #4d79ff;
 	color: white;
 }
+#cldetail{
+border-radius: 15px;
+}
+
 </style>
 </head>
 <body>
@@ -85,17 +121,17 @@
 	</div>
 	</section>
 
-	<section class="ftco-section">
+	<section class="ftco-section" id="soofont">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-7 ftco-animate">
 				<p>
 					<c:choose>
 						<c:when test="${vo.poster==null }">
-							<img src="../images/aa.jpg" alt="" width=700 height=400>
+							<img src="../images/aa.jpg" alt="" width=700 height=400 id="cldetail">
 						</c:when>
 						<c:otherwise>
-							<img src="${vo.poster }" alt="" width=700 height=400>
+							<img src="${vo.poster }" alt="" width=700 height=400 id="cldetail">
 						</c:otherwise>
 					</c:choose>
 				</p>
@@ -140,7 +176,10 @@
 				<table class="table">
 					<tr>
 						<td>병원 상세 정보&nbsp;&nbsp; 
-						<button class="btn" id="btn1" data-toggle="modal" data-target="#myModal">지도보기</button>
+						<button class="btn" id="btn1" data-toggle="modal" data-target="#clinicModal">지도보기</button>
+						<c:if test="${sessionScope.id!=null }">
+						<button class="btn" id="btn1" data-toggle="modal" data-target="#ResModal">예약하기</button>
+						</c:if>
 						</td>
 					</tr>
 				</table>
@@ -219,10 +258,11 @@
 		</div>
 	</section>
 	
-	 <!-- The Modal -->
-  <div class="modal fade" id="myModal">
+	<!-- 모달 섹션 -->
+	 <!-- Map Modal -->
+  <div class="modal fade" id="clinicModal">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content" >
       
         <!-- Modal Header -->
         <div class="modal-header">
@@ -231,9 +271,9 @@
         </div>
         
         <!-- Modal body -->
-        <div class="modal-body">
+        <div class="modal-body" style="width:600px; height:650px;">
           
-          <div id="maps" style="width: 150%; height: 400px;"></div>
+          <div id="maps" style="width:470px; height:500px;"></div>
 
 				<script type="text/javascript"
 					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=18b988d228ba568335019cf062c1ebf7&libraries=services"></script>
@@ -280,71 +320,93 @@
 	 									} 
 	 								}); 
 	 			</script> 
-          
-          
         </div>
-        
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" class="btn" id="btn2" data-dismiss="modal">Close</button>
         </div>
         
       </div>
     </div>
   </div>
+  <!-- Map Modal 종료 -->
   
-</div>
-
-	<!-- 내 소중한 지도 -->
-	<!-- <div id="maps" style="width: 150%; height: 400px;"></div> -->
-
-	<!-- 			<script type="text/javascript" -->
-	<!-- 				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=18b988d228ba568335019cf062c1ebf7&libraries=services"></script> -->
-	<!-- 			<script> -->
-	<!-- // 				var mapContainer = document.getElementById('maps'), // 지도를 표시할 div  -->
-	<!-- // 				mapOption = { -->
-	<!-- // 					center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표 -->
-	<!-- // 					level : 3 -->
-	<!-- // 				// 지도의 확대 레벨 -->
-	<!-- // 				}; -->
-
-	<!-- // 				// 지도를 생성합니다     -->
-	<!-- // 				var map = new kakao.maps.Map(mapContainer, mapOption); -->
-
-	<!-- // 				// 주소-좌표 변환 객체를 생성합니다 -->
-	<!-- // 				var geocoder = new kakao.maps.services.Geocoder(); -->
-
-	<!-- // 				// 주소로 좌표를 검색합니다 -->
-	<!-- // 				geocoder -->
-	<!-- // 						.addressSearch( -->
-	<%-- // 								'${vo.addr}', --%>
-	<!-- // 								function(result, status) { -->
-
-	<!-- // 									// 정상적으로 검색이 완료됐으면  -->
-	<!-- // 									if (status === kakao.maps.services.Status.OK) { -->
-
-	<!-- // 										var coords = new kakao.maps.LatLng( -->
-	<!-- // 												result[0].y, result[0].x); -->
-
-	<!-- // 										// 결과값으로 받은 위치를 마커로 표시합니다 -->
-	<!-- // 										var marker = new kakao.maps.Marker({ -->
-	<!-- // 											map : map, -->
-	<!-- // 											position : coords -->
-	<!-- // 										}); -->
-
-	<!-- // 										// 인포윈도우로 장소에 대한 설명을 표시합니다 -->
-	<!-- // 										var infowindow = new kakao.maps.InfoWindow( -->
-	<!-- // 												{ -->
-	<%-- // 													content : '<div style="width:150px;text-align:center;padding:6px 0;">${vo.title}</div>' --%>
-	<!-- // 												}); -->
-	<!-- // 										infowindow.open(map, marker); -->
-
-	<!-- // 										// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다 -->
-	<!-- // 										map.setCenter(coords); -->
-	<!-- // 									} -->
-	<!-- // 								}); -->
-	<!-- 			</script> -->
-
+  <!-- Reserve Modal 시작 -->
+   <div class="modal" id="ResModal">
+    <div class="modal-dialog">
+      <div class="modal-content" >
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="text-center modal-title" >예약 접수</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        <form method=post action="../clinic/clinic_reserve_insert.do" name="resFrm" id="resFrm">
+        <input type="hidden" name="clno" value="${vo.clno }">
+        <input type="hidden" name="id" value="${sessionScope.id}">
+          <table class="table">
+           <tr>
+		       <th class="text-center" width="35%">예약날짜</th>
+		       <td width=65%>
+		         <input type=date name="resdate" class="input-sm" size=20 id="resdate" pattern="yyyy-MM-dd">
+		       </td>
+     	  </tr>
+     	  <tr>
+		       <th class="text-center" width="35%">보호자 이름</th>
+		       <td width=65%>
+		         <input type=text name="owner" class="input-sm" size=15 id="owner" required>
+		       </td>
+     	  </tr>
+     	  <tr>
+		       <th class="text-center" width="35%">반려동물 이름</th>
+		       <td width=65%>
+		         <input type=text name="pname" class="input-sm" size=15 id="pname" required>
+		       </td>
+     	  </tr>
+     	  <tr>
+		       <th class="text-center" width="35%">증상 및 특이사항</th>
+		       <td width=65%>
+		         <textarea rows="3" cols="18" name="content" id="content"></textarea>
+		       </td>
+     	  </tr>
+     	  <tr>
+     	  <th class="text-center" width="30%">예약 시간</th>
+     	   <td width=70%>
+     	      <input type="radio" id="restime1" name="time" value="9:00 - 10:00" required>
+			  <label for="restime1">9:00 - 10:00</label><br>
+			  <input type="radio" id="restime2" name="time" value="10:00 - 11:00">
+			  <label for="restime2">10:00 - 11:00</label><br>
+			  <input type="radio" id="restime3" name="time" value="11:00 - 12:00">
+			  <label for="restime3">11:00 - 12:00</label><br>
+			  <input type="radio" id="restime4" name="time" value="12:00 - 13:00">
+			  <label for="restime4">12:00 - 13:00</label><br>
+			  <input type="radio" id="restime5" name="time" value="14:00 - 15:00">
+			  <label for="restime5">14:00 - 15:00</label><br>
+			  <input type="radio" id="restime6" name="time" value="15:00 - 16:00">
+			  <label for="restime6">15:00 - 16:00</label><br>
+			  <input type="radio" id="restime7" name="time" value="6:00 - 17:00">
+			  <label for="restime7">16:00 - 17:00</label><br>
+			  <p style="color:red">야간 진료는 전화 문의 부탁드립니다</p> 
+     	   </td>
+     	  </tr>
+          </table>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+          <input type="submit" value="병원예약" class="btn" id="btn22">
+         <button type="button" class="btn" id="btn2" data-dismiss="modal">Close</button>
+        </div>
+          </form>
+        </div> 
+        
+        
+        
+      </div>
+    </div>
+  </div>
+  <!-- Res Modal 종료 -->
 
 </body>
 </html>

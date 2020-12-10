@@ -23,6 +23,7 @@ public class ClinicDAO {
 	
 	public ClinicVO clinicDetailData(int clno)
 	{
+		System.out.println("clinicDetailData 실행");
 		return mapper.clinicDetailData(clno);
 	}
 	
@@ -46,9 +47,10 @@ public class ClinicDAO {
 	{
 		mapper.clinicReplyDelete(vo);
 	}
-	public void clinicReserveInsert(ReserveVO vo)
+	public void clinicReserveInsert(ReserveVO rvo)
 	{
-		mapper.clinicReserveInsert(vo);
+		System.out.println("clinicReserveInsert 실행");
+		mapper.clinicReserveInsert(rvo);
 	}
 	public List<ReserveVO> clinicReserveList(int resno)
 	{
