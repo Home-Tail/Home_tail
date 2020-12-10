@@ -59,7 +59,7 @@ public class CenterServiceController {
 		Center_reserveVO rvo = new Center_reserveVO();
 		String id = String.valueOf(session.getAttribute("id"));
 		String name= String.valueOf(session.getAttribute("name"));
-		System.out.println("위치값" + vo.getLoc());
+		System.out.println("위치값" + vo.getCity());
 		System.out.println("전화번호" + vo.getTel());
 		System.out.println("지번 주소" + vo.getLotno_addr());	
 		System.out.println("도로명 주소 " + vo.getRoadno_addr());
@@ -68,7 +68,7 @@ public class CenterServiceController {
 		System.out.println("병원명"+vo.getName());
 		rvo.setId(id);
 		rvo.setName(name);
-		rvo.setLoc(vo.getLoc());
+		rvo.setLoc(vo.getCity());
 		rvo.setTel(vo.getTel());
 		rvo.setLotno_addr(vo.getLotno_addr());
 		rvo.setRoadno_addr(vo.getRoadno_addr());
@@ -180,17 +180,20 @@ public class CenterServiceController {
 		org.json.simple.JSONArray js = new org.json.simple.JSONArray();
 		for(CenterVO vo:list)
 		{
-			System.out.println("좌표"+vo.getWgs84_x());
-			System.out.println("좌표"+vo.getWgs84_y());
+//			System.out.println("좌표"+vo.getWgs84_x());
+//			System.out.println("좌표"+vo.getWgs84_y());
 			
 			JSONObject shelter = new JSONObject();
 			shelter.put("NO",""+vo.getNo()+"");
 			shelter.put("SHELTER_NAME",vo.getName());
-			shelter.put("LOC",vo.getLoc()); 
+			shelter.put("CITY",vo.getCity()); 
+			shelter.put("CAPACITY",vo.getCapacity()); 
+			shelter.put("REMINDER",vo.getReminder()); 
 			shelter.put("TEL",vo.getTel());
 			shelter.put("POST",""+vo.getPost()+"");
 			shelter.put("POSTER",vo.getPoster());
-			shelter.put("ADDR",vo.getLotno_addr());
+			shelter.put("LOTNO_ADDR",vo.getLotno_addr());
+			shelter.put("ROADNO_ADDR",vo.getRoadno_addr());
 			shelter.put("WGS84_X",vo.getWgs84_x());
 			shelter.put("WGS84_Y",vo.getWgs84_y());
 			js.add(shelter);
@@ -215,4 +218,31 @@ public class CenterServiceController {
      }
 		return "../center/shelter";
 	}
-}
+	
+	@RequestMapping("shelter_add.do")
+	public String shelter_add()
+	{	
+		
+		return "shelter_find";
+	}	
+		
+	@RequestMapping("shelter_insert.do")
+	public String shelter_insert(CenterVO vo)
+	{	
+//		<option value="1">신문지</option>
+//		<option value="2">통조림</option>
+//		<option value="3">사료</option>
+//		<option value="4">헌옷</option>
+//		<option value="5">이불</option>
+		String arr[] = {"newspaper.png","canned-food.png","meat.png","clothes.png","blanket.png"};
+		int poster_number = Integer.parseInt(vo.getPoster());
+		vo.setPoster(arr[poster_number]);
+		System.out.println("shelter_insert.do 호출");
+		System.out.println("요청 보호소 번호 "+vo.getNo());
+		System.out.println("요청 품목 사진"+vo.getPoster());
+		dao.shelter_icon(vo);
+		
+		return "redirect:../center/shelter.do";
+	}	
+}		
+		

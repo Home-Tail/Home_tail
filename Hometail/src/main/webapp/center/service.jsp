@@ -479,7 +479,7 @@ function button_click(){
 				<tr>
 					<th>지역</th>
 					<td id="loc"></td>
-					<input type="hidden" id="loc2"  name="loc">
+					<input type="hidden" id="loc2"  name="city">
 				</tr>
 				<tr>
 					<th>병원 이름</th>

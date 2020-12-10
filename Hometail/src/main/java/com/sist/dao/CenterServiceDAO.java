@@ -39,4 +39,9 @@ public class CenterServiceDAO {
 	{
 		return mapper.shelter_data();
 	}
+	
+	public void shelter_icon(CenterVO vo)
+	{
+		mapper.shelter_icon(vo);
+	}
 }	

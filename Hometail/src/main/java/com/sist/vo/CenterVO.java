@@ -16,18 +16,46 @@ package com.sist.vo;
  */
 public class CenterVO {
 	private int no;
-	private int classification;
-	private String loc;
+	private String city;
 	private String name;
 	private String tel;
+	//비고사항
+	private String reminder;
+	//대표자  
+	private String representative;
+	private int capacity;
 	private int post;
 	private String lotno_addr;
 	private String roadno_addr;
 	private Double wgs84_x;
 	private Double wgs84_y;
 	private String poster;
-	
-	
+		   
+		   
+	public String getReminder() {
+		return reminder;
+	}	   
+	public void setReminder(String reminder) {
+		this.reminder = reminder;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getRepresentative() {
+		return representative;
+	}
+	public void setRepresentative(String representative) {
+		this.representative = representative;
+	}
+	public int getCapacity() {
+		return capacity;
+	}
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
 	public String getPoster() {
 		return poster;
 	}
@@ -39,18 +67,6 @@ public class CenterVO {
 	}
 	public void setNo(int no) {
 		this.no = no;
-	}
-	public int getClassification() {
-		return classification;
-	}
-	public void setClassification(int classification) {
-		this.classification = classification;
-	}
-	public String getLoc() {
-		return loc;
-	}
-	public void setLoc(String loc) {
-		this.loc = loc;
 	}
 	public String getName() {
 		return name;

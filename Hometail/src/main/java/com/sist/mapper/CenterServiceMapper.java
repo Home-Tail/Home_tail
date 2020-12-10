@@ -43,6 +43,9 @@ public interface CenterServiceMapper {
 	@Select("UPDATE center_reserve set check_msg='Y' WHERE id=#{id} AND no=#{no}")
 	public void check_update(Center_reserveVO vo);
 	
-	@Select("SELECT * FROM center where classification=2")
+	@Select("SELECT * FROM center")
 	public List<CenterVO> shelter_data();
+	
+	@Select("UPDATE center set poster=#{poster} where no=#{no}")
+	public void shelter_icon(CenterVO vo);
 }

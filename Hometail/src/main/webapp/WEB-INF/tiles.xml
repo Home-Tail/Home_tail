@@ -46,6 +46,9 @@
   <definition name="reserve_time" template="../center/reserve_time.jsp">
   </definition>
   
+  <definition name="shelter_find" template="../center/shelter_find.jsp">
+  </definition>
+  
   <!-- 정희진 게시판 -->
   
  <definition name="cboard_list" template="/WEB-INF/board/cboard_list.jsp"> 
