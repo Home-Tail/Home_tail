@@ -5,11 +5,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.dao.ReportDAO;
 import com.sist.vo.ClinicVO;
 import com.sist.vo.ReportVO;
 
+import java.io.IOException;
 import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ReportController {
@@ -102,17 +108,64 @@ public class ReportController {
 	}
 	
 	@RequestMapping("report/around.do")
-	public String report_Around(String no,Model model)
+	public String report_Around(Model model)
 	{
-		System.out.println("report/around.do실행");
-		return "report_around";
+		List<ReportVO> list=dao.reportAllData();
+		model.addAttribute("list",list);
+		return "report/around";
 	}
 	
 	@RequestMapping("report/insert.do")
 	public String report_Detail_Insert()
 	{
-		System.out.println("report/insert.do실행");
 		return "report/insert";
+	}
+	
+	@RequestMapping("report/insert_ok.do")
+	public String report_insert_ok(ReportVO vo,HttpServletRequest request,HttpSession session)throws IOException{//String cate?
+		
+		System.out.println("report/insert_ok.do실행");
+		String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Hometail\\reportposter";
+		String enctype= "UTF-8";
+		int size = 1024 * 1024 * 100;
+		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
+		
+		String id=(String)session.getAttribute("id");
+		
+		vo.setId(id);
+		vo.setTitle(mr.getParameter("title"));
+		vo.setCate(Integer.parseInt(mr.getParameter("cate")));
+		vo.setKind(Integer.parseInt(mr.getParameter("kind")));
+		vo.setSub_kind(Integer.parseInt(mr.getParameter("sub_kind")));
+		vo.setLoc(mr.getParameter("loc"));
+		vo.setPoster(mr.getFilesystemName("poster"));
+		vo.setPdate(mr.getParameter("pdate"));
+		vo.setSex(mr.getParameter("sex"));
+		vo.setAge(Integer.parseInt(mr.getParameter("age")));
+		vo.setWeight(mr.getParameter("weight"));
+		vo.setColor(mr.getParameter("color"));
+		vo.setPoint(mr.getParameter("point"));
+		vo.setTel(mr.getParameter("tel"));
+		vo.setContent(mr.getParameter("content"));
+		
+//		System.out.println("id: "+vo.getId());
+//		System.out.println("title"+vo.getTitle());
+//		System.out.println("cate: "+mr.getParameter("cate"));
+//		System.out.println("kind: "+mr.getParameter("kind"));
+//		System.out.println("sub_kind: "+mr.getParameter("sub_kind"));
+//		System.out.println("loc: "+mr.getParameter("loc"));
+//		System.out.println("poster: "+mr.getFilesystemName("poster"));
+//		System.out.println("pdate: "+mr.getParameter("pdate")); 
+//		System.out.println("sex: "+mr.getParameter("sex"));
+//		System.out.println("age: "+mr.getParameter("age"));
+//		System.out.println("weight: "+mr.getParameter("weight"));
+//		System.out.println("color: "+mr.getParameter("color"));
+//		System.out.println("point: "+mr.getParameter("point"));
+//		System.out.println("tel: "+mr.getParameter("tel"));
+//		System.out.println("content: " + mr.getParameter("content"));
+		
+		dao.reportInsertData(vo);
+		return "redirect:../report/main.do";
 	}
 	
 }

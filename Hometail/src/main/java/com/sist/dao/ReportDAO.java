@@ -13,12 +13,13 @@ public class ReportDAO {
      
 	 public List<ReportVO> reportListData(Map map)
      {
+		 System.out.println("test");
     	 return mapper.reportListData(map);
      }
 
      public int reportTotalPage()
      {
-  	   return mapper.reportTotalPage();
+    	 return mapper.reportTotalPage();
      }
      
 	 public List<ReportVO> reportCateData(Map map)
@@ -34,5 +35,14 @@ public class ReportDAO {
      public ReportVO reportDetailData(int petno)
      {
   	   return mapper.reportDetailData(petno);
+     }
+     
+     public List<ReportVO> reportAllData()
+     {
+  	   return mapper.reportAllData();
+     }
+     
+     public ReportVO reportInsertData(ReportVO vo){
+    	 return mapper.reportInsertData(vo);
      }
 }

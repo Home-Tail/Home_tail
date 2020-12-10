@@ -62,8 +62,6 @@ $(function() {
 	$('div .containerX a').click(function(){
 		cate=$(this).attr("cate");
 		
-		if(cate!=4)
-		{
 		$.ajax({
 				type:'post',
 				url:'../report/list.do',
@@ -74,19 +72,6 @@ $(function() {
 					$('#tagin').html(result);
 				}
 			})
-		}
-		if(cate==4)
-		{
-		$.ajax({
-				type:'post',
-				url:'../report/around.do',
-				success:function(result)
-				{
-					console.log("cate==4");
-					$('#tagin').html(result);
-				}
-			})
-		}
 	});
 	
 	//페이지 넘기는 용도
@@ -117,10 +102,11 @@ $(function() {
 			  <a cate=1 style="color: black; font-weight: 800;">실종</a>
 			  <a cate=2 style="color: black; font-weight: 800;">제보</a>
 			  <a cate=3 style="color: black; font-weight: 800;">완료</a>
-			  <a cate=4 style="color: black; font-weight: 800;">주변</a>
 			</div>
 			<div>
-				<a href="../report/insert.do">글쓰기</a>
+				<c:if test="${sessionScope.id!=null }">
+				 <a href="../report/insert.do" class="btn btn-sm btn-primary">글쓰기</a>
+				</c:if>
 			</div>
 		<div class="row">
 			
@@ -135,17 +121,20 @@ $(function() {
 			        <c:if test="${vo.cate==1 }">
 			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black; font-weight: 800;"><span style="color:#ff00a9;">[실종]</span>${vo.title }</a></h6>
 			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">${vo.loc }</a></h6>
-			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">실종날짜 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${vo.pdate}" /></a></h6>
+			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">실종날짜 : ${vo.pdate}"</a></h6>
+<%-- 			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">실종날짜 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${vo.pdate}" /></a></h6> --%>
 			     </c:if>
 			        <c:if test="${vo.cate==2 }">
 			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black; font-weight: 800;"><span style="color:#28a745;">[제보]</span>${vo.title }</a></h6>
 			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">${vo.loc }</a></h6>
-			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">실종날짜 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${vo.pdate}" /></a></h6>
+			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">실종날짜 : ${vo.pdate}"</a></h6>
+<%-- 			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">실종날짜 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${vo.pdate}" /></a></h6> --%>
 			     </c:if>
 			        <c:if test="${vo.cate==3 }">
 			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black; font-weight: 800;"><span style="color:#939782;">[완료]</span>${vo.title }</a></h6>
 			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">${vo.loc }</a></h6>
-			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">실종날짜 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${vo.pdate}" /></a></h6>
+			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">실종날짜 : ${vo.pdate}"</a></h6>
+<%-- 			         <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">실종날짜 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${vo.pdate}" /></a></h6> --%>
 			     </c:if>
 			   </div>
 			     </div>
