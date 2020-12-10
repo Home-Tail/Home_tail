@@ -23,7 +23,7 @@
         <td>
         
         
-          <select name="cate" value="${vo.cate }" style="font-size:14pt;">
+          <select name="cate" style="font-size:14pt;">
          <option value="" selected>전체</OPTION>
          <OPTION value="5">[보호중]</OPTION>
          <OPTION value="6">[보호요청]</OPTION>
@@ -105,7 +105,6 @@
        
         <tr>
         <td colspan="2" class="text-center">
-        <input type=hidden value="${cate }" name=cate>
           <input type=submit class="btn btn-sm btn-primary" value="글쓰기">
           <input type=button  class="btn btn-sm btn-primary" value="취소" onclick="javascript:history.back()">
         </td>

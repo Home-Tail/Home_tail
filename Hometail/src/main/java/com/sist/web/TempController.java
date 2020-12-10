@@ -150,13 +150,13 @@ public class TempController {
 	    //제목
 	    vo.setTitle(mr.getParameter("title"));
 	    //카테
-	    
 	    vo.setCate(Integer.parseInt(mr.getParameter("cate")));
 	    
 	    
 	    /*int cno=Integer.parseInt(cate);*/
 	    //날짜
-	    vo.setDb_pdate(mr.getParameter("db_pdate"));
+//	    vo.setDb_pdate(mr.getParameter("db_pdate"));
+	    vo.setDb_pdate("2020-00-00");
 	    //위치
 	    vo.setLoc(mr.getParameter("loc"));
 	    //내용
