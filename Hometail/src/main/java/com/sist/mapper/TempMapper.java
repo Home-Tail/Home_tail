@@ -14,7 +14,7 @@ public interface TempMapper {
 	@Select("SELECT petno,id,title,cate,kind,poster,pdate,loc,num "
 			+ "FROM (SELECT petno,id,title,cate,kind,poster,pdate,loc,rownum as num "
 			+ "FROM (SELECT petno,id,title,cate,kind,poster,pdate,loc "
-			+ "FROM pet_board WHERE cate BETWEEN 5 AND 6 ORDER BY petno DESC)) "
+			+ "FROM pet_board WHERE cate BETWEEN 5 AND 7 ORDER BY petno DESC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<TempVO> TempListData(Map map);
 	

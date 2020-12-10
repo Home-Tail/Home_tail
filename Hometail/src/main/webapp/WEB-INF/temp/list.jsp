@@ -8,6 +8,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+div.containerX a
+{
+   
+ 
+  background-color:#FFFFFF;
+  color:#000000  ;
+  border: thick double #A9A9A9;
+
+}
+
+#new
+{
+  background-color:#ff4500;
+  color:#FFFFFF  ;
+}
+</style>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 
@@ -23,7 +41,6 @@ $(function() {
 				data: {cate:cate}, //버튼누를때마다 카테고리별 정렬
 				success:function(result)
 				{
-					
 					$('#tagin').html(result);
 				}
 			})	
@@ -31,20 +48,13 @@ $(function() {
 })
 	// 로그인 안했을때 글등록하기 버튼 미노출
 	$(function(){
-			
-		/* 	$('#new').hover(function(){
-				$(this).css("cursor", "pointer")
-			}, function(){
-				$(this).css("cursor", "")
-			}); */
-			
-			//등록하기 
+	
 			
 			$('#new').click(function(){
-				console.log('새글 클릭');
+				console.log('등록하기 클릭');
 			$.ajax({
 				type:'POST',
-				data:{cate:cate},
+				/* data:{cate:cate}, */
 				url:'../temp/insert.do',
 				success:function(result)
 				{
@@ -52,6 +62,8 @@ $(function() {
 				}
 			});
 		});
+			
+			
 		/* 	$('#new').click(function(){
 				$.ajax({
 					type:'POST',
@@ -83,34 +95,21 @@ $(function() {
 
 </head>
 <body>
-
-
-	<div class="container">
-	  <div class="row">
+<div class="container">
+     <div class="row">
         <div class="col-lg-12" >
-        	<!-- 카테고리 버튼 -->
-			<div class="containerX blue topBotomBordersOut" style="margin-bottom: 20px; margin-top: 20px;">
-			  <a cate=0 class="btn btn-sm btn-primary py-2 px-4" style="color: white;">전체</a>
-			  <a cate=5 class="btn btn-sm btn-info py-2 px-4" style="color: white;">보호중</a>
-			  <a cate=6 class="btn btn-sm btn-danger py-2 px-4" style="color: white;">보호요청</a>
-			</div>
-			
-		
-				
-	  			<div class="container">
-        		<div class="col-lg-12">
-        		<div class="row">
-        		
-        
-        		<c:if test="${sessionScope.id!=null }">
-        			  <span class="btn btn-sm btn-primary py-2 px-4" id="new">새글</span>
-		        	
-		    	</c:if>	 
-					 <table class="table">
-		     			
-		  			 </table>
-		  			 
-			 		<c:forEach items="${list }" var="vo"  >
+           <!-- 카테고리 버튼 -->
+         <div class="containerX topBotomBordersOut" style="margin-bottom: 20px; margin-top: 20px;">
+           <a cate=0 class="btn btn-sm py-2 px-4">전체</a>
+           <a cate=5 class="btn btn-sm py-2 px-3" >보호중</a>
+           <a cate=6 class="btn btn-sm py-2 px-3" >보호요청</a>
+              <c:if test="${sessionScope.id!=null }">
+                   <span class="btn btn-sm py-2 px-4" id="new" style="float:right;">등록하기</span>
+             </c:if>    
+         </div>
+         </div>
+           <c:forEach items="${list }" var="vo"  >
+               
 					<div class="col-md-3 ftco-animated">
 			   		<div class="blog-entry">
 						   			<!----------사진 출력 코드  ----------------->
@@ -139,6 +138,13 @@ $(function() {
 			         <c:if test="${vo.cate==6 }">
 			         <h5><a href="../temp/detail.do?no=${vo.petno }" ></a></h5>
 			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;" ><b><span style="color:#FF0000;">[보호요청] </span>${vo.title }</b></a></h6>
+			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;">${vo.loc }</a></h6>
+			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;">발견날짜 : <fmt:formatDate pattern="yyyy-MM-dd " value="${vo.pdate}" /></a></h6>
+			         </c:if>
+			         
+			         <c:if test="${vo.cate==7 }">
+			         <h5><a href="../temp/detail.do?no=${vo.petno }" ></a></h5>
+			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;" ><b><span style="color:#3cb371;">[찾았어요] </span>${vo.title }</b></a></h6>
 			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;">${vo.loc }</a></h6>
 			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;">발견날짜 : <fmt:formatDate pattern="yyyy-MM-dd " value="${vo.pdate}" /></a></h6>
 			         </c:if>

@@ -13,33 +13,28 @@
    <!--  enctype="multipart/form-data" -->
    <div class="container">
    <h1  class="text-left">등록하기</h1>
-    <div class="row">
+    <div class="row-center">
      <form method="post" action="insert_ok.do" enctype="multipart/form-data">
      <table class="table">
      
-    <!--  <tr>
-        <th class="text-center danger" width=15%>번호</th>
-        <td width=20%>
-          <input type=text name=petno size=5>
-        </td>
-        
-       </tr> -->
        
       <tr>
           <th class="text-center danger"  >카테고리</th>
         <td>
-         <!--  <input type=text name=loc size=15> -->
-          <select name="cate" style="font-size:14pt;">
+        
+        
+          <select name="cate" value="${vo.cate }" style="font-size:14pt;">
          <option value="" selected>전체</OPTION>
          <OPTION value="5">[보호중]</OPTION>
          <OPTION value="6">[보호요청]</OPTION>
+         <OPTION value="7">[찾았어요]</OPTION>
          </select>                                                               
         </td>
       </tr>
       
       <tr>
-        <th class="text-center danger" width=15%>제목</th>
-        <td width=20%>
+        <th class="text-center danger" width=20%>제목</th>
+        <td width=30%>
           <input type=text name=title size=96>
         </td>
         
@@ -48,8 +43,8 @@
        <tr>
         <th class="text-center danger" width=20%>작성자</th>
         <td width=25%>
-          	<td>
-         <input type=text name=id size=20 value="${sessionScope.id }" readonly>
+          	
+         <input type=text name=id size=20 value="${sessionScope.id }" >
         	</td>
         
         
@@ -107,15 +102,10 @@
       
        </td>
       </tr>
-       <tr>
-        <th class="text-center danger" width=15%>비밀번호</th>
-        <td width=85%>
-          <input type="password" name=pwd size=10>
-        </td>
-       </tr>
        
         <tr>
         <td colspan="2" class="text-center">
+        <input type=hidden value="${cate }" name=cate>
           <input type=submit class="btn btn-sm btn-primary" value="글쓰기">
           <input type=button  class="btn btn-sm btn-primary" value="취소" onclick="javascript:history.back()">
         </td>

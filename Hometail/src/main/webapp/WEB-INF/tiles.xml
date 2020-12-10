@@ -61,6 +61,14 @@
    <!-- 임시보호 - 차윤도 -->
    <definition name="temp_list" template="/WEB-INF/temp/list.jsp">
   </definition>
+ 	<definition name="temp_insert" template="/WEB-INF/temp/insert.jsp">
+  </definition>
+  <definition name="temp_update" template="/WEB-INF/temp/update.jsp">
+  </definition>
+    <definition name="temp_detail" template="/WEB-INF/temp/detail.jsp">
+  </definition>
+<!--   <definition name="temp_delete" template="/WEB-INF/temp/delete.jsp">
+  </definition> -->
   
 </tiles-definitions>
 

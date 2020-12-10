@@ -31,6 +31,7 @@
          <option value="" selected>전체</OPTION>
          <OPTION value="5">[보호중]</OPTION>
          <OPTION value="6">[보호요청]</OPTION>
+         <OPTION value="7">[찾았어요]</OPTION>
          </select>                                                               
         </td>
       </tr>

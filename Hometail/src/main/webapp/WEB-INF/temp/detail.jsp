@@ -8,40 +8,60 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$('.update').click(function(){
+			console.log('바보')
 			let petno = $(this).attr("value");		
 			$.ajax({
 				type:'POST',
 				url:'../temp/update.do',
 				data:{'petno':petno},
-				success:function(res) 
+				success:function(result) 
 				{
-					$('#print').html(res);
+					console.log('여기')
+					console.log(result)
+					$('#tagin').html(result);
 				}
 			});
 		});
-		
-		
-		
+		 let cate=0;
 		 $('.back').click(function(){
-			 petno=$(this).attr("value");
-				console.log(petno+'클릭');
-				$.ajax({
+			 cate=$(this).attr("value");
+				console.log(cate+'클릭');
+				
+				location.href="../temp/main.do"
+				
+	/* 	$('.update').click(function(){
+		petno=$(this).attr("value");
+		console.log(update+'클릭');
+							
+		location.href="../temp/update.do?petno"+petno
+									 */
+				
+		/* function update(){
+			        
+			  var update = $("#update").val();
+			        
+			  location.href = "../temp/update.do?petno"+petno
+			    }	
+				 */
+				/* $.ajax({
 					type:'POST',
-					url:'../temp/main.do',
-					data:{"petno":petno},
-					success:function(res)
+					url:'../temp/list.do',
+					data:{"cate":cate},
+					success:function(result)
 					{
-						$('#print').html(res);
+						$('#tagin').html(result);
 					}
-				});
+				}); */
 			});
 	})
 	
-</script>  -->
+</script>
+	
+</script> 
 </head>
 <body>
 	<div class="container">
@@ -58,7 +78,7 @@
 				</tr>
 				<tr>
 					<th width=20% class="text-center danger">작성자</th>
-					<td width=30% class="text-left">${vo.id }</td>
+					<td width=30% class="text-left">${sessionScope.id } </td>
 					
 					<th width=20% class="text-center danger">연락처</th>
 					<td width=30% class="text-left">${vo.tel }</td>
@@ -97,10 +117,10 @@
             </tr>
             <tr>
             <td class="text-right" colspan=4>
-            <c:if test="${sessionScope.id==vo.id }">
-               <%--  <span class="btn btn-sm btn-success update" value="${vo.petno}">수정</span> --%>
-            <a href="../temp/update.do?petno=${vo.petno }" class="btn btn-sm btn-primary" style="margin:10px">수정</a>          
-               <a href="../temp/delete_ok.do?petno=${vo.petno }" class="btn btn-sm btn-primary">삭제</a>
+            <c:if test="${sessionScope.id==sessionScope.id }">
+                <span class="btn btn-sm btn-success update" value="${vo.petno}">수정</span>
+                 <a href="../temp/update.do?petno=${vo.petno }" class="btn btn-sm btn-primary">수정</a>
+           		 <a href="../temp/delete_ok.do?petno=${vo.petno }" class="btn btn-sm btn-primary" onclick="return confirm('선택한 게시물을 삭제하시겠습니까?');">삭제</a>
              </c:if>       
             </td>
             </tr>
@@ -133,9 +153,11 @@
 				<tr>
 				<td></td>
 				<tr>
-				 <span class="btn btn-sm btn-primary py-3 px-4 back" value="${list }">목록</span>
+				 <span class="btn btn-sm btn-primary py-3 px-4 back" value="${vo.cate}">목록</span>
 				</table>
 				</div>
 				</div>	
+				
+				
 </body>
 </html>

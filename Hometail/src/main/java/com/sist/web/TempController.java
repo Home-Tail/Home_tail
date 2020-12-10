@@ -9,6 +9,8 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.dao.TempDAO;
 import com.sist.vo.TempVO;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
@@ -92,7 +94,7 @@ public class TempController {
 
 	@RequestMapping("temp/detail.do")
 	public String Temp_Detail(String no, Model model) {
-
+		
 		TempVO vo = dao.TempDetailData(Integer.parseInt(no));
 		model.addAttribute("vo", vo);
 
@@ -102,16 +104,33 @@ public class TempController {
 
 	@RequestMapping("temp/insert.do")
 	public String temp_insert() {
-		return "temp/insert";
+		return "temp_insert";
 	}
 
 	@RequestMapping("temp/insert_ok.do")
-	public String temp_insert_ok(HttpServletRequest request, HttpSession session) throws IOException 
+	public String temp_insert_ok(HttpServletRequest request, HttpSession session) throws IOException  
+   
 	{
 		TempVO vo = new TempVO();
 		/*request.setCharacterEncoding("utf-8");*/
 		
 		String path="C:\\Users\\YOONDO\\springDev\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\TempPoster"; 
+		File Folder = new File(path);
+
+		// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.
+		if (!Folder.exists()) {
+			try{
+				Folder.mkdir(); //폴더 생성합니다.
+			    System.out.println("폴더가 생성되었습니다.");
+			    } 
+			catch(Exception e){
+			    e.getStackTrace();
+			}        
+			}else {
+			System.out.println("이미 폴더가 생성되어 있습니다.");
+			}
+		
+		
 		String enctype= "UTF-8";  
 		
 		String id = String.valueOf( session.getAttribute("id"));
@@ -119,13 +138,23 @@ public class TempController {
 		int size = 1024 * 1024 * 100;
 		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
 		
+		
+/*		String str = request.getParameter("str");
+		if(str == null || str.trim().equals("")){
+		str = "0";
+		}*/
+		
 	   
 	    //아이디
 	    vo.setId("id");
 	    //제목
 	    vo.setTitle(mr.getParameter("title"));
 	    //카테
+	    
 	    vo.setCate(Integer.parseInt(mr.getParameter("cate")));
+	    
+	    
+	    /*int cno=Integer.parseInt(cate);*/
 	    //날짜
 	    vo.setDb_pdate(mr.getParameter("db_pdate"));
 	    //위치
@@ -136,6 +165,8 @@ public class TempController {
 	    vo.setTel(mr.getParameter("tel"));
 	    //사진
 		vo.setPoster(mr.getFilesystemName("poster"));
+
+
 		
 //		System.out.println("아이디"+vo.getId());
 //		System.out.println("제목"+vo.getTitle());
@@ -146,7 +177,7 @@ public class TempController {
 //		System.out.println("텔"+vo.getTel());
 //		System.out.println("콘텐츠" + vo.getContent());
 		dao.TempInsertData(vo);
-		return "redirect:../temp/list.do";
+		return "redirect:../temp/main.do";
 	}
 	
 	@RequestMapping("temp/update.do")
@@ -157,7 +188,7 @@ public class TempController {
 		TempVO vo = dao.TempDetailData(petno);
 		
 		model.addAttribute("vo",vo);
-		  return "temp/update";
+		  return "temp_update";
 	   }
 	
 	 @RequestMapping("temp/update_ok.do")
@@ -172,7 +203,22 @@ public class TempController {
 			   }
 		   
 //		   String path="C:\\Users\\YOONDO\\springDev\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\TempPoster"; 
-		   String path="C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp2\\wtpwebapps\\Hometail"; 
+		   String path="C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\TempPoster"; 
+		   File Folder = new File(path);
+
+			// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.
+			if (!Folder.exists()) {
+				try{
+					Folder.mkdir(); //폴더 생성합니다.
+				    System.out.println("폴더가 생성되었습니다.");
+				    } 
+				catch(Exception e){
+				    e.getStackTrace();
+				}        
+				}else {
+				System.out.println("이미 폴더가 생성되어 있습니다.");
+				}
+			
 			String enctype= "UTF-8";  
 			int size = 1024 * 1024 * 100;
 			MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
