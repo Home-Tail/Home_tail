@@ -24,8 +24,9 @@ package com.sist.vo;
 import java.util.*;
 public class ReportVO {
 		private int petno,cate,kind,sub_kind,age;
-		private String id,title,poster,sex,weight,color,point,loc,maploc,tel,content;
-		private Date regdate,pdate;
+		private String id,title,poster,sex,weight,color,point,loc,maploc,tel,content,pdate;
+		private Date regdate;
+		
 		
 		public int getPetno() {
 			return petno;
@@ -129,12 +130,13 @@ public class ReportVO {
 		public void setRegdate(Date regdate) {
 			this.regdate = regdate;
 		}
-		public Date getPdate() {
+		public String getPdate() {
 			return pdate;
 		}
-		public void setPdate(Date pdate) {
+		public void setPdate(String pdate) {
 			this.pdate = pdate;
 		}
+		
 		
 }
 

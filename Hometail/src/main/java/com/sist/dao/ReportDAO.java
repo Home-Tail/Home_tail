@@ -41,4 +41,8 @@ public class ReportDAO {
      {
   	   return mapper.reportAllData();
      }
+     
+     public ReportVO reportInsertData(ReportVO vo){
+    	 return mapper.reportInsertData(vo);
+     }
 }

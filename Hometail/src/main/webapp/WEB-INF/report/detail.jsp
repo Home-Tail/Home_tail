@@ -54,8 +54,6 @@
              <tr>
               <td>
                <td><img src="${vo.poster }" width=210 height=200></td>
-               <td><img src="${vo.poster }" width=210 height=200></td>
-               <td><img src="${vo.poster }" width=210 height=200></td>
               </td>
              </tr>
             </table>
@@ -83,6 +81,9 @@
               <tr>
                 <td width=20%>분류</td>
                 <c:choose>
+                 <c:when test="${vo.kind eq 0 }">
+               	  <td width=80%>모든 동물</td>
+              	 </c:when>
              	 <c:when test="${vo.kind eq 1 }">
                	  <td width=80%>개</td>
               	 </c:when>
@@ -97,11 +98,28 @@
               </tr>
               <tr>
                 <td width=20%>품종</td>
-                <td width=80%>${vo.sub_kind }</td>
+                <c:choose>
+                 <c:when test="${vo.sub_kind eq 0 }">
+               	  <td width=80%>전체</td>
+              	 </c:when>
+             	 
+                </c:choose>
+<%--                 <td width=80%>${vo.sub_kind }</td> --%>
               </tr>
               <tr>
                 <td width=20%>성별</td>
-                <td width=80%>${vo.sex }</td>
+                <c:choose>
+                 <c:when test="${vo.sex eq 0 }">
+               	  <td width=80%>미확인</td>
+              	 </c:when>
+             	 <c:when test="${vo.sex eq 1 }">
+               	  <td width=80%>수컷</td>
+              	 </c:when>
+              	 <c:when test="${vo.sex eq 2 }">
+               	  <td width=80%>암컷</td>
+              	 </c:when>
+                </c:choose>
+<%--                 <td width=80%>${vo.sex }</td> --%>
               </tr>
               <tr>
                 <td width=20%>나이</td>
@@ -109,7 +127,7 @@
               </tr>
               <tr>
                 <td width=20%>몸무게</td>
-                <td width=80%>${vo.weight }</td>
+                <td width=80%>${vo.weight }kg</td>
               </tr>
               <tr>
                 <td width=20%>특징</td>
@@ -117,7 +135,8 @@
               </tr>
               <tr>
                 <td width=20%>실종일</td>
-                <td width=80%><fmt:formatDate value="${vo.pdate }" pattern="yyyy-MM-dd"/></td>  
+                <td width=80%>${vo.pdate }</td>
+<%--                 <fmt:formatDate value="${vo.pdate }" pattern="yyyy-MM-dd"/></td>   --%>
               </tr>
               <tr>
                 <td width=20%>실종장소</td>

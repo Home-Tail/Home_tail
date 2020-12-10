@@ -30,4 +30,26 @@ public interface ReportMapper {
 	
 	@Select("SELECT * FROM pet_board where cate BETWEEN 1 AND 3")
 	public List<ReportVO> reportAllData();
+	
+	@Select("insert into pet_board(petno,id,cate,kind,sub_kind,loc,poster,regdate,pdate,sex,age,weight,color,point,tel,content) values( "
+			+ "(select nvl(max(petno+1),1) FROM pet_board)"
+			+ ",#{id}"
+			+ ",#{title}"
+			+ ",#{cate}"
+			+ ",#{kind}"
+			+ ",#{sub_kind}"
+			+ ",#{loc}"
+			+ ",#{poster}"
+			+ ",sysdate"
+			+ ",#{pdate}"
+			+ ",#{sex}"
+			+ ",#{age}"
+			+ ",#{weight}"
+			+ ",#{color}"
+			+ ",#{point}"
+			+ ",#{tel}"
+			+ ",#{content}"
+			+ ")")
+	public ReportVO reportInsertData(ReportVO vo);
+	
 }
