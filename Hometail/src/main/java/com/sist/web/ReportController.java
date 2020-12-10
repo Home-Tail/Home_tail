@@ -1,5 +1,7 @@
 package com.sist.web;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +15,12 @@ import com.sist.vo.ClinicVO;
 import com.sist.vo.ReplyVO;
 import com.sist.vo.ReportVO;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -118,6 +125,40 @@ public class ReportController {
 	@RequestMapping("report/around.do")
 	public String report_Around()
 	{
+		List<ReportVO> list = dao.reportAllData();
+		System.out.println("around.do list 사이즈:"+list.size());
+		
+		JSONObject JSresult = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		
+		for(ReportVO vo:list)
+		{
+			JSONObject json = new JSONObject();
+			json.put("no",vo.getPetno());
+			json.put("title",vo.getTitle());
+			json.put("cate",vo.getCate());
+			json.put("kind",vo.getKind());
+			json.put("loc",vo.getLoc());
+			json.put("map_x",vo.getMap_x());
+			json.put("map_y",vo.getMap_y());
+			jsonArray.add(json);
+		}
+		JSresult.put("datas",jsonArray);
+		String result=jsonArray.toString();
+		
+		File file = new File("C:\\Users\\Home_tail\\Hometail\\src\\main\\webapp\\WEB-INF\\report\\reportJson.json");
+		try {
+			//파일 객체 생성
+            FileWriter fw = new FileWriter(file, true);
+            //버퍼
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getPath()),"UTF-8"));
+            //파일안에 문자쓰기
+            bw.write(result);
+            bw.close();
+            
+     } catch(IOException e) {
+            e.printStackTrace();
+     }
 		return "report/around";
 	}
 	
@@ -132,6 +173,7 @@ public class ReportController {
 		
 		System.out.println("report/insert_ok.do실행");
 		String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Hometail\\reportposter";
+//		String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\reportposter";
 		String enctype= "UTF-8";
 		int size = 1024 * 1024 * 100;
 		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
@@ -144,6 +186,8 @@ public class ReportController {
 		vo.setKind(Integer.parseInt(mr.getParameter("kind")));
 		vo.setSub_kind(Integer.parseInt(mr.getParameter("sub_kind")));
 		vo.setLoc(mr.getParameter("loc"));
+		vo.setMap_x(mr.getParameter("map_x"));
+		vo.setMap_y(mr.getParameter("map_y"));
 		vo.setPoster(mr.getFilesystemName("poster"));
 		vo.setPdate(mr.getParameter("pdate"));
 		vo.setSex(mr.getParameter("sex"));

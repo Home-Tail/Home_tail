@@ -34,7 +34,6 @@ $(function() {
 		       <th class="danger text-right" width=15%>카테고리</th>
 			   <td width=85%>
 		         <select name=cate >
-		         	<option value="0">전체</option>
 		         	<option value="1">실종</option>
 		         	<option value="2">목격</option>
 		         </select>
@@ -209,6 +208,10 @@ $(function() {
 					                        
 					                        infowindow.setContent(content);
 							                infowindow.open(map, marker);
+							                
+							                var latlng = map.getCenter(); 
+				                            document.getElementById("map_x").value=latlng.getLat();
+				                            document.getElementById("map_y").value=latlng.getLng();
 					                    }
 					                });
 					            }

@@ -1,14 +1,25 @@
 package com.sist.web;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.dao.ReportDAO;
@@ -19,52 +30,31 @@ public class ReportController2 {
 	@Autowired
 	private ReportDAO dao;
 	
-	/*
-	@RequestMapping("report/insert_ok.do")
-	public String report_insert_ok(ReportVO vo,HttpServletRequest request,HttpSession session)throws IOException{//String cate?
-		
-		System.out.println("report/insert_ok.do실행");
-		
-		String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Hometail\\reportposter";
-		String enctype= "UTF-8";
-		int size = 1024 * 1024 * 100;
-		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
-		
-		String id=(String)session.getAttribute("id");
-		
-		System.out.println("id"+vo.getId());
-		System.out.println("title"+vo.getTitle());
-		System.out.println("cate"+vo.getCate());
-		System.out.println("kind"+vo.getKind());
-		System.out.println("sub_kind"+vo.getSub_kind());
-		System.out.println("loc"+vo.getLoc());
-		System.out.println("poster"+vo.getPoster());
-		System.out.println("pdate"+vo.getPdate());
-		System.out.println("sex"+vo.getSex());
-		System.out.println("age"+vo.getAge());
-		System.out.println("weight"+vo.getWeight());
-		System.out.println("color"+vo.getColor());
-		System.out.println("point"+vo.getPoint());
-		System.out.println("tel"+vo.getTel());
-		System.out.println("content" + vo.getContent());
-		
-//		vo.setId(id);
-//		vo.setPoster(mr.getFilesystemName("poster"));
-		
-		
-//		dao.reportInsert(vo);
-		return "redirect:../report/list.do";
-	}
-	
-	
-	@RequestMapping("report/around_list.do")
-	public String report_Around_list()
+	@RequestMapping(value ="report/around_data.do", produces="text/plain;charset=UTF-8")
+	public String report_Around_data(Model model)
 	{
-		System.out.println("report/around_list.do 실행");
-		List<ReportVO> list=dao.reportAllData();
-		System.out.println(list.size());
+		List<ReportVO> list = dao.reportAllData();
+		System.out.println("around.do list 사이즈:"+list.size());
 		
-		return list;
+		JSONObject JSresult = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		
+		for(ReportVO vo:list)
+		{
+			JSONObject json = new JSONObject();
+			json.put("no",vo.getPetno());
+			json.put("title",vo.getTitle());
+			json.put("cate",vo.getCate());
+			json.put("kind",vo.getKind());
+			json.put("loc",vo.getLoc());
+			json.put("map_x",vo.getMap_x());
+			json.put("map_y",vo.getMap_y());
+			jsonArray.add(json);
+		}
+		JSresult.put("datas",jsonArray);
+		String result=jsonArray.toString();
+
+		return result;
 	}
-	*/
+	
 }

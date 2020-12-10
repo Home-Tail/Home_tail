@@ -30,7 +30,7 @@ public interface ReportMapper {
 	@Select("SELECT * FROM pet_board WHERE petno=#{petno}")
 	public ReportVO reportDetailData(int petno);
 	
-	@Select("SELECT id FROM pet_board where cate BETWEEN 1 AND 3")
+	@Select("SELECT * FROM pet_board where cate BETWEEN 1 AND 3")
 	public List<ReportVO> reportAllData();
 	
 	@Select("insert into pet_board(petno,id,title,cate,kind,sub_kind,loc,map_x,map_y,poster,regdate,pdate,sex,age,weight,color,point,tel,content) values( "
