@@ -10,6 +10,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.dao.ReportDAO;
 import com.sist.vo.ClinicVO;
+import com.sist.vo.ReplyVO;
 import com.sist.vo.ReportVO;
 
 import java.io.IOException;
@@ -102,9 +103,15 @@ public class ReportController {
 	@RequestMapping("report/detail.do")
 	public String report_Detail(String no,Model model)
 	{
-		ReportVO vo=dao.reportDetailData(Integer.parseInt(no));
-		model.addAttribute("vo", vo);
+		System.out.println("report_deatil.do 실행");
+		System.out.println("no: "+no);
+		int petno=Integer.parseInt(no);
+		ReportVO vo=dao.reportDetailData(petno);
+		List<ReplyVO> rList=dao.replyListData(petno);	
+		System.out.println("relist: "+rList.size());
 		
+		model.addAttribute("vo", vo);
+		model.addAttribute("rList", rList);
 		return "report/detail";
 	}
 	
@@ -125,7 +132,6 @@ public class ReportController {
 		
 		System.out.println("report/insert_ok.do실행");
 		String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Hometail\\reportposter";
-//		String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\reportposter";
 		String enctype= "UTF-8";
 		int size = 1024 * 1024 * 100;
 		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
@@ -138,8 +144,6 @@ public class ReportController {
 		vo.setKind(Integer.parseInt(mr.getParameter("kind")));
 		vo.setSub_kind(Integer.parseInt(mr.getParameter("sub_kind")));
 		vo.setLoc(mr.getParameter("loc"));
-		vo.setMap_x(mr.getParameter("map_x"));
-		vo.setMap_y(mr.getParameter("map_y"));
 		vo.setPoster(mr.getFilesystemName("poster"));
 		vo.setPdate(mr.getParameter("pdate"));
 		vo.setSex(mr.getParameter("sex"));
@@ -150,24 +154,52 @@ public class ReportController {
 		vo.setTel(mr.getParameter("tel"));
 		vo.setContent(mr.getParameter("content"));
 		
-//		System.out.println("id: "+vo.getId());
-//		System.out.println("title"+vo.getTitle());
-//		System.out.println("cate: "+mr.getParameter("cate"));
-//		System.out.println("kind: "+mr.getParameter("kind"));
-//		System.out.println("sub_kind: "+mr.getParameter("sub_kind"));
-//		System.out.println("loc: "+mr.getParameter("loc"));
-//		System.out.println("poster: "+mr.getFilesystemName("poster"));
-//		System.out.println("pdate: "+mr.getParameter("pdate")); 
-//		System.out.println("sex: "+mr.getParameter("sex"));
-//		System.out.println("age: "+mr.getParameter("age"));
-//		System.out.println("weight: "+mr.getParameter("weight"));
-//		System.out.println("color: "+mr.getParameter("color"));
-//		System.out.println("point: "+mr.getParameter("point"));
-//		System.out.println("tel: "+mr.getParameter("tel"));
-//		System.out.println("content: " + mr.getParameter("content"));
-		
 		dao.reportInsertData(vo);
 		return "redirect:../report/main.do";
+	}
+	
+	@RequestMapping("report/reply_insert.do")
+	public String report_reply_insert(int petno,String content,HttpSession session){
+		
+		System.out.println("reply_insert.do실행");
+		
+		String id=(String)session.getAttribute("id");
+		
+		System.out.println("id: "+id);
+		System.out.println("petno: "+petno);
+		System.out.println("content: "+content);
+		
+		ReplyVO rvo=new ReplyVO();
+		rvo.setId(id);
+		rvo.setPetno(petno);
+		rvo.setContent(content);
+		dao.replyInsertData(rvo);
+		return "redirect:../report/detail.do?no="+petno;
+	}
+	
+	@RequestMapping("report/reply_delete.do")
+	public String report_reply_delete(String rno,String pno){
+		
+		System.out.println("reply_delete.do 실행");
+		System.out.println("rno,pno: "+rno+","+pno);
+		int petno=Integer.parseInt(pno);
+		int replyno=Integer.parseInt(rno);
+		dao.replyDeleteData(replyno);
+		return "redirect:../report/detail.do?no="+petno;
+	}
+	
+	@RequestMapping("report/reply_update.do")
+	public String report_reply_update(String rno,String pno,String content){
+		
+		System.out.println("reply_update.do 실행");
+		System.out.println("rno,pno: "+rno+","+pno);
+		int petno=Integer.parseInt(pno);
+		int replyno=Integer.parseInt(rno);
+		ReplyVO rvo=new ReplyVO();
+		rvo.setContent(content);
+		rvo.setReplyno(replyno);
+		dao.replyUpdateData(rvo);
+		return "redirect:../report/detail.do?no="+petno;
 	}
 	
 }

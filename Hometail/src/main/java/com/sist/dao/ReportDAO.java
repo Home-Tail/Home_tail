@@ -4,6 +4,7 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.sist.mapper.ReportMapper;
+import com.sist.vo.ReplyVO;
 import com.sist.vo.ReportVO;
 
 @Repository
@@ -45,4 +46,22 @@ public class ReportDAO {
      public ReportVO reportInsertData(ReportVO vo){
     	 return mapper.reportInsertData(vo);
      }
+     
+     public ReplyVO replyInsertData(ReplyVO rvo){
+    	 return mapper.replyInsertData(rvo);
+     }
+     
+     public List<ReplyVO> replyListData(int petno)
+     {
+  	   return mapper.replyListData(petno);
+     }
+     
+     public ReplyVO replyDeleteData(int replyno){
+    	 return mapper.replyDeleteData(replyno);
+     }
+     
+     public ReplyVO replyUpdateData(ReplyVO rvo){
+    	 return mapper.replyUpdateData(rvo);
+     }
+     
 }

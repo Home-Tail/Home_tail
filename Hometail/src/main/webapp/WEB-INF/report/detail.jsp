@@ -152,65 +152,66 @@
               </tr>
             </table>
             <hr>
-			<div style="height:100px"></div>			
-<!--             <table class="table"> -->
-<!--               <tr> -->
-<!--                <td> -->
-<%--                  <c:forEach var="rvo" items="${rList }"> --%>
-<!--                    <table class="table table-striped"> -->
-<!--                     <tr> -->
-<%--                      <td class="text-left">◑${rvo.name }(${rvo.dbday })</td> --%>
-<!--                      <td class="text-right"> -->
-<%--                       <c:if test="${sessionScope.id==rvo.id }"> --%>
-<%--                        <span value="${rvo.no }" class="btn btn-xs btn-success up">수정</span> --%>
-<%--                        <a href="../food/reply_delete.do?no=${rvo.no }&cno=${vo.no}" class="btn btn-xs btn-info">삭제</a> --%>
-<%--                       </c:if> --%>
-<!--                      </td> -->
-<!--                     </tr> -->
-<!--                     <tr> -->
-<!--                       <td colspan="2"> -->
-<%--                        <pre style="white-space: pre-wrap;border:none;background-color: white">${rvo.msg }</pre> --%>
-<!--                       </td> -->
-<!--                     </tr> -->
-<%--                     <tr class="updates" id="u${rvo.no }" style="display:none"> --%>
-<!-- 		               <td colspan="2"> -->
-<!-- 		                 <form method="post" action="../food/reply_update.do"> -->
-<%-- 			                 <input type="hidden" name="cno" value="${vo.no }"> --%>
-<%-- 			                 <input type="hidden" name="no" value="${rvo.no }"> --%>
-<%-- 			                 <textarea rows="3" cols="60" name="msg" style="float: left">${rvo.msg }</textarea> --%>
-<!-- 			                 <input type=submit value="댓글수정" class="btn btn-sm btn-primary" -->
-<!-- 			                  style="float: left;height: 73px"> -->
-<!-- 		                  </form> -->
-<!-- 		               </td> -->
-<!-- 		              </tr> -->
-<!--                    </table> -->
-<%--                  </c:forEach> --%>
-<!--                </td> -->
-<!--               </tr> -->
-<!--             </table> -->
-
+			<div style="height:100px"></div>	
+					
+			<!-- 댓글 입력창 -->
 <!-- 			<div style="height:100px"></div> -->
+			<h3>댓글</h3>
             <table class="table">
               <tr>
                <td>
+               	 <c:if test="${sessionScope.id==null }">
+	                 <textarea rows="2" cols="70" name="content" style="float: left" placeholder="로그인 후 입력해주세요"></textarea>
+                 </c:if>
+               	 <c:if test="${sessionScope.id!=null }">
                  <form method="post" action="../report/reply_insert.do">
-	                 <input type="hidden" name="cno" value="${vo.petno }">
-	                 <textarea rows="2" cols="70" name="msg" style="float: left"></textarea>
-	                 <input type=submit value="댓글쓰기" class="btn btn-sm btn-primary" style="width:100px; height: 67px; margin-left:5px;">
+	                 <input type="hidden" name="petno" value="${vo.petno }">
+	                 <textarea rows="2" cols="70" name="content" style="float: left"></textarea>
+	                  <input type=submit value="댓글쓰기" class="btn btn-sm btn-primary" style="width:100px; height: 67px; margin-left:5px;" >
                   </form>
+                  </c:if>
                </td>
               </tr>
-<!--               <tr> -->
-<!--                <td> -->
-<!--                  <form method="post" action="../report/reply_map_insert.do"> -->
-<%-- 	                 <input type="hidden" name="cno" value="${vo.petno }"> --%>
-<!-- 	                 <textarea rows="2" cols="70" name="msg" style="float: left"></textarea> -->
-<!-- 	                 <input type=submit value="댓글쓰기" class="btn btn-sm btn-primary" style="width:100px; height: 67px; margin-left:5px;"> -->
-<!--                   </form> -->
-<!--                </td> -->
-<!--               </tr> -->
             </table>
+            <!-- 댓글 리스트 -->
+            <table class="table">
+              <tr>
+               <td>
+                 <c:forEach var="rvo" items="${rList }">
+                   <table class="table table-striped">
+                    <tr>
+                     <td class="text-left">◑${rvo.id }(<span style="color:#939782;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${rvo.regdate}" /></span>)${rvo.replyno }</td>
+                     <td class="text-right">
+                      <c:if test="${sessionScope.id==rvo.id }">
+                       <span value="${rvo.replyno }" class="btn btn-xs btn-success up">수정</span>
+                       <a href="../report/reply_delete.do?rno=${rvo.replyno }&pno=${vo.petno}" class="btn btn-xs btn-info">삭제</a>
+                      </c:if>
+                     </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                       <pre style="white-space: pre-wrap;border:none;background-color: white">${rvo.content }</pre>
+                      </td>
+                    </tr>
+                    <tr class="updates" id="u${rvo.replyno }" style="display:none">
+		               <td colspan="2">
+		                 <form method="post" action="../report/reply_update.do">
+			                 <input type="hidden" name="pno" value="${vo.petno }">
+			                 <input type="hidden" name="rno" value="${rvo.replyno }">
+			                 <textarea rows="3" cols="60" name="content" style="float: left">${rvo.content }</textarea>
+			                 <input type=submit value="댓글수정" class="btn btn-sm btn-primary"
+			                  style="float: left;height: 73px">
+		                  </form>
+		               </td>
+		              </tr>
+                   </table>
+                 </c:forEach>
+               </td>
+              </tr>
+            </table>
+            
           </div>
+          <!-- 	지도		 -->
           <div class="col-md-5">
             <h3>실종 장소</h3>
             <table class="table">

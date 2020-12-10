@@ -2,6 +2,8 @@ package com.sist.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Select;
+
+import com.sist.vo.ReplyVO;
 import com.sist.vo.ReportVO;
 
 public interface ReportMapper {
@@ -53,5 +55,25 @@ public interface ReportMapper {
 			+ ",#{content}"
 			+ ")")
 	public ReportVO reportInsertData(ReportVO vo);
+	
+	@Select("insert into reply(replyno,petno,id,cate,content,regdate) values( "
+			+ "(select nvl(max(replyno+1),1) FROM reply)"
+			+ ",#{petno}"
+			+ ",#{id}"
+			+ ",3"
+			+ ",#{content}"
+			+ ",sysdate"
+			+ ")")
+	public ReplyVO replyInsertData(ReplyVO vo);
+	
+	@Select("select replyno,id,content,regdate from reply where petno=#{petno}")
+	public List<ReplyVO> replyListData(int petno);
+	
+	@Select("delete from reply where replyno=#{replyno}")
+	public ReplyVO replyDeleteData(int replyno);
+	
+	@Select("update reply set content=#{content},regdate=sysdate where replyno=#{replyno}")
+	public ReplyVO replyUpdateData(ReplyVO rvo);
+	
 	
 }
