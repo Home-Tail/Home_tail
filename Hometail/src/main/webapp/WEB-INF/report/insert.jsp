@@ -103,6 +103,8 @@ $(function() {
 		       <td width=85%>
 		       <!-- 입력창 -->
 			   <input type="text" name=loc id="sample5_address" placeholder="주소를 검색하시거나 지도에서 클릭해주세요" readonly="readonly" style="width: 500px">
+			   <input type="text" name=map_x id="map_x" value="">
+			   <input type="text" name=map_y id="map_y" value="">
 			   <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 			   
 			   <!-- 지도 -->	
@@ -140,6 +142,11 @@ $(function() {
 					                var content = '<div class="bAddr" style="padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; ">' +
 					                                detailAddr + 
 					                            '</div>';
+					                
+					                // 클릭한 위도, 경도 정보를 가져옵니다 
+		                            var latlng = mouseEvent.latLng; 
+		                            document.getElementById("map_x").value=latlng.getLat();
+		                            document.getElementById("map_y").value=latlng.getLng();
 
 					                // 마커를 클릭한 위치에 표시합니다 
 					                marker.setPosition(mouseEvent.latLng);

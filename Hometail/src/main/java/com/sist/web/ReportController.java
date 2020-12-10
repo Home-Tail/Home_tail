@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -108,10 +109,8 @@ public class ReportController {
 	}
 	
 	@RequestMapping("report/around.do")
-	public String report_Around(Model model)
+	public String report_Around()
 	{
-		List<ReportVO> list=dao.reportAllData();
-		model.addAttribute("list",list);
 		return "report/around";
 	}
 	
@@ -126,6 +125,7 @@ public class ReportController {
 		
 		System.out.println("report/insert_ok.do실행");
 		String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Hometail\\reportposter";
+//		String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\reportposter";
 		String enctype= "UTF-8";
 		int size = 1024 * 1024 * 100;
 		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
@@ -138,6 +138,8 @@ public class ReportController {
 		vo.setKind(Integer.parseInt(mr.getParameter("kind")));
 		vo.setSub_kind(Integer.parseInt(mr.getParameter("sub_kind")));
 		vo.setLoc(mr.getParameter("loc"));
+		vo.setMap_x(mr.getParameter("map_x"));
+		vo.setMap_y(mr.getParameter("map_y"));
 		vo.setPoster(mr.getFilesystemName("poster"));
 		vo.setPdate(mr.getParameter("pdate"));
 		vo.setSex(mr.getParameter("sex"));

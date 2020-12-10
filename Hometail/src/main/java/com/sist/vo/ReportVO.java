@@ -24,7 +24,7 @@ package com.sist.vo;
 import java.util.*;
 public class ReportVO {
 		private int petno,cate,kind,sub_kind,age;
-		private String id,title,poster,sex,weight,color,point,loc,maploc,tel,content,pdate;
+		private String id,title,poster,sex,weight,color,point,loc,map_x,map_y,tel,content,pdate;
 		private Date regdate;
 		
 		
@@ -106,11 +106,17 @@ public class ReportVO {
 		public void setLoc(String loc) {
 			this.loc = loc;
 		}
-		public String getMaploc() {
-			return maploc;
+		public String getMap_x() {
+			return map_x;
 		}
-		public void setMaploc(String maploc) {
-			this.maploc = maploc;
+		public void setMap_x(String map_x) {
+			this.map_x = map_x;
+		}
+		public String getMap_y() {
+			return map_y;
+		}
+		public void setMap_y(String map_y) {
+			this.map_y = map_y;
 		}
 		public String getTel() {
 			return tel;

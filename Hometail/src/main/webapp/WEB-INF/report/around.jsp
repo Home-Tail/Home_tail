@@ -56,6 +56,22 @@
 	          color: #fff; }
 
 </style>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function() {
+	console.log("실행완료1");
+	$.ajax({
+				type:'post',
+				url:'../report/around_list.do',
+				success:function(result)
+				{
+					console.log("실행완료2");
+				}
+		  })
+});
+</script>
+
 </head>
 <body>
 
@@ -90,7 +106,7 @@ ${fn:length(list)}
 			console.log(size);
 			var list = new Array();
 			list.push("${list}");
-			console.log(list[0].name);
+			console.log(list.length );
 			// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
 			var positions = [
 			    {
