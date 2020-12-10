@@ -1,167 +1,181 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-div.containerX a
-{
-    color: #FFF;
-    text-decoration: none;
-    font: 20px Raleway;
-    margin: 0px 10px;
-    padding: 10px 10px;
-    position: relative;
-    z-index: 0;
-    cursor: pointer;
-}
-
-div.topBotomBordersOut a:before, div.topBotomBordersOut a:after
-{
-    position: absolute;
-    left: 0px;
-    width: 100%;
-    height: 2px;
-    background: #0082C6;
-    content: "";
-    opacity: 0;
-    transition: all 0.3s;
-}
-
-div.topBotomBordersOut a:before
-{
-    top: 0px;
-    transform: translateY(10px);
-}
-
-div.topBotomBordersOut a:after
-{
-    bottom: 0px;
-    transform: translateY(-10px);
-}
-
-
-div.topBotomBordersOut a:hover:before, div.topBotomBordersOut a:hover:after
-{
-    opacity: 1;
-    transform: translateY(0px);
-}
+	.ftco-sectionXX {
+	    padding: 0em 0;
+	    position: relative;
+	}
+	
+	.pl-4XX, .px-4 {
+	    padding-left: 0rem !important;
+	}
+	
+	.hero-wrapXX {
+	width: 100%;
+	height: 100%;
+	position: inherit;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top center;
+	position: relative; }
+	
+	@media (max-width: 991.98px) {
+	  .hero-wrapXX {
+	    background-position: top center !important; } }
+	.hero-wrapXX .overlay {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  content: '';
+	  opacity: .8;
+	  background: #0033c700; }
+	.hero-wrapXX.hero-wrapXX-2 {
+	  height: 300px; }
+	  .hero-wrapXX.hero-wrapXX-2 .slider-text {
+	    height: 300px; }
+	    .hero-wrapXX.hero-wrapXX-2 .slider-text .bread {
+	      font-weight: 900;
+	      color: #fff; }
+	    .hero-wrapXX.hero-wrapXX-2 .slider-text .breadcrumbs {
+	      text-transform: uppercase;
+	      font-size: 13px;
+	      letter-spacing: 1px; }
+	      .hero-wrapXX.hero-wrapXX-2 .slider-text .breadcrumbs span {
+	        color: #fff;
+	        border-bottom: 2px solid rgba(255, 255, 255, 0.1); }
+	        .hero-wrapXX.hero-wrapXX-2 .slider-text .breadcrumbs span a {
+	          color: #fff; }
 
 </style>
-
-<script type="text/javascript">
-$(function() {
-	//전체,실종,제보,완료 버튼 누를때마다 카테고리 변경 용도
-	$('div .containerX a').click(function(){
-		cate=$(this).attr("cate");
-		
-		if(cate!=4)
-		{
-		$.ajax({
-				type:'post',
-				url:'../report/list.do',
-				data: {cate:cate}, //버튼누를때마다 카테고리별 정렬
-				success:function(result)
-				{
-					console.log("cate!=4");
-					$('#tagin').html(result);
-				}
-			})
-		}
-		if(cate==4)
-		{
-		$.ajax({
-				type:'post',
-				url:'../report/around.do',
-				success:function(result)
-				{
-					console.log("cate==4");
-					$('#tagin').html(result);
-				}
-			})
-		}
-	});
-});
-
-
-</script>
-
 </head>
 <body>
+
+<section class="hero-wrapXX hero-wrapXX-2" style="background-image: url('https://i.ibb.co/Hd3n3Vz/33322.png');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-2 bread" style="text-shadow: 1px 0 #212529, 0 1px #212529, 1px 0 #212529, 0 1px #212529;">주변동물</h1>
+          </div>
+        </div>
+      </div>
+</section>
+
+${fn:length(list)}
+
 <div class="container">
   <div class="row">
-  			
-      <div class="col-lg-8 ftco-animated">
-	      <div class="containerX blue topBotomBordersOut" style="margin-bottom: 20px; margin-top: 20px;">
-				  <a cate=0 style="color: black; font-weight: 800;">전체</a>
-				  <a cate=1 style="color: black; font-weight: 800;">실종</a>
-				  <a cate=2 style="color: black; font-weight: 800;">제보</a>
-				  <a cate=3 style="color: black; font-weight: 800;">완료</a>
-				  <a cate=4 style="color: black; font-weight: 800;">주변</a>
-		 </div>
+		 	
+		 	<!-- 지도생성 -->
+			<div id="map" style="width:100%;height:350px;"></div>
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bf0dee115b69fb07b0a086d4b7d2b75a"></script>
+			<script>
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+			    mapOption = { 
+			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			        level: 3 // 지도의 확대 레벨
+			    };
+			
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			var size = ${fn:length(list)};
+			console.log(size);
+			var list = new Array();
+			list.push("${list}");
+			console.log(list[0].name);
+			// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+			var positions = [
+			    {
+			        content: '<div>카카오</div>', 
+			        latlng: new kakao.maps.LatLng(33.450705, 126.570677)
+			    },
+			    {
+			        content: '<div>생태연못</div>', 
+			        latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+			    },
+			    {
+			        content: '<div>텃밭</div>', 
+			        latlng: new kakao.maps.LatLng(33.450879, 126.569940)
+			    },
+			    {
+			        content: '<div>근린공원</div>',
+			        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+			    }
+			];
+			
+			for (var i = 0; i < positions.length; i ++) {
+			    // 마커를 생성합니다
+			    var marker = new kakao.maps.Marker({
+			        map: map, // 마커를 표시할 지도
+			        position: positions[i].latlng // 마커의 위치
+			    });
+			
+			    // 마커에 표시할 인포윈도우를 생성합니다 
+			    var infowindow = new kakao.maps.InfoWindow({
+			        content: positions[i].content // 인포윈도우에 표시할 내용
+			    });
+			
+			    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+			    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+			    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+			    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+			    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+			}
+			
+			// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+			function makeOverListener(map, marker, infowindow) {
+			    return function() {
+			        infowindow.open(map, marker);
+			    };
+			}
+			
+			// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+			function makeOutListener(infowindow) {
+			    return function() {
+			        infowindow.close();
+			    };
+			}
+			
+			/* 아래와 같이도 할 수 있습니다 */
+			/*
+			for (var i = 0; i < positions.length; i ++) {
+			    // 마커를 생성합니다
+			    var marker = new kakao.maps.Marker({
+			        map: map, // 마커를 표시할 지도
+			        position: positions[i].latlng // 마커의 위치
+			    });
+			
+			    // 마커에 표시할 인포윈도우를 생성합니다 
+			    var infowindow = new kakao.maps.InfoWindow({
+			        content: positions[i].content // 인포윈도우에 표시할 내용
+			    });
+			
+			    // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
+			    // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+			    (function(marker, infowindow) {
+			        // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
+			        kakao.maps.event.addListener(marker, 'mouseover', function() {
+			            infowindow.open(map, marker);
+			        });
+			
+			        // 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
+			        kakao.maps.event.addListener(marker, 'mouseout', function() {
+			            infowindow.close();
+			        });
+			    })(marker, infowindow);
+			}
+			*/
+			</script>
 		 
-		 
-<input type="text" id="sample5_address" placeholder="주소" readonly="readonly">
-<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-
-
-<div id="map" style="width:100%;height:350px;">testtest</div>
-
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bf0dee115b69fb07b0a086d4b7d2b75a&libraries=services"></script>
-<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = { 
-		    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-		    level: 3 // 지도의 확대 레벨
-		};
-
-    //지도를 미리 생성
-    var map = new kakao.maps.Map(mapContainer, mapOption); 
-    //주소-좌표 변환 객체를 생성
-    var geocoder = new kakao.maps.services.Geocoder();
-    //마커를 미리 생성
-    var marker = new kakao.maps.Marker({
-        position: new kakao.maps.LatLng(37.537187, 127.005476),
-        map: map
-    });
-
-
-    function sample5_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                var addr = data.address; // 최종 주소 변수
-
-                // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("sample5_address").value = addr;
-                // 주소로 상세 정보를 검색
-                geocoder.addressSearch(data.address, function(results, status) {
-                    // 정상적으로 검색이 완료됐으면
-                    if (status === daum.maps.services.Status.OK) {
-
-                        var result = results[0]; //첫번째 결과의 값을 활용
-
-                        // 해당 주소에 대한 좌표를 받아서
-                        var coords = new daum.maps.LatLng(result.y, result.x);
-                        // 지도를 보여준다.
-                        mapContainer.style.display = "block";
-                        map.relayout();
-                        // 지도 중심을 변경한다.
-                        map.setCenter(coords);
-                        // 마커를 결과값으로 받은 위치로 옮긴다.
-                        marker.setPosition(coords)
-                    }
-                });
-            }
-        }).open();
-    }
-</script>
-		 
-
-		 
-      </div> <!-- .col-md-8 -->
+</div> <!-- .col-md-8 -->
 
 
 <!-- 

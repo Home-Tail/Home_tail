@@ -38,7 +38,16 @@
 	        <ul class="navbar-nav ml-auto">
 	        <!-- 테스트 -->
 	        	<li class="nav-item active"><a href="../main/main.do" class="nav-link">Home</a></li>
-	        	<li class="nav-item"><a href="../report/main.do" class="nav-link">신고/제보</a></li>
+	        	
+	        	<li class="nav-item submenu dropdown">
+	               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+	                 aria-expanded="false">신고/제보</a>
+	               <ul class="dropdown-menu">
+			       <li class="nav-item"><a href="../report/main.do" class="nav-link" style="color: black;">신고/제보</a></li>
+			       <li class="nav-item"><a href="../report/around.do" class="nav-link" style="color: black;">주변동물</a></li>
+	               </ul>
+	            </li>
+	        	
 	        	<li class="nav-item"><a href="../temp/main.do" class="nav-link">임시보호</a></li>
 	        	<li class="nav-item"><a href="../adopt/list.do" class="nav-link">입양</a></li>
 	        	

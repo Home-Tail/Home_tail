@@ -102,16 +102,16 @@ public class ReportController {
 	}
 	
 	@RequestMapping("report/around.do")
-	public String report_Around(String no,Model model)
+	public String report_Around(Model model)
 	{
-		System.out.println("report/around.do실행");
-		return "report_around";
+		List<ReportVO> list=dao.reportAllData();
+		model.addAttribute("list",list);
+		return "report/around";
 	}
 	
 	@RequestMapping("report/insert.do")
 	public String report_Detail_Insert()
 	{
-		System.out.println("report/insert.do실행");
 		return "report/insert";
 	}
 	

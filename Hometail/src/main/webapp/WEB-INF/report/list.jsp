@@ -62,8 +62,6 @@ $(function() {
 	$('div .containerX a').click(function(){
 		cate=$(this).attr("cate");
 		
-		if(cate!=4)
-		{
 		$.ajax({
 				type:'post',
 				url:'../report/list.do',
@@ -74,19 +72,6 @@ $(function() {
 					$('#tagin').html(result);
 				}
 			})
-		}
-		if(cate==4)
-		{
-		$.ajax({
-				type:'post',
-				url:'../report/around.do',
-				success:function(result)
-				{
-					console.log("cate==4");
-					$('#tagin').html(result);
-				}
-			})
-		}
 	});
 	
 	//페이지 넘기는 용도
@@ -117,7 +102,6 @@ $(function() {
 			  <a cate=1 style="color: black; font-weight: 800;">실종</a>
 			  <a cate=2 style="color: black; font-weight: 800;">제보</a>
 			  <a cate=3 style="color: black; font-weight: 800;">완료</a>
-			  <a cate=4 style="color: black; font-weight: 800;">주변</a>
 			</div>
 			<div>
 				<a href="../report/insert.do">글쓰기</a>
