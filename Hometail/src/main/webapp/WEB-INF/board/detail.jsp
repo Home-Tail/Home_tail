@@ -190,7 +190,7 @@
        					<table class="table">
        						<tr>
        							<td class="text-left">
-       								☆${rvo.id }(${rvo.db_regdate })
+       								→  ${rvo.id }(${rvo.db_regdate })
        							</td>
        							<td class="text-right">
        								<c:if test="${sessionScope.id==rvo.id }">

@@ -6,7 +6,11 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.*;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +20,8 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.vo.ReplyVO;
 import com.sist.dao.BoardDAO;
+import com.sist.news.Item;
+import com.sist.news.NewsManager;
 import com.sist.vo.BoardVO;
 
 import oracle.jdbc.OracleTypes;
@@ -24,6 +30,8 @@ import oracle.jdbc.OracleTypes;
 public class BoardController {
 	@Autowired
 	private BoardDAO dao;
+	@Autowired
+	private NewsManager mgr;
 	@RequestMapping("board/list.do")
 	public String board_board_list(String page,Model model)
 	{
@@ -260,4 +268,38 @@ public class BoardController {
 		   dao.replyUpdate(replyno, content);
 		   return "redirect:detail.do?board_no="+board_no;
 	   }
+	   
+	   // 뉴스
+	   @RequestMapping("board/news_list.do")
+		public String news_list(Model model)
+		{
+			
+			List<Item> list=mgr.newsAllData();
+//			private String title;
+//			private String link;
+//			private String description;
+//			private String pubDate;
+//			private String author;
+//			private String day;
+			
+//			JSONObject news_data = new JSONObject();
+			JSONArray js = new JSONArray();
+			for(Item i:list)
+			{
+				i.setDay(new SimpleDateFormat("yyyy-MM-dd").format(new Date(i.getPubDate())));
+				JSONObject news = new JSONObject();
+				news.put("TITLE", i.getTitle());
+				news.put("AUTHOR", i.getAuthor());
+				news.put("LINK", i.getLink());
+				news.put("DESCRIPTION", i.getDescription());
+				news.put("DAY", i.getDay());
+				js.add(news);
+			}
+			System.out.println("결과 :"+js);
+			
+			
+			model.addAttribute("list", list);	
+			
+			return "news_list";
+		}
 }
