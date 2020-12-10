@@ -7,6 +7,14 @@ public class ClinicVO {
 	private String addr;
 	private String post;
 	private String poster;
+	private String time;
+	
+	public final String getTime() {
+		return time;
+	}
+	public final void setTime(String time) {
+		this.time = time;
+	}
 	public int getClno() {
 		return clno;
 	}

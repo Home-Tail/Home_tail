@@ -221,8 +221,10 @@
        				</c:forEach>
        			</td>
        		</tr>
-       		<c:if test="${sessionScope.id!=null }">
-	       			<tr>
+       		
+				<c:choose>
+					<c:when test = "${cate==4 && sessionScope.id eq 'admin'}">
+					    <tr>
 	       				<td>
 	       					<form method=post action="board_reply_insert.do" id="replyForm" name="replyForm">
 		       					<input type=hidden id="for_test" name=board_no value="${vo.board_no }">
@@ -232,7 +234,27 @@
 	       					</form>
 	       				</td>
 	       			</tr>
-	       	</c:if>
+					</c:when>
+					<c:when test = "${cate==4 && sessionScope.id != 'admin'}">
+					    <tr>
+	       				<td class="text-center" colspan=2>
+	       					<span style="color:red; font-weight:bold;">* 답변은 관리자만 작성 가능합니다. </span>
+	       				</td>
+	       			</tr>
+					</c:when>
+					<c:when test = "${cate==1 or cate==2}">
+					    <tr>
+	       				<td>
+	       					<form method=post action="board_reply_insert.do" id="replyForm" name="replyForm">
+		       					<input type=hidden id="for_test" name=board_no value="${vo.board_no }">
+		       					<input type=hidden name=cate value=${cate }> 
+		       					<textarea rows="2" cols="100" style="float:left; margin-right:20px;" name=content id="reply_content"></textarea>
+		       					<input type=button class="btn btn-sm btn-primary" value="댓글쓰기" style="height:50px; float:left;" id="replyBtn">
+	       					</form>
+	       				</td>
+	       			</tr>
+					</c:when>
+				</c:choose>
        		</table>
        	</div>
      </div>

@@ -5,28 +5,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-   <c:if test="${count==0 }">
-     <h3 class="text-center">검색결과가 없습니다</h3>
-   </c:if>
-   <c:if test="${count>0 }">
-  <c:forEach var="vo" items="${list }">
-	     <div class="col-md-3 ftco-animated">
-	       <div class="blog-entry">
-	       <c:choose>
-	       <c:when test="${vo.poster==null }">
-	       <img src="../images/aa.jpg" style="width:100px;height:100px">
-	       </c:when>
-	       <c:otherwise>
-	        <img src="${vo.poster }" style="width:100px;height:100px">
-	        </c:otherwise>
-	        </c:choose>
-	        <p>${vo.title }</p>
-	      </div>
-	     </div>
-	  </c:forEach>
-   </c:if>
+	<c:if test="${count==0 }">
+		<h3 class="text-center">검색결과가 없습니다</h3>
+	</c:if>
+	
+	<c:if test="${count>0 }">
+		<c:forEach var="vo" items="${list }">
+			<table class="table table-striped">
+			<tr >
+			  <td width=30%>병원이름</td>
+			  <td width=70%>${vo.title }</td>
+			</tr>
+			<tr>
+			  <td width=5%>주소</td>
+			  <td width=95%>${vo.addr }</td>
+			</tr>
+			</table>
+		</c:forEach>
+	</c:if>
 </body>
 </html>

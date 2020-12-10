@@ -186,7 +186,6 @@
                            </li>
                     </c:if>
                   </c:forEach>
-                 
                  <c:if test="${aendPage<aTotalpage }">
                     <li page="${aendPage+1 }" class="page"><a style="cursor: pointer;">&gt;</a></li>
                  </c:if>
@@ -218,7 +217,14 @@
                <td class="text-center" width=10%>${qvo.board_no }</td>
 	           <td class="text-left" width=45%>
 	             <span class="btn detail" data-value="${no }" data-cate="${qvo.board_no }">${qvo.title } 
-	             <c:if test="${qvo.reply_count!=0 }"><sup style="color:blue;">(${qvo.reply_count })</sup></c:if>
+	             <c:choose>
+					 <c:when test = "${qvo.reply_count!=0}">
+					            <sup style="color:blue;">(답변완료)</sup>
+					         </c:when>
+					         <c:otherwise>
+					          	<sup>(답변대기)</sup>
+					          </c:otherwise>
+					      </c:choose>
 	            </span>
                <input type=hidden value="${qvo.board_no }" class="bn">
 	           </td>

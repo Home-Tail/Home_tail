@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.ClinicVO;
 import com.sist.vo.ReplyVO;
+import com.sist.vo.ReserveVO;
 public interface ClinicMapper {
 @Select("SELECT clno,title,addr,poster,num "
 		+ "FROM (SELECT clno,title,addr,poster,rownum as num "
@@ -39,4 +40,10 @@ public void clinicReplyUpdate(ReplyVO vo);
 
 @Delete("DELETE FROM reply WHERE replyno=#{replyno} and cate=1")
 public void clinicReplyDelete(ReplyVO vo);
+
+@Insert("INSERT INTO reserve(resno,clno,id,resdate,owner,pname,content,name) VALUES((SELECT NVL(MAX(resno)+1,1) FROM reserve),#{clno},#{id},#{resdate},#{owner},#{pname},#{content},#{time})")
+public void clinicReserveInsert(ReserveVO vo);
+
+@Select("SELECT resno,clno,id,resdate,owner,pname,content,name FROM reserve WHERE resno=#{resno}")
+public List<ReserveVO> clinicReserveList(int resno);
 }
