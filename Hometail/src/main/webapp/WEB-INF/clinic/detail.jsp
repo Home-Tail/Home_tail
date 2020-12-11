@@ -32,9 +32,28 @@
 			}
 		});
 	})
+	$('.reply_reply').click(function(){
+	  $('.reply_reply').hide();
+	  $('.reply_reply').text("댓글");
+	  let no=$(this).attr('value');
+	  if(i==0)
+	  {
+		    
+			$('#rIn'+no).show();
+			$(this).text("취소");
+			i=1;
+	  }
+	  else
+	  {
+		    $('#rIn'+no).hide();
+		    $(this).text("댓글");
+			i=0;
+	  }
+		
+	});
 	
 $(function(){
-	$('#btnXX').click(function(){
+	$('#btn22').click(function(){
 		let owner=$('#owner').val();
 		let pname=$('#pname').val();
 		let content=$('#content').val();
@@ -65,7 +84,6 @@ $(function(){
 	font-size: 10px;
 	cursor: pointer;
 }
-
 #btn2 {
 	border-color: #DB7093;
 	color: Purple;
@@ -75,6 +93,20 @@ $(function(){
 	background: #FFB6C1;
 	color: Purple;
 }
+#btn3 {
+	border: 2px solid black;
+	background-color: white;
+	color: Purple;
+	padding: 4px 8px;
+	font-size: 10px;
+	cursor: pointer;
+	border-color: #DB7093;
+}
+#btn3:hover {
+	background: #FFB6C1;
+	color: Purple;
+}
+
 #btn22 {
 	border-color: #DB7093;
 	color: Purple;
@@ -120,6 +152,8 @@ border-radius: 15px;
 		</div>
 	</div>
 	</section>
+	
+<!-- ========================= 배너 ================================-->
 
 	<section class="ftco-section" id="soofont">
 	<div class="container">
@@ -149,9 +183,6 @@ border-radius: 15px;
 								<textarea name="content" cols="30" rows="3" class="form-control"
 									disabled>로그인 후 이용 가능 합니다</textarea>
 							</div>
-							<!--                   <div class="form-group"> -->
-							<!--                     <input type="submit" value="Post Comment" class="btn" id="btn2"> -->
-							<!--                   </div> -->
 						</form>
 					</c:if>
 					<c:if test="${sessionScope.id!=null }">
@@ -161,7 +192,7 @@ border-radius: 15px;
 								<label for="message">Message</label>
 								<textarea name="content" cols="30" rows="3" class="form-control" required></textarea>
 							</div>
-							<div class="form-group">
+							<div class="form-group text-right">
 								<input type="submit" value="Post Comment" class="btn" id="btn2">
 							</div>
 						</form>
@@ -170,8 +201,10 @@ border-radius: 15px;
 				</div>
 
 			</div>
-			<!-- .col-md-8 -->
-			<!-- 병원정보 -->
+			<!-- col-md-8 -->
+			
+			<!--====================== 병원정보 ==============================-->
+			
 			<div class="col-lg-5">
 				<table class="table">
 					<tr>
@@ -211,47 +244,90 @@ border-radius: 15px;
 						<td width=60%>${vo.post }</td>
 					</tr>
 				</table>
-				<!-- 병원정보 끝 -->
-				<!-- 댓글 리스트 출력 -->
+				<!-- ================== 병원정보 끝 ==================== -->
+				
+				<!-- =================== 댓글 리스트 출력 =====================-->
+
 				<div class="pt-5 mt-5">
-					<h3 class="font-weight-bold">Comments</h3>
+					<h3 class="font-weight-bold text-center">Comments</h3>
 					<ul class="comment-list">
 						<c:forEach var="cvo" items="${clist }">
-							<div class="comment-body">
-								<h5>${cvo.id }</h5>
-								<div>
-									<fmt:formatDate value="${cvo.regdate }" pattern="YYYY-MM-dd" />
-								</div>
-								<h5>${cvo.content }</p>
-									<c:if test="${sessionScope.id==cvo.id }">
-										<span value="${cvo.replyno}" class="btn btn-xs up" id="btn2">수정</span>
-										<a
-											href="../clinic/clinic_reply_delete.do?clno=${cvo.clno }&replyno=${cvo.replyno}"
-											class="btn btn-xs" id="btn2">삭제</a>
+							<li class="comment">
+								<div class="comment-body">
+									<h5>${cvo.id }</h5>
+									<div class="meta mb-2">
+										<fmt:formatDate value="${cvo.regdate }" pattern="YYYY-MM-dd" />
+									</div>
+									<p>${cvo.content }</p>
+									<p>
+										<a>Reply</a>
+									</p>
+									${cvo.cate }/${vo.clno } / ${cvo.replyno } / ${cvo.group_id } / ${cvo.group_step } / ${cvo.group_tap } / ${cvo.root }/ 
+									<div class="comment-form-wrap pt-5 reply_reply" id="rIn${cvo.replyno }" value="${cvo.replyno }">
+										<form method="post"
+											action="../clinic/clinicReply_replyInsert.do">
+											<input type="hidden" name="clno" value="${vo.clno }">
+											<input type="hidden" name="replyno" value="${cvo.replyno}">
+											<input type="hidden" name="group_id" value="${cvo.group_id }">
+											<input type="hidden" name="group_step" value="${cvo.group_step }">
+										    <input type="hidden" name="group_tap" value="${cvo.group_tap }">
+											<input type="hidden" name="root" value="${cvo.root }">
+											<div class="form-group">
+												<textarea name="content" cols="30" rows="2"
+													class="form-control" required></textarea>
+											</div>
+											<div class="form-group text-right">
+												<input type="submit" value="대댓달아" class="reply">
+											</div>
+										</form>
+									</div>
+									<c:if test="${cvo.group_tap>0 }">
+										<ul class="children">
+											<li class="comment">
+												<div class="comment-body">
+													<h5>${cvo.id }</h5>
+													<div class="meta mb-2">
+														<fmt:formatDate value="${cvo.regdate }"
+															pattern="YYYY-MM-dd" />
+													</div>
+													<p>${cvo.content }</p>
+													<a>Reply</a>
+												</div>
+											</li>
+										</ul>
 									</c:if>
-							</div>
-							<div class="comment-form-wrap pt-5 updates" id="u${cvo.replyno }"
-								value="${cvo.replyno }">
-								<h3 class="mb-5 h4 font-weight-bold">update a comment</h3>
-								<form method="post" action="../clinic/clinic_reply_update.do"
-									class="p-5 bg-light">
-									<input type="hidden" name="clno" value="${cvo.clno }">
-									<input type="hidden" name="replyno" value="${cvo.replyno}">
-									<div class="form-group">
-										<label for="message">Message</label>
-										<textarea name="content" cols="30" rows="3"
-											class="form-control">${cvo.content }</textarea>
-									</div>
-									<div class="form-group">
-										<input type="submit" value="Post Comment"
-											class="btn py-3 px-4 " id="btn2">
-									</div>
+								</div>
+							</li>
 
-								</form>
-							</div>
-						</c:forEach>
-					</ul>
-					<!-- 댓글리스트 끝 -->
+							<c:if test="${sessionScope.id==cvo.id }">
+								<span value="${cvo.replyno}" class="btn btn-xs up" id="btn3">수정</span>
+								<a
+									href="../clinic/clinic_reply_delete.do?clno=${cvo.clno }&replyno=${cvo.replyno}"
+									class="btn btn-xs" id="btn3">삭제</a>
+							</c:if>
+				
+				<div class="comment-form-wrap pt-5 updates" id="u${cvo.replyno }"
+					value="${cvo.replyno }">
+					<h3 class="mb-5 h4 font-weight-bold">update a comment</h3>
+					<form method="post" action="../clinic/clinic_reply_update.do"
+						class="p-5 bg-light">
+						<input type="hidden" name="clno" value="${cvo.clno }"> <input
+							type="hidden" name="replyno" value="${cvo.replyno}">
+						<div class="form-group">
+							<label for="message">Message</label>
+							<textarea name="content" cols="30" rows="3" class="form-control">${cvo.content }</textarea>
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Post Comment" class="btn py-3 px-4 "
+								id="btn2">
+						</div>
+					</form>
+				</div>
+
+				</c:forEach>
+              </ul>
+				</div>
+					<!-- ========================= 댓글리스트 끝 =========================== -->
 				</div>
 				</div>
 			</div>

@@ -21,16 +21,19 @@ public class ClinicDAO {
 		return mapper.clinicTotalPage();
 	}
 	
+	//=======디테일
 	public ClinicVO clinicDetailData(int clno)
 	{
 		System.out.println("clinicDetailData 실행");
 		return mapper.clinicDetailData(clno);
 	}
-	
+	//============서울시
 	public List<ClinicVO> clinicLocationFindData(String gu)
     {
    	 return mapper.clinicLocationFindData(gu);
     }
+	
+	//========== 댓글
 	public void clinicReplyInsert(ReplyVO vo)
 	{
 		mapper.clinicReplyInsert(vo);
@@ -47,6 +50,20 @@ public class ClinicDAO {
 	{
 		mapper.clinicReplyDelete(vo);
 	}
+	//============== 대댓글
+	public void clinicReply_replyInsert(ReplyVO vo,int root)
+	{
+		System.out.println("clinicReply_replyInsert 실행");
+		ReplyVO pvo=mapper.replyParentData(root);
+		mapper.replyStepIncrement(pvo);
+		vo.setGroup_id(pvo.getGroup_id());
+		vo.setGroup_step(pvo.getGroup_step()+1);
+		vo.setGroup_tap(pvo.getGroup_tap()+1);
+		vo.setRoot(root);
+		mapper.clinicReply_replyInsert(vo);
+		mapper.clinicReplyDepthUpdate(root);
+	}
+	//========예약
 	public void clinicReserveInsert(ReserveVO rvo)
 	{
 		System.out.println("clinicReserveInsert 실행");

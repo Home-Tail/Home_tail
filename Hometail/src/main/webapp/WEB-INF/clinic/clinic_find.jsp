@@ -15,7 +15,8 @@
 	
 	<c:if test="${count>0 }">
 		<c:forEach var="vo" items="${list }">
-			<table class="table table-striped">
+		 <div>
+			<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 			<tr >
 			  <td width=30%>병원이름</td>
 			  <td width=70%>${vo.title }</td>
@@ -25,6 +26,7 @@
 			  <td width=95%>${vo.addr }</td>
 			</tr>
 			</table>
+			</div>
 		</c:forEach>
 	</c:if>
 </body>

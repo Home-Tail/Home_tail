@@ -96,7 +96,7 @@ public String ClinicLocationFindData(String no,Model model)
 @RequestMapping("clinic/clinic_reply.do")
 public String ClinicReplyInsert(String clno,ReplyVO vo,HttpSession session)
 {
-	System.out.println("test");
+//	System.out.println("test");
 	String id=(String)session.getAttribute("id");
 	vo.setId(id);
 	vo.setClno(Integer.parseInt(clno));
@@ -120,15 +120,36 @@ public String clinicReplyDelete(ReplyVO vo)
 public String clinicReserveInsert(ReserveVO rvo)
 {
 
-	System.out.println(rvo.getClno());
-	System.out.println(rvo.getId());
-	System.out.println(rvo.getResdate());
-	System.out.println(rvo.getOwner());
-	System.out.println(rvo.getPname());
-	System.out.println(rvo.getContent());
-	System.out.println(rvo.getTime());
+//	System.out.println(rvo.getClno());
+//	System.out.println(rvo.getId());
+//	System.out.println(rvo.getResdate());
+//	System.out.println(rvo.getOwner());
+//	System.out.println(rvo.getPname());
+//	System.out.println(rvo.getContent());
+//	System.out.println(rvo.getTime());
 	dao.clinicReserveInsert(rvo);
 	
 	return "redirect:../clinic/detail.do?no="+rvo.getClno();
+}
+@RequestMapping("clinic/clinicReply_replyInsert.do")
+public String clinicReply_replyInsert(ReplyVO vo,HttpSession session)
+{
+	String id = (String)session.getAttribute("id");
+	vo.setId(id);
+	//cate,replyno,clno,id,regdate,content,group_id,group_step,group_tap,root,depth
+	System.out.println("대댓글 돌아");
+	System.out.println(vo.getCate());
+	System.out.println(vo.getReplyno());
+	System.out.println(vo.getClno());
+	System.out.println(vo.getId());
+	System.out.println(vo.getRegdate());
+	System.out.println(vo.getContent());
+	System.out.println(vo.getGroup_id());
+	System.out.println(vo.getGroup_step());
+	System.out.println(vo.getGroup_tap());
+	System.out.println(vo.getRoot());
+	System.out.println(vo.getDepth());
+	dao.clinicReply_replyInsert(vo,vo.getRoot());
+	return "redirect:../clinic/detail.do?no="+vo.getClno();
 }
 }
