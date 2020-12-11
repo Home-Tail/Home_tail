@@ -47,18 +47,18 @@ public void clinicReplyUpdate(ReplyVO vo);
 public void clinicReplyDelete(ReplyVO vo);
 
 //------------------------ 댓글--------------------------
-@Select("SELECT group_id,group_step,group_tap FROM reply WHERE replyno=#{replyno} AND clno=#{clno}")
-public ReplyVO replyParentData(int root);
+@Select("SELECT group_id,group_step,group_tap FROM reply WHERE replyno=#{replyno}")
+public ReplyVO replyParentData(int replyno);
 
 @Update("UPDATE reply SET group_step=group_step+1 WHERE group_id=#{group_id} AND group_step>#{group_step}")
 public void replyStepIncrement(ReplyVO vo);
 
 @Insert("INSERT INTO reply(cate,replyno,clno,id,regdate,content,group_id,group_step,group_tap,root,depth) "
-		+ "VALUES(1,#{replyno},#{clno},#{id},SYSDATE,#{content},#{group_id},#{group_step},#{group_tap},#{root},0)")
+		+ "VALUES(1,(SELECT NVL(MAX(replyno)+1,1) FROM reply),#{clno},#{id},SYSDATE,#{content},#{group_id},#{group_step},#{group_tap},#{root},0)")
 public void clinicReply_replyInsert(ReplyVO vo);
 
-@Update("UPDATE reply SET depth=depth+1 WHERE replyno=#{replyno} AND clno=#{clno}")
-public void clinicReplyDepthUpdate(int root);
+@Update("UPDATE reply SET depth=depth+1 WHERE replyno=#{replyno}")
+public void clinicReplyDepthUpdate(int replyno);
 
 //@Update("UPDATE reply SET depth=depth-1 WHERE replyno=#{replyno}")
 //public void clinicReplyDepthDecrement(int root);

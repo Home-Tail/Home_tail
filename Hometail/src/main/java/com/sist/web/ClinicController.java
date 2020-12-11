@@ -138,18 +138,11 @@ public String clinicReply_replyInsert(ReplyVO vo,HttpSession session)
 	vo.setId(id);
 	//cate,replyno,clno,id,regdate,content,group_id,group_step,group_tap,root,depth
 	System.out.println("대댓글 돌아");
-	System.out.println(vo.getCate());
 	System.out.println(vo.getReplyno());
 	System.out.println(vo.getClno());
 	System.out.println(vo.getId());
-	System.out.println(vo.getRegdate());
 	System.out.println(vo.getContent());
-	System.out.println(vo.getGroup_id());
-	System.out.println(vo.getGroup_step());
-	System.out.println(vo.getGroup_tap());
-	System.out.println(vo.getRoot());
-	System.out.println(vo.getDepth());
-	dao.clinicReply_replyInsert(vo,vo.getRoot());
+	dao.clinicReply_replyInsert(vo,vo.getReplyno());
 	return "redirect:../clinic/detail.do?no="+vo.getClno();
 }
 }

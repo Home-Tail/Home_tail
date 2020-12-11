@@ -256,22 +256,17 @@ border-radius: 15px;
 								<div class="comment-body">
 									<h5>${cvo.id }</h5>
 									<div class="meta mb-2">
-										<fmt:formatDate value="${cvo.regdate }" pattern="YYYY-MM-dd" />
+<%-- 										<fmt:formatDate value="${cvo.regdate }" pattern="YYYY-MM-dd" /> --%>
 									</div>
 									<p>${cvo.content }</p>
 									<p>
 										<a>Reply</a>
 									</p>
-									${cvo.cate }/${vo.clno } / ${cvo.replyno } / ${cvo.group_id } / ${cvo.group_step } / ${cvo.group_tap } / ${cvo.root }/ 
 									<div class="comment-form-wrap pt-5 reply_reply" id="rIn${cvo.replyno }" value="${cvo.replyno }">
 										<form method="post"
 											action="../clinic/clinicReply_replyInsert.do">
 											<input type="hidden" name="clno" value="${vo.clno }">
-											<input type="hidden" name="replyno" value="${cvo.replyno}">
-											<input type="hidden" name="group_id" value="${cvo.group_id }">
-											<input type="hidden" name="group_step" value="${cvo.group_step }">
-										    <input type="hidden" name="group_tap" value="${cvo.group_tap }">
-											<input type="hidden" name="root" value="${cvo.root }">
+											<input type="hidden" name="replyno" value="${cvo.replyno}"> 
 											<div class="form-group">
 												<textarea name="content" cols="30" rows="2"
 													class="form-control" required></textarea>
