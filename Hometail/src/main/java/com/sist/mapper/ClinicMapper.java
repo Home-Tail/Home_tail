@@ -54,7 +54,7 @@ public ReplyVO replyParentData(int root);
 public void replyStepIncrement(ReplyVO vo);
 
 @Insert("INSERT INTO reply(cate,replyno,clno,id,regdate,content,group_id,group_step,group_tap,root,depth) "
-		+ "VALUES(1,#{replyno},#{clno},#{id},SYSDATE,#{content},#{group_id},#{group_step},#{group_tap},#{root},0")
+		+ "VALUES(1,#{replyno},#{clno},#{id},SYSDATE,#{content},#{group_id},#{group_step},#{group_tap},#{root},0)")
 public void clinicReply_replyInsert(ReplyVO vo);
 
 @Update("UPDATE reply SET depth=depth+1 WHERE replyno=#{replyno} AND clno=#{clno}")

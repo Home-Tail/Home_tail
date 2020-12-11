@@ -180,7 +180,7 @@
                  <c:forEach var="rvo" items="${rList }">
                    <table class="table table-striped">
                     <tr>
-                     <td class="text-left">◑${rvo.id }(<span style="color:#939782;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${rvo.regdate}" /></span>)${rvo.replyno }</td>
+                     <td class="text-left">◑${rvo.id }(<span style="color:#939782;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${rvo.regdate}" /></span>)</td>
                      <td class="text-right">
                       <c:if test="${sessionScope.id==rvo.id }">
                        <span value="${rvo.replyno }" class="btn btn-xs btn-success up">수정</span>
@@ -261,6 +261,17 @@
          </tr>
         </table>
        <hr>
+      </div>
+      <div class="col-md-12">
+      	<tr>
+		  <td colspan="2" class="text-center">
+		   <input type=button value=목록 class="btn btn-sm btn-primary" onclick="javascript:history.back()">
+		   <c:if test="${sessionScope.id==vo.id }">
+		   	<a href="../report/update.do?no=${vo.petno }" class="btn btn-sm btn-success">수정</a>
+		   	<a href="../report/delete.do?no=${vo.petno }" class="btn btn-sm btn-danger">삭제</a>
+		   </c:if>
+		  </td>
+		</tr>
       </div>
      </div>
    </div>

@@ -202,6 +202,17 @@ public class ReportController {
 		return "redirect:../report/main.do";
 	}
 	
+	@RequestMapping("report/delete.do")
+	public String report_detail_delete(String no)
+	{
+		System.out.println("report/delete.do 실행");
+		System.out.println("no: "+no);
+		int petno=Integer.parseInt(no);
+		dao.reportDeleteData(petno);
+		return "redirect:../report/main.do";
+	}
+	
+	// 댓글
 	@RequestMapping("report/reply_insert.do")
 	public String report_reply_insert(int petno,String content,HttpSession session){
 		

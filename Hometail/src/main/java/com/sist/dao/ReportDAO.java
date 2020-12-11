@@ -47,6 +47,15 @@ public class ReportDAO {
     	 return mapper.reportInsertData(vo);
      }
      
+     public ReportVO reportDeleteData(int petno){
+    	 return mapper.reportDeleteData(petno);
+     }
+     
+     public ReportVO reportUpdateData(ReportVO vo){
+    	 return mapper.reportUpdateData(vo);
+     }
+     
+     //	댓글
      public ReplyVO replyInsertData(ReplyVO rvo){
     	 return mapper.replyInsertData(rvo);
      }

@@ -33,6 +33,7 @@ public interface ReportMapper {
 	@Select("SELECT * FROM pet_board where cate BETWEEN 1 AND 3")
 	public List<ReportVO> reportAllData();
 	
+	// 디테일
 	@Select("insert into pet_board(petno,id,title,cate,kind,sub_kind,loc,map_x,map_y,poster,regdate,pdate,sex,age,weight,color,point,tel,content) values( "
 			+ "(select nvl(max(petno+1),1) FROM pet_board)"
 			+ ",#{id}"
@@ -56,6 +57,30 @@ public interface ReportMapper {
 			+ ")")
 	public ReportVO reportInsertData(ReportVO vo);
 	
+	@Select("delete from pet_board where petno=#{petno}")
+	public ReportVO reportDeleteData(int petno);
+	
+	@Select("update pet_board set "
+			+ "title=#{title}"
+			+ ",cate=#{cate}"
+			+ ",kind=#{kind}"
+			+ ",sub_kind=#{sub_kind}"
+			+ ",loc=#{loc}"
+			+ ",poster=#{poster}"
+			+ ",regdate=sysdate"
+			+ ",pdate=#{pdate}"
+			+ ",sex=#{sex}"
+			+ ",age=#{age}"
+			+ ",weight=#{weight}"
+			+ ",color=#{color}"
+			+ ",point=#{point}"
+			+ ",tel=#{tel}"
+			+ ",content=#{content}"
+			+ ")")
+	public ReportVO reportUpdateData(ReportVO vo);
+	
+	
+	//	댓글
 	@Select("insert into reply(replyno,petno,id,cate,content,regdate) values( "
 			+ "(select nvl(max(replyno+1),1) FROM reply)"
 			+ ",#{petno}"
@@ -74,6 +99,7 @@ public interface ReportMapper {
 	
 	@Select("update reply set content=#{content},regdate=sysdate where replyno=#{replyno}")
 	public ReplyVO replyUpdateData(ReplyVO rvo);
+	
 	
 	
 }
