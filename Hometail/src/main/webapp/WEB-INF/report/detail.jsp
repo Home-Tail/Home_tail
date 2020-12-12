@@ -121,6 +121,7 @@
               	 </c:when>
                 </c:choose>
                --%>
+                <td width=20%>성별</td>
                 <td width=80%>${vo.sex }</td>
               </tr>
               <tr>
