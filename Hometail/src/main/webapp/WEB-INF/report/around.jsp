@@ -173,13 +173,16 @@ $(function() {
 				{
 					json.no=obj_json.no;
 					json.title=obj_json.title;
-	            	json.body=  '<table>'+
+					json.body=  '<table>'+
 					            '<thead>'+
 					            '  <tr>'+
-					            '    <th><img src="../reportposter/'+obj_json.poster+'" width="150" height="150">' +
+					            '    <th><img src="../reportposter/'+obj_json.poster+'" width="200" height="150">' +
 					            '    <th><span class="ellipsis" style="margin-left: 3px;">'+obj_json.loc+'</span>'+
-					            '    <div>'+
-					            ' 		<a href="../report/detail.do?no='+obj_json.no+'" class="link" style="margin-left: 3px;">상세페이지</a></div>'+
+					            '    <div class="ellipsis" style="margin-left: 3px;">분류 : '+obj_json.kind+'</div>'+
+					            '    <div class="ellipsis" style="margin-left: 3px;">품종 : '+obj_json.sub_kind+'</div>'+
+					            '    <div class="ellipsis" style="margin-left: 3px;">성별 : '+obj_json.sex+'</div>'+
+					            '    <div class="ellipsis" style="margin-left: 3px;">나이 : '+obj_json.age+'</div>'+
+					            '    <div><a href="../report/detail.do?no='+obj_json.no+'" class="link" style="margin-left: 3px;">상세페이지</a></div>'+
 					            '    </th>'
 					            '  </tr>'+
 					            '</thead>'+
