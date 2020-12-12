@@ -6,148 +6,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+div.toggleWrap1 { position: relative; width: 300px; margin: 0 auto; padding: 0 10px; background: #1F3766; } div.toggleWrap1 > span { font-size: 15px; font-weight: 600; line-height: 2; color: #fff; } input { display: none; }
+.toggleWrap1 > div { position: absolute; top: 0; bottom: 0; right: 10px; width: 34px; height: 20px; margin-top: 5px; } label { display: block; width: 36px; height: 20px; box-sizing: border-box; border-radius: 36px; border: 1px solid #e5e5e5; background: #fff; transition: all 0.3s ease; } label > span { position: absolute; top: 3px; left: 3px; display: block; width: 14px; height: 14px; border-radius: 50%; box-sizing: border-box; box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25), 0 3px 3px 0 rgba(0, 0, 0, 0.15); transition: all 0.3s cubic-bezier(0.275, -0.45, 0.725, 1.45); background: #fff; }
+input:active + div label, input:checked + div label { border: 10px solid #abe2fb; box-shadow: 0 0 5px #abe2fb; } input:active + div label > span, input:checked + div label > span { left: 18px; }
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+div.toggleWrap2 { position: relative; width: 300px; margin: 0 auto; padding: 0 10px; background: #1F3766; } div.toggleWrap2 > span { font-size: 15px; font-weight: 600; line-height: 2; color: #fff; } input { display: none; }
+.toggleWrap2 > div { position: absolute; top: 0; bottom: 0; right: 10px; width: 34px; height: 20px; margin-top: 5px; } label { display: block; width: 36px; height: 20px; box-sizing: border-box; border-radius: 36px; border: 1px solid #e5e5e5; background: #fff; transition: all 0.3s ease; } label > span { position: absolute; top: 3px; left: 3px; display: block; width: 14px; height: 14px; border-radius: 50%; box-sizing: border-box; box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25), 0 3px 3px 0 rgba(0, 0, 0, 0.15); transition: all 0.3s cubic-bezier(0.275, -0.45, 0.725, 1.45); background: #fff; }
+input:active + div label, input:checked + div label { border: 10px solid #abe2fb; box-shadow: 0 0 5px #abe2fb; } input:active + div label > span, input:checked + div label > span { left: 18px; }
 
-.bodyXX{
-  font-family:'Open Sans', sans-serif;
-  width:90%;
-  margin:0 auto;
-  padding:2em 0 6em;
-}
-
-.wrapper{
-  margin:3em 0;
-}
-.a,.a:visited,.a:hover,.a:active{
-  -webkit-backface-visibility:hidden;
-          backface-visibility:hidden;
-	position:relative;
-  transition:0.5s color ease;
-	text-decoration:none;
-	color:#81b3d2;
-	font-size:2.5em;
-}
-.a:hover{
-	color:#d73444;
-}
-.a.before:before,.a.after:after{
-  content: "";
-  transition:0.5s all ease;
-  -webkit-backface-visibility:hidden;
-          backface-visibility:hidden;
-  position:absolute;
-}
-.a.before:before{
-  top:-0.25em;
-}
-.a.after:after{
-  bottom:-0.25em;
-}
-.a.before:before,.a.after:after{
-  height:5px;
-  height:0.35rem;
-  width:0;
-  background:#d73444;
-}
-.a.first:after{
-  left:0;
-}
-.a.second:after{
-  right:0;
-}
-.a.third:after,.a.sixth:before,.a.sixth:after{
-  left:50%;
-  -webkit-transform:translateX(-50%);
-          transform:translateX(-50%);
-}
-.a.fourth:before,.a.fourth:after{
-  left:0;
-}
-.a.fifth:before,.a.fifth:after{
-  right:0;
-}
-.a.seventh:before{
-  right:0;
-}
-.a.seventh:after{
-  left:0;
-}
-.a.eigth:before{
-  left:0;
-}
-.a.eigth:after{
-  right:0;
-}
-.a.before:hover:before,.a.after:hover:after{
-  width:100%;
-}
-.square{
-  box-sizing:border-box;
-  margin-left:-0.4em;
-  position:relative;
-  font-size:1.5em;
-  overflow:hidden;
-}
-.square .a{
-  position:static;
-  font-size:100%;
-  padding:0.2em 0.4em;
-}
-.square:before,.square:after{
-  content: "";
-  box-sizing:border-box;
-  transition:0.25s all ease;
-  -webkit-backface-visibility:hidden;
-          backface-visibility:hidden;
-  position:absolute;
-  width:5px;
-  width:0.35rem;
-  height:0;
-  background:#d73444;
-}
-.square:before{
-  left:0;
-  bottom:-0.2em;
-}
-.square.individual:before{
-  transition-delay:0.6s;
-}
-.square:after{
-  right:0;
-  top:-0.2em;
-}
-.square.individual:after{
-  transition-delay:0.2s;
-}
-.square .a:before{
-  left:0;
-  transition:0.25s all ease;
-}
-.square .a:after{
-  right:0;
-  transition:0.25s all ease;
-}
-.square.individual .a:after{
-  transition:0.25s all ease 0.4s;
-}
-.square:hover:before,.square:hover:after{
-  height:calc(100% + 0.4em);
-}
-.square:hover .a:before,.square:hover .a:after{
-  width:100%;
-}
 </style>
 </head>
 <body>
-
-<div class="bodyXX">
-<div class="wrapper">
-  <span class="square">
-    <a class="a tenth before after" href="#">Cool Square Simultaneous</a>
-  </span>
+<div class="toggleWrap1">
+  <span>알림</span>
+  <input type="checkbox" id="toggle_alarm1" name="" value="" />
+  <div>
+    <label for="toggle_alarm1">
+      <span />
+    </label>
+  </div>
 </div>
+<div class="toggleWrap2">
+  <span>알림</span>
+  <input type="checkbox" id="toggle_alarm2" name="" value="" />
+  <div>
+    <label for="toggle_alarm2">
+      <span />
+    </label>
+  </div>
 </div>
-
 </body>
 </html>

@@ -107,6 +107,7 @@
 <%--                 <td width=80%>${vo.sub_kind }</td> --%>
               </tr>
               <tr>
+              <%--
                 <td width=20%>성별</td>
                 <c:choose>
                  <c:when test="${vo.sex eq 0 }">
@@ -119,7 +120,8 @@
                	  <td width=80%>암컷</td>
               	 </c:when>
                 </c:choose>
-<%--                 <td width=80%>${vo.sex }</td> --%>
+               --%>
+                <td width=80%>${vo.sex }</td>
               </tr>
               <tr>
                 <td width=20%>나이</td>

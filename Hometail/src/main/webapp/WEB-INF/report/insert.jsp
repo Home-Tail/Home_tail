@@ -62,9 +62,9 @@ $(function() {
 		       <th class="danger text-right" width=15%>성별</th>
 		       <td width=85%>
 		         <select name=sex>
-		         	<option value="0">미확인</option>
-		         	<option value="1">수컷</option>
-		         	<option value="2">암컷</option>
+		         	<option value="미확인">미확인</option>
+		         	<option value="수컷">수컷</option>
+		         	<option value="암컷">암컷</option>
 		         </select>
 		       </td>
 		     </tr>

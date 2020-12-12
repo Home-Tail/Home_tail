@@ -135,7 +135,15 @@ public class ReportController {
 		{
 			JSONObject json = new JSONObject();
 			json.put("no",vo.getPetno());
-			json.put("title",vo.getTitle());
+			if(vo.getCate()==1)
+			{
+				json.put("title","[실종] "+vo.getTitle());
+			}
+			else if(vo.getCate()==2)
+			{
+				json.put("title","[제보] "+vo.getTitle());
+			}
+			json.put("poster",vo.getPoster());
 			json.put("cate",vo.getCate());
 			json.put("kind",vo.getKind());
 			json.put("loc",vo.getLoc());

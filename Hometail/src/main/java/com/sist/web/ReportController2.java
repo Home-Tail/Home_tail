@@ -43,9 +43,16 @@ public class ReportController2 {
 		{
 			JSONObject json = new JSONObject();
 			json.put("no",vo.getPetno());
-			json.put("title",vo.getTitle());
+			if(vo.getCate()==1) json.put("title","[실종] "+vo.getTitle());
+			if(vo.getCate()==2) json.put("title","[제보] "+vo.getTitle());
 			json.put("cate",vo.getCate());
-			json.put("kind",vo.getKind());
+			json.put("poster",vo.getPoster());
+			if(vo.getKind()==1) json.put("kind","개");
+			if(vo.getKind()==2) json.put("kind","고양이");
+			if(vo.getKind()==3) json.put("kind","기타");
+			json.put("sub_kind",vo.getSub_kind());
+			json.put("sex",vo.getSex());
+			json.put("age",vo.getAge());
 			json.put("loc",vo.getLoc());
 			json.put("map_x",vo.getMap_x());
 			json.put("map_y",vo.getMap_y());

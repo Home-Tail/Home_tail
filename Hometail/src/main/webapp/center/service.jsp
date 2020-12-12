@@ -41,7 +41,6 @@
  $(function(){
  		var aJsonArray_p = new Array();
  		var jsondata_p;
-
  		var hospital_name;
 		var loc;
 		var tel;
@@ -367,15 +366,11 @@
 			    
 	 			// 지도에 마커를 표출하는 함수입니다
  			 	function displayPlaces(places) {
-
  			 	    // 몇번째 카테고리가 선택되어 있는지 얻어옵니다
  			 	    // 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
  			 	    var order = document.getElementById(currCategory).getAttribute('data-order');
-
  			 	    
-
  			 	    for ( var i=0; i<places.length; i++ ) {
-
  			 	            // 마커를 생성하고 지도에 표시합니다
  			 	            var marker = addMarker(new kakao.maps.LatLng(places[i].y, places[i].x), order);
 			
@@ -401,7 +396,6 @@
  			 	            position: position, // 마커의 위치
  			 	            image: markerImage 
  			 	        });
-
  			 	    marker.setMap(map); // 지도 위에 마커를 표출합니다
  			 	    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 			 
@@ -554,7 +548,3 @@ function button_click(){
 
   </body>
 </html>
-
-
-
-
