@@ -18,18 +18,18 @@ $(function(){
 	    $.getJSON("myJson.json",function(data){
 	    	$.each(data["datas"],function(index,value){
 	    			console.log('일단 돌아감');
-	    	})
-	    });
-	    
+	    	})		
+	    });			
+	    			
  			  $.getJSON("myJson.json",function(data){
 // 	 			  $( "#tabs" ).tabs();
  			     var html = [];
  				 var aJsonArray = new Array();
  				 
  			   	 $.each(data["datas"],function(index,value){
- 			   	 	
+ 			   	 		
  			   	 var jsondata = JSON.stringify(value); // 문자열변환
- 			   	 
+ 			   	 		
  				 var obj = eval("("+jsondata+")"); // object 형태로 변경
  				 var aJson = new Object();
  				 aJson.NO = obj.NO;
@@ -37,6 +37,7 @@ $(function(){
  				 aJson.TEL = obj.TEL;
  				 aJson.CAPACITY = obj.CAPACITY;
  				 aJson.REPRESENTATIVE = obj.REPRESENTATIVE; //대표자
+ 				 console.log(obj.REPRESENTATIVE);
  				 aJson.CITY = obj.CITY; //시군구
  				 aJson.REMINDER = obj.REMINDER; //비고 사항
  				 aJson.POST = obj.POST;
@@ -51,19 +52,20 @@ $(function(){
  		         mapdata = aJsonArray; 
  		         console.log(mapdata); // 배열형태 확인  
  		         	console.log(mapdata.length); //배열 사이즈 확인
- 			   	})
+ 			   	})			
 	 			   var mapContainer = document.getElementById('maps'), // 지도를 표시할 div  
 			   	    mapOption = { 
 			   	        center: new kakao.maps.LatLng(37.5665,126.9780),  // 지도의 중심좌표
 			   	        level: 8 // 지도의 확대 레벨
-			   	    };
-	   	    	 
+			   	    };		
+	   	    	 			
 			   		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		   			for(var i=0;i<mapdata.length;i++)
-		   			{
+		   			{		
+// 	 			   		var imageSrc = mapdata[i].POSTER;
 	 			   		var imageSrc = mapdata[i].POSTER;
 								
-	 			   		var imageSize = new kakao.maps.Size(35, 35); 
+	 			   		var imageSize = new kakao.maps.Size(55, 55); 
 	 			   		var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
 		   				var marker = new kakao.maps.Marker({
 		   					map: map,
@@ -84,7 +86,7 @@ $(function(){
 		   							+"|"+mapdata[i].CAPACITY+"|"+mapdata[i].REPRESENTATIVE+
 		   							"|"+mapdata[i].CITY+"|"+mapdata[i].REMINDER+
 		   							"|"+mapdata[i].POST+"|"+mapdata[i].LOTNO_ADDR+
-		   							"|"+mapdata[i].LOTNO_ADDR,
+		   							"|"+mapdata[i].ROADNO_ADDR,
 		   					image: markerImage
 		   				});		
 		   				var infowindow = new kakao.maps.InfoWindow({
@@ -93,8 +95,8 @@ $(function(){
 		   			 kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker));
 	 			   		function makeClickListener(map, marker, infowindow) {
 	 			   			return function(){
-// 	 			   			console.log(marker.getTitle()+'클릭');
-// 	 			   			console.log(marker.getPosition()+'위치');
+// 	 			   				console.log(marker.getTitle()+'클릭');
+// 	 			   				console.log(marker.getPosition()+'위치');
 	 			   			var temp = marker.getTitle();
 	 			   			var temp2 = temp.split('|');
 	 			   			//순서!
@@ -129,20 +131,27 @@ $(function(){
 	 			   					lotno_addr=temp2[i];
 	 			   				else if(i==9)
 	 			   					roadno_addr=temp2[i];
-	  			   			}	
-// 	 			   			콘솔찍기!
+	  			   			}		
+// 	 			   			콘솔찍기!	
 							console.log('보호소 번호  '+no);
 							console.log('보호소 이름  '+shelter_name);
 							console.log('==========================');
-						
+									
 // 							데이터 전달하기! 여기에!
 							$('#name').text(shelter_name);
+							$('#input_name').text(shelter_name);
+	 			   			$('#representative').text(representative);
+	 			   			$('#city').text(city);
+	 			   			$('#capacity').text(capacity+'명');
+	 			   			$('#roadno_addr').text(roadno_addr);
+	 			   			$('#reminder').text(reminder);
 							$('#no').val(no);
-	 			   			};	
+	 			   			};
 	 			   		}		
 		   			}			
  			  });				
  			 $('#add_btn').click(function(){
+ 				$('#shelter_click_data').hide();
  				$.ajax({
  					type:'POST',
  					url:'../center/shelter_add.do',
@@ -173,8 +182,8 @@ $(function(){
 		    <div id="maps" style="width:1200px;height:600px; border:1px solid black; float: left;"></div>
 		</div>		
 <!-- 		<div class="map_wrap col-lg-12" style="float: left; padding-top: 100px; height: 500px;"> -->
-		<div class="map_wrap col-lg-12" style="float: left;  height: 1000px;">
-			<div class="map_wrap col-lg-6" style="float: left; padding-top: 100px;">
+		<div class="map_wrap col-lg-12" style="float: left;  height: 1000px;" id="add_shelter">
+			<div class="map_wrap col-lg-6" style="float: left; padding-top: 100px;" id="shelter_click_data">
 		 	 <input type="button" value="보호소 추가" id="add_btn" class="btn btn-primary">
 		 	 <sup style="color: red;">*찾는 보호소가 없으면 보호소를 추가해주세요</sup>		
 		 	 <form action="../center/shelter_insert.do" method="post">
@@ -221,11 +230,12 @@ $(function(){
 				</table>
 				<textarea rows="5" cols="60" id="message"></textarea>
 				
+				<input type="hidden"  class="btn btn-primary" id="input_name" name="name">
 				<input type="hidden"  class="btn btn-primary" id="no" name="no">
 				<input type="submit"  class="btn btn-primary" value="요청하기">
 				</form>
 			</div>		
-			<div class="map_wrap col-lg-6" style="float: left; padding-top: 100px;" id="add_shelter">
+			<div class="map_wrap col-lg-6" style="float: left; padding-top: 100px;" >
 						
 			</div>		
 		</div>		

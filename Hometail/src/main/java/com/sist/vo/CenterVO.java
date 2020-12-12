@@ -30,8 +30,15 @@ public class CenterVO {
 	private Double wgs84_x;
 	private Double wgs84_y;
 	private String poster;
-		   
-		   
+	private String message;
+		  
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	public String getReminder() {
 		return reminder;
 	}	   

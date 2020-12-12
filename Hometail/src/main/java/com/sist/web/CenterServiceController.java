@@ -176,6 +176,18 @@ public class CenterServiceController {
 		
 		
 		list = dao.shelter_data();
+		for(CenterVO vo:list)
+		{
+			if(vo.getRepresentative()==null)
+			{
+				vo.setRepresentative("미정");
+			}
+			if(vo.getReminder()==null)
+			{
+				vo.setReminder("* 사항 없음");
+			}
+			
+		}
 		System.out.println("list 사이즈:"+list.size());
 		org.json.simple.JSONArray js = new org.json.simple.JSONArray();
 		for(CenterVO vo:list)
@@ -190,6 +202,7 @@ public class CenterServiceController {
 			shelter.put("CAPACITY",vo.getCapacity()); 
 			shelter.put("REMINDER",vo.getReminder()); 
 			shelter.put("TEL",vo.getTel());
+			shelter.put("REPRESENTATIVE", vo.getRepresentative());
 			shelter.put("POST",""+vo.getPost()+"");
 			shelter.put("POSTER",vo.getPoster());
 			shelter.put("LOTNO_ADDR",vo.getLotno_addr());
@@ -234,15 +247,49 @@ public class CenterServiceController {
 //		<option value="3">사료</option>
 //		<option value="4">헌옷</option>
 //		<option value="5">이불</option>
-		String arr[] = {"newspaper.png","canned-food.png","meat.png","clothes.png","blanket.png"};
+		String arr[] = {"newspaper_marker.png","canned-food_marker.png","meat_marker.png","clothes_marker.png","blanket_marker.png"};
 		int poster_number = Integer.parseInt(vo.getPoster());
 		vo.setPoster(arr[poster_number]);
 		System.out.println("shelter_insert.do 호출");
+		System.out.println("요청 보호소 이름"+vo.getName());
 		System.out.println("요청 보호소 번호 "+vo.getNo());
 		System.out.println("요청 품목 사진"+vo.getPoster());
 		dao.shelter_icon(vo);
 		
 		return "redirect:../center/shelter.do";
-	}	
+	}
+	
+	//새로운 보호소 저장
+	@RequestMapping("shelter_add_data")
+	public String shelter_add_data(CenterVO vo)
+	{
+		System.out.println("번호="+vo.getNo());
+		System.out.println("이름="+vo.getCity());
+		System.out.println("이름="+vo.getName());
+		System.out.println("전화번호="+vo.getTel());
+		System.out.println("대표="+vo.getRepresentative());
+		System.out.println("수용력="+vo.getCapacity());
+		System.out.println("비고사항="+vo.getReminder());
+		System.out.println("주소="+vo.getRoadno_addr());
+		vo.setLotno_addr("데이터 없음");
+		System.out.println("주소="+vo.getLotno_addr());
+		String temp_x = vo.getWgs84_x().toString();
+		String temp_y = vo.getWgs84_y().toString();
+		temp_x = temp_x.substring(0,temp_x.indexOf('.')+9);
+		temp_y = temp_y.substring(0,temp_y.indexOf('.')+9);
+		vo.setWgs84_x(Double.parseDouble(temp_x));
+		vo.setWgs84_y(Double.parseDouble(temp_y));
+		System.out.println("x="+vo.getWgs84_x());
+		System.out.println("y="+vo.getWgs84_y());
+		String arr[] = {"newspaper_marker.png","canned-food_marker.png","meat_marker.png","clothes_marker.png","blanket_marker.png"};
+		int poster_number = Integer.parseInt(vo.getPoster());
+		vo.setPoster(arr[poster_number]);
+		System.out.println("사진"+vo.getPoster());
+		System.out.println("msg="+vo.getMessage());
+		
+		dao.shelter_insertdata(vo);
+		
+		return "redirect:main.do";
+	}
 }		
 		

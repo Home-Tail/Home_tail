@@ -46,6 +46,22 @@ public interface CenterServiceMapper {
 	@Select("SELECT * FROM center")
 	public List<CenterVO> shelter_data();
 	
-	@Select("UPDATE center set poster=#{poster} where no=#{no}")
+	@Select("UPDATE center set poster=#{poster} where name=#{name}")
 	public void shelter_icon(CenterVO vo);
+	
+	@Select("INSERT INTO center VALUES("
+			+ "(SELECT NVL(MAX(no+1),1) FROM center),"
+			+ "#{city},"
+			+ "#{name},"
+			+ "#{tel},"
+			+ "#{representative},"
+			+ "#{capacity},"
+			+ "#{reminder},"
+			+ "#{post},"
+			+ "#{lotno_addr},"
+			+ "#{roadno_addr},"
+			+ "#{wgs84_y},"
+			+ "#{wgs84_x},"
+			+ "#{poster})")
+	public void shelter_insertdata(CenterVO vo);
 }
