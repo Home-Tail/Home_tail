@@ -163,7 +163,7 @@ public class ReportController {
 	}
 	
 	@RequestMapping("report/insert.do")
-	public String report_Detail_Insert()
+	public String report_insert()
 	{
 		return "report/insert";
 	}
@@ -203,13 +203,78 @@ public class ReportController {
 	}
 	
 	@RequestMapping("report/delete.do")
-	public String report_detail_delete(String no)
+	public String report_delete(String no)
 	{
 		System.out.println("report/delete.do 실행");
 		System.out.println("no: "+no);
 		int petno=Integer.parseInt(no);
 		dao.reportDeleteData(petno);
 		return "redirect:../report/main.do";
+	}
+	
+	@RequestMapping("report/update.do")
+	public String report_update(String no,Model model)
+	{
+		System.out.println("report/update.do 실행");
+		System.out.println("no: "+no);
+		int petno=Integer.parseInt(no);
+		ReportVO vo=dao.reportDetailData(petno);
+		model.addAttribute("vo", vo);
+		return "report/update";
+	}
+	
+	@RequestMapping("report/update_ok.do")
+	public String report_update_ok(ReportVO vo,HttpServletRequest request)throws IOException{
+		
+		System.out.println("report/update_ok.do 실행");
+		
+		
+		String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Hometail\\reportposter";
+//		String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\reportposter";
+		String enctype= "UTF-8";
+		int size = 1024 * 1024 * 100;
+		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
+		
+		int petno=Integer.parseInt(mr.getParameter("petno"));
+		vo.setPetno(petno);
+		vo.setTitle(mr.getParameter("title"));
+		vo.setCate(Integer.parseInt(mr.getParameter("cate")));
+		vo.setKind(Integer.parseInt(mr.getParameter("kind")));
+		vo.setSub_kind(Integer.parseInt(mr.getParameter("sub_kind")));
+		vo.setLoc(mr.getParameter("loc"));
+		vo.setMap_x(mr.getParameter("map_x"));
+		vo.setMap_y(mr.getParameter("map_y"));
+		vo.setPoster(mr.getFilesystemName("poster"));
+		vo.setPdate(mr.getParameter("pdate"));
+		vo.setSex(mr.getParameter("sex"));
+		vo.setAge(Integer.parseInt(mr.getParameter("age")));
+		vo.setWeight(mr.getParameter("weight"));
+		vo.setColor(mr.getParameter("color"));
+		vo.setPoint(mr.getParameter("point"));
+		vo.setTel(mr.getParameter("tel"));
+		vo.setContent(mr.getParameter("content"));
+		
+//		System.out.println("title"+vo.getTitle());
+//		System.out.println("cate: "+mr.getParameter("cate"));
+//		System.out.println("kind: "+mr.getParameter("kind"));
+//		System.out.println("sub_kind: "+mr.getParameter("sub_kind"));
+//		System.out.println("loc: "+mr.getParameter("loc"));
+//		System.out.println("map_x: "+mr.getParameter("map_x"));
+//		System.out.println("map_y: "+mr.getParameter("map_y"));
+//		System.out.println("poster: "+mr.getFilesystemName("poster"));
+//		System.out.println("pdate: "+mr.getParameter("pdate")); 
+//		System.out.println("sex: "+mr.getParameter("sex"));
+//		System.out.println("age: "+mr.getParameter("age"));
+//		System.out.println("weight: "+mr.getParameter("weight"));
+//		System.out.println("color: "+mr.getParameter("color"));
+//		System.out.println("point: "+mr.getParameter("point"));
+//		System.out.println("tel: "+mr.getParameter("tel"));
+//		System.out.println("content: " + mr.getParameter("content"));
+		
+		
+		dao.reportUpdateData(vo);
+		
+		return "redirect:../report/detail.do?no="+petno;
 	}
 	
 	// 댓글

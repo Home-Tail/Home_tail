@@ -103,11 +103,12 @@ $(function() {
 			  <a cate=2 style="color: black; font-weight: 800;">제보</a>
 			  <a cate=3 style="color: black; font-weight: 800;">완료</a>
 			</div>
-			<div>
-				<c:if test="${sessionScope.id!=null }">
-				 <a href="../report/insert.do" class="btn btn-sm btn-primary">글쓰기</a>
-				</c:if>
-			</div>
+			<div style="text-align: right ">
+			  <c:if test="${sessionScope.id!=null }">
+				 <a href="../report/insert.do" class="btn btn-sm btn-primary" style="height: 38px; width: 100px; font: 18px Raleway;">글쓰기</a>
+			  </c:if>
+			  </div>
+			  
 		<div class="row">
 			
 			<!-- 실제 리스트 출력 -->

@@ -66,6 +66,8 @@ public interface ReportMapper {
 			+ ",kind=#{kind}"
 			+ ",sub_kind=#{sub_kind}"
 			+ ",loc=#{loc}"
+			+ ",map_x=#{map_x}"
+			+ ",map_y=#{map_y}"
 			+ ",poster=#{poster}"
 			+ ",regdate=sysdate"
 			+ ",pdate=#{pdate}"
@@ -75,8 +77,7 @@ public interface ReportMapper {
 			+ ",color=#{color}"
 			+ ",point=#{point}"
 			+ ",tel=#{tel}"
-			+ ",content=#{content}"
-			+ ")")
+			+ ",content=#{content} where petno=#{petno}")
 	public ReportVO reportUpdateData(ReportVO vo);
 	
 	

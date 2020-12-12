@@ -167,7 +167,7 @@
                  <form method="post" action="../report/reply_insert.do">
 	                 <input type="hidden" name="petno" value="${vo.petno }">
 	                 <textarea rows="2" cols="70" name="content" style="float: left"></textarea>
-	                  <input type=submit value="댓글쓰기" class="btn btn-sm btn-primary" style="width:100px; height: 67px; margin-left:5px;" >
+	                  <input type=submit value="댓글쓰기" class="btn btn-sm btn-primary" style="width:100px; height: 67px; margin-left:5px; font: 16px Raleway;" >
                   </form>
                   </c:if>
                </td>
@@ -262,20 +262,22 @@
         </table>
        <hr>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-12" style="height:100px"></div>
+      <div class="col-md-12"><hr></div>
+      <div class="col-md-12" style="text-align: right ">
       	<tr>
 		  <td colspan="2" class="text-center">
-		   <input type=button value=목록 class="btn btn-sm btn-primary" onclick="javascript:history.back()">
+		   <input type=button value=목록 class="btn btn-sm btn-primary" style="height: 35px; width: 80px; font: 15px Raleway;" onclick="javascript:history.back()">
 		   <c:if test="${sessionScope.id==vo.id }">
-		   	<a href="../report/update.do?no=${vo.petno }" class="btn btn-sm btn-success">수정</a>
-		   	<a href="../report/delete.do?no=${vo.petno }" class="btn btn-sm btn-danger">삭제</a>
+		   	<a href="../report/update.do?no=${vo.petno }" class="btn btn-sm btn-success" style="height: 35px; width: 80px; font: 15px Raleway;">수정</a>
+		   	<a href="../report/delete.do?no=${vo.petno }" class="btn btn-sm btn-danger" style="height: 35px; width: 80px; font: 15px Raleway;">삭제</a>
 		   </c:if>
 		  </td>
 		</tr>
       </div>
      </div>
    </div>
-   <div style="height:300px"></div>
+   <div style="height:150px"></div>
   </div>
   
 </body>
