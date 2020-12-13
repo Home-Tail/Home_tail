@@ -14,7 +14,6 @@
 	$(function() {
 		$('.updates').hide();
 		$('.up').click(function() {
-			$('.updates').hide();
 			$('.insert').hide();
 			let no = $(this).attr("value");
 			console.log('번호값:' + no);
@@ -32,26 +31,49 @@
 			}
 		});
 	})
-	$('.reply_reply').click(function(){
-	  $('.reply_reply').hide();
-	  $('.reply_reply').text("댓글");
-	  let no=$(this).attr('value');
-	  if(i==0)
-	  {
-		    
-			$('#rIn'+no).show();
-			$(this).text("취소");
-			i=1;
-	  }
-	  else
-	  {
-		    $('#rIn'+no).hide();
-		    $(this).text("댓글");
-			i=0;
-	  }
-		
+	
+	
+	let s= 0;
+	$(function(){
+		$('.reply_reply').hide();
+		$('.replyclick').click(function(){
+			$('.reply_reply').hide()
+			let sno = $('.reply_reply').attr("value");
+			console.log('번호값:' + sno);
+			if (s == 0) {
+				console.log('돈다돌아');
+				$('#rIn' + sno).show();
+				$(this).text("취소");
+				s = 1;
+			} else {
+				console.log('else 돈다돌아');
+				$('#rIn' + sno).hide();
+				$(this).text("Reply");
+				s = 0;
+			}
+		});
 	});
 	
+	let a= 0;
+	$(function(){
+		$('.reply_reply22').hide();
+		$('.replyclick22').click(function(){
+			$('.reply_reply22').hide()
+			let ano = $('.reply_reply22').attr("value");
+			console.log('번호값:' + ano);
+			if (a == 0) {
+				console.log('돈다돌아');
+				$('#rIn22' + ano).show();
+				$(this).text("취소");
+				s = 1;
+			} else {
+				console.log('else 돈다돌아');
+				$('#rIn22' + ano).hide();
+				$(this).text("Reply");
+				a = 0;
+			}
+		});
+	});
 $(function(){
 	$('#btn22').click(function(){
 		let owner=$('#owner').val();
@@ -74,6 +96,10 @@ $(function(){
 		}
 	})
 })
+
+$("#clinicModal").on('shown.bs.modal', function(){
+	clinicMap.relayout();
+            });
 </script>
 <style type="text/css">
 .btn {
@@ -256,12 +282,19 @@ border-radius: 15px;
 								<div class="comment-body">
 									<h5>${cvo.id }</h5>
 									<div class="meta mb-2">
-<%-- 										<fmt:formatDate value="${cvo.regdate }" pattern="YYYY-MM-dd" /> --%>
+										<fmt:formatDate value="${cvo.regdate }" pattern="YYYY-MM-dd" />
 									</div>
 									<p>${cvo.content }</p>
-									<p>
-										<a>Reply</a>
+									<c:if test="${sessionScope.id!=null }">
+									 <p>
+									  <span class="replyclick">Reply</span>
 									</p>
+									</c:if>
+									<c:if test="${sessionScope.id==cvo.id }">
+										<span value="${cvo.replyno}" class="btn btn-xs up" id="btn3">수정</span>
+										<a href="../clinic/clinic_reply_delete.do?clno=${cvo.clno }&replyno=${cvo.replyno}"
+											class="btn btn-xs" id="btn3">삭제</a>
+									</c:if>
 									<div class="comment-form-wrap pt-5 reply_reply" id="rIn${cvo.replyno }" value="${cvo.replyno }">
 										<form method="post"
 											action="../clinic/clinicReply_replyInsert.do">
@@ -269,37 +302,17 @@ border-radius: 15px;
 											<input type="hidden" name="replyno" value="${cvo.replyno}"> 
 											<div class="form-group">
 												<textarea name="content" cols="30" rows="2"
-													class="form-control" required></textarea>
+													class="form-control" required>★</textarea>
 											</div>
 											<div class="form-group text-right">
 												<input type="submit" value="대댓달아" class="reply">
 											</div>
 										</form>
 									</div>
-									<c:if test="${cvo.group_tap>0 }">
-										<ul class="children">
-											<li class="comment">
-												<div class="comment-body">
-													<h5>${cvo.id }</h5>
-													<div class="meta mb-2">
-														<fmt:formatDate value="${cvo.regdate }"
-															pattern="YYYY-MM-dd" />
-													</div>
-													<p>${cvo.content }</p>
-													<a>Reply</a>
-												</div>
-											</li>
-										</ul>
-									</c:if>
+									
 								</div>
 							</li>
 
-							<c:if test="${sessionScope.id==cvo.id }">
-								<span value="${cvo.replyno}" class="btn btn-xs up" id="btn3">수정</span>
-								<a
-									href="../clinic/clinic_reply_delete.do?clno=${cvo.clno }&replyno=${cvo.replyno}"
-									class="btn btn-xs" id="btn3">삭제</a>
-							</c:if>
 				
 				<div class="comment-form-wrap pt-5 updates" id="u${cvo.replyno }"
 					value="${cvo.replyno }">
@@ -333,7 +346,7 @@ border-radius: 15px;
 	 <!-- Map Modal -->
   <div class="modal fade" id="clinicModal">
     <div class="modal-dialog">
-      <div class="modal-content" >
+      <div class="modal-content" style="width:600px; height:650px;">
       
         <!-- Modal Header -->
         <div class="modal-header">
@@ -342,14 +355,14 @@ border-radius: 15px;
         </div>
         
         <!-- Modal body -->
-        <div class="modal-body" style="width:600px; height:650px;">
+        <div class="modal-body">
           
-          <div id="maps" style="width:470px; height:500px;"></div>
+          <div id="clinicMap" style="width:470px; height:500px;"></div>
 
 				<script type="text/javascript"
 					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=18b988d228ba568335019cf062c1ebf7&libraries=services"></script>
 				<script>
-	 				var mapContainer = document.getElementById('maps'), // 지도를 표시할 div  
+	 				var mapContainer = document.getElementById('clinicMap'), // 지도를 표시할 div  
 					mapOption = {
 	 					center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표 
 	 					level : 3 
@@ -357,7 +370,7 @@ border-radius: 15px;
 	 				}; 
 
 	 				// 지도를 생성합니다    
-	 				var map = new kakao.maps.Map(mapContainer, mapOption);
+	 				var clinicMap = new kakao.maps.clinicMap(mapContainer, mapOption);
  				// 주소-좌표 변환 객체를 생성합니다 
 					var geocoder = new kakao.maps.services.Geocoder(); 
 
@@ -373,21 +386,22 @@ border-radius: 15px;
 	 										var coords = new kakao.maps.LatLng( 
 	 												result[0].y, result[0].x); 
 
+	 										clinicMap.reload();
 	 										// 결과값으로 받은 위치를 마커로 표시합니다 
 	 										var marker = new kakao.maps.Marker({ 
-	 											map : map, 
+	 											clinicMap : clinicMap, 
 	 											position : coords 
 	 										}); 
-
+												
 	 										// 인포윈도우로 장소에 대한 설명을 표시합니다 
 	 										var infowindow = new kakao.maps.InfoWindow( 
 	 												{ 
 	 													content : '<div style="width:150px;text-align:center;padding:6px 0;">${vo.title}</div>'
 	 												}); 
-	 										infowindow.open(map, marker); 
+	 										infowindow.open(clinicMap, marker); 
 
 											// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다 -
-	 										map.setCenter(coords); 
+	 										clinicMap.setCenter(coords); 
 	 									} 
 	 								}); 
 	 			</script> 

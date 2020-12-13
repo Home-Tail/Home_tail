@@ -51,19 +51,19 @@ public class ClinicDAO {
 		mapper.clinicReplyDelete(vo);
 	}
 	//============== 대댓글
-	public void clinicReply_replyInsert(ReplyVO vo,int replyno)
+	public void clinicReply_replyInsert(ReplyVO vo,int root)
 	{
 		System.out.println("clinicReply_replyInsert 실행");
 		
-		ReplyVO pvo=mapper.replyParentData(replyno);
+		ReplyVO pvo=mapper.replyParentData(root);
 		mapper.replyStepIncrement(pvo);
 		
 		vo.setGroup_id(pvo.getGroup_id());
 		vo.setGroup_step(pvo.getGroup_step()+1);
 		vo.setGroup_tap(pvo.getGroup_tap()+1);
-		vo.setRoot(replyno);
+		vo.setRoot(root);
 		mapper.clinicReply_replyInsert(vo);
-		mapper.clinicReplyDepthUpdate(replyno);
+		mapper.clinicReplyDepthUpdate(root);
 		System.out.println("왜안되는지 말이라도 해줬으면 싶다");
 	}
 	//========예약

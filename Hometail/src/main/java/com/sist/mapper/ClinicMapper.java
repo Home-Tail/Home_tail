@@ -48,7 +48,7 @@ public void clinicReplyDelete(ReplyVO vo);
 
 //------------------------ 댓글--------------------------
 @Select("SELECT group_id,group_step,group_tap FROM reply WHERE replyno=#{replyno}")
-public ReplyVO replyParentData(int replyno);
+public ReplyVO replyParentData(int root);
 
 @Update("UPDATE reply SET group_step=group_step+1 WHERE group_id=#{group_id} AND group_step>#{group_step}")
 public void replyStepIncrement(ReplyVO vo);
@@ -58,7 +58,7 @@ public void replyStepIncrement(ReplyVO vo);
 public void clinicReply_replyInsert(ReplyVO vo);
 
 @Update("UPDATE reply SET depth=depth+1 WHERE replyno=#{replyno}")
-public void clinicReplyDepthUpdate(int replyno);
+public void clinicReplyDepthUpdate(int root);
 
 //@Update("UPDATE reply SET depth=depth-1 WHERE replyno=#{replyno}")
 //public void clinicReplyDepthDecrement(int root);
