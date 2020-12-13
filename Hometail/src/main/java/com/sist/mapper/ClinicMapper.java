@@ -60,8 +60,8 @@ public void clinicReply_replyInsert(ReplyVO vo);
 @Update("UPDATE reply SET depth=depth+1 WHERE replyno=#{replyno}")
 public void clinicReplyDepthUpdate(int root);
 
-//@Update("UPDATE reply SET depth=depth-1 WHERE replyno=#{replyno}")
-//public void clinicReplyDepthDecrement(int root);
+@Update("UPDATE reply SET depth=depth-1 WHERE replyno=#{replyno}")
+public void clinicReplyDepthDecrement(int root);
 //------------------------ 대댓글 --------------------------
 
 @Insert("INSERT INTO reserve(resno,clno,id,resdate,owner,pname,content,time) VALUES((SELECT NVL(MAX(resno)+1,1) FROM reserve),#{clno},#{id},#{resdate},#{owner},#{pname},#{content},#{time})")

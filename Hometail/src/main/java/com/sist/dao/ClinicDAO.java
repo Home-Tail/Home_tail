@@ -66,6 +66,10 @@ public class ClinicDAO {
 		mapper.clinicReplyDepthUpdate(root);
 		System.out.println("왜안되는지 말이라도 해줬으면 싶다");
 	}
+	public void clinicReply_replyDelete(int root)
+	{
+		mapper.clinicReplyDepthDecrement(root);
+	}
 	//========예약
 	public void clinicReserveInsert(ReserveVO rvo)
 	{

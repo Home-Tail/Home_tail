@@ -38,7 +38,7 @@
 		$('.reply_reply').hide();
 		$('.replyclick').click(function(){
 			$('.reply_reply').hide()
-			let sno = $('.reply_reply').attr("value");
+			let sno = $(this).attr("data-value");
 			console.log('번호값:' + sno);
 			if (s == 0) {
 				console.log('돈다돌아');
@@ -54,26 +54,6 @@
 		});
 	});
 	
-	let a= 0;
-	$(function(){
-		$('.reply_reply22').hide();
-		$('.replyclick22').click(function(){
-			$('.reply_reply22').hide()
-			let ano = $('.reply_reply22').attr("value");
-			console.log('번호값:' + ano);
-			if (a == 0) {
-				console.log('돈다돌아');
-				$('#rIn22' + ano).show();
-				$(this).text("취소");
-				s = 1;
-			} else {
-				console.log('else 돈다돌아');
-				$('#rIn22' + ano).hide();
-				$(this).text("Reply");
-				a = 0;
-			}
-		});
-	});
 $(function(){
 	$('#btn22').click(function(){
 		let owner=$('#owner').val();
@@ -287,7 +267,7 @@ border-radius: 15px;
 									<p>${cvo.content }</p>
 									<c:if test="${sessionScope.id!=null }">
 									 <p>
-									  <span class="replyclick">Reply</span>
+									  <span class="replyclick" data-value=${cvo.replyno }>Reply</span>
 									</p>
 									</c:if>
 									<c:if test="${sessionScope.id==cvo.id }">
