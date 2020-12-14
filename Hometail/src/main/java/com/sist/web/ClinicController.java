@@ -113,7 +113,7 @@ public String clinicReplyUpdate(ReplyVO vo)
 @RequestMapping("clinic/clinic_reply_delete.do")
 public String clinicReplyDelete(ReplyVO vo)
 {
-	dao.clinicReplyDelete(vo);
+	dao.clinicReplyDelete(vo,vo.getRoot());
 	return "redirect:../clinic/detail.do?no="+vo.getClno();
 }
 @RequestMapping("clinic/clinic_reserve_insert.do")
@@ -145,5 +145,4 @@ public String clinicReply_replyInsert(ReplyVO vo,HttpSession session)
 	dao.clinicReply_replyInsert(vo,vo.getReplyno());
 	return "redirect:../clinic/detail.do?no="+vo.getClno();
 }
-
 }

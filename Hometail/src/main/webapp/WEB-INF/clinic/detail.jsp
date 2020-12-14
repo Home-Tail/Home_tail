@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+	var coords;
 	let u = 0;
 	$(function() {
 		$('.updates').hide();
@@ -30,6 +31,14 @@
 				u = 0;
 			}
 		});
+		$("#clinicModal").on('shown.bs.modal', function(){
+  		  map.relayout();
+  		  console.log(coords);
+  		  console.log('test');
+  		  map.setCenter(coords); //이게 안먹히는거?웅 coords가 저게 relayout되고나서 값이 찍히는건가1도모르겠네 자맘ㄴ
+  		  console.log('goooood');
+  		  });
+		
 	})
 	
 	
@@ -77,11 +86,11 @@ $(function(){
 	})
 })
 
-$("#clinicModal").on('shown.bs.modal', function(){
-	clinicMap.relayout();
-            });
 </script>
 <style type="text/css">
+.modify{
+text-align: right;
+}
 .btn {
 	border: 2px solid black;
 	background-color: white;
@@ -260,29 +269,38 @@ border-radius: 15px;
 						<c:forEach var="cvo" items="${clist }">
 							<li class="comment">
 								<div class="comment-body">
+								<c:if test="${cvo.group_tap>0 }">
+										<c:forEach var="i" begin="1" end="${rvo.group_tab }">
+							               &nbsp;&nbsp;&nbsp;&nbsp;
+							             </c:forEach>
+									</c:if>
+								<c:if test="${cvo.group_tap==0}">
 									<h5>${cvo.id }</h5>
 									<div class="meta mb-2">
 										<fmt:formatDate value="${cvo.regdate }" pattern="YYYY-MM-dd" />
 									</div>
 									<p>${cvo.content }</p>
-									<c:if test="${sessionScope.id!=null }">
-									 <p>
-									  <span class="replyclick" data-value=${cvo.replyno }>Reply</span>
-									</p>
 									</c:if>
+									
+									<c:if test="${sessionScope.id!=null }">
 									<c:if test="${sessionScope.id==cvo.id }">
-										<span value="${cvo.replyno}" class="btn btn-xs up" id="btn3">수정</span>
+									<div class="modify">
+										<span class="replyclick" data-value=${cvo.replyno } class="btn btn-xs" id="btn3">답글</span>
+										<span value="${cvo.replyno}" class="btn btn-xs up" id="btn3" >수정</span>
 										<a href="../clinic/clinic_reply_delete.do?clno=${cvo.clno }&replyno=${cvo.replyno}"
 											class="btn btn-xs" id="btn3">삭제</a>
+									</div>
 									</c:if>
+									</c:if>
+									
+									  
 									<div class="comment-form-wrap pt-5 reply_reply" id="rIn${cvo.replyno }" value="${cvo.replyno }">
-										<form method="post"
-											action="../clinic/clinicReply_replyInsert.do">
+										<form method="post" action="../clinic/clinicReply_replyInsert.do">
 											<input type="hidden" name="clno" value="${vo.clno }">
-											<input type="hidden" name="replyno" value="${cvo.replyno}"> 
+											<input type="hidden" name="replyno" value="${cvo.replyno}">
+											<label for="message">Message</label> 
 											<div class="form-group">
-												<textarea name="content" cols="30" rows="2"
-													class="form-control" required>★</textarea>
+												<textarea name="content" cols="30" rows="2" class="form-control" required>★</textarea>
 											</div>
 											<div class="form-group text-right">
 												<input type="submit" value="대댓달아" class="reply">
@@ -296,22 +314,19 @@ border-radius: 15px;
 				
 				<div class="comment-form-wrap pt-5 updates" id="u${cvo.replyno }"
 					value="${cvo.replyno }">
-					<h3 class="mb-5 h4 font-weight-bold">update a comment</h3>
-					<form method="post" action="../clinic/clinic_reply_update.do"
-						class="p-5 bg-light">
-						<input type="hidden" name="clno" value="${cvo.clno }"> <input
-							type="hidden" name="replyno" value="${cvo.replyno}">
+					<h3 class="h4 font-weight-bold">update a comment</h3>
+					<form method="post" action="../clinic/clinic_reply_update.do">
+						<input type="hidden" name="clno" value="${cvo.clno }"> 
+						<input type="hidden" name="replyno" value="${cvo.replyno}">
 						<div class="form-group">
 							<label for="message">Message</label>
-							<textarea name="content" cols="30" rows="3" class="form-control">${cvo.content }</textarea>
+							<textarea name="content" cols="30" rows="3" class="form-control" required>${cvo.content }</textarea>
 						</div>
 						<div class="form-group">
-							<input type="submit" value="Post Comment" class="btn py-3 px-4 "
-								id="btn2">
+							<input type="submit" value="수정하기" class="btn btn-xs " id="btn3">
 						</div>
 					</form>
-				</div>
-
+					</div>
 				</c:forEach>
               </ul>
 				</div>
@@ -324,9 +339,9 @@ border-radius: 15px;
 	
 	<!-- 모달 섹션 -->
 	 <!-- Map Modal -->
-  <div class="modal fade" id="clinicModal">
+  <div class="modal" id="clinicModal">
     <div class="modal-dialog">
-      <div class="modal-content" style="width:600px; height:650px;">
+      <div class="modal-content" style="width:600px; height:600px;">
       
         <!-- Modal Header -->
         <div class="modal-header">
@@ -337,54 +352,50 @@ border-radius: 15px;
         <!-- Modal body -->
         <div class="modal-body">
           
-          <div id="clinicMap" style="width:470px; height:500px;"></div>
-
-				<script type="text/javascript"
-					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=18b988d228ba568335019cf062c1ebf7&libraries=services"></script>
-				<script>
-	 				var mapContainer = document.getElementById('clinicMap'), // 지도를 표시할 div  
-					mapOption = {
-	 					center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표 
-	 					level : 3 
-	 				// 지도의 확대 레벨
-	 				}; 
-
-	 				// 지도를 생성합니다    
-	 				var clinicMap = new kakao.maps.clinicMap(mapContainer, mapOption);
- 				// 주소-좌표 변환 객체를 생성합니다 
-					var geocoder = new kakao.maps.services.Geocoder(); 
-
-	 				// 주소로 좌표를 검색합니다 
-	 				geocoder 
-	 						.addressSearch(
-									'${vo.addr}',
-									function(result, status) { 
-
-	 									// 정상적으로 검색이 완료됐으면  
-	 									if (status === kakao.maps.services.Status.OK) { 
-
-	 										var coords = new kakao.maps.LatLng( 
-	 												result[0].y, result[0].x); 
-
-	 										clinicMap.reload();
-	 										// 결과값으로 받은 위치를 마커로 표시합니다 
-	 										var marker = new kakao.maps.Marker({ 
-	 											clinicMap : clinicMap, 
-	 											position : coords 
-	 										}); 
-												
-	 										// 인포윈도우로 장소에 대한 설명을 표시합니다 
-	 										var infowindow = new kakao.maps.InfoWindow( 
-	 												{ 
-	 													content : '<div style="width:150px;text-align:center;padding:6px 0;">${vo.title}</div>'
-	 												}); 
-	 										infowindow.open(clinicMap, marker); 
-
-											// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다 -
-	 										clinicMap.setCenter(coords); 
-	 									} 
-	 								}); 
-	 			</script> 
+          <div id="clinicmap" style="width:100%;height:400px;"></div> 
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=18b988d228ba568335019cf062c1ebf7&libraries=services"></script>
+			<script>
+			var mapContainer = document.getElementById('clinicmap'), // 지도를 표시할 div 
+			    mapOption = {
+			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			        level: 3 // 지도의 확대 레벨
+			    };  
+			
+			// 지도를 생성합니다    
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+			
+			// 주소-좌표 변환 객체를 생성합니다
+			geocoder = new kakao.maps.services.Geocoder();
+			
+			// 주소로 좌표를 검색합니다
+			geocoder.addressSearch("${vo.addr}", function(result, status) {
+			
+				 
+			    // 정상적으로 검색이 완료됐으면 
+			     if (status === kakao.maps.services.Status.OK) {
+			
+			    	coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+			    	console.log(coords);
+			
+			        // 결과값으로 받은 위치를 마커로 표시합니다
+			        var marker = new kakao.maps.Marker({
+			            map: map,
+			            
+			            position: coords
+			        });
+			
+			        // 인포윈도우로 장소에 대한 설명을 표시합니다
+			        var infowindow = new kakao.maps.InfoWindow({
+			            content: '<div style="width:150px;text-align:center;">${vo.title}</div>'
+			        });
+			        infowindow.open(map, marker);
+				
+			        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+			        //그래서 모달창띄울때 relayout 하는거 일테고
+			        map.setCenter(coords); //이게 안먹히는거?웅 coords가 저게 relayout되고나서 값이 찍히는건가1도모르겠네 자맘ㄴ
+ 			    } 
+			});    
+			</script>
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">

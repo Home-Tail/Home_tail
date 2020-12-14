@@ -46,9 +46,10 @@ public class ClinicDAO {
 	{
 		mapper.clinicReplyUpdate(vo);
 	}
-	public void clinicReplyDelete(ReplyVO vo)
+	public void clinicReplyDelete(ReplyVO vo,int root)
 	{
 		mapper.clinicReplyDelete(vo);
+		mapper.clinicReplyDepthDecrement(root);
 	}
 	//============== 대댓글
 	public void clinicReply_replyInsert(ReplyVO vo,int root)
@@ -66,10 +67,7 @@ public class ClinicDAO {
 		mapper.clinicReplyDepthUpdate(root);
 		System.out.println("왜안되는지 말이라도 해줬으면 싶다");
 	}
-	public void clinicReply_replyDelete(int root)
-	{
-		mapper.clinicReplyDepthDecrement(root);
-	}
+
 	//========예약
 	public void clinicReserveInsert(ReserveVO rvo)
 	{
