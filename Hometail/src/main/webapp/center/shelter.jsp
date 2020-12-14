@@ -235,8 +235,9 @@ $(function(){
 				<input type="submit"  class="btn btn-primary" value="요청하기">
 				</form>
 			</div>		
-			<div class="map_wrap col-lg-6" style="float: left; padding-top: 100px;" >
-						
+			<div class="col-lg-6" style="float: left; padding-top: 100px;" >
+					<div id="root"></div>
+		            <script src="../center_news/center_news.js"></script>
 			</div>		
 		</div>		
 					

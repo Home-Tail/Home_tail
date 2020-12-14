@@ -102,12 +102,25 @@ $(function(){
 	})
         
 });
+function ch_color(target,bgcolor){
+	console.log('클릭클릭클릭~');
+	var tbody = target.parentNode;
+	var trs = $('.bg_data');
+	for( var i =0; i<trs.length;i++)
+	{
+		if(trs[i]!=target)
+		{
+			trs[i].style.backgroundColor='';			
+			console.log('찍혀라 제발.');		
+		}
+		else{
+			trs[i].style.backgroundColor= bgcolor;			
+		}
+	}
+}
 </script>
 </head>
 <body>
-<body>
-<div class="contaner">
-<div>
       <h3 class="text-center">${year }년도 ${month }월</h3>
       <table class="table">
         <tr>
@@ -125,7 +138,7 @@ $(function(){
           </td>
         </tr>
       </table>
-      <table class="table table-striped">
+      <table class="table-striped" style="width: 530px;">
         <tr class="danger" style="height:40px">
           <c:forEach var="str" items="${strWeek }" varStatus="s">
             <c:choose>
@@ -139,7 +152,7 @@ $(function(){
                 <c:set var="color" value="black"/>
               </c:otherwise>
             </c:choose>
-            <th class="text-center"><font color="${color }">${str }</font></th>
+            <th class="text-center" bgcolor="#3CA0FF"><font color="${color }">${str }</font></th>
           </c:forEach>
         </tr>
         <c:set var="week" value="${week }"/>
@@ -169,9 +182,9 @@ $(function(){
              <c:set var="bg" value="text-center"/>
            </c:if>
            
-           <td class="${bg }"><font color="${color }" class="rdays_ok" data-year=${year } data-month=${month }>
+           <td class="${bg } bg_data" bgcolor="" onClick="ch_color(this,'#50B4FF');" style="border-radius: 2em;"><font color="${color }" class="rdays_ok" data-year=${year } data-month=${month }>
             <c:if test="${i==rdays[i] }">
-             <span class="rdays_ok" data-year=${year } data-month=${month }>${i }</span>
+             <span class="rdays_ok"  data-year=${year } data-month=${month }>${i }</span>
             </c:if>
             <c:if test="${i!=rdays[i]  }">
              ${i }
@@ -186,9 +199,5 @@ $(function(){
         </c:forEach>
         </tr>
       </table>
-      </div>
-      <div>
-      </div>
-   </div>
 </body>
 </html>

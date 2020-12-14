@@ -30,18 +30,18 @@
 			}
 		});
 		
-// 		뉴스 가져오는 부분
-		$('.b_news').click(function(){
-			$.ajax({
-				type:'POST',
-				url:'../board/news_list.do',
-				success:function(res)
-				{
-// 					$('#print').html(res);
-					console.log('성공');
-				}
-			});
-		})
+// // 		뉴스 가져오는 부분
+// 		$('.b_news').click(function(){
+// 			$.ajax({
+// 				type:'POST',
+// 				url:'../board/news_list.do',
+// 				success:function(res)
+// 				{
+// // 					$('#print').html(res);
+// 					console.log('성공');
+// 				}
+// 			});
+// 		})
 		$('.cate').click(function(){
 			no=$(this).attr("value");
 			console.log(no+'클릭');
@@ -77,7 +77,7 @@
               <ul class="categories">
                 <li><span class="btn cate" value="1" >자유게시판</span></li>
                 <li><span class="btn cate" value="2">입양후기</span>
-                <li><span class="btn b_news" value="3">유기동물 소식</span>
+                <li><span class="btn cate" value="3">유기동물 소식</span>
                 <li><span class="btn cate" value="4">Q&A</span>
               </ul>
             </div>

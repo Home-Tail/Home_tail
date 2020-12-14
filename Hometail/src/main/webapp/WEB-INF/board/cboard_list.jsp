@@ -194,6 +194,11 @@
              </div>
            </div>
 		</c:if>
+		<div id="root">
+		</div>
+		<c:if test="${no==3 }">
+			  <script src="../board_news/board_news.js"></script>
+		</c:if>
 		<c:if test="${no==4 }">
 		<c:if test="${sessionScope.id!=null }">
 		       <table class="table">

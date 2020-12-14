@@ -20,19 +20,23 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.dao.CenterServiceDAO;
+import com.sist.news.Item;
+import com.sist.news.NewsManager;
 import com.sist.vo.CenterVO;
 import com.sist.vo.Center_reserveVO;
 
 import twitter4j.JSONArray;
-
+	
 @Controller
 @RequestMapping("center/")
 public class CenterServiceController {
 	@Autowired
 	private CenterServiceDAO dao;
+	
 	@RequestMapping("service.do")
 	public String board_list(Model model, String data,HttpServletRequest request)
 	{
@@ -49,10 +53,53 @@ public class CenterServiceController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} // 한글 디코딩
+		
 		//=====================================
+		List<CenterVO> list = dao.center_hospital();
+		JSONObject hospital_data = new JSONObject();
+		org.json.simple.JSONArray js = new org.json.simple.JSONArray();
+		for(CenterVO vo:list)
+		{
+//			System.out.println("좌표"+vo.getWgs84_x());
+//			System.out.println("좌표"+vo.getWgs84_y());
+			
+			JSONObject center_hospital = new JSONObject();
+			center_hospital.put("NO",""+vo.getNo()+"");
+			center_hospital.put("SHELTER_NAME",vo.getName());
+			center_hospital.put("CITY",vo.getCity()); 
+			center_hospital.put("CAPACITY",vo.getCapacity()); 
+			center_hospital.put("REMINDER",vo.getReminder()); 
+			center_hospital.put("TEL",vo.getTel());
+			center_hospital.put("REPRESENTATIVE", vo.getRepresentative());
+			center_hospital.put("POST",""+vo.getPost()+"");
+			center_hospital.put("POSTER",vo.getPoster());
+			center_hospital.put("LOTNO_ADDR",vo.getLotno_addr());
+			center_hospital.put("ROADNO_ADDR",vo.getRoadno_addr());
+			center_hospital.put("WGS84_X",vo.getWgs84_x());
+			center_hospital.put("WGS84_Y",vo.getWgs84_y());
+			js.add(center_hospital);
+		}
+		hospital_data.put("datas",js.toString());
+		System.out.println("치료병원데이터"+hospital_data);
+		String result = hospital_data.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
+		
+		System.out.println("JSON설정후"+result);
+		File path = new File("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\hospital.json");
+		try {
+			//C:\SpringDev\SpringStudy\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Hometail
+            FileWriter file = new FileWriter("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\hospital.json");
+            BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path.getPath()),"UTF-8"));
+            output.write(result);
+            output.close();
+//            file.write(result);
+//            file.flush();
+//            file.close();
+     } catch(IOException e) {
+            e.printStackTrace();
+     }	
+		
 		return "../center/service";
 	}	
-		
 	@RequestMapping("service_map.do")
 	public String center_service_map(Model model, CenterVO vo,String rday,String time,HttpSession session) {
 		
@@ -98,7 +145,7 @@ public class CenterServiceController {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+			  	}
 			  // 2020-10
 			  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-M-d");
 			  // MM dd (X)  M d 01 ~ 09 10 11 12   09
@@ -291,5 +338,22 @@ public class CenterServiceController {
 		
 		return "redirect:main.do";
 	}
-}		
+	
+	
+	@RequestMapping("graph.do")
+	public String center_graph(String city,Model model)
+	{
+		System.out.println("city는 :"+city);
+		int count_center = dao.count_center(city);
+		int count_center_hospital = dao.count_center_hospital(city);
+		int count_clinic = dao.count_clinic(city);
 		
+		model.addAttribute("shelter",count_center);
+		model.addAttribute("hospital",count_center_hospital);
+		model.addAttribute("clinic",count_clinic);
+		
+		return "center_graph";
+	}
+	
+
+}

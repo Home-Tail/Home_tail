@@ -45,6 +45,9 @@
   <definition name="shelter_find" template="../center/shelter_find.jsp">
   </definition>
   
+  <definition name="center_graph" template="../center/graph.jsp">
+  </definition>
+  
   <!-- 정희진 게시판 -->
   
  <definition name="cboard_list" template="/WEB-INF/board/cboard_list.jsp"> 

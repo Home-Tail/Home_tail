@@ -20,30 +20,129 @@ public class ReactController {
 	@Autowired
 	private NewsManager mgr;
 	@RequestMapping(value="board/news_list.do",produces="text/plain;charset=UTF-8")
-	public String news_list(String page)
+	   public String news_list(String page)
+	   {
+		System.out.println("받은 페이지 "+page);
+		if(page==null)
+			page="1";
+		int curpage = Integer.parseInt(page);
+		int rowSize=9;
+		int start=(rowSize*curpage)-(rowSize-1);
+		int end=rowSize*curpage;
+		
+		String title="";
+		String description="";
+	         List<Item> list=mgr.newsAllData();
+	         String result="";
+	         System.out.println("");
+	         try
+	         {
+	            JSONArray js = new JSONArray();
+	            if(end>list.size())
+	            {
+	            	end = list.size();
+	            }
+//	            for(Item i:list)
+	            for(int i=start;i<=end;i++)
+	            {
+	               list.get(i-1).setDay(new SimpleDateFormat("yyyy-MM-dd").format(new Date(list.get(i-1).getPubDate())));
+	               JSONObject news = new JSONObject();
+	               
+	               try{
+	            	   title = list.get(i-1).getTitle().substring(0,20)+"...";
+	               }catch (Exception e) {
+	            	   title = list.get(i-1).getTitle();
+	               }
+	               try{
+	            	   description = list.get(i-1).getDescription().substring(0,90)+"...";
+	               }catch (Exception e) {
+	            	   description = list.get(i-1).getDescription();
+	               }
+	               
+	               news.put("title", title);
+	               news.put("author", list.get(i-1).getAuthor());
+	               news.put("link", list.get(i-1).getLink());
+	               
+	               news.put("description", description);
+	               news.put("day", list.get(i-1).getDay());
+	               js.add(news);
+	            }
+	            result=js.toJSONString();
+	         }catch(Exception ex){}
+	         return result;
+	   } 
+	@RequestMapping(value="board/total.do",produces="text/plain;charset=UTF-8")
+	public String board_total()
 	{
-			List<Item> list=mgr.newsAllData();
-	//		private String title;
-	//		private String link;
-	//		private String description;
-	//		private String pubDate;
-	//		private String author;
-	//		private String day;
-			
-	//		JSONObject news_data = new JSONObject();
-			JSONArray js = new JSONArray();
-			for(Item i:list)
-			{
-				i.setDay(new SimpleDateFormat("yyyy-MM-dd").format(new Date(i.getPubDate())));
-				JSONObject news = new JSONObject();
-				news.put("TITLE", i.getTitle());
-				news.put("AUTHOR", i.getAuthor());
-				news.put("LINK", i.getLink());
-				news.put("DESCRIPTION", i.getDescription());
-				news.put("DAY", i.getDay());
-				js.add(news);
-			}
-			System.out.println("결과 :"+js);
-			return "news_list";
+		String total="";
+	    
+		List<Item> list=mgr.newsAllData();
+	    total = String.valueOf(Math.ceil(list.size()/9.0));
+	    
+	    return total;
+	}
+	
+	
+	@RequestMapping(value="center/news_list.do",produces="text/plain;charset=UTF-8")
+	   public String center_list(String page)
+	   {
+		System.out.println("받은 페이지 "+page);
+		if(page==null)
+			page="1";
+		int curpage = Integer.parseInt(page);
+		int rowSize=4;
+		int start=(rowSize*curpage)-(rowSize-1);
+		int end=rowSize*curpage;
+		
+		String title="";
+		String description="";
+	         List<Item> list=mgr.newsAllData();
+	         String result="";
+	         System.out.println("");
+	         try
+	         {
+	            JSONArray js = new JSONArray();
+	            if(end>list.size())
+	            {
+	            	end = list.size();
+	            }
+//	            for(Item i:list)
+	            for(int i=start;i<=end;i++)
+	            {
+	               list.get(i-1).setDay(new SimpleDateFormat("yyyy-MM-dd").format(new Date(list.get(i-1).getPubDate())));
+	               JSONObject news = new JSONObject();
+	               
+	               try{
+	            	   title = list.get(i-1).getTitle().substring(0,25)+"...";
+	               }catch (Exception e) {
+	            	   title = list.get(i-1).getTitle();
+	               }
+	               try{
+	            	   description = list.get(i-1).getDescription().substring(0,90)+"...";
+	               }catch (Exception e) {
+	            	   description = list.get(i-1).getDescription();
+	               }
+	               
+	               news.put("title", title);
+	               news.put("author", list.get(i-1).getAuthor());
+	               news.put("link", list.get(i-1).getLink());
+	               
+	               news.put("description", description);
+	               news.put("day", list.get(i-1).getDay());
+	               js.add(news);
+	            }
+	            result=js.toJSONString();
+	         }catch(Exception ex){}
+	         return result;
+	   } 
+	@RequestMapping(value="center/total.do",produces="text/plain;charset=UTF-8")
+	public String center_total()
+	{
+		String total="";
+	    
+		List<Item> list=mgr.newsAllData();
+	    total = String.valueOf(Math.ceil(list.size()/4.0));
+	    
+	    return total;
 	}
 }
