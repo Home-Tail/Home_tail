@@ -47,10 +47,9 @@ public class ReportController2 {
 			if(vo.getCate()==2) json.put("title","[제보] "+vo.getTitle());
 			json.put("cate",vo.getCate());
 			json.put("poster",vo.getPoster());
-			if(vo.getKind()==0) json.put("kind","모든동물");
+			if(vo.getKind()==0) json.put("kind","기타");
 			if(vo.getKind()==1) json.put("kind","개");
 			if(vo.getKind()==2) json.put("kind","고양이");
-			if(vo.getKind()==3) json.put("kind","기타");
 			json.put("sub_kind",vo.getSub_kind());
 			json.put("sex",vo.getSex());
 			json.put("age",vo.getAge());

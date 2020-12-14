@@ -19,7 +19,7 @@ import java.util.*;
  */
 public class ReplyVO {
 	private int replyno,petno,board_no,clno,group_id,group_step,group_tap,root,depth,cate;
-	private String id,loc,maploc,content;
+	private String id,loc,map_x,map_y,content;
 	private Date regdate,rdate;
 	private String db_regdate;
 	
@@ -99,14 +99,20 @@ public class ReplyVO {
 	public String getLoc() {
 		return loc;
 	}
+	public String getMap_x() {
+		return map_x;
+	}
+	public void setMap_x(String map_x) {
+		this.map_x = map_x;
+	}
+	public String getMap_y() {
+		return map_y;
+	}
+	public void setMap_y(String map_y) {
+		this.map_y = map_y;
+	}
 	public void setLoc(String loc) {
 		this.loc = loc;
-	}
-	public String getMaploc() {
-		return maploc;
-	}
-	public void setMaploc(String maploc) {
-		this.maploc = maploc;
 	}
 	public Date getRegdate() {
 		return regdate;
