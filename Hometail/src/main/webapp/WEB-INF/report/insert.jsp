@@ -35,7 +35,7 @@ $(function() {
 			   <td width=85%>
 		         <select name=cate >
 		         	<option value="1">실종</option>
-		         	<option value="2">목격</option>
+		         	<option value="2">제보</option>
 		         </select>
 		       </td>
 		     </tr>
