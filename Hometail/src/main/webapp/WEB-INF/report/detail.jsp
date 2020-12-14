@@ -90,16 +90,13 @@
                 <td width=20%>분류</td>
                 <c:choose>
                  <c:when test="${vo.kind eq 0 }">
-               	  <td width=80%>모든 동물</td>
+               	  <td width=80%>기타</td>
               	 </c:when>
              	 <c:when test="${vo.kind eq 1 }">
                	  <td width=80%>개</td>
               	 </c:when>
               	 <c:when test="${vo.kind eq 2 }">
                	  <td width=80%>고양이</td>
-              	 </c:when>
-              	 <c:when test="${vo.kind eq 3 }">
-               	  <td width=80%>기타</td>
               	 </c:when>
                 </c:choose>
 <%--                 <td width=80%>${vo.kind }</td> --%>
@@ -183,7 +180,7 @@
                	 <c:if test="${sessionScope.id==null }">
 <!-- 	                 <textarea rows="2" cols="70" name="content" style="float: left" placeholder="로그인 후 입력해주세요"></textarea> -->
 					<div class="p-4 bg-light ">
-                    <textarea name="content" id="content" cols="30" rows="3" class="form-control" placeholder="내용을 입력해주세요"></textarea>
+                    <textarea name="content" id="content" cols="30" rows="3" class="form-control" placeholder="로그인 후 입력해주세요"></textarea>
                   </div>
                  </c:if>
                	 <c:if test="${sessionScope.id!=null }">
@@ -248,8 +245,9 @@
                </td>
               </tr>
             </table>
-            
           </div>
+          
+          
           <!-- 	지도		 -->
           <div class="col-md-5">
             <h3>실종 장소</h3>
@@ -301,19 +299,53 @@
         </table>
        <hr>
        
+       
+       
        <!-- 목격했어요!! 			-->
        <!-- Button to Open the Modal -->
        <div style="text-align: right ">
-       <c:if test="${sessionScope.id!=null }">
+       <c:if test="${sessionScope.id==null }">
+       	<button type="button" class="btn btn-info font-weight-bold" data-toggle="modal" data-target="#goawayModal" style="height: 45px; width: 120px; font: 17px Raleway;">
+			  목격했어요!
+		</button>
+		</c:if>
+		<c:if test="${sessionScope.id!=null }">
        	<button type="button" class="btn btn-info font-weight-bold" data-toggle="modal" data-target="#reportModal" style="height: 45px; width: 120px; font: 17px Raleway;">
 			  목격했어요!
 		</button>
 		</c:if>
       </div>
       
+      
+      <!-- 로그인 전 모달 -->
+      <!-- The Modal -->
+	<div class="modal" id="goawayModal">
+	    <div class="modal-dialog" style="max-width:560px;  width: 560px; height: 1000px;">
+	    <div class="modal-content">
+	    
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	      
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	      	<h5 class="mb-3 h5 font-weight-bold" style="text-align: center;">로그인 후 이용해 주세요!</h5>
+	      </div>
+	      
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+<!-- 	        <button type="button" class="btn btn-success" data-dismiss="modal">제보하기</button> -->
+	      </div>
+	      
+	     </div>
+	     </div>
+	 </div>
+	      
+      <!-- 로그인 후 모달 -->
 	<!-- The Modal -->
-	<div class="modal" id="reportModal">
-	  <div class="modal-dialog" style="max-width:560px;  width: 560px; height: 1000px;">
+	    <div class="modal" id="reportModal">
+	    <div class="modal-dialog" style="max-width:560px;  width: 560px; height: 1000px;">
 	    <div class="modal-content">
 	
 	      <!-- Modal Header -->
@@ -321,7 +353,7 @@
 	        <h6 class="modal-title">목격 장소를 검색하시거나 지도에서 클릭해주세요</h6>
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
 	      </div>
-	
+	      
 	      <!-- Modal body -->
 	      <div class="modal-body">
 	        <table class="table ">
@@ -462,7 +494,6 @@
 
 	      <!-- Modal footer -->
 	      <div class="modal-footer">
-	      	
 	        <button type="button" class="btn btn-success" data-dismiss="modal">제보하기</button>
 	      </div>
 	

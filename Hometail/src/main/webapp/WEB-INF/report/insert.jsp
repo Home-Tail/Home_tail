@@ -43,10 +43,9 @@ $(function() {
 		       <th class="danger text-right" width=15%>분류</th>
 		       <td width=85%>
 		         <select name=kind required>
-		         	<option value="0">모든동물</option>
+		         	<option value="0">기타</option>
 		         	<option value="1">개</option>
 		         	<option value="2">고양이</option>
-		         	<option value="3">기타</option>
 		         </select>
 		       </td>
 		     </tr>
