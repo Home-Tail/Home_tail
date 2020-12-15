@@ -190,7 +190,14 @@
        					<table class="table">
        						<tr>
        							<td class="text-left">
-       								→  ${rvo.id }(${rvo.db_regdate })
+       								<c:choose>
+       									<c:when test="${rvo.id eq 'admin' }">
+       										<img src="../img/admin.png" width=25px height=25px> ${rvo.id }(${rvo.db_regdate })
+       									</c:when>
+       									<c:otherwise>
+       										<img src="../img/user.png" width=25px height=25px> ${rvo.id }(${rvo.db_regdate })
+       									</c:otherwise>
+       								</c:choose>
        							</td>
        							<td class="text-right">
        								<c:if test="${sessionScope.id==rvo.id }">
