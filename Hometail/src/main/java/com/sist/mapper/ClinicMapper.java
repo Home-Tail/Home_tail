@@ -37,7 +37,7 @@ public ClinicVO clinicDetailData(int clno);
 		+ ",#{clno},#{id},#{content},SYSDATE,(SELECT NVL(MAX(group_id)+1,1) FROM reply))")
 public void clinicReplyInsert(ReplyVO vo);
 
-@Select("SELECT replyno,clno,id,content,regdate FROM reply WHERE clno=#{clno} ORDER BY group_id DESC,group_step ASC")
+@Select("SELECT replyno,clno,id,content,regdate,group_tap FROM reply WHERE clno=#{clno} ORDER BY group_id DESC,group_step ASC")
 public List<ReplyVO> clinicReplyList(int clno);
 
 @Update("UPDATE reply SET content=#{content} WHERE replyno=#{replyno} AND clno=#{clno}")

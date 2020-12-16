@@ -151,7 +151,9 @@ text-align: right;
 #cldetail{
 border-radius: 15px;
 }
-
+#reply_re{
+padding: 0 0 0 120px;
+}
 </style>
 </head>
 <body>
@@ -268,19 +270,14 @@ border-radius: 15px;
 					<ul class="comment-list">
 						<c:forEach var="cvo" items="${clist }">
 							<li class="comment">
-								<div class="comment-body">
-								<c:if test="${cvo.group_tap>0 }">
-										<c:forEach var="i" begin="1" end="${rvo.group_tab }">
-							               &nbsp;&nbsp;&nbsp;&nbsp;
-							             </c:forEach>
-									</c:if>
-								<c:if test="${cvo.group_tap==0}">
+							<c:choose>		
+							<c:when test="${cvo.group_tap>0 }">
+							<div class="children" id="reply_re">
 									<h5>${cvo.id }</h5>
 									<div class="meta mb-2">
 										<fmt:formatDate value="${cvo.regdate }" pattern="YYYY-MM-dd" />
 									</div>
 									<p>${cvo.content }</p>
-									</c:if>
 									
 									<c:if test="${sessionScope.id!=null }">
 									<c:if test="${sessionScope.id==cvo.id }">
@@ -307,8 +304,45 @@ border-radius: 15px;
 											</div>
 										</form>
 									</div>
-									
 								</div>
+							</c:when>	
+							<c:otherwise>				
+								<div class="comment-body">
+									<h5>${cvo.id }</h5>
+									<div class="meta mb-2">
+										<fmt:formatDate value="${cvo.regdate }" pattern="YYYY-MM-dd" />
+									</div>
+									<p>${cvo.content }</p>
+									
+									<c:if test="${sessionScope.id!=null }">
+									<c:if test="${sessionScope.id==cvo.id }">
+									<div class="modify">
+										<span class="replyclick" data-value=${cvo.replyno } class="btn btn-xs" id="btn3">답글</span>
+										<span value="${cvo.replyno}" class="btn btn-xs up" id="btn3" >수정</span>
+										<a href="../clinic/clinic_reply_delete.do?clno=${cvo.clno }&replyno=${cvo.replyno}"
+											class="btn btn-xs" id="btn3">삭제</a>
+									</div>
+									</c:if>
+									</c:if>
+									
+									  
+									<div class="comment-form-wrap pt-5 reply_reply" id="rIn${cvo.replyno }" value="${cvo.replyno }">
+										<form method="post" action="../clinic/clinicReply_replyInsert.do">
+											<input type="hidden" name="clno" value="${vo.clno }">
+											<input type="hidden" name="replyno" value="${cvo.replyno}">
+											<label for="message">Message</label> 
+											<div class="form-group">
+												<textarea name="content" cols="30" rows="2" class="form-control" required>★</textarea>
+											</div>
+											<div class="form-group text-right">
+												<input type="submit" value="대댓달아" class="reply">
+											</div>
+										</form>
+									</div>
+								</div>
+								<!-- 여기 -->
+								</c:otherwise>
+								</c:choose>
 							</li>
 
 				

@@ -53,6 +53,9 @@ public String clinic_list(String page,Model model)
 		endPage=totalPage;
 	}
 	
+	
+	
+	
 	model.addAttribute("startPage", startPage);
 	model.addAttribute("endPage", endPage);
 	model.addAttribute("curpage", curpage);
