@@ -18,19 +18,38 @@ div.containerX a
   border: thick double #A9A9A9;
 
 }
-
-#new
+div.containerX a:hover
+{
+   
+ border: thick double #EDA900;
+ 
+}
+/* #new
 {
   background-color:#ff4500;
   color:#FFFFFF  ;
-}
+} */
 </style>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 
-$.ajaxSettings.traditional = true;
 $(function() {
+	
+	// 로그인 안했을때 글등록하기 버튼 미노출
+	$('#new').click(function(){
+		console.log('등록하기 클릭');
+	$.ajax({
+		type:'POST',
+		/* data:{cate:cate}, */
+		url:'../temp/insert.do',
+		success:function(result)
+		{
+			$('#tagin').html(result);
+		}
+	});
+});
+	
 	//버튼 누를때마다 카테고리 변경 용도
 	$('div .containerX a').click(function(){
 		cate=$(this).attr("cate");
@@ -45,38 +64,6 @@ $(function() {
 				}
 			})	
 	});
-})
-	// 로그인 안했을때 글등록하기 버튼 미노출
-	$(function(){
-	
-			
-			$('#new').click(function(){
-				console.log('등록하기 클릭');
-			$.ajax({
-				type:'POST',
-				/* data:{cate:cate}, */
-				url:'../temp/insert.do',
-				success:function(result)
-				{
-					$('#tagin').html(result);
-				}
-			});
-		});
-			
-			
-		/* 	$('#new').click(function(){
-				$.ajax({
-					type:'POST',
-					url:'../temp/insert.do',
-					data:{petno:petno},
-					success:function(res)
-					{
-						$('#print').html(res);
-					}
-				})	
-				});
-			 */
-	
 	//페이지 넘기는 용도
 	$('li').click(function(){
 		let page=$(this).attr("page");
@@ -104,12 +91,12 @@ $(function() {
            <a cate=5 class="btn btn-sm py-2 px-3" >보호중</a>
            <a cate=6 class="btn btn-sm py-2 px-3" >보호요청</a>
               <c:if test="${sessionScope.id!=null }">
-                   <span class="btn btn-sm py-2 px-4" id="new" style="float:right;">등록하기</span>
+                   <span class="btn btn-sm btn-primary py-2 px-4" id="new" style="float:right;">등록하기</span>
              </c:if>    
          </div>
          </div>
            <c:forEach items="${list }" var="vo"  >
-               
+
 					<div class="col-md-3 ftco-animated">
 			   		<div class="blog-entry">
 						   			<!----------사진 출력 코드  ----------------->
@@ -129,21 +116,18 @@ $(function() {
 				        <div class="desc pl-4XX" style="width: calc(100%);">
 			     
 			        <c:if test="${vo.cate==5 }">
-			         <h5><a href="../temp/detail.do?no=${vo.petno }" ></a></h5>
 			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;" ><b><span style="color:#0000ff;">[보호중]</span>${vo.title }</b></a></h6>
 			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;">${vo.loc }</a></h6>
 			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;">발견날짜 : <fmt:formatDate pattern="yyyy-MM-dd " value="${vo.pdate}" /></a></h6>
 			         </c:if>
 			         
-			         <c:if test="${vo.cate==6 }">
-			         <h5><a href="../temp/detail.do?no=${vo.petno }" ></a></h5>
+			         <c:if test="${vo.cate==6 }">		     
 			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;" ><b><span style="color:#FF0000;">[보호요청] </span>${vo.title }</b></a></h6>
 			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;">${vo.loc }</a></h6>
 			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;">발견날짜 : <fmt:formatDate pattern="yyyy-MM-dd " value="${vo.pdate}" /></a></h6>
 			         </c:if>
 			         
 			         <c:if test="${vo.cate==7 }">
-			         <h5><a href="../temp/detail.do?no=${vo.petno }" ></a></h5>
 			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;" ><b><span style="color:#3cb371;">[찾았어요] </span>${vo.title }</b></a></h6>
 			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;">${vo.loc }</a></h6>
 			         <h6><a href="../temp/detail.do?no=${vo.petno }" style="color: black;">발견날짜 : <fmt:formatDate pattern="yyyy-MM-dd " value="${vo.pdate}" /></a></h6>

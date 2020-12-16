@@ -1,22 +1,26 @@
 package com.sist.web;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.dao.TempDAO;
+import com.sist.vo.ReplyVO;
 import com.sist.vo.TempVO;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class TempController {
@@ -28,7 +32,7 @@ public class TempController {
 	{
 		return "temp/main";
 	}
-
+	
 	@RequestMapping("temp/list.do")
 	public String Temp_list(String page, int cate, Model model) {
 
@@ -96,6 +100,10 @@ public class TempController {
 	public String Temp_Detail(String no, Model model) {
 		
 		TempVO vo = dao.TempDetailData(Integer.parseInt(no));
+		
+		List<ReplyVO> trList = dao.TempreplyListData(Integer.parseInt(no));
+		System.out.println("사이즈"+trList.size());
+		model.addAttribute("trList",trList);
 		model.addAttribute("vo", vo);
 
 		return "temp/detail";
@@ -137,7 +145,6 @@ public class TempController {
 		
 		int size = 1024 * 1024 * 100;
 		MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
-		
 		
 /*		String str = request.getParameter("str");
 		if(str == null || str.trim().equals("")){
@@ -186,9 +193,9 @@ public class TempController {
 		System.out.println("update호출!!");
 		System.out.println("petno"+petno);
 		TempVO vo = dao.TempDetailData(petno);
-		
+		System.out.println("vo"+vo.getContent());
 		model.addAttribute("vo",vo);
-		  return "temp_update";
+		  return "temp/update";
 	   }
 	
 	 @RequestMapping("temp/update_ok.do")
@@ -202,8 +209,8 @@ public class TempController {
 				e.printStackTrace();
 			   }
 		   
-//		   String path="C:\\Users\\YOONDO\\springDev\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\TempPoster"; 
-		   String path="C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\TempPoster"; 
+		   String path="C:\\Users\\YOONDO\\springDev\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\TempPoster"; 
+//		   String path="C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\TempPoster"; 
 		   File Folder = new File(path);
 
 			// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.
@@ -221,7 +228,9 @@ public class TempController {
 			
 			String enctype= "UTF-8";  
 			int size = 1024 * 1024 * 100;
+			System.out.println("돌아감");
 			MultipartRequest mr = new MultipartRequest(request, path, size, enctype, new DefaultFileRenamePolicy());
+			System.out.println("돌아감2");
 			
 			System.out.println(mr.getParameter("no"));
 			System.out.println(mr.getParameter("db_pdate"));
@@ -262,7 +271,72 @@ public class TempController {
 	      dao.TempDeleteData(petno);
 	      return "redirect:../temp/main.do";
 	   }
-
+	   
+	   
+	   // 대댓글
+	   @RequestMapping("temp/reply_reply_insert.do")
+	   public String temp_reply_reply_insert(ReplyVO vo,HttpSession session)
+	   {
+		   String id= String.valueOf(session.getAttribute("id"));
+		   vo.setId(id);
+		   
+			System.out.println("temp 대댓글");
+			System.out.println(vo.getReplyno());
+			System.out.println(vo.getPetno());
+			System.out.println(vo.getId());
+			System.out.println(vo.getContent());
+			dao.TempReply_reply_Insert(vo,vo.getReplyno());
+			
+		   return "redirect:../temp/detail.do?no="+vo.getPetno();
+		   
+	   }
+	   
+	   //댓글 입력
+	   @RequestMapping("temp/reply_insert.do")
+	   public String temp_reply_insert(int petno,String content,HttpServletRequest request)
+	   {
+		   
+		   ReplyVO rvo=new ReplyVO();
+		   //vo.setRoot(Integer.parseInt(no));
+		  
+		   HttpSession session=request.getSession();
+		   String id=(String)session.getAttribute("id");
+		
+		   rvo.setId(id);
+		   rvo.setPetno(petno);
+		   rvo.setContent(content);
+		   // DB연동 
+		   dao.TempreplyInsertData(rvo);
+		   return "redirect:../temp/detail.do?no="+petno;
+	   }
+	   
+	   @RequestMapping("temp/reply_update.do")
+	   public String reply_update(int petno, HttpServletRequest request)
+	   {
+		  
+		   ReplyVO rvo=new ReplyVO();
+		   /*String id=request.getParameter("id");
+		   String bno=request.getParameter("bno");
+		   String msg=request.getParameter("msg");
+		   // DB => UPDATE
+		   ReplyVO rvo=new ReplyVO();
+		   rvo.setPetno(petno);
+		   rvo.setContent(content);*/
+		   
+		   dao.TempreplyUpdateData(rvo);
+		   return "redirect:../temp/detail.do?no="+petno;
+	   }
+	   
+	   @RequestMapping("temp/reply_delete.do")
+	   public String reply_delete(int replyno,int petno,HttpServletRequest request)
+	   {
+		   ReplyVO rvo=new ReplyVO();
+		   
+		   dao.TempreplyDeleteData(replyno);
+		   return "redirect:../temp/detail.do?no="+petno;
+	   }
+		
+		
 
 }
 

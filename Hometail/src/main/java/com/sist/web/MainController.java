@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.dao.CenterServiceDAO;
 import com.sist.dao.MemberDAO;
+import com.sist.dao.TempDAO;
 import com.sist.vo.Center_reserveVO;
+import com.sist.vo.TempVO;
 
 import java.util.*;
 
@@ -17,15 +19,17 @@ import javax.servlet.http.HttpSession;
 public class MainController {
 	@Autowired
 	private CenterServiceDAO dao;
+	@Autowired
+	private TempDAO tdao;
 	
 	@RequestMapping("main/main.do")
-	public String main_main(String page, Model model, HttpSession session) {
+	public String main_main(String page, Model model, HttpSession session, Map map) {
 		System.out.println("아이디" + session.getAttribute("id"));
 		System.out.println("이름" + session.getAttribute("name"));
 		int count=0;
 		List<Center_reserveVO> rlist = new ArrayList<Center_reserveVO>();
 		
-		
+
 		if(session.getAttribute("id")!=null)
 		{
 			String id = String.valueOf(session.getAttribute("id"));
@@ -36,6 +40,12 @@ public class MainController {
 		}
 		model.addAttribute("rlist",rlist);
 		model.addAttribute("count",count);
+
+		// 임시보호
+		List<TempVO> tList = tdao.tempMainList(map);
+		System.out.println("됩니당");
+		model.addAttribute("tList",tList);
+		
 		return "main";
 	}
 

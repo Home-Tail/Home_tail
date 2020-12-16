@@ -1,21 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#tempup').click(function(){
+		  var form = $('#updateForm')[0];
+		   var formData = new FormData(form);
+			 $.ajax({
+				type:'POST',
+				url:'../temp/update_ok.do',
+				contentType : false,
+				processData : false,
+				data : formData,
+				success:function(result) 
+				{
+					$('#tagin').html(result);
+				}
+			}); 
+	});
+});
+</script> -->
 </head>
 <body>
-<!--  enctype="multipart/form-data" -->
    <div class="container">
    <h1  class="text-left">수정하기</h1>
     <div class="row">
-     <form method="post" action="update_ok.do" enctype="multipart/form-data">
+     <form action="update_ok.do" enctype="multipart/form-data"  method="post">
      <table class="table">
      
-    <!--  <tr>
+    <!--  <tr> 
         <th class="text-center danger" width=15%>번호</th>
         <td width=20%>
           <input type=text name=petno size=5>
@@ -97,6 +118,16 @@
           <textarea rows="10" cols="100" name=content>${vo.content }</textarea>
         </td>
        </tr>
+       
+<%--        <c:if test="${!empty vo.poster }"> --%>
+<!-- 	      <tr> -->
+<!-- 		     <th class="text-center danger" width=20%>첨부파일</th> -->
+<!-- 		     <td> -->
+<%-- 		     <input type="file" class="input-sm" name="poster" id="upPoster" value="${vo.poster }"> --%>
+		      
+<!-- 		      </td> -->
+<!-- 	     </tr> -->
+<%-- 	     </c:if>  --%>
       <tr>
       <th class="text-center danger" >첨부파일</th>
       <td>
