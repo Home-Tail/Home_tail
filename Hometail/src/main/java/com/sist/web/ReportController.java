@@ -113,12 +113,17 @@ public class ReportController {
 		System.out.println("report_deatil.do 실행");
 		System.out.println("no: "+no);
 		int petno=Integer.parseInt(no);
+		
 		ReportVO vo=dao.reportDetailData(petno);
+		
 		List<ReplyVO> rList=dao.replyListData(petno);	
-		System.out.println("relist: "+rList.size());
+		
+		List<ReplyVO> frList=dao.findReplyListData(petno);
+		System.out.println("frList: "+frList.size());
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("rList", rList);
+		model.addAttribute("frList", frList);
 		return "report/detail";
 	}
 	
@@ -328,6 +333,67 @@ public class ReportController {
 		dao.replyUpdateData(rvo);
 		return "redirect:../report/detail.do?no="+petno;
 	}
+	
+	
+	
+		// 목격댓글
+		@RequestMapping("report/find_reply_insert.do")
+		public String report_find_reply_insert(int petno,String pdate, String content,String loc,String map_x2,String map_y2,HttpSession session){
+			
+			System.out.println("find_reply_insert.do실행");
+			
+			String id=(String)session.getAttribute("id");
+//			System.out.println("id: "+id);
+//			System.out.println("petno: "+petno);
+//			System.out.println("content: "+content);
+//			System.out.println("pdate: "+pdate);
+//			System.out.println("loc: "+loc);
+//			System.out.println("map_x: "+map_x2);
+//			System.out.println("map_y: "+map_y2);
+			
+			ReplyVO frvo=new ReplyVO();
+			frvo.setId(id);
+			frvo.setPetno(petno);
+			frvo.setContent(content);
+			frvo.setLoc(loc);
+			frvo.setMap_x(map_x2);
+			frvo.setMap_y(map_y2);
+			dao.findReplyInsertData(frvo);
+			return "redirect:../report/detail.do?no="+petno;
+		}
+		
+		@RequestMapping("report/find_reply_delete.do")
+		public String report_find_reply_delete(String frno,String pno){
+			
+			System.out.println("find_reply_delete.do 실행");
+			System.out.println("frno,pno: "+frno+","+pno);
+			int petno=Integer.parseInt(pno);
+			int replyno=Integer.parseInt(frno);
+			dao.findReplyDeleteData(replyno);
+			return "redirect:../report/detail.do?no="+petno;
+		}
+		
+		@RequestMapping("report/find_reply_update.do")
+		public String report_find_reply_update(String frno,String pno,String pdate,String content,String loc,String map_x2,String map_y2){
+			
+			System.out.println("find_reply_update.do 실행");
+			System.out.println("frno,pno: "+frno+","+pno);
+			int petno=Integer.parseInt(pno);
+			int replyno=Integer.parseInt(frno);
+			System.out.println("petno: "+petno);
+			System.out.println("replyno: "+replyno);
+			System.out.println("content: "+content);
+			System.out.println("pdate: "+pdate);
+			System.out.println("loc: "+loc);
+			System.out.println("map_x: "+map_x2);
+			System.out.println("map_y: "+map_y2);
+			
+//			ReplyVO frvo=new ReplyVO();
+//			frvo.setContent(content);
+//			frvo.setReplyno(replyno);
+//			dao.findReplyUpdateData(frvo);
+			return "redirect:../report/detail.do?no="+petno;
+		}
 	
 }
 

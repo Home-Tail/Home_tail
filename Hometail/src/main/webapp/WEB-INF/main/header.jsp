@@ -25,6 +25,9 @@
 #sootag{
 	margin: 0 0px 4px 13px;
 }
+.nav-item{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>

@@ -92,7 +92,7 @@ public interface ReportMapper {
 			+ ")")
 	public ReplyVO replyInsertData(ReplyVO vo);
 	
-	@Select("select replyno,id,content,regdate from reply where petno=#{petno}")
+	@Select("select replyno,id,content,regdate from reply where petno=#{petno} and cate=3")
 	public List<ReplyVO> replyListData(int petno);
 	
 	@Select("delete from reply where replyno=#{replyno}")
@@ -101,6 +101,30 @@ public interface ReportMapper {
 	@Select("update reply set content=#{content},regdate=sysdate where replyno=#{replyno}")
 	public ReplyVO replyUpdateData(ReplyVO rvo);
 	
+	
+	
+	//	목격했어요!(댓글) (replyno),petno,loc,map_x,map_y,content,(id)
+	@Select("insert into reply(replyno,petno,id,cate,content,regdate,loc,map_x,map_y) values( "
+			+ "(select nvl(max(replyno+1),1) FROM reply)"
+			+ ",#{petno}"
+			+ ",#{id}"
+			+ ",4"
+			+ ",#{content}"
+			+ ",sysdate"
+			+ ",#{loc}"
+			+ ",#{map_x}"
+			+ ",#{map_y}"
+			+ ")")
+	public ReplyVO findReplyInsertData(ReplyVO vo);
+	
+	@Select("select replyno,id,content,regdate,loc,map_x,map_y from reply where petno=#{petno} and cate=4")
+	public List<ReplyVO> findReplyListData(int petno);
+	
+	@Select("delete from reply where replyno=#{replyno}")
+	public ReplyVO findReplyDeleteData(int replyno);
+	
+	@Select("update reply set content=#{content},regdate=sysdate where replyno=#{replyno}")
+	public ReplyVO findReplyUpdateData(ReplyVO frvo);
 	
 	
 }

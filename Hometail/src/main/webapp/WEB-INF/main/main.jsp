@@ -77,7 +77,6 @@
     			success:function(res)
     			{
     				let no=res.trim();
-    				alert(no);
     				if(no==1)
     				{
     					$('#result').text("ID가 존재하지 않습니다");

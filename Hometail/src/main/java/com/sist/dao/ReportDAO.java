@@ -73,4 +73,22 @@ public class ReportDAO {
     	 return mapper.replyUpdateData(rvo);
      }
      
+     // 목격 댓글
+     public ReplyVO findReplyInsertData(ReplyVO frvo){
+    	 return mapper.findReplyInsertData(frvo);
+     }
+     
+     public List<ReplyVO> findReplyListData(int petno)
+     {
+  	   return mapper.findReplyListData(petno);
+     }
+     
+     public ReplyVO findReplyDeleteData(int replyno){
+    	 return mapper.findReplyDeleteData(replyno);
+     }
+     
+     public ReplyVO findReplyUpdateData(ReplyVO frvo){
+    	 return mapper.findReplyUpdateData(frvo);
+     }
+     
 }

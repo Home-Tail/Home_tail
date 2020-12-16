@@ -7,14 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
       let u=0;
+
       $(function(){
     	  $('.up').click(function(){
     		 $('.updates').hide();
     		 let no=$(this).attr("value");
+    		 console.log('up');
     		 if(u==0)
     		 {
     			 $('#u'+no).show();
@@ -32,6 +34,31 @@
     	  $("#reportModal").on('shown.bs.modal', function(){
     		  reportmap.relayout();
     		  });
+    	  
+    	  $("#replyModal").on('shown.bs.modal', function(){
+    		  reportmap.relayout();
+    		  });
+    	  
+       let u2=0;
+    	  
+        	  $('.up2').click(function(){
+        		 $('.updates2').hide();
+        		 let no=$(this).attr("value");
+        		 console.log('up2');
+        		 if(u2==0)
+        		 {
+        			 $('#u2'+no).show();
+        			 $(this).text("취소");
+        			 u2=1;
+        		 }
+        		 else
+        		 {
+        			 $('#u2'+no).hide();
+        			 $(this).text("수정");
+        			 u2=0;
+        		 }
+        	  });
+    	  
     	  
       })
 </script>
@@ -164,33 +191,17 @@
 			
 			<div class="comment-form-wrap pt-5">
                 <h4 class="mb-3 h4 font-weight-bold">댓글</h4>
-<!--                 <form action="#" class="p-4 bg-light"> -->
-<!--                   <div class="form-group "> -->
-<!--                     <label for="message">Message</label> -->
-<!--                     <textarea name="content" id="content" cols="30" rows="3" class="form-control" placeholder="내용을 입력해주세요"></textarea> -->
-<!--                   </div> -->
-<!--                   <div style="text-align:right;"> -->
-<!--                     <input type="submit" value="입력" class="btn py-1 px-3 btn-primary"> -->
-<!--                   </div> -->
-<!--                 </form> -->
-              
             <table class="table">
               <tr>
                <td>
                	 <c:if test="${sessionScope.id==null }">
-<!-- 	                 <textarea rows="2" cols="70" name="content" style="float: left" placeholder="로그인 후 입력해주세요"></textarea> -->
 					<div class="p-4 bg-light ">
                     <textarea name="content" id="content" cols="30" rows="3" class="form-control" placeholder="로그인 후 입력해주세요"></textarea>
                   </div>
                  </c:if>
                	 <c:if test="${sessionScope.id!=null }">
-<!--                  <form method="post" action="../report/reply_insert.do"> -->
-<%-- 	                 <input type="hidden" name="petno" value="${vo.petno }"> --%>
-<!-- 	                 <textarea rows="2" cols="70" name="content" style="float: left"></textarea> -->
-<!-- 	                  <input type=submit value="댓글쓰기" class="btn btn-sm btn-primary" style="width:100px; height: 67px; margin-left:5px; font: 16px Raleway;" > -->
-<!--                   </form> -->
 				<form action="../report/reply_insert.do" class="p-4 bg-light">
-					<input type="hidden" name="petno" value="${vo.petno }">
+					<input type="hidden" name="petno" id="petno" value="${vo.petno }">
                   <div class="form-group ">
                     <textarea name="content" cols="30" rows="3" class="form-control" placeholder="내용을 입력해주세요"></textarea>
                   </div>
@@ -322,7 +333,7 @@
 	<div class="modal" id="goawayModal">
 	    <div class="modal-dialog" style="max-width:560px;  width: 560px; height: 1000px;">
 	    <div class="modal-content">
-	    
+	    	
 	      <!-- Modal Header -->
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -342,12 +353,14 @@
 	     </div>
 	 </div>
 	      
+	  <!-- (replyno),petno,loc,map_x,map_y,content,(id) -->
       <!-- 로그인 후 모달 -->
-	<!-- The Modal -->
+		<!-- The Modal -->
 	    <div class="modal" id="reportModal">
 	    <div class="modal-dialog" style="max-width:560px;  width: 560px; height: 1000px;">
 	    <div class="modal-content">
 	
+			
 	      <!-- Modal Header -->
 	      <div class="modal-header">
 	        <h6 class="modal-title">목격 장소를 검색하시거나 지도에서 클릭해주세요</h6>
@@ -356,18 +369,21 @@
 	      
 	      <!-- Modal body -->
 	      <div class="modal-body">
+	      
 	        <table class="table ">
-	        	
+	        	<form action="../report/find_reply_insert.do">
 			    <tr>
 			       <td>
+			       <span>목격일: </span>
+			       <input type=date name=pdate class="input-sm" id="pdate" style="margin-right: 182px">
 			       <!-- 입력창 -->
 				   <input type="hidden" name=loc id="sample5_address" readonly="readonly" style="width: 300px">
 				   <input type="hidden" name=map_x2 id="map_x2" value="">
 				   <input type="hidden" name=map_y2 id="map_y2" value="">
-				   <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="width: 90px"><br>
+				   <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="width: 90px;"><br>
 				   
 				   <!-- 지도 -->	
-				   <div id="reportmap" style="width:500px;height:300px;"></div>
+				   <div id="reportmap" style="width:500px;height:300px; margin-top: 5px;"></div>
 						
 						<!-- 주소&지도 스크립트 시작 -->
 						<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -484,23 +500,201 @@
 			       </td>
 			     </tr>
 			     <tr>
-	        		
 	        		<td>
 	        		<textarea rows="3" cols="63" name="content" style="float: left" placeholder="내용을 입력해주세요"></textarea>
 	        		</td>
 	        	</tr>
+	        	<tr>
+	        		<td>
+	        		<input type="hidden" name="petno" value="${vo.petno}">
+	        		<input type="submit" class="btn btn-success"  id="subbtn" value="제보하기"></input>
+	        		</td>
+	        	</tr>
+	        	</form>
 	        </table>
+	        
 	      </div>
 
-	      <!-- Modal footer -->
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-success" data-dismiss="modal">제보하기</button>
-	      </div>
-	
+<!-- 	      Modal footer -->
+<!-- 	      <div class="modal-footer"> -->
+<!-- 	        <input type="submit" class="btn btn-success" data-dismiss="modal" id="subbtn" value="제보하기"></input> -->
+<!-- 	      </div> -->
+			
 	    </div>
 	  </div>
 	</div>
       
+      		<div style="height:50px"></div>
+      		<h5 class="mb-3 h5 font-weight-bold">목격 댓글</h5>
+      		댓글 리스트
+            <table class="table">
+              <tr>
+               <td>
+                 <c:forEach var="frvo" items="${frList }">
+                   <table class="table table-striped">
+                    <tr>
+                     <td class="text-left">◑${frvo.id }(<span style="color:#939782;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${frvo.regdate}" /></span>)</td>
+                     <td class="text-right">
+                      <c:if test="${sessionScope.id==frvo.id }">
+                       <span value="${frvo.replyno }" class="btn py-1 px-2 btn-success up2" style=" font: 10px Raleway;">수정</span>
+                       <a href="../report/find_reply_delete.do?frno=${frvo.replyno }&pno=${vo.petno}" class="btn py-1 px-2 btn-danger" style=" font: 10px Raleway;">삭제</a>
+                      </c:if>
+                     </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                       <pre style="white-space: pre-wrap;border:none;background-color: white" ><span style=" font: 16px Raleway;">${frvo.content }</span></pre>
+                      </td>
+                    </tr>
+                    <tr class="updates2" id="u2${frvo.replyno }" style="display:none">
+		               <td colspan="2">
+		                 <form method="post" action="../report/find_reply_update.do" >
+			                 <input type="hidden" name="pno" value="${vo.petno }">
+			                 <input type="hidden" name="frno" value="${frvo.replyno }">
+			                 <table>
+			                 	<tr>
+			       <td>
+			       <span>목격일: </span>
+			       <input type=date name=pdate class="input-sm" id="pdate" style="margin-right: 182px">
+			       <!-- 입력창 -->
+				   <input type="hidden" name=loc id="sample5_address" readonly="readonly" style="width: 300px" >
+				   <input type="hidden" name=map_x2 id="map_x2" value="${frvo.map_x }">
+				   <input type="hidden" name=map_y2 id="map_y2" value="${frvo.map_y }">
+				   <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="width: 90px;"><br>
+				   
+				   <!-- 지도 -->	
+				   <div id="findreplymap" style="width:200px;height:100px; margin-top: 5px;"></div>
+						
+						<!-- 주소&지도 스크립트 시작 -->
+						<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bf0dee115b69fb07b0a086d4b7d2b75a&libraries=services"></script>
+						<script>
+								var mapContainer = document.getElementById('findreplymap'), // 지도를 표시할 div 
+								mapOption = { 
+								    center: new kakao.maps.LatLng(37.566689, 126.978414), // 지도의 중심좌표
+								    level: 4 // 지도의 확대 레벨
+								};
+						
+						    //지도를 미리 생성
+						    var findreplymap = new kakao.maps.Map(mapContainer, mapOption); 
+						    //주소-좌표 변환 객체를 생성
+						    var geocoder = new kakao.maps.services.Geocoder();
+						    //인포윈도우
+						    var infowindow = new kakao.maps.InfoWindow({zindex:1});
+						    //마커를 미리 생성
+						    var marker = new kakao.maps.Marker({
+						        findreplymap: findreplymap
+						    });
+						    
+						    
+						  	//==========버튼기능 활용시작==========
+						    kakao.maps.event.addListener(findreplymap, 'click', function(mouseEvent) {
+						        searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+						            if (status === kakao.maps.services.Status.OK) {
+						                var detailAddr = !!result[0].road_address ? '<div>도로명 : ' + result[0].road_address.address_name + '</div>' : '';
+						                detailAddr += '<div>지번 : ' + result[0].address.address_name + '</div>';
+						                
+						                var content = '<div class="bAddr" style="padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; ">' +
+						                                detailAddr + 
+						                            '</div>';
+						                
+						                // 클릭한 위도, 경도 정보를 가져옵니다 
+			                            var latlng = mouseEvent.latLng; 
+			                            document.getElementById("map_x2").value=latlng.getLat();
+			                            document.getElementById("map_y2").value=latlng.getLng();
+	
+						                // 마커를 클릭한 위치에 표시합니다 
+						                marker.setPosition(mouseEvent.latLng);
+						                marker.setMap(findreplymap);
+	
+						                // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+						                infowindow.setContent(content);
+						                infowindow.open(findreplymap, marker);
+						                
+										document.getElementById("sample5_address").value=!!result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
+						                
+						            }   
+						        });
+						    });
+						    
+						    function searchAddrFromCoords(coords, callback) {
+						        // 좌표로 행정동 주소 정보를 요청합니다
+						        geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+						    }
+	
+						    function searchDetailAddrFromCoords(coords, callback) {
+						        // 좌표로 법정동 상세 주소 정보를 요청합니다
+						        geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+						    }
+						  	//==========버튼기능 활용끝==========
+						
+						    //==========검색기능 활용시작==========
+						    function sample5_execDaumPostcode() {
+						        new daum.Postcode({
+						            oncomplete: function(data) {
+						                var addr = data.address; // 최종 주소 변수
+						                var roadAddr = data.roadAddress; // 도로명 주소 변수
+						                var extraRoadAddr = ''; // 참고 항목 변수
+						                
+						                var detailAddr = '<div>도로명 : ' + data.roadAddress + '</div>';
+						                detailAddr += '<div>지번 : ' + data.jibunAddress + '</div>';
+						                
+						                var content = '<div class="bAddr" style="padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; ">' +
+						                                detailAddr + 
+						                            '</div>';
+						
+						                // 주소 정보를 해당 필드에 넣는다.
+						                document.getElementById("sample5_address").value = addr;
+						                // 주소로 상세 정보를 검색
+						                geocoder.addressSearch(data.address, function(results, status) {
+						                    // 정상적으로 검색이 완료됐으면
+						                    if (status === daum.maps.services.Status.OK) {
+						                    	findreplymap.setLevel(4);
+						                        var result = results[0]; //첫번째 결과의 값을 활용
+						
+						                        // 해당 주소에 대한 좌표를 받아서
+						                        var coords = new daum.maps.LatLng(result.y, result.x);
+						                        // 지도를 보여준다.
+						                        mapContainer.style.display = "block";
+						                        findreplymap.relayout();
+						                        // 지도 중심을 변경한다.
+						                        findreplymap.setCenter(coords);
+						                        // 마커를 결과값으로 받은 위치로 옮긴다.
+						                        marker.setPosition(coords)
+						                        
+						                        infowindow.setContent(content);
+								                infowindow.open(findreplymap, marker);
+								                
+								                var latlng = findreplymap.getCenter(); 
+					                            document.getElementById("map_x2").value=latlng.getLat();
+					                            document.getElementById("map_y2").value=latlng.getLng();
+						                    }
+						                });
+						            }
+						        }).open();
+						    }
+						  	//==========검색기능 활용끝==========
+						</script>
+						<!-- 주소&지도 스크립트 끝 -->
+	
+			       </td>
+			     </tr>
+			     
+			                 </table>
+							  <div class="form-group ">
+			                    <textarea name="content" cols="30" rows="3" class="form-control" style=" font: 16px Raleway;">${frvo.content }</textarea>
+			                  </div>
+			                  <div style="text-align:right;">
+			                    <input type="submit" value="댓글수정" class="btn py-1 px-2 btn-primary" style=" font: 10px Raleway;">
+			                  </div>
+		                  </form>
+		               </td>
+		              </tr>
+                   </table>
+                 </c:forEach>
+               </td>
+              </tr>
+            </table>
       
       
       </div>
