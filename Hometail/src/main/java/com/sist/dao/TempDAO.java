@@ -87,7 +87,7 @@ public class TempDAO {
 
 
 
-	/*
+	/* 123
 	 * public int tempTotalPage() { return mapper.tempTotalPage(); }
 	 */
 	/*

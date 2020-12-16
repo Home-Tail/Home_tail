@@ -105,7 +105,7 @@ public interface TempMapper {
 	@Update("UPDATE reply SET depth=depth+1 WHERE replyno=#{replyno}")
 	public void TempReplyDepthUpdate(int root);
 	
-	// 메인 출력
+	// 메인 출력 
 	@Select("SELECT * FROM (SELECT * FROM pet_board WHERE cate in(5,6) "
 			+"ORDER BY DBMS_RANDOM.RANDOM) WHERE rownum <= 4")
 	public List<TempVO> tempMainList(Map map); 

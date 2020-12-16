@@ -255,7 +255,7 @@ $(function(){
 				    </table>
 				  </div>	
 
-				<!-----------------목록버튼 ------------- -->
+				<!-----------------목록버튼 --------------->
 				
 				<table class="table">
 				<div class="text-right" style="padding-right:1200px;  margin:10px">

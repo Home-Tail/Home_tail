@@ -321,7 +321,7 @@ public class TempController {
 		   // DB => UPDATE
 		   ReplyVO rvo=new ReplyVO();
 		   rvo.setPetno(petno);
-		   rvo.setContent(content);*/
+		   rvo.setContent(content);* /
 		   
 		   dao.TempreplyUpdateData(rvo);
 		   return "redirect:../temp/detail.do?no="+petno;

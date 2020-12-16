@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-let cate=0;
+let cate=0; 
 $(function() {
 	//시작하자마자 본문에 list.do 내용 출력하는 용도
 	$.ajax({
