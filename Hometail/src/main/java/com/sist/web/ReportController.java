@@ -116,7 +116,11 @@ public class ReportController {
 		
 		ReportVO vo=dao.reportDetailData(petno);
 		
-		List<ReplyVO> rList=dao.replyListData(petno);	
+		List<ReplyVO> rList=dao.replyListData(petno);
+		System.out.println(rList.get(0).getContent());
+		System.out.println(rList.get(0).getGroup_tap());
+		System.out.println(rList.get(1).getGroup_tap());
+		System.out.println(rList.get(2).getGroup_tap());
 		
 		List<ReplyVO> frList=dao.findReplyListData(petno);
 		System.out.println("frList: "+frList.size());
@@ -291,49 +295,38 @@ public class ReportController {
 	
 	// 댓글
 	@RequestMapping("report/reply_insert.do")
-	public String report_reply_insert(int petno,String content,HttpSession session){
-		
-		System.out.println("reply_insert.do실행");
+	public String report_reply_insert(ReplyVO rvo,HttpSession session){
 		
 		String id=(String)session.getAttribute("id");
-		
-		System.out.println("id: "+id);
-		System.out.println("petno: "+petno);
-		System.out.println("content: "+content);
-		
-		ReplyVO rvo=new ReplyVO();
 		rvo.setId(id);
-		rvo.setPetno(petno);
-		rvo.setContent(content);
 		dao.replyInsertData(rvo);
-		return "redirect:../report/detail.do?no="+petno;
+		return "redirect:../report/detail.do?no="+rvo.getPetno();
 	}
 	
 	@RequestMapping("report/reply_delete.do")
-	public String report_reply_delete(String rno,String pno){
-		
-		System.out.println("reply_delete.do 실행");
-		System.out.println("rno,pno: "+rno+","+pno);
-		int petno=Integer.parseInt(pno);
-		int replyno=Integer.parseInt(rno);
-		dao.replyDeleteData(replyno);
-		return "redirect:../report/detail.do?no="+petno;
+	public String report_reply_delete(ReplyVO rvo){
+		dao.replyDeleteData(rvo.getReplyno(),rvo.getRoot());
+		return "redirect:../report/detail.do?no="+rvo.getPetno();
 	}
 	
 	@RequestMapping("report/reply_update.do")
 	public String report_reply_update(String rno,String pno,String content){
-		
-		System.out.println("reply_update.do 실행");
-		System.out.println("rno,pno: "+rno+","+pno);
-		int petno=Integer.parseInt(pno);
 		int replyno=Integer.parseInt(rno);
 		ReplyVO rvo=new ReplyVO();
 		rvo.setContent(content);
 		rvo.setReplyno(replyno);
 		dao.replyUpdateData(rvo);
-		return "redirect:../report/detail.do?no="+petno;
+		return "redirect:../report/detail.do?no="+pno;
 	}
 	
+	@RequestMapping("report/replyReplyInsert.do")
+	public String report_reply_replyInsert(ReplyVO vo,HttpSession session)
+	{
+		String id = (String)session.getAttribute("id");
+		vo.setId(id);
+		dao.replyReplyInsert(vo,vo.getReplyno());
+		return "redirect:../report/detail.do?no="+vo.getPetno();
+	}
 	
 	
 		// 목격댓글

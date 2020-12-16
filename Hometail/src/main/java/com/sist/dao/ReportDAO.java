@@ -56,8 +56,8 @@ public class ReportDAO {
      }
      
      //	댓글
-     public ReplyVO replyInsertData(ReplyVO rvo){
-    	 return mapper.replyInsertData(rvo);
+     public void replyInsertData(ReplyVO rvo){
+    	 mapper.replyInsertData(rvo);
      }
      
      public List<ReplyVO> replyListData(int petno)
@@ -65,13 +65,28 @@ public class ReportDAO {
   	   return mapper.replyListData(petno);
      }
      
-     public ReplyVO replyDeleteData(int replyno){
-    	 return mapper.replyDeleteData(replyno);
+     public void replyDeleteData(int replyno, int root){
+    	 mapper.replyDeleteData(replyno);
+    	 mapper.replyDepthDecrement(root);
      }
      
      public ReplyVO replyUpdateData(ReplyVO rvo){
     	 return mapper.replyUpdateData(rvo);
      }
+     
+     // 대댓글
+     public void replyReplyInsert(ReplyVO vo,int root)
+ 	{
+ 		ReplyVO pvo=mapper.replyParentData(root);
+ 		mapper.replyStepIncrement(pvo);
+ 		
+ 		vo.setGroup_id(pvo.getGroup_id());
+ 		vo.setGroup_step(pvo.getGroup_step()+1);
+ 		vo.setGroup_tap(pvo.getGroup_tap()+1);
+ 		vo.setRoot(root);
+ 		mapper.replyReplyInsert(vo);
+ 		mapper.replyDepthUpdate(root);
+ 	}
      
      // 목격 댓글
      public ReplyVO findReplyInsertData(ReplyVO frvo){

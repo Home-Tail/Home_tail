@@ -1,7 +1,10 @@
 package com.sist.mapper;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.ReplyVO;
 import com.sist.vo.ReportVO;
@@ -82,17 +85,18 @@ public interface ReportMapper {
 	
 	
 	//	댓글
-	@Select("insert into reply(replyno,petno,id,cate,content,regdate) values( "
+	@Select("insert into reply(replyno,petno,id,cate,content,regdate,group_id) values( "
 			+ "(select nvl(max(replyno+1),1) FROM reply)"
 			+ ",#{petno}"
 			+ ",#{id}"
 			+ ",3"
 			+ ",#{content}"
 			+ ",sysdate"
+			+ ",(SELECT NVL(MAX(group_id)+1,1) FROM reply)"
 			+ ")")
 	public ReplyVO replyInsertData(ReplyVO vo);
 	
-	@Select("select replyno,id,content,regdate from reply where petno=#{petno} and cate=3")
+	@Select("select * from reply where petno=#{petno} ORDER BY group_id DESC,group_step ASC")
 	public List<ReplyVO> replyListData(int petno);
 	
 	@Select("delete from reply where replyno=#{replyno}")
@@ -101,6 +105,23 @@ public interface ReportMapper {
 	@Select("update reply set content=#{content},regdate=sysdate where replyno=#{replyno}")
 	public ReplyVO replyUpdateData(ReplyVO rvo);
 	
+	
+	// 대댓글
+	@Select("SELECT group_id,group_step,group_tap FROM reply WHERE replyno=#{replyno}")
+	public ReplyVO replyParentData(int root);
+
+	@Update("UPDATE reply SET group_step=group_step+1 WHERE group_id=#{group_id} AND group_step>#{group_step}")
+	public void replyStepIncrement(ReplyVO vo);
+
+	@Insert("INSERT INTO reply(cate,replyno,petno,id,regdate,content,group_id,group_step,group_tap,root,depth) "
+			+ "VALUES(1,(SELECT NVL(MAX(replyno)+1,1) FROM reply),#{petno},#{id},SYSDATE,#{content},#{group_id},#{group_step},#{group_tap},#{root},0)")
+	public void replyReplyInsert(ReplyVO vo);
+
+	@Update("UPDATE reply SET depth=depth+1 WHERE replyno=#{replyno}")
+	public void replyDepthUpdate(int root);
+
+	@Update("UPDATE reply SET depth=depth-1 WHERE replyno=#{replyno}")
+	public void replyDepthDecrement(int root);
 	
 	
 	//	목격했어요!(댓글) (replyno),petno,loc,map_x,map_y,content,(id)

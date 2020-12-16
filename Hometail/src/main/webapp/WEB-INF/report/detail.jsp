@@ -58,9 +58,48 @@
         			 u2=0;
         		 }
         	  });
-    	  
-    	  
-      })
+});
+      
+let s= 0;
+$(function(){
+	$('.replyclick').click(function(){
+		let test=$(this).attr("test-value");
+		$('.replyclick').attr("test-value",0);
+		
+		$('.reply_reply').hide()
+		$('.replyclick').text("대댓글");
+		let rrno = $(this).attr("value");
+		
+		if (test == 0) {
+			$('#rIn' + rrno).show();
+			$(this).text("취소");
+			$(this).attr("test-value",1);
+		} else {
+			$('#rIn' + rrno).hide();
+			$(this).text("대댓글");
+			$(this).attr("test-value",0);
+		}
+	});
+});
+
+$(function(){
+	console.log($('.reply').eq(4).attr("style"));
+	console.log($('.reply').eq(4).attr("value"));
+	console.log($('.reply').length);
+	
+	
+	for(var i=0; i<$('.reply').length;i++)
+	{
+		var tab=$('.reply').eq(i).attr("value");
+		tab=tab*15;
+		console.log(tab);
+		$('.reply').eq(i).attr("style","margin-left: "+tab+"px;");
+	}
+	
+	
+
+});
+	
 </script>
 <style type="text/css">
 .modal{
@@ -219,13 +258,20 @@
               <tr>
                <td>
                  <c:forEach var="rvo" items="${rList }">
-                   <table class="table table-striped">
+                   <table class="table table-striped reply" style="margin-left: 0px;" value=${rvo.group_tap }>
                     <tr>
-                     <td class="text-left">◑${rvo.id }(<span style="color:#939782;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${rvo.regdate}" /></span>)</td>
+                     <td class="text-left">
+                     <c:if test="${rvo.group_tap>0 }">
+                 		<img src="../img/re.png" style="width: 15px;">
+                 	</c:if>
+                 	◑${rvo.id }(<span style="color:#939782;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${rvo.regdate}" /></span>)</td>
                      <td class="text-right">
                       <c:if test="${sessionScope.id==rvo.id }">
                        <span value="${rvo.replyno }" class="btn py-1 px-2 btn-success up" style=" font: 10px Raleway;">수정</span>
-                       <a href="../report/reply_delete.do?rno=${rvo.replyno }&pno=${vo.petno}" class="btn py-1 px-2 btn-danger" style=" font: 10px Raleway;">삭제</a>
+                       <a href="../report/reply_delete.do?rno=${rvo.replyno }&pno=${vo.petno}&root=${rvo.root}" class="btn py-1 px-2 btn-danger" style=" font: 10px Raleway;">삭제</a>
+                      </c:if>
+                      <c:if test="${sessionScope.id!=null }">
+                       <span value="${rvo.replyno }" test-value=0 class="btn py-1 px-2 btn-primary replyclick" style=" font: 10px Raleway;">대댓글</span>
                       </c:if>
                      </td>
                     </tr>
@@ -247,6 +293,21 @@
 			                  </div>
 			                  <div style="text-align:right;">
 			                    <input type="submit" value="댓글수정" class="btn py-1 px-2 btn-primary" style=" font: 10px Raleway;">
+			                  </div>
+		                  </form>
+		               </td>
+		              </tr>
+		              
+		            <tr class="reply_reply" id="rIn${rvo.replyno }" style="display:none">
+		               <td colspan="2">
+		                 <form method="post" action="../report/replyReplyInsert.do" >
+			                 <input type="hidden" name="petno" value="${vo.petno }">
+			                 <input type="hidden" name="replyno" value="${rvo.replyno }">
+							  <div class="form-group ">
+			                    <textarea name="content" cols="30" rows="3" class="form-control" style=" font: 16px Raleway;" placeholder="test"></textarea>
+			                  </div>
+			                  <div style="text-align:right;">
+			                    <input type="submit" value="대댓글 입력" class="btn py-1 px-2 btn-primary" style=" font: 10px Raleway;">
 			                  </div>
 		                  </form>
 		               </td>
