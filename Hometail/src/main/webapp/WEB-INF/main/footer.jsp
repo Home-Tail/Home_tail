@@ -22,62 +22,26 @@
   </head>
 <body>
     <!-- footer_start  -->
-     <footer class="ftco-footer ftco-bg-dark ftco-section">
+     <footer class="ftco-footer ftco-bg-dark ftco-section" style="padding:10px; background-color:#EAEAEA; border-top:1px dotted #D5D5D5;">
       <div class="container">
-        <div class="row mb-5">
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Mosaic</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
+        <div class="row mb-12">
+          <div class="col-md-12 text-center" style="color:#4C4C4C;">
+          	<table style="width:30%; margin:0px auto;">
+          		<tr>
+          			<td align=center style="font-weight:bold; font-size:15px; color:#4C4C4C;">HomeTail</td>
+          			<td rowspan=2> <img src="../img/footer.png" width=60px height=60px></td>
+          		</tr>
+          		<tr>
+          			<td align=center style="color:#4C4C4C; font-size:12px;">서울 마포구 월드컵북로 21 풍성빌딩 G강의장</td>
+          		</tr>
+          	</table>
             </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-4">
-              <h2 class="ftco-heading-2">Links</h2>
-              <ul class="list-unstyled">
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>About</a></li>
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Services</a></li>
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Projects</a></li>
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Services</h2>
-              <ul class="list-unstyled">
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Architectural Design</a></li>
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Interior Design</a></li>
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Exterior Design</a></li>
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Lighting Design</a></li>
-                <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>AutoCAD Service</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Newsletter</h2>
-            	<p>Far far away, behind the word mountains, far from the countries.</p>
-              <form action="#" class="subscribe-form">
-                <div class="form-group">
-                  <input type="text" class="form-control mb-2 text-center" placeholder="Enter email address">
-                  <input type="submit" value="Subscribe" class="form-control submit px-3">
-                </div>
-              </form>
-            </div>
-          </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-top:10px;">
           <div class="col-md-12 text-center">
 
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            <p style="color:#4C4C4C;"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with  by <a href="../main/main.do" target="_blank" style="color:#4C4C4C;">HomeTail</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
           </div>
         </div>

@@ -13,7 +13,7 @@
 	$(function(){
 		$('.cate').hover(function(){
 			$(this).css("cursor", "pointer")
-			$(this).css("color", "blue")
+			$(this).css("color", "#EDA900")
 		}, function(){
 			$(this).css("cursor", "")
 			$(this).css("color", "black")
@@ -59,7 +59,8 @@
 </script> 
 </head>
 <body>
-<section class="hero-wrap hero-wrap-2" style="background-color:#EAEAEA">
+<section class="hero-wrap hero-wrap-2" style="background-image: url('../img/dog.jpg');" data-stellar-background-ratio="0.5">
+ <div class="overlay" style="background-color:#CACACA;"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">

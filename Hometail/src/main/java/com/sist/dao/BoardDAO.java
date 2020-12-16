@@ -457,14 +457,46 @@ public class BoardDAO {
     	}
     	return count;
     }
+    
+    // 메인 출력
+    public List<BoardVO> mainBoardList()
+    {
+    	List<BoardVO> bList=new ArrayList<BoardVO>();
+    	try
+    	{
+    		dbConn.getConnection();
+    		/*String sql="SELECT board_no,title,id,cate,regdate,hit,poster,num "
+    					+"FROM (SELECT board_no,title,id,cate,regdate,hit,poster,rownum as num "
+    					+"FROM (SELECT board_no,title,id,cate,regdate,hit,poster "
+    					+"FROM board WHERE cate=2 ORDER BY hit DESC)) "
+    					+"WHERE num<=4";*/
+    		String sql="SELECT board_no,title,id,cate,regdate,hit,poster,content "
+    				+"FROM(SELECT board_no,title,id,cate,regdate,hit,poster,content "
+    				+"FROM board WHERE cate=2 ORDER BY DBMS_RANDOM.RANDOM) where rownum <= 4";
+    		ps=dbConn.getConn().prepareStatement(sql);
+    		ResultSet rs=ps.executeQuery();
+    		while(rs.next())
+    		{
+    			BoardVO fvo=new BoardVO();
+    			fvo.setBoard_no(rs.getInt(1));
+    			fvo.setTitle(rs.getString(2));
+    			fvo.setId(rs.getString(3));
+    			fvo.setCate(rs.getInt(4));
+    			fvo.setRegdate(rs.getDate(5));
+    			fvo.setHit(rs.getInt(6));
+    			fvo.setPoster(rs.getString(7));
+    			fvo.setContent(rs.getString(8));
+    			bList.add(fvo);
+    		}
+    		rs.close();
+    	}catch(Exception ex)
+    	{
+    		System.out.println(ex.getMessage());
+    	}
+    	finally
+    	{
+    		dbConn.disConnection();
+    	}
+		return bList;
+    }
 }
-
-
-
-
-
-
-
-
-
-

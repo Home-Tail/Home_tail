@@ -87,7 +87,7 @@
                <td class="text-center" width=10%>${fvo.board_no }</td>
 	           <td class="text-left" width=45%>
 	             <span class="btn detail" data-value="${no }" data-cate="${fvo.board_no }">${fvo.title } 
-	             	<c:if test="${fvo.reply_count!=0 }"><sup style="color:blue;">(${fvo.reply_count })</sup></c:if>
+	             	<c:if test="${fvo.reply_count!=0 }"><sup style="color:#EDA900;">(${fvo.reply_count })</sup></c:if>
 	             </span> 
                <input type=hidden value="${fvo.board_no }" class="bn">
 	           </td>
@@ -161,7 +161,7 @@
 			                </div>
 			                <div class="desc pl-3">
 				                <h3 class="heading">${rvo.title }
-				                <c:if test="${rvo.reply_count!=0 }"><sup style="color:blue;">(${rvo.reply_count })</sup></c:if></h3>
+				                <c:if test="${rvo.reply_count!=0 }"><sup style="color:#EDA900;">(${rvo.reply_count })</sup></c:if></h3>
 				              </div>
 			              </div>
 			            </div>
@@ -224,7 +224,7 @@
 	             <span class="btn detail" data-value="${no }" data-cate="${qvo.board_no }">${qvo.title } 
 	             <c:choose>
 					 <c:when test = "${qvo.reply_count!=0}">
-					            <sup style="color:blue;">(답변완료)</sup>
+					            <sup style="color:#EDA900;">(답변완료)</sup>
 					         </c:when>
 					         <c:otherwise>
 					          	<sup>(답변대기)</sup>

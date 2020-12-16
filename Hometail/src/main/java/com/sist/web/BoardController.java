@@ -194,7 +194,6 @@ public class BoardController {
 		   model.addAttribute("rlist",rlist);
 		   return "board_detail"; 
 	   }
-	
 	@RequestMapping("board/delete_ok.do")
 	   public String board_delete_ok(BoardVO vo,HttpSession session, int cate)
 	   {
@@ -302,4 +301,6 @@ public class BoardController {
 			
 			return "news_list";
 		}
+	   
+	   
 }

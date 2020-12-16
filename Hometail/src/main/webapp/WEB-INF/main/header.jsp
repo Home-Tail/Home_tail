@@ -30,7 +30,8 @@
 <body>
    	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="../main/main.do"><img src="../img/hometail.png" width=30px height=30px> HomeTail</a>
+	    
+	      <a class="navbar-brand" href="../main/main.do" id="logoTxt"><img src="../img/logo3.png" width=125px height=40px id="logoImg"><span style="z-index:-1; left:-80px; top:-20px; position:relative; letter-spacing:1px;">Home</span><span style="z-index:-1; left:-125px; position:relative; letter-spacing:1px;">Tail</span></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
