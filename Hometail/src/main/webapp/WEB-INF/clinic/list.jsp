@@ -29,7 +29,7 @@
 </script>
 <style>
 #climage{
-border-style: solid;border-color: #B0E0E6;
+border-style: solid;border-color: #ffb84d;
 border-radius: 25px;
 }
 .heading{
@@ -99,5 +99,7 @@ font-family: 'Jua', sans-serif;
 			    </div>
 			  </div>
 		</div>
+		
+		
 </body>
 </html>

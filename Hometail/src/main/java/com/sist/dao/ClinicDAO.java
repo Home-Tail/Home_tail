@@ -46,10 +46,10 @@ public class ClinicDAO {
 	{
 		mapper.clinicReplyUpdate(vo);
 	}
-	public void clinicReplyDelete(ReplyVO vo,int root)
+	public void clinicReplyDelete(ReplyVO vo,int replyno)
 	{
 		mapper.clinicReplyDelete(vo);
-		mapper.clinicReplyDepthDecrement(root);
+		mapper.clinicReplyDepthDecrement(replyno);
 	}
 	//============== 대댓글
 	public void clinicReply_replyInsert(ReplyVO vo,int root)
@@ -77,5 +77,18 @@ public class ClinicDAO {
 	public List<ReserveVO> clinicReserveList(int resno)
 	{
 		return mapper.clinicReserveList(resno);
+	}
+	public List<ClinicVO> clinicCntList(Map map)
+	{
+		return mapper.clinicCntList(map);
+	}
+	
+	public List<ClinicVO> clinicSearchList(Map map)
+	{
+		return mapper.clinicListData(map);
+	}
+	public int clinicSearchcnt(Map map)
+	{
+		return mapper.clinicSearchcnt(map);
 	}
 }

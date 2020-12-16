@@ -7,6 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+<style type="text/css">
+.ss{
+background-color: #ffe680;
+}
+.ss2{
+background-color: #fff5cc;
+}
+</style>
 </head>
 <body>
 	<c:if test="${count==0 }">
@@ -16,14 +24,14 @@
 	<c:if test="${count>0 }">
 		<c:forEach var="vo" items="${list }">
 		 <div>
-			<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
-			<tr >
-			  <td width=30%>병원이름</td>
-			  <td width=70%>${vo.title }</td>
+			<table class="table table-bordered" width="400px" style="margin-left: auto; margin-right: auto;">
+			<tr>
+			  <th width=100px class="ss">병원이름</th>
+			  <td width=300px class="ss2">${vo.title }</td>
 			</tr>
 			<tr>
-			  <td width=5%>주소</td>
-			  <td width=95%>${vo.addr }</td>
+			  <th width=100px class="ss">주소</th>
+			  <td width=300px class="ss2">${vo.addr }</td>
 			</tr>
 			</table>
 			</div>

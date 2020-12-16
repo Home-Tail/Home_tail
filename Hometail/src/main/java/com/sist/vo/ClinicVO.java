@@ -8,7 +8,16 @@ public class ClinicVO {
 	private String post;
 	private String poster;
 	private String time;
+	private ReplyVO rcvo=new ReplyVO();
 	
+	
+	
+	public final ReplyVO getRcvo() {
+		return rcvo;
+	}
+	public final void setRcvo(ReplyVO rcvo) {
+		this.rcvo = rcvo;
+	}
 	public final String getTime() {
 		return time;
 	}

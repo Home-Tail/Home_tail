@@ -94,42 +94,42 @@ text-align: right;
 .btn {
 	border: 2px solid black;
 	background-color: white;
-	color: black;
+	color: #ffb84d;
 	padding: 8px 14px;
 	font-size: 10px;
 	cursor: pointer;
 }
 #btn2 {
-	border-color: #DB7093;
-	color: Purple;
+	border-color: #ffb84d;
+	color: Orange;
 }
 
 #btn2:hover {
-	background: #FFB6C1;
-	color: Purple;
+	background: #ffb84d;
+	color: white;
 }
 #btn3 {
-	border: 2px solid black;
+	border: 2px solid #ffb84d;
 	background-color: white;
-	color: Purple;
+	color: whote;
 	padding: 4px 8px;
 	font-size: 10px;
 	cursor: pointer;
-	border-color: #DB7093;
+	border-color: #ffb84d;
 }
 #btn3:hover {
-	background: #FFB6C1;
-	color: Purple;
+	background: #ffb84d;
+	color: white;
 }
 
 #btn22 {
-	border-color: #DB7093;
-	color: Purple;
+	border-color: #ffb84d;
+	color: #ffb84d;
 }
 
 #btn22:hover {
-	background: #FFB6C1;
-	color: Purple;
+	background: #ffb84d;
+	color: white;
 }
 
 .button {
@@ -141,15 +141,16 @@ text-align: right;
 	cursor: pointer;
 }
 #btn1 {
-	border-color: #809fff;
-	color: #809fff;
+	border-color: #ffb84d;
+	color: #ffb84d;
 }
 #btn1:hover {
-	background: #4d79ff;
+	background: #ffb84d;
 	color: white;
 }
 #cldetail{
 border-radius: 15px;
+border:4px solid #ffb84d;
 }
 #reply_re{
 padding: 0 0 0 120px;
@@ -158,7 +159,7 @@ padding: 0 0 0 120px;
 </head>
 <body>
 	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('../images/cc.jpg');"
+		style="background-image: url('../images/bb.jpg');"
 		data-stellar-background-ratio="0.5"> <!--       <div class="overlay"></div> -->
 	<div class="container">
 		<div
@@ -191,7 +192,7 @@ padding: 0 0 0 120px;
 				<!-- END comment-list -->
 
 				<div class="comment-form-wrap pt-5 insert">
-					<h3 class="mb-5 h4 font-weight-bold">Leave a comment</h3>
+					<h3 class="mb-5 h4 font-weight-bold" style="color:orange;">Leave a comment</h3>
 					<c:if test="${sessionScope.id==null }">
 						<form method="post" action="../clinic/clinic_reply.do">
 							<input type="hidden" name="clno" value="${vo.clno }">
@@ -225,18 +226,18 @@ padding: 0 0 0 120px;
 			<div class="col-lg-5">
 				<table class="table">
 					<tr>
-						<td>병원 상세 정보&nbsp;&nbsp; 
-						<button class="btn" id="btn1" data-toggle="modal" data-target="#clinicModal">지도보기</button>
-						<c:if test="${sessionScope.id!=null }">
-						<button class="btn" id="btn1" data-toggle="modal" data-target="#ResModal">예약하기</button>
-						</c:if>
+						<td>
+							<h1 style="color:orange;">${vo.title}</h1>
 						</td>
 					</tr>
 				</table>
 				<table class="table">
 					<tr>
-						<td>
-							<h1>${vo.title}</h1>
+						<td>병원 상세 정보&nbsp;&nbsp; 
+						<button class="btn" id="btn1" data-toggle="modal" data-target="#clinicModal">지도보기</button>
+						<c:if test="${sessionScope.id!=null }">
+						<button class="btn" id="btn1" data-toggle="modal" data-target="#ResModal">예약하기</button>
+						</c:if>
 						</td>
 					</tr>
 				</table>
@@ -266,7 +267,7 @@ padding: 0 0 0 120px;
 				<!-- =================== 댓글 리스트 출력 =====================-->
 
 				<div class="pt-5 mt-5">
-					<h3 class="font-weight-bold text-center">Comments</h3>
+					<h3 class="font-weight-bold text-center" style="color:orange;">Comments</h3>
 					<ul class="comment-list">
 						<c:forEach var="cvo" items="${clist }">
 							<li class="comment">

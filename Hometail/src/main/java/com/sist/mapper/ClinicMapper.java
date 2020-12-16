@@ -46,6 +46,7 @@ public void clinicReplyUpdate(ReplyVO vo);
 @Delete("DELETE FROM reply WHERE replyno=#{replyno} and cate=1")
 public void clinicReplyDelete(ReplyVO vo);
 
+
 //------------------------ 댓글--------------------------
 @Select("SELECT group_id,group_step,group_tap FROM reply WHERE replyno=#{replyno}")
 public ReplyVO replyParentData(int root);
@@ -61,7 +62,7 @@ public void clinicReply_replyInsert(ReplyVO vo);
 public void clinicReplyDepthUpdate(int root);
 
 @Update("UPDATE reply SET depth=depth-1 WHERE replyno=#{replyno}")
-public void clinicReplyDepthDecrement(int root);
+public void clinicReplyDepthDecrement(int replyno);
 //------------------------ 대댓글 --------------------------
 
 @Insert("INSERT INTO reserve(resno,clno,id,resdate,owner,pname,content,time) VALUES((SELECT NVL(MAX(resno)+1,1) FROM reserve),#{clno},#{id},#{resdate},#{owner},#{pname},#{content},#{time})")
@@ -71,4 +72,24 @@ public void clinicReserveInsert(ReserveVO rvo);
 public List<ReserveVO> clinicReserveList(int resno);
 
 //------------------------ 예약 --------------------------
+
+@Select("select distinct reply.clno,clinic.title,poster from (select clno, ROWNUM "
+	     +"from(select clno,count(*) "
+	     +"from reply where cate=1 group by clno order by count(*) desc) "
+	     +"where rownum<=4),reply,clinic "
+	     +"where reply.clno=clinic.clno")
+public List<ClinicVO> clinicCntList(Map map);
+
+//---------------- 댓글갯수로 출력 ---------------------------
+
+@Select("SELECT clno,title,poster,num "
+		+ "FROM (SELECT clno,title,poster,rownum as num "
+		+ "FROM (SELECT clno,title,poster "
+		+ "FROM clinic WHERE title LIKE '%'||#{title}||'%'))"
+		+ "WHERE num BETWEEN #{start} AND #{end}")
+public List<ClinicVO> clinicSearchList(Map map);
+
+@Select ("SELECT CEIL(COUNT(*)/6.0) FROM clinic "
+		+ "WHERE title LIKE '%'||#{title}||'%'")
+public int clinicSearchcnt(Map map);
 }

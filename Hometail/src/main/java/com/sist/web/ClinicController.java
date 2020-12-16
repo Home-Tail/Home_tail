@@ -22,8 +22,11 @@ public class ClinicController {
 @Autowired
 private ClinicDAO dao;
 @RequestMapping("clinic/main.do")
-public String main()
+public String main(Model model)
 {
+	Map map=new HashMap();
+	List<ClinicVO> cntlist=dao.clinicCntList(map);
+	model.addAttribute("cntlist",cntlist);
 	return "clinic/main";
 }
 
@@ -44,6 +47,7 @@ public String clinic_list(String page,Model model)
 	map.put("end", end);
 	
 	List<ClinicVO> list=dao.clinicListData(map);
+	
 	int totalPage=dao.clinicTotalPage();
 	int BLOCK=5;
 	int startPage=((curpage-1)/BLOCK * BLOCK)+1;
@@ -52,9 +56,6 @@ public String clinic_list(String page,Model model)
 	{
 		endPage=totalPage;
 	}
-	
-	
-	
 	
 	model.addAttribute("startPage", startPage);
 	model.addAttribute("endPage", endPage);
@@ -65,8 +66,9 @@ public String clinic_list(String page,Model model)
 	return "list";
 }
 
-@RequestMapping("clinic/detail.do")
 
+
+@RequestMapping("clinic/detail.do")
 public String clinic_Detail(String no,Model model)
 {
 	
@@ -147,5 +149,42 @@ public String clinicReply_replyInsert(ReplyVO vo,HttpSession session)
 	System.out.println(vo.getContent());
 	dao.clinicReply_replyInsert(vo,vo.getReplyno());
 	return "redirect:../clinic/detail.do?no="+vo.getClno();
+}
+
+@RequestMapping("clinic/search.do")
+public String clinicSearchList(Model model,String page,String title)
+{
+	if(page==null)
+		page="1";
+	int curpage=Integer.parseInt(page);
+	
+	int rowSize=6;
+	int start = (curpage * rowSize) - (rowSize - 1);
+	int end = curpage * rowSize;
+	
+	
+	Map map=new HashMap();
+	map.put("title",title);
+	map.put("start", start);
+	map.put("end", end);
+	
+	List<ClinicVO> slist=dao.clinicSearchList(map);
+	
+	int totalPage=dao.clinicSearchcnt(map);
+	int BLOCK=5;
+	int startPage=((curpage-1)/BLOCK * BLOCK)+1;
+	int endPage=((curpage-1)/BLOCK * BLOCK)+BLOCK;
+	if(endPage>totalPage)
+	{
+		endPage=totalPage;
+	}
+	
+	model.addAttribute("startPage", startPage);
+	model.addAttribute("endPage", endPage);
+	model.addAttribute("curpage", curpage);
+	model.addAttribute("totalpage", totalPage);
+	model.addAttribute("BLOCK", BLOCK);
+	model.addAttribute("slist",slist);
+	return "search";
 }
 }

@@ -41,10 +41,23 @@
 		});
 	});
 </script>
+<style type="text/css">
+.ftco-section11{
+padding: 1em;
+}
+.be-light11{
+background: none;
+background-color: none;
+}
+#crimage{
+border-radius: 25px;
+border:1px solid orange;
+}
 
+</style>
 </head>
 <body>
-	<section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bb.jpg');" data-stellar-background-ratio="0.5">
+	<section class="hero-wrap hero-wrap-2" style="background-image:url(../images/bb.jpg)" data-stellar-background-ratio="0.5">
       <!-- <div class="overlay"></div> -->
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -56,30 +69,17 @@
       </div>
 </section>
 
-<!-- 		<div class="row"> -->
-<!-- 			<div class="col-lg-8" id="tagin"> -->
- 			<!-- 리스트 ajax --> 
-<!-- 			</div> -->
-			
-<!-- 			<div class="col-lg-4"> -->
-<!-- 			<div id="a"> -->
-<!-- 				<img id="seoul_1" src="../map/1111.png"> -->
-<%-- 				<c:forEach var="i" begin="1" end="25"> --%>
-<%-- 					<img id="gu${i }" src="../map/gu_${i }_off.png" --%>
-<%-- 						onmouseover="this.src='../map/gu_${i}_on.png'" --%>
-<%-- 						onmouseout="this.src='../map/gu_${i}_off.png'" class="images" --%>
-<%-- 						data-value="${i }"> --%>
-<%-- 				</c:forEach> --%>
-<!-- 			</div> -->
-<!-- 			<div id="print" class="row"> -->
-			
-<!-- 			</div> -->
-<!-- 		</div> -->
-			
- 			<!-- END COL --> 
-<!-- 		</div> -->
-<section class="ftco-section">
+<section class="ftco-section11">
 			<div class="container">
+			  <div class="col-lg-3 sidebar ftco-animate">
+              <form class="search-form">
+                <div class="form-group">
+                  <span class="icon icon-search"></span>
+                  <input type="text" class="form-control" placeholder="병원 이름을 입력 해주세요" id="keyword">
+                </div>
+              </form>
+            </div>
+			
 				<div class="row">
           <div class="col-lg-8" id="tagin">
           	<!-- ajax -->
@@ -101,5 +101,36 @@
         </div>
 			</div>
 			</section>
+			
+			
+			
+<section class="ftco-section11 bg-light11">
+    	<div class="container">
+    		<div class="row justify-content-start">
+          <div class="col-md-4 heading-section ftco-animate">
+          	<span class="subheading subheading-with-line"><small class="pr-2 bg-light">댓글이 많이 달린</small></span>
+            <h2 class="mb-4">동물병원 리스트</h2>
+          </div>
+          <div class="col-md-8 pl-md-6 heading-section ftco-animate">
+          <div>
+          </div>
+          </div>
+        </div>
+    	</div>
+    	<div class="container">
+    		<div class="row">
+    			<c:forEach var="crvo" items="${cntlist }">
+    			<div class="col-md-6 col-lg-3 ftco-animated">
+    				<div class="project" id="crimage">
+	    				<img src="${crvo.poster }" width="300px" height="350px" id="crimage" >
+	    				<div class="text">
+	    					<h3><a href="../clinic/detail.do?no=${crvo.clno }">${crvo.title }</a></h3>
+	    				</div>
+    				</div>
+    			</div>
+    			</c:forEach>
+    	</div>
+    	</div>
+    	</section>
 </body>
 </html>
