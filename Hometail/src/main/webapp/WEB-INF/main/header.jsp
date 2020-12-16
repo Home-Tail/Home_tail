@@ -51,8 +51,14 @@
 	            </li>
 	        	
 	        	<li class="nav-item"><a href="../temp/main.do" class="nav-link">임시보호</a></li>
-	        	<li class="nav-item"><a href="../adopt/list.do" class="nav-link">입양</a></li>
-	        	
+	        	<li class="nav-item submenu dropdown">
+	               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+	                 aria-expanded="false">입양</a>
+	               <ul class="dropdown-menu">
+			       <li class="nav-item"><a href="../adopt/list.do" class="nav-link" style="color: black;">입양</a></li>
+			       <li class="nav-item"><a href="../adopt/process.do" class="nav-link" style="color: black;">입양절차</a></li>
+	               </ul>
+	            </li>
 	        	<li class="nav-item submenu dropdown">
 	               <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 	                 aria-expanded="false">봉사/후원</a>

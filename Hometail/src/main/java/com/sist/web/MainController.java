@@ -39,11 +39,6 @@ public class MainController {
 		return "main";
 	}
 
-	@RequestMapping("adopt/list.do")
-	public String adopt_list() {
-		return "adopt/list";
-	}
-
 	@RequestMapping("main/logout.do")
 	public String main_logout(HttpSession session) {
 		session.invalidate();

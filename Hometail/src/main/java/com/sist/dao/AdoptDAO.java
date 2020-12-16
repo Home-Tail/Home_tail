@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.sist.mapper.AdoptMapper;
 import com.sist.vo.AdoptVO;
+import com.sist.vo.ReplyVO;
 import com.sist.vo.adopt_newsVO;
 @Repository
 public class AdoptDAO {
@@ -26,4 +27,20 @@ public class AdoptDAO {
 	public List<AdoptVO> adoptCate10() {
 		return mapper.adoptCate10();
 	}
+	public ReplyVO adoptReplyInsert(ReplyVO rvo){
+   	 	return mapper.adoptReplyInsert(rvo);
+    }
+    
+    public List<ReplyVO> adoptReplyData(int adno)
+    {
+    	return mapper.adoptReplyData(adno);
+    }
+    
+    public ReplyVO adoptReplyDelete(int replyno){
+    	return mapper.adoptReplyDelete(replyno);
+    }
+    
+    public ReplyVO adoptReplyUpdate(ReplyVO rvo){
+    	return mapper.adoptReplyUpdate(rvo);
+    }
 }

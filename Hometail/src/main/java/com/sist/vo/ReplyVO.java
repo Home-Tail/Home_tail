@@ -18,12 +18,18 @@ import java.util.*;
 	
  */
 public class ReplyVO {
-	private int replyno,petno,board_no,clno,group_id,group_step,group_tap,root,depth,cate;
+	private int replyno,petno,board_no,clno,adno,group_id,group_step,group_tap,root,depth,cate;
 	private String id,loc,map_x,map_y,content;
 	private Date regdate,rdate;
 	private String db_regdate;
 	
 	
+	public int getAdno() {
+		return adno;
+	}
+	public void setAdno(int adno) {
+		this.adno = adno;
+	}
 	public String getDb_regdate() {
 		return db_regdate;
 	}

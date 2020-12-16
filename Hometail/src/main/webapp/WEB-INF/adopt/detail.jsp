@@ -127,6 +127,7 @@
                </td>
              </tr>
             </table>
+            <!-- 차트 -->
             <table class="table">
              <tr>
                <td>
@@ -134,18 +135,54 @@
                </td>
              </tr>
             </table>
+            <!-- 댓글 -->
             <table class="table">
               <tr>
                <td>
+                 <c:forEach var="rvo" items="${rList }">
+                   <table class="table table-striped">
+                    <tr>
+                     <td class="text-left">◑${rvo.id }(<fmt:formatDate value="${rvo.regdate }" pattern="YYYY-MM-dd"/>)</td>
+                     <td class="text-right">
+                      <c:if test="${sessionScope.id==rvo.id }">
+                       <span value="${rvo.replyno }" class="btn btn-xs btn-success up">수정</span>
+                       <a href="../adopt/reply_delete.do?reno=${rvo.replyno }&ano=${vo.adno}" class="btn btn-xs btn-info">삭제</a>
+                      </c:if>
+                     </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                       <pre style="white-space: pre-wrap;border:none;background-color: white">${rvo.content }</pre>
+                      </td>
+                    </tr>
+                    <tr class="updates" id="u${rvo.replyno }" style="display:none">
+		               <td colspan="2">
+		                 <form method="post" action="../adopt/reply_update.do">
+			                 <input type="hidden" name="ano" value="${vo.adno }">
+			                 <input type="hidden" name="reno" value="${rvo.replyno }">
+			                 <textarea rows="3" cols="60" name="content" style="float: left">${rvo.content }</textarea>
+			                 <input type=submit value="댓글수정" class="btn btn-sm btn-primary"
+			                  style="float: left;height: 73px">
+		                  </form>
+		               </td>
+		              </tr>
+                   </table>
+                 </c:forEach>
+               </td>
+              </tr>
+            </table>
+            <table class="table">
+               <td>
                <h3>댓글</h3>
+               <c:if test="${sessionScope.id!=avo.id }">
                  <form method="post" action="../adopt/reply_insert.do">
-	                 <input type="hidden" name="cno" value="${vo.adno }">
-	                 <textarea rows="3" cols="93" name="msg" style="float: left" placeholder="내용을 입력하세요."></textarea>
+	                 <input type="hidden" name="adno" value="${vo.adno }">
+	                 <textarea rows="3" cols="93" name="content" style="float: left" placeholder="내용을 입력하세요."></textarea>
 	                 <input type=submit value="등록" class="btn btn-sm btn-primary px-4"
 	                  style="float: left;height: 74px">
                   </form>
+                  </c:if>
                </td>
-              </tr>
             </table>
 		    </div>  
           </div>
@@ -221,7 +258,7 @@
             	<div class="sidebar-box ftco-animate"> 
             	<h3>관련 뉴스</h3>
               <table class="table">
-              <c:forEach var="nvo" items="${list }">
+              <c:forEach var="nvo" items="${nlist }">
                 <tr>
                  <td>
                   <img src="${nvo.poster }" width=35 height=35 class="img-rounded">
