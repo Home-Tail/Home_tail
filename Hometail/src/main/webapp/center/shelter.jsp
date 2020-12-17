@@ -21,7 +21,7 @@ $(function(){
 	    	})		
 	    });			
 	    			
- 			  $.getJSON("shelter.json",function(data){
+ 			  $.getJSON("shelter2.json",function(data){
 // 	 			  $( "#tabs" ).tabs();
  			     var html = [];
  				 var aJsonArray = new Array();
@@ -166,12 +166,12 @@ $(function(){
 </script>			
 </head>				
 <body>				
- <section class="hero-wrap hero-wrap-2" style="background-image: url('../center/dog.png');" data-stellar-background-ratio="0.5">
+ <section class="hero-wrap hero-wrap-2" style="background-image: url('../center/cat.jpg');" data-stellar-background-ratio="0.5">
       <!-- <div class="overlay"></div> -->
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-2 bread">임시보호</h1>
+            <h1 class="mb-2 bread">보호소</h1>
             <p class="breadcrumbs"><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
           </div>		
         </div>		

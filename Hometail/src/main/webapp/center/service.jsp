@@ -63,7 +63,7 @@ $(function(){
 					$('#reserve_time').html(data);
 				}
 			  });
-			$.getJSON("hospital.json",function(data){
+			$.getJSON("hospital2.json",function(data){
 				$.each(data["datas"],function(index,value){
 						jsondata_p= JSON.stringify(value);
 // 						console.log('protection.json 출력'+jsondata_p);
@@ -110,7 +110,7 @@ $(function(){
 				})
 			
 			
- 			  $.getJSON("shelter.json",function(data){
+ 			  $.getJSON("shelter2.json",function(data){
 // 	 			  $( "#tabs" ).tabs();
  			     var html = [];
  				 var aJsonArray = new Array();
@@ -483,12 +483,12 @@ function button_click(){
 </script>
 </head>
 <body>
- <section class="hero-wrap hero-wrap-2" style="background-image: url('../center/center_logo.png');" data-stellar-background-ratio="0.5">
+ <section class="hero-wrap hero-wrap-2" style="background-image: url('../center/dog.png');" data-stellar-background-ratio="0.5">
       <!-- <div class="overlay"></div> -->
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-2 bread">임시보호</h1>
+            <h1 class="mb-2 bread">봉사</h1>
             <p class="breadcrumbs"><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
           </div>		
         </div>		
@@ -588,7 +588,12 @@ function button_click(){
 								<input type="hidden" id="post2"  name="post">
 				                <input type="hidden" name="rday" id="rday">
 				                <input type="hidden" name="time" id="time">
+				              <c:if test="${sessionScope.id!=null }">
 								<input type="button" value="예약" onclick="button_click();" class="btn btn-primary" style="width:200px;">
+								</c:if>
+				              <c:if test="${sessionScope.id==null }">
+								<input type="text" value="로그인후 예약을 해주세요" style="width:200px;">
+								</c:if>
 							</td>
 						</tr>
 		             </table>

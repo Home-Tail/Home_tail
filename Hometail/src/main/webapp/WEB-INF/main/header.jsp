@@ -66,7 +66,7 @@
 	               <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 	                 aria-expanded="false">봉사/후원</a>
 	               <ul class="dropdown-menu">
-			       <li class="nav-item"><a href="../center/service.do" class="nav-link" style="color: black;">봉사/후원</a></li>
+			       <li class="nav-item"><a href="../center/service.do" class="nav-link" style="color: black;">봉사하기</a></li>
 			       <li class="nav-item"><a href="../center/shelter.do" class="nav-link" style="color: black;">보호소</a></li>
 	               </ul>
 	            </li>

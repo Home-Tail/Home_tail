@@ -84,10 +84,10 @@ public class CenterServiceController {
 		String result = hospital_data.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
 		
 		System.out.println("JSON설정후"+result);
-		File path = new File("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\hospital.json");
+		File path = new File("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\hospital2.json");
 		try {
 			//C:\SpringDev\SpringStudy\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Hometail
-            FileWriter file = new FileWriter("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\hospital.json");
+            FileWriter file = new FileWriter("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\hospital2.json");
             BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path.getPath()),"UTF-8"));
             output.write(result);
             output.close();
@@ -123,7 +123,7 @@ public class CenterServiceController {
 		rvo.setDb_reserve_day(rday);
 		rvo.setTime(time);
 		dao.center_reserve(rvo);
-		return "../center/service";
+		return "redirect:../main/main.do";
 	}	
 	@RequestMapping("msg_detail.do")
 	public String msg_detail(Model model)
@@ -263,10 +263,10 @@ public class CenterServiceController {
 		String result = shelter_data.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
 		
 		System.out.println("JSON설정후"+result);
-		File path = new File("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\shelter.json");
+		File path = new File("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\shelter2.json");
 		try {
 			//C:\SpringDev\SpringStudy\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Hometail
-            FileWriter file = new FileWriter("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\shelter.json");
+            FileWriter file = new FileWriter("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\shelter2.json");
             BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path.getPath()),"UTF-8"));
             output.write(result);
             output.close();
@@ -303,8 +303,8 @@ public class CenterServiceController {
 		System.out.println("요청 품목 사진"+vo.getPoster());
 		dao.shelter_icon(vo);
 		
-//		return "redirect:../center/shelter.do";	
-		return "redirect:../main/main.do";
+		return "redirect:../center/shelter.do";	
+//		return "redirect:../main/main.do";
 	}
 	
 	//새로운 보호소 저장
