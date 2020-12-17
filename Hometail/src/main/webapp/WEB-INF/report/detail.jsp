@@ -95,11 +95,7 @@ $(function(){
 		console.log(tab);
 		$('.reply').eq(i).attr("style","margin-left: "+tab+"px;");
 	}
-	
-	
-
 });
-	
 </script>
 <style type="text/css">
 .modal{
@@ -268,7 +264,7 @@ $(function(){
                      <td class="text-right">
                       <c:if test="${sessionScope.id==rvo.id }">
                        <span value="${rvo.replyno }" class="btn py-1 px-2 btn-success up" style=" font: 10px Raleway;">수정</span>
-                       <a href="../report/reply_delete.do?rno=${rvo.replyno }&pno=${vo.petno}&root=${rvo.root}" class="btn py-1 px-2 btn-danger" style=" font: 10px Raleway;">삭제</a>
+                       <a href="../report/reply_delete.do?replyno=${rvo.replyno }&petno=${vo.petno}&root=${rvo.root}" class="btn py-1 px-2 btn-danger" style=" font: 10px Raleway;">삭제</a>
                       </c:if>
                       <c:if test="${sessionScope.id!=null }">
                        <span value="${rvo.replyno }" test-value=0 class="btn py-1 px-2 btn-primary replyclick" style=" font: 10px Raleway;">대댓글</span>
@@ -304,7 +300,7 @@ $(function(){
 			                 <input type="hidden" name="petno" value="${vo.petno }">
 			                 <input type="hidden" name="replyno" value="${rvo.replyno }">
 							  <div class="form-group ">
-			                    <textarea name="content" cols="30" rows="3" class="form-control" style=" font: 16px Raleway;" placeholder="test"></textarea>
+			                    <textarea name="content" cols="30" rows="3" class="form-control" style=" font: 16px Raleway;" placeholder="내용을 입력해주세요."></textarea>
 			                  </div>
 			                  <div style="text-align:right;">
 			                    <input type="submit" value="대댓글 입력" class="btn py-1 px-2 btn-primary" style=" font: 10px Raleway;">
@@ -562,7 +558,7 @@ $(function(){
 			     </tr>
 			     <tr>
 	        		<td>
-	        		<textarea rows="3" cols="63" name="content" style="float: left" placeholder="내용을 입력해주세요"></textarea>
+	        		<textarea rows="3" cols="63" name="content" style="float: left" placeholder="내용을 입력해주세요."></textarea>
 	        		</td>
 	        	</tr>
 	        	<tr>

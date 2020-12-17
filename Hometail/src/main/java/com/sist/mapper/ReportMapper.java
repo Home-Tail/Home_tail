@@ -96,7 +96,7 @@ public interface ReportMapper {
 			+ ")")
 	public ReplyVO replyInsertData(ReplyVO vo);
 	
-	@Select("select * from reply where petno=#{petno} ORDER BY group_id DESC,group_step ASC")
+	@Select("select * from reply where petno=#{petno} AND cate=3 ORDER BY group_id DESC,group_step ASC")
 	public List<ReplyVO> replyListData(int petno);
 	
 	@Select("delete from reply where replyno=#{replyno}")
@@ -114,7 +114,7 @@ public interface ReportMapper {
 	public void replyStepIncrement(ReplyVO vo);
 
 	@Insert("INSERT INTO reply(cate,replyno,petno,id,regdate,content,group_id,group_step,group_tap,root,depth) "
-			+ "VALUES(1,(SELECT NVL(MAX(replyno)+1,1) FROM reply),#{petno},#{id},SYSDATE,#{content},#{group_id},#{group_step},#{group_tap},#{root},0)")
+			+ "VALUES(3,(SELECT NVL(MAX(replyno)+1,1) FROM reply),#{petno},#{id},SYSDATE,#{content},#{group_id},#{group_step},#{group_tap},#{root},0)")
 	public void replyReplyInsert(ReplyVO vo);
 
 	@Update("UPDATE reply SET depth=depth+1 WHERE replyno=#{replyno}")

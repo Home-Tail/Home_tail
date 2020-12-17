@@ -117,14 +117,11 @@ public class ReportController {
 		ReportVO vo=dao.reportDetailData(petno);
 		
 		List<ReplyVO> rList=dao.replyListData(petno);
-		System.out.println(rList.get(0).getContent());
-		System.out.println(rList.get(0).getGroup_tap());
-		System.out.println(rList.get(1).getGroup_tap());
-		System.out.println(rList.get(2).getGroup_tap());
 		
 		List<ReplyVO> frList=dao.findReplyListData(petno);
 		System.out.println("frList: "+frList.size());
 		
+		model.addAttribute("test",123);
 		model.addAttribute("vo", vo);
 		model.addAttribute("rList", rList);
 		model.addAttribute("frList", frList);

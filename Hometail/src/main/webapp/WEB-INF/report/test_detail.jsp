@@ -133,7 +133,7 @@ $(function(){
 						             <c:forEach var="i" begin="1" end="${rvo.group_tab }">
 						               &nbsp;&nbsp;&nbsp;&nbsp;
 						             </c:forEach>
-						             <img src="../board/re.gif">
+						             <img src="../report/re.gif">
 						           </c:if>
 						           <img src="../board/img.png">&nbsp;${rvo.name }(${rvo.dbday })
 						          </td>
