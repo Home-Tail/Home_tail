@@ -35,7 +35,7 @@ public interface TempMapper {
 	@Select("SELECT * FROM pet_board WHERE petno=#{petno}") 
 	public TempVO TempDetailData(int petno);
 	
-	@Select("INSERT INTO pet_board(petno,id,title,cate,kind,SUB_KIND,poster,regdate,pdate,loc,tel,content) "
+	@Select("INSERT INTO pet_board(petno,id,title,cate,kind,SUB_KIND,map_x,map_y,poster,regdate,pdate,loc,tel,content) "
 			+ "VALUES("
 			+ "(SELECT NVL(MAX(petno+1),1) FROM pet_board)," 	
 			+ "#{id}," 
@@ -43,19 +43,23 @@ public interface TempMapper {
 			+ "#{cate},"
 			+ "1,"
 			+ "1,"
+			+ "#{map_x},"
+			+ "#{map_y},"
 			+ "#{poster},"
 			+ "SYSDATE,"
 			+ "SYSDATE," 
 			+ "#{loc},"
 			+ "#{tel},"
 			+ "#{content})")
-	public TempVO TempInsertData(TempVO vo);
+	public void TempInsertData(TempVO vo);
 	
 	@Select("UPDATE pet_board SET "
 			+ "cate=#{cate},"
 			+ "title=#{title},"
 			+ "kind=1,"
 			+ "sub_kind=1,"
+			+ "map_x=#{map_x},"
+			+ "map_y=#{map_y},"
 			+ "poster=#{poster},"
 			/*+ "pdate=#{db_pdate},"*/
 			+ "pdate=SYSDATE,"
@@ -84,10 +88,13 @@ public interface TempMapper {
 	
 	@Select("SELECT replyno,id,content,regdate,group_step,group_tap FROM reply WHERE petno=#{petno} ORDER BY group_id DESC,group_step ASC")
 	public List<ReplyVO> TempreplyListData(int petno);
-	
+	//삭제 
 	@Select("DELETE FROM reply WHERE replyno=#{replyno}")
-	public ReplyVO TempreplyDeleteData(int replyno);
+	public void TempreplyDeleteData(ReplyVO vo);
 	
+	@Select("UPDATE reply SET depth=depth-1 WHERE replyno=#{replyno}")
+	public void TempreplyDepthDecrement(int replyno);
+	//==
 	@Select("UPDATE reply SET content=#{content},regdate=sysdate WHERE replyno=#{replyno}")
 	public ReplyVO TempreplyUpdateData(ReplyVO rvo);
 	
@@ -110,6 +117,8 @@ public interface TempMapper {
 			+"ORDER BY DBMS_RANDOM.RANDOM) WHERE rownum <= 4")
 	public List<TempVO> tempMainList(Map map); 
 	
+	//댓글개수
+/*	@Select()*/
 
 
 }

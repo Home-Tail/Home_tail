@@ -4,9 +4,35 @@ import java.util.Date;
 
 public class TempVO {
 	private int petno, cate, kind, pwd;
-	private String id, title, poster, loc, tel, content;
+	private String id, title, poster, loc, tel, content, map_x,map_y;
+	public String getMap_x() {
+		return map_x;
+	}
+
+	public void setMap_x(String map_x) {
+		this.map_x = map_x;
+	}
+
+	public String getMap_y() {
+		return map_y;
+	}
+
+	public void setMap_y(String map_y) {
+		this.map_y = map_y;
+	}
+
 	private Date regdate, pdate;
 	private String db_pdate;
+	private int reply_count;
+	
+
+	public int getReply_count() {
+		return reply_count;
+	}
+
+	public void setReply_count(int reply_count) {
+		this.reply_count = reply_count;
+	}
 
 	public String getDb_pdate() {
 		return db_pdate;

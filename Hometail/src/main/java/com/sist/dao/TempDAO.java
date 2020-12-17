@@ -34,9 +34,9 @@ public class TempDAO {
  	   return mapper.TempCateTotalPage(cate);
     }
 	
-	public TempVO TempInsertData(TempVO vo)
+	public void TempInsertData(TempVO vo)
 	{
-		return mapper.TempInsertData(vo);
+		mapper.TempInsertData(vo);
 	}
 	
 	public TempVO TempUpdateData(TempVO vo)
@@ -58,8 +58,10 @@ public class TempDAO {
   	   return mapper.TempreplyListData(petno);
      }
      
-     public ReplyVO TempreplyDeleteData(int replyno){
-    	 return mapper.TempreplyDeleteData(replyno);
+     public void TempreplyDeleteData(ReplyVO vo,int root){
+    	 mapper.TempreplyDeleteData(vo);
+    	 mapper.TempreplyDepthDecrement(root);
+    	 
      }
      
      public ReplyVO TempreplyUpdateData(ReplyVO rvo){

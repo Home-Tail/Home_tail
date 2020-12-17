@@ -8,6 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <style type="text/css">
 
 #b1:hover
@@ -33,6 +36,8 @@
  	 
 }
 </style>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5f479a055a85358bb537395d0d7aeb6"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5f479a055a85358bb537395d0d7aeb6&libraries=services"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -99,7 +104,6 @@ $(function(){
 		}
 	});
 });
-
 </script>
 </head>
 <body>
@@ -117,7 +121,7 @@ $(function(){
 				</tr>
 				<tr>
 					<th width=20% class="text-center danger">작성자</th>
-					<td width=30% class="text-left">${sessionScope.id } </td>
+					<td width=30% class="text-left">${vo.id } </td>
 					
 					<th width=20% class="text-center danger">연락처</th>
 					<td width=30% class="text-left">${vo.tel }</td>
@@ -132,7 +136,7 @@ $(function(){
 					
 				</tr>
             <tr>
-               <td colspan=4>
+               <td colspan=2>
                
                <c:set var = "po" value = "${vo.poster}"/>
 					      <c:choose>
@@ -150,13 +154,42 @@ $(function(){
                   <%-- <img src="../TempPoster/${vo.poster }" width=400px height=400px><br>${vo.content } --%>
                
                </td>
+               <td class="text-center" colspan="2">
+                <div id="map" style="width:100%;height:350px;"></div>
+                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38f29003dfceb26147055ab6401f2dcf&libraries=services"></script>
+                <script>
+                var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                mapOption = { 
+                    center: new kakao.maps.LatLng('${vo.map_x}',  '${vo.map_y}'), // 지도의 중심좌표
+                    level: 3 // 지도의 확대 레벨
+                };
+
+            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+            // 마커가 표시될 위치입니다 
+            var markerPosition  = new kakao.maps.LatLng('${vo.map_x}', '${vo.map_y}'); 
+
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                position: markerPosition
+            });
+
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);
+
+            // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+            // marker.setMap(null);    
+           </script>
+          </td>
+          </td>
+               
             </tr>
             <tr>
-            	<td style="border-top:none;">${vo.content }</td>
+            	<td style="width:1200px; border-top:none; ">${vo.content }</td>
             </tr>
             <tr>
             <td class="text-right" colspan=4>
-            <c:if test="${sessionScope.id==sessionScope.id }">
+            <c:if test="${sessionScope.id == vo.id }"> 
                  <a href="../temp/update.do?petno=${vo.petno }" class="btn btn-sm btn-primary" value="${vo.petno}">수정</a>
            		 <a href="../temp/delete_ok.do?petno=${vo.petno }" class="btn btn-sm btn-primary" onclick="return confirm('선택한 게시물을 삭제하시겠습니까?');">삭제</a>
              </c:if>       
@@ -183,15 +216,13 @@ $(function(){
 				         &nbsp;<b>${rvo.id }</b> 
 				       <!--   <td style="font-size:8px; color:#848484;"> -->
 				         <fmt:formatDate value="${rvo.regdate }" pattern="YYYY-MM-dd"  /> 
-				        
 				          </td>
 				          <td class="text-right">
 				            <c:if test="${sessionScope.id==rvo.id }">
 				             <span class="btn btn-xs reply_update" value="${rvo.replyno }"id="b1" >수정</span>
-				             <a href="../temp/reply_delete.do?no=${rvo.replyno }&bno=${vo.petno}" class="btn btn-xs delBtn" id="b2" onclick="return confirm('선택한 댓글을 삭제하시겠습니까?')" >삭제</a>
-				             
-				             <span class="btn btn-xs reply_reply" value="${rvo.replyno }" id="b3" >댓글</span>
+				             <a href="../temp/reply_delete.do?replyno=${rvo.replyno }&petno=${vo.petno}&root=${rvo.root}" class="btn btn-xs delBtn" id="b2" onclick="return confirm('선택한 댓글을 삭제하시겠습니까?')" >삭제</a>
 				            </c:if>
+				             <span class="btn btn-xs reply_reply" value="${rvo.replyno }" id="b3" >댓글</span>
 				          </td>
 				        </tr>
 				        <tr>

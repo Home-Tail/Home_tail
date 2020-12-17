@@ -7,6 +7,8 @@
 <html>
 <head>
 <title>Insert title here</title>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5f479a055a85358bb537395d0d7aeb6"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5f479a055a85358bb537395d0d7aeb6&libraries=services"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 let cate=0; 
@@ -27,7 +29,7 @@ $(function() {
 </head>
 <body>
 
-	<section class="hero-wrap hero-wrap-2" style="background-image: url('../images/temp.jpg');" data-stellar-background-ratio="0.5">
+	<section class="hero-wrap hero-wrap-2" style="background-image: url('../images/test.jpg');" data-stellar-background-ratio="0.5">
       <!-- <div class="overlay"></div> -->
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">

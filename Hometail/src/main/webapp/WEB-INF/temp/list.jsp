@@ -33,7 +33,6 @@ div.containerX a:hover
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-
 $(function() {
 	
 	// 로그인 안했을때 글등록하기 버튼 미노출
@@ -75,9 +74,9 @@ $(function() {
 				{
 					$('#tagin').html(result);
 				}
-			})
+		})
 	});
-	})
+})
 </script>
 
 </head>

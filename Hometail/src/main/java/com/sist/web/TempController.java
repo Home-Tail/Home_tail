@@ -60,6 +60,13 @@ public class TempController {
 			if (endPage > totalpage)
 				endPage = totalpage;
 			
+		   /* for(TempVO vo:List)
+			   {
+					int count= dao.Reply_count(vo.getPetno());
+					//System.out.println("count는"+count);
+			   		vo.setReply_count(count);
+			   }*/
+			
 			model.addAttribute("list", list);
 			model.addAttribute("curpage", curpage);
 			model.addAttribute("totalpage", totalpage);
@@ -151,14 +158,13 @@ public class TempController {
 		str = "0";
 		}*/
 		
-	   
-	    //아이디
-	    vo.setId("id");
+	    //아이디 
+	    vo.setId(id); 
 	    //제목
 	    vo.setTitle(mr.getParameter("title"));
 	    //카테
 	    vo.setCate(Integer.parseInt(mr.getParameter("cate")));
-	    
+	    System.out.println("카테는~!@#@!$@#$%!@"+vo.getCate());
 	    
 	    /*int cno=Integer.parseInt(cate);*/
 	    //날짜
@@ -173,7 +179,11 @@ public class TempController {
 	    //사진
 		vo.setPoster(mr.getFilesystemName("poster"));
 
-
+		vo.setMap_x(mr.getParameter("map_x"));
+		System.out.println("x좌표 ~!@#@!$@#$%!@"+vo.getMap_x());
+		
+		vo.setMap_y(mr.getParameter("map_y"));
+		System.out.println("y좌표 ~!@#@!$@#$%!@"+vo.getMap_y());
 		
 //		System.out.println("아이디"+vo.getId());
 //		System.out.println("제목"+vo.getTitle());
@@ -253,6 +263,8 @@ public class TempController {
 			    vo.setTitle(title);
 			    vo.setTel(tel);
 			    vo.setLoc(loc);
+			    vo.setMap_x(mr.getParameter("map_x"));
+				vo.setMap_y(mr.getParameter("map_y"));
 			    vo.setPoster(poster);
 			    vo.setContent(content);
 			    vo.setDb_pdate(db_pdate);
@@ -308,39 +320,33 @@ public class TempController {
 		   // DB연동 
 		   dao.TempreplyInsertData(rvo);
 		   return "redirect:../temp/detail.do?no="+petno;
+		   
 	   }
-	   /*
-	   @RequestMapping("temp/reply_update.do")
-	   public String reply_update(int petno, HttpServletRequest request)
+	  @RequestMapping("temp/reply_update.do")
+	   public String reply_update(int petno, HttpServletRequest request,ReplyVO vo)
 	   {
 		  
-		   ReplyVO rvo=new ReplyVO();
-		   String id=request.getParameter("id");
-		   String bno=request.getParameter("bno");
-		   String msg=request.getParameter("msg");
+//		   ReplyVO rvo=new ReplyVO();
+//		   String id=request.getParameter("id"); 
+//		   String bno=request.getParameter("bno");
+//		   String msg=request.getParameter("msg");
 		   // DB => UPDATE
-		   ReplyVO rvo=new ReplyVO();
-		   rvo.setPetno(petno);
-		   rvo.setContent(content);
-		   
-		   dao.TempreplyUpdateData(rvo);
+//		   rvo.setPetno(petno);
+//		   rvo.setContent();		   
+		  System.out.println("petno  :"+vo.getPetno());
+		  System.out.println("replyno:"+vo.getReplyno());
+		   dao.TempreplyUpdateData(vo);
 		   return "redirect:../temp/detail.do?no="+petno;
 	   }
-	   
+	  
 	   @RequestMapping("temp/reply_delete.do")
-	   public String reply_delete(int replyno,int petno,HttpServletRequest request)
+	   public String reply_delete(ReplyVO vo,HttpServletRequest request)
 	   {
-		   ReplyVO rvo=new ReplyVO();
-		   
-		   dao.TempreplyDeleteData(replyno);
-		   return "redirect:../temp/detail.do?no="+petno;
+		   System.out.println("?? "+vo.getPetno());
+		   System.out.println("?? "+vo.getReplyno());
+		   System.out.println("?? "+vo.getRoot());
+		   dao.TempreplyDeleteData(vo,vo.getRoot());
+		   return "redirect:../temp/detail.do?no="+vo.getPetno();
 	   }
-		
-		*/
 
-}
-
-
-
-
-
+	  }
