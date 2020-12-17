@@ -24,11 +24,10 @@ private ClinicDAO dao;
 @RequestMapping("clinic/main.do")
 public String main(Model model)
 {
-	Map map=new HashMap();
-	List<ClinicVO> cntlist=dao.clinicCntList(map);
-	model.addAttribute("cntlist",cntlist);
+	
 	return "clinic/main";
 }
+
 
 @RequestMapping("clinic/list.do")
 public String clinic_list(String page,Model model)

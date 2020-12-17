@@ -159,7 +159,7 @@ padding: 0 0 0 120px;
 </head>
 <body>
 	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('../images/bb.jpg');"
+		style="background-image: url('../images/abc.jpg'); background-position: center center"
 		data-stellar-background-ratio="0.5"> <!--       <div class="overlay"></div> -->
 	<div class="container">
 		<div
