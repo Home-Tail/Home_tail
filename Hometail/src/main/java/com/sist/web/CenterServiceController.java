@@ -84,10 +84,14 @@ public class CenterServiceController {
 		String result = hospital_data.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
 		
 		System.out.println("JSON설정후"+result);
-		File path = new File("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\hospital2.json");
+		//석주형  경로
+		File path = new File("C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\hospital2.json");
+		
+		//승구 경로
+//		File path = new File("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\hospital2.json");
 		try {
 			//C:\SpringDev\SpringStudy\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Hometail
-            FileWriter file = new FileWriter("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\hospital2.json");
+            FileWriter file = new FileWriter("C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\hospital2.json");
             BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path.getPath()),"UTF-8"));
             output.write(result);
             output.close();
@@ -263,10 +267,11 @@ public class CenterServiceController {
 		String result = shelter_data.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
 		
 		System.out.println("JSON설정후"+result);
-		File path = new File("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\shelter2.json");
+		File path = new File("C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\shelter2.json");
+//		File path = new File("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\shelter2.json");
 		try {
-			//C:\SpringDev\SpringStudy\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Hometail
-            FileWriter file = new FileWriter("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\shelter2.json");
+            FileWriter file = new FileWriter("C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\shelter2.json");
+//            FileWriter file = new FileWriter("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\shelter2.json");
             BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path.getPath()),"UTF-8"));
             output.write(result);
             output.close();
