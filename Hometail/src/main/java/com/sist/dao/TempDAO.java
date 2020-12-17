@@ -85,8 +85,6 @@ public class TempDAO {
 		System.out.println("돈다 5");
 	}
 
-
-
 	/* 123
 	 * public int tempTotalPage() { return mapper.tempTotalPage(); }
 	 */

@@ -8,10 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
-.row {
-   margin: 0px auto;
-   width:900px;
-}
+
 #category {position:absolute;top:10px;left:10px;border-radius: 5px; border:1px solid #909090;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);background: #fff;overflow: hidden;z-index: 2;}
 #category li {float:left;list-style: none;width:50px;px;border-right:1px solid #acacac;padding:6px 0;text-align: center; cursor: pointer;}
 #category li.on {background: #eee;}
@@ -30,12 +27,11 @@
 .map_wrap {position:relative;width:100%;height:350px;}
 </style>
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5f479a055a85358bb537395d0d7aeb6"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5f479a055a85358bb537395d0d7aeb6&libraries=LIBRARY"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5f479a055a85358bb537395d0d7aeb6&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5f479a055a85358bb537395d0d7aeb6&libraries=clusterer"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5f479a055a85358bb537395d0d7aeb6&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -48,8 +44,7 @@ $(function(){
 	var post;		
 	var lotno_addr;	 
   	var roadnm_addr;
-  	
-			console.log('ajax돌아기전') 				 
+		console.log('ajax돌아기전') 				 
 		$.ajax({
 			type:'POST',
 			url:'../center/center_date.do',
@@ -59,7 +54,6 @@ $(function(){
 				$('#reserve_date').html(data);
 			}
 		  });
-			
 			
 		$.ajax({
 				type:'POST',
@@ -116,7 +110,7 @@ $(function(){
 				})
 			
 			
- 			  $.getJSON("myJson.json",function(data){
+ 			  $.getJSON("shelter.json",function(data){
 // 	 			  $( "#tabs" ).tabs();
  			     var html = [];
  				 var aJsonArray = new Array();
@@ -194,7 +188,7 @@ $(function(){
 //  			    	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
  			   	// 마커 이미지의 이미지 크기 입니다
 			   	var imageSize = new kakao.maps.Size(35, 35); 
-			   	    
+			   	
 			   	// 마커 이미지를 생성합니다    
 			   	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
  			   	for(var j=0;j<mapdata_p.length;j++)
@@ -211,7 +205,7 @@ $(function(){
 			   	    }); 
  				  
  				 var infowindow = new kakao.maps.InfoWindow({
-				        content: mapdata_p[j].ENTRPS_NM // 인포윈도우에 표시할 내용
+				        content: mapdata_p[j].SHELTER_NAME // 인포윈도우에 표시할 내용
 				    });
 				    kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker));
 			   		function makeClickListener(map, marker, infowindow) {
@@ -240,18 +234,41 @@ $(function(){
  			   				else if(i==9)
  			   					roadno_addr=temp2[i];
   			   			}	
-	 			   		console.log('병원이름'+hospital_name);
+	 			   		console.log('병원이름'+shelter_name);
 	 			   		console.log('지역위치'+city);
 	 			   		console.log('전화번호'+tel);
 	 			   		console.log('우편번호'+post);
 	 			   		console.log('도로주소'+lotno_addr);
-	 			   		console.log('지번주소'+roadnm_addr);
-			   			$('#hospital_name').text(hospital_name);
-			   			$('#loc').text(loc);
+	 			   		console.log('지번주소'+roadno_addr);
+	 			   		
+		 			   	var city_temp = city.substring(0,2);
+	 					$.ajax({
+	 						type:'POST',
+	 						url:'../center/graph.do',
+	 						data:{"city":city_temp},
+	 						success:function(data)
+	 						{
+	 							console.log('graph ajax 성공!')
+	 							$('#graph').html(data);
+	 						}
+	 					});
+	 					
+	 					$('#reserve_text_hospital').text(shelter_name);
+			   			$('#hospital_name').text(shelter_name);
+			   			$('#loc').text(city);
 			   			$('#hospital_addr').text(lotno_addr);
-			   			$('#hospital_addr2').text(roadnm_addr);
+			   			$('#hospital_addr2').text(roadno_addr);
 			   			$('#hospital_tel').text(tel);
 			   			$('#post').text(post);
+			   			
+			   			
+			   			$('#hospital_name2').val(shelter_name);
+ 			   			$('#loc2').val(city);
+ 			   			$('#hospital_addr1').val(lotno_addr);
+ 			   			$('#hospital_addr22').val(roadno_addr);
+ 			   			$('#hospital_tel2').val(tel);
+ 			   			$('#post2').val(post);
+ 			   			
 			   			};
 			   		}
 			   		
@@ -279,6 +296,9 @@ $(function(){
 		   	// 마커 이미지의 이미지 크기 입니다
 	   			var imageSize = new kakao.maps.Size(35, 35); 
 	   			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+	   			
+	   			
+	   		 
  			   for (var i = 0; i < mapdata.length; i ++) {
  			   	// 마커를 생성합니다
  				var marker= new kakao.maps.Marker({
@@ -298,7 +318,7 @@ $(function(){
  			   	        
  			   	    });
  				    var infowindow = new kakao.maps.InfoWindow({
- 				        content: mapdata[i].RSCU_INST_NM // 인포윈도우에 표시할 내용
+ 				        content: mapdata[i].SHELTER_NAME // 인포윈도우에 표시할 내용
  				    });
  				    kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker));
  			   		function makeClickListener(map, marker, infowindow) {
@@ -334,7 +354,7 @@ $(function(){
 	 			   		console.log('전화번호'+tel);
 	 			   		console.log('우편번호'+post);
 	 			   		console.log('도로주소'+lotno_addr);
-	 			   		console.log('지번주소'+roadnm_addr);
+	 			   		console.log('지번주소'+roadno_addr);
 	 			   		
 	 			   		var city_temp = city.substring(0,2);
 	 					$.ajax({
@@ -352,14 +372,15 @@ $(function(){
  			   			$('#hospital_name').text(shelter_name);
  			   			$('#loc').text(city);
  			   			$('#hospital_addr').text(lotno_addr);
- 			   			$('#hospital_addr2').text(roadnm_addr);
+ 			   			$('#hospital_addr2').text(roadno_addr);
  			   			$('#hospital_tel').text(tel);
  			   			$('#post').text(post);
  			   			
+ 			   			$('#reserve_text_hospital').text(shelter_name);
  			   			$('#hospital_name2').val(shelter_name);
  			   			$('#loc2').val(city);
  			   			$('#hospital_addr1').val(lotno_addr);
- 			   			$('#hospital_addr22').val(roadnm_addr);
+ 			   			$('#hospital_addr22').val(roadno_addr);
  			   			$('#hospital_tel2').val(tel);
  			   			$('#post2').val(post);
  			   			};
@@ -429,7 +450,6 @@ $(function(){
  			  });
 			});
 });
- 
 function button_click(){
  console.log('클릭클릭');
 	let loc=$('#loc2').val();
@@ -463,135 +483,118 @@ function button_click(){
 </script>
 </head>
 <body>
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_1.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
+ <section class="hero-wrap hero-wrap-2" style="background-image: url('../center/center_logo.png');" data-stellar-background-ratio="0.5">
+      <!-- <div class="overlay"></div> -->
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-2 bread">Contact Us</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Contact <i class="ion-ios-arrow-forward"></i></span></p>
-          </div>
-        </div>
-      </div>
-      </section>
-<div class="container">
-	<div class="map_wrap col-lg-12" style="padding-top: 30px; height: 1500px; padding-left: 15px; width: 1300px;">
-<!-- 		    <div id="maps" class="col-lg-6" style="width:700px;height:600px; border:1px solid black; float: left;"></div> -->
-<!-- 		    <ul id="category"> -->
-<!-- 		        <li id="MT1" >  -->
-<!-- 		            <span > -->
-<!-- 		            	<img alt="" src="../center/hospital.png"> -->
-<!-- 		            </span> -->
-<!-- 		           센터 -->
-<!-- 		        </li>   -->
-<!-- 		        <li id="PM9" data-order="2">  -->
-<!-- 		            <span class="category_bg pharmacy"></span> -->
-<!-- 		           보호소 -->
-<!-- 		        </li>   -->
-<!-- 		    </ul> -->
-			<table align="center">
+            <h1 class="mb-2 bread">임시보호</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
+          </div>		
+        </div>		
+      </div>		
+</section>	
+
+<div class="container" style="margin-top:50px; margin-bottom:50px;">
+	<div class="row">
+			<div class="col-sm-7">
+			    <div id="maps" style="width:720px;height:650px; border:1px solid black;"></div>
+			    
+			    <table style="margin:20px; float:right;">
 				<tr>
-					<th><img src="../center/hospital.png" width=50 height=50></th>
-					<th></th>
-					<th align="right" style="padding-left: 15px;"><img src="../center/shelter.png" width=50 height=50> </th>
+					<td style="padding-right:20px;"><img src="../center/hospital.png" width=40 height=40></td>
+					<td><img src="../center/shelter.png" width=40 height=40></td>
 				</tr>
 				<tr>
-					<td>치료 병원 </td>
-					<td></td>
-					<td style="padding-left:18px;"> 보호소</td>
+					<td class="text-center" style="padding-right:20px;"><span style="font-size:11px; font-weight:bold;">치료 병원 </span></td>
+					<td class="text-center"><span style="font-size:11px; font-weight:bold;">보호소</span></td>
 				</tr>
 			</table>
-			<div class="map_wrap col-lg-8" style="padding-top: 10px; float: left">
-			    <div id="maps" style="width:700px;height:600px; border:1px solid black;"></div>
+			    
 			</div>
 			
-			<div  id="graph" style="padding-top: 50px; padding-left: 730px;">
-			</div>
+			
 
-			<div class="map_wrap col-lg-4" style="float: left; margin-left:730px;">
-			<form action="../center/service_map.do" method="post" name="ReserveFrm">
-			<table class="table">
-				<h3>정보 내역</h3>
-				<tr>
-					<th>지역</th>
-					<td id="loc">
-					<input type="hidden" id="loc2"  name="city">
-					</td>
-				</tr>
-				<tr>
-					<th>병원 이름</th>
-					<td id="hospital_name">
-					<input type="hidden" id="hospital_name2"  name="name">
-					</td>
-				</tr>
-				<tr>
-					<th>지번주소</th>
-					<td id="hospital_addr" >
-					<input type="hidden" id="hospital_addr1"  name=lotno_addr>
-					</td>
-				</tr>
-				<tr>
-					<th>도로명주소</th>
-					<td id="hospital_addr2">
-					<input type="hidden" id="hospital_addr22"  name="roadno_addr">
-					</td>
-				</tr>
-				<tr>
-					<th>전화번호</th>
-					<td id="hospital_tel">
-					<input type="hidden" id="hospital_tel2"  name="tel">
-					</td>
-				</tr>
-				<tr>
-					<th>우편번호</th>
-					<td id="post" name="post"></td>
-				</tr>
-<!--                   <input type=hidden name="strYear" id="strYear"> -->
-<!--                   <input type=hidden name="strMonth" id="strMonth"> -->
-<!--                   <input type=hidden name="strDay" id="strDay"> -->
-			</table>
-<!--                   <input type=submit value="예매하기" class="btn btn-lg btn-primary"> -->
-				  <input type=hidden id="post2"  name="post">
-                  <input type=hidden name="rday" id="rday">
-                  <input type=hidden name="time" id="time">
-	              <input type="button" value="예약" onclick="button_click();" class="btn btn-primary">
-			</form> 
-	              <p id="text_view" style="color:red;"></p>
+			<div class="col-sm-5" style="margin-top:30px;">
+				<div id="graph" style="height:250px;">
+				</div>
+				<table class="table" style="font-size:14px;">
+					<h5>정보 내역</h5>
+					<tr>
+						<th width=30%>지역</th>
+						<td id="loc">
+						</td>
+					</tr>
+					<tr>
+						<th width=30%>병원 이름</th>
+						<td id="hospital_name">
+						</td>
+					</tr>
+					<tr>
+						<th width=30%>지번주소</th>
+						<td id="hospital_addr" >
+						</td>
+					</tr>
+					<tr>
+						<th width=30%>도로명주소</th>
+						<td id="hospital_addr2">
+						</td>
+					</tr>
+					<tr>
+						<th width=30%>전화번호</th>
+						<td id="hospital_tel">
+						</td>
+					</tr>
+					<tr>
+						<th width=30%>우편번호</th>
+						<td id="post" name="post"></td>
+					</tr>
+	<!--                   <input type=hidden name="strYear" id="strYear"> -->
+	<!--                   <input type=hidden name="strMonth" id="strMonth"> -->
+	<!--                   <input type=hidden name="strDay" id="strDay"> -->
+				</table>
+	<!--                   <input type=submit value="예매하기" class="btn btn-lg btn-primary"> -->
+
+		              <p id="text_view" style="color:red;"></p>
 	              </div>
-	        <div class="col-sm-12" style="float: left;">
-				<div class="col-sm-6" id="reserve_date">
+				<div class="col-sm-7" id="reserve_date">
 				</div>
 	        		
-				<div class="col-sm-6" id="reserve_time">
+<!-- 				<div class="col-sm-5" id="reserve_time"> -->
+				<div class="col-sm-5" style="margin-top:30px;">
+					<h5>예약 정보</h5>
+		             	
+				<form action="../center/service_map.do" method="post" name="ReserveFrm">
+		             <table class="table" style="border:1px solid #ddd;">
+			             <tr>
+							<th width=30% style="border-top:none;">센터/보호소명</th>
+							<td style="border-top:none;" id="reserve_text_hospital"></td>
+						</tr>
+						<tr>
+							<th width=30% style="border-top:none;">예약날짜</th>
+							<td style="border-top:none;" id="reserve_text_rday"></td>
+						</tr>
+						<tr>
+							<th width=30% style="border-top:none;">예약시간</th>
+							<td style="border-top:none;" id="reserve_text_time"></td>
+						</tr>
+						<tr>
+							<td colspan=2 class="text-center" style="border-top:none;">
+								<input type="hidden" id="loc2"  name="city">
+								<input type="hidden" id="hospital_name2"  name="name">
+								<input type="hidden" id="hospital_addr1"  name=lotno_addr>
+								<input type="hidden" id="hospital_addr22"  name="roadno_addr">
+								<input type="hidden" id="hospital_tel2"  name="tel">
+								<input type="hidden" id="post2"  name="post">
+				                <input type="hidden" name="rday" id="rday">
+				                <input type="hidden" name="time" id="time">
+								<input type="button" value="예약" onclick="button_click();" class="btn btn-primary" style="width:200px;">
+							</td>
+						</tr>
+		             </table>
+				</form> 
 				</div>
-	        </div>	
-			 <div class="col-sm-12">
-			 	<h4>센터 page</h4>
-<!--          <div id="tabs"> -->
-<!--            <ul> -->
-<!--              <li><a href="#tabs-1">치료기관 </a></li> -->
-<!--            </ul> -->
-<!--            <div id="tabs-1"> -->
-<!--              <table class="table" id="table1"> -->
-<!--               <ul> -->
-<!--              <li><a href="#tabs-1">보호소</a></li> -->
-<!--              </ul> -->
-<!--              </table> -->
-<!--            </div> -->
-<!--            <div id="tabs-2"> -->
-<!--              <table class="table" id="table2"> -->
-             
-<!--              </table> -->
-<!--            </div> -->
-<!--            <div id="tabs-3"> -->
-<!--              <table class="table" id="table3"> -->
-             
-<!--              </table> -->
-<!--            </div> -->
-<!--          </div> -->
-	   </div>
+	   			</div>
 			</div>
-	</div>
-
   </body>
 </html>

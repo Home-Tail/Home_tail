@@ -37,7 +37,7 @@ public interface CenterServiceMapper {
 	public int msg_check(String id);
 	
 	@Select("SELECT no,id,name,loc,tel,lotno_addr,roadno_addr,reserve_day,TO_CHAR(regdate,'YYYY-MM-DD') as db_reserve_day,time,check_msg,hospital_name"
-			+ " FROM center_reserve where id=#{id}")
+			+ " FROM center_reserve where id=#{id} ORDER BY regdate desc")
 	public List<Center_reserveVO> msg_data(String id);
 	
 	@Select("UPDATE center_reserve set check_msg='Y' WHERE id=#{id} AND no=#{no}")
@@ -76,4 +76,22 @@ public interface CenterServiceMapper {
 	
 	@Select("SELECT count(*) FROM clinic WHERE ADDR LIKE '%'||#{city}||'%'")
 	public int count_clinic(String city);
+	
+	@Select("SELECT DISTINCT name,city from center where poster=#{poster}")
+	public List<CenterVO> poster_count(String poster);
+	
+	// 보호소/센터 중 봉사를 받은 기관 수 
+	@Select("SELECT DISTINCT a.loc,a.hospital_name FROM center_reserve a inner join center b on a.hospital_name = b.name")
+	public List<Center_reserveVO> reserve_shelter_count();
+	
+	@Select("SELECT DISTINCT a.loc,a.hospital_name FROM center_reserve a inner join center_hospital b on a.hospital_name = b.name")
+	public List<Center_reserveVO> reserve_center_count();
+	
+	// 보호소의 총 갯수
+	@Select("select DISTINCT name,city from center")
+	public List<CenterVO> total_shelter_count();
+	
+	// 센터의 총 갯수
+	@Select("select count(*) from center_hospital")
+	public int total_center_count();
 }

@@ -15,13 +15,13 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5f479a055a85358bb537395d0d7aeb6&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript">
 $(function(){
-	    $.getJSON("myJson.json",function(data){
+	    $.getJSON("shelter.json",function(data){
 	    	$.each(data["datas"],function(index,value){
 	    			console.log('일단 돌아감');
 	    	})		
 	    });			
 	    			
- 			  $.getJSON("myJson.json",function(data){
+ 			  $.getJSON("shelter.json",function(data){
 // 	 			  $( "#tabs" ).tabs();
  			     var html = [];
  				 var aJsonArray = new Array();
@@ -139,12 +139,12 @@ $(function(){
 									
 // 							데이터 전달하기! 여기에!
 							$('#name').text(shelter_name);
-							$('#input_name').text(shelter_name);
 	 			   			$('#representative').text(representative);
 	 			   			$('#city').text(city);
 	 			   			$('#capacity').text(capacity+'명');
 	 			   			$('#roadno_addr').text(roadno_addr);
 	 			   			$('#reminder').text(reminder);
+							$('#input_name').val(shelter_name);
 							$('#no').val(no);
 	 			   			};
 	 			   		}		
@@ -166,7 +166,7 @@ $(function(){
 </script>			
 </head>				
 <body>				
- <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+ <section class="hero-wrap hero-wrap-2" style="background-image: url('../center/dog.png');" data-stellar-background-ratio="0.5">
       <!-- <div class="overlay"></div> -->
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -176,45 +176,46 @@ $(function(){
           </div>		
         </div>		
       </div>		
-</section>			
+</section>
 <div class="container">
+	<div class="row">
 		<div class="map_wrap col-lg-12" style="float: left; padding-top: 50px;">
-		    <div id="maps" style="width:1200px;height:600px; border:1px solid black; float: left;"></div>
+		    <div id="maps" style="width:1200px;height:600px; border:1px solid black; float: center; margin:0px auto;"></div>
 		</div>		
 <!-- 		<div class="map_wrap col-lg-12" style="float: left; padding-top: 100px; height: 500px;"> -->
-		<div class="map_wrap col-lg-12" style="float: left;  height: 1000px;" id="add_shelter">
+		<div class="map_wrap col-lg-12" id="add_shelter">
 			<div class="map_wrap col-lg-6" style="float: left; padding-top: 100px;" id="shelter_click_data">
 		 	 <input type="button" value="보호소 추가" id="add_btn" class="btn btn-primary">
 		 	 <sup style="color: red;">*찾는 보호소가 없으면 보호소를 추가해주세요</sup>		
 		 	 <form action="../center/shelter_insert.do" method="post">
-				<table>
+				<table class="table">
 					<tr style="padding-top: 50px;">
-						<th width=25% style="text-align: left; margin-top: 50px" >● 요청 보호소</th>
-						<td id="name">-</td>
+						<th width=30% style="text-align: left; margin-top: 50px" >● 요청 보호소</th>
+						<td id="name" width=70%>-</td>
 					</tr>
 					<tr>
-						<th width=25% style="text-align: left;">● 보호소 대표자</th>
-						<td id="representative">-</td>
+						<th width=30% style="text-align: left;">● 보호소 대표자</th>
+						<td id="representative" width=70%>-</td>
 					</tr>
 					<tr>
-						<th width=25% style="text-align: left;">● 보호소 지역</th>
-						<td id="city">-</td>
+						<th width=30% style="text-align: left;">● 보호소 지역</th>
+						<td id="city" width=70%>-</td>
 					</tr>
 					<tr>
-						<th width=25% style="text-align: left;">● 보호소  수용 능력</th>
-						<td id="capacity">-</td>
+						<th width=30% style="text-align: left;">● 보호소  수용 능력</th>
+						<td id="capacity" width=70%>-</td>
 					</tr>
 					<tr>
-						<th width=25% style="text-align: left;">● 보호소 주소</th>
-						<td id="roadno_addr">-</td>
+						<th width=30% style="text-align: left;">● 보호소 주소</th>
+						<td id="roadno_addr" width=70%>-</td>
 					</tr>
 					<tr>
-						<th width=25% style="text-align: left;">● 비고 사항</th>
-						<td id="reminder">-</td>
+						<th width=30% style="text-align: left;">● 비고 사항</th>
+						<td id="reminder" width=70%>-</td>
 					</tr>
 					<tr>
-						<th width=25% style="text-align: left;">● 요청 품목</th>
-						<td>
+						<th width=30% style="text-align: left;">● 요청 품목</th>
+						<td width=70%>
 							<select id="poster" name="poster">
 								<option value="0">신문지</option>
 								<option value="1">통조림</option>
@@ -225,14 +226,19 @@ $(function(){
 						</td>
 					</tr>
 					<tr>
-						<th>※ 요청 메시지</th>
+						<th colspan=2>※ 요청 메시지</th>
+					</tr>
+					<tr>
+						<td colspan=2 style="border-top:none;"><textarea rows="5" cols="60" id="message"></textarea></td>
+					</tr>
+					<tr>
+						<td colspan=2 class="text-center">
+							<input type="hidden"  id="input_name" name="name">
+							<input type="hidden"  id="no" name="no">
+							<input type="submit"  class="btn btn-primary" value="요청하기">
+						</td>
 					</tr>
 				</table>
-				<textarea rows="5" cols="60" id="message"></textarea>
-				
-				<input type="hidden"  class="btn btn-primary" id="input_name" name="name">
-				<input type="hidden"  class="btn btn-primary" id="no" name="no">
-				<input type="submit"  class="btn btn-primary" value="요청하기">
 				</form>
 			</div>		
 			<div class="col-lg-6" style="float: left; padding-top: 100px;" >
@@ -240,8 +246,7 @@ $(function(){
 		            <script src="../center_news/center_news.js"></script>
 			</div>		
 		</div>		
-					
-		<h5>보호소 page</h5>
+					</div>
 					
 	</div>			
   </body>			

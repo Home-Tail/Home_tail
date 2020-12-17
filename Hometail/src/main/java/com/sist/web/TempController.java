@@ -309,19 +309,19 @@ public class TempController {
 		   dao.TempreplyInsertData(rvo);
 		   return "redirect:../temp/detail.do?no="+petno;
 	   }
-	   
+	   /*
 	   @RequestMapping("temp/reply_update.do")
 	   public String reply_update(int petno, HttpServletRequest request)
 	   {
 		  
 		   ReplyVO rvo=new ReplyVO();
-		   /*String id=request.getParameter("id");
+		   String id=request.getParameter("id");
 		   String bno=request.getParameter("bno");
 		   String msg=request.getParameter("msg");
 		   // DB => UPDATE
 		   ReplyVO rvo=new ReplyVO();
 		   rvo.setPetno(petno);
-		   rvo.setContent(content);* /
+		   rvo.setContent(content);
 		   
 		   dao.TempreplyUpdateData(rvo);
 		   return "redirect:../temp/detail.do?no="+petno;
@@ -336,7 +336,7 @@ public class TempController {
 		   return "redirect:../temp/detail.do?no="+petno;
 	   }
 		
-		
+		*/
 
 }
 

@@ -263,10 +263,10 @@ public class CenterServiceController {
 		String result = shelter_data.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
 		
 		System.out.println("JSON설정후"+result);
-		File path = new File("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\myJson.json");
+		File path = new File("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\shelter.json");
 		try {
 			//C:\SpringDev\SpringStudy\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Hometail
-            FileWriter file = new FileWriter("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\myJson.json");
+            FileWriter file = new FileWriter("C:\\SpringDev\\SpringStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Hometail\\center\\shelter.json");
             BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path.getPath()),"UTF-8"));
             output.write(result);
             output.close();
@@ -303,11 +303,12 @@ public class CenterServiceController {
 		System.out.println("요청 품목 사진"+vo.getPoster());
 		dao.shelter_icon(vo);
 		
-		return "redirect:../center/shelter.do";
+//		return "redirect:../center/shelter.do";	
+		return "redirect:../main/main.do";
 	}
 	
 	//새로운 보호소 저장
-	@RequestMapping("shelter_add_data")
+	@RequestMapping("shelter_add_data.do")
 	public String shelter_add_data(CenterVO vo)
 	{
 		System.out.println("번호="+vo.getNo());
@@ -336,7 +337,7 @@ public class CenterServiceController {
 		
 		dao.shelter_insertdata(vo);
 		
-		return "redirect:main.do";
+		return "redirect:../center/shelter.do";
 	}
 	
 	

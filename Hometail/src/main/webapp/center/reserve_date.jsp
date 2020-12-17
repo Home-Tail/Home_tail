@@ -84,7 +84,7 @@ $(function(){
 // 		$('#strDay').val(day.trim());
 // 		$('#movie_reserve').text(rday);
 		$('#rday').val(rday);
-		
+		$('#reserve_text_rday').text(rday);
 		// 시간 출력 
 		/*
 		    result => text,html,xml,json
@@ -118,13 +118,25 @@ function ch_color(target,bgcolor){
 		}
 	}
 }
+function doOpenCheck(chk){
+    var obj = document.getElementsByName("xxx");
+    var value = $(chk).attr("value");
+    console.log('출력'+value);
+    $('#time').val(value);
+    $('#reserve_text_time').text(value);
+    for(var i=0; i<obj.length; i++){
+        if(obj[i] != chk){
+            obj[i].checked = false;
+        }
+    }
+}
 </script>
 </head>
 <body>
-      <h3 class="text-center">${year }년도 ${month }월</h3>
+      <h4 class="text-center">${year }년도 ${month }월</h4>
       <table class="table">
         <tr>
-          <td>
+          <td colspan=3>
             <select name="year" id="year">
              <c:forEach var="i" begin="2020" end="2030">
                <option ${i==year?"selected":"" }>${i }</option>
@@ -136,10 +148,21 @@ function ch_color(target,bgcolor){
              </c:forEach>
             </select>월
           </td>
+          </tr>
+          <tr>
+           <td>
+        	<input type="checkbox" name="xxx" value="오전반 [09:30~12:30]" onclick="doOpenCheck(this);">&nbsp;&nbsp;오전반&nbsp;&nbsp;[09:30~12:30]
+    	  </td>
+    	  <td>
+          	<input type="checkbox" name="xxx" value="오후반 [13:30~16:30]" onclick="doOpenCheck(this);">&nbsp;&nbsp;오후반&nbsp;&nbsp;[13:30~16:30]
+    	  </td>
+    	   <td>
+          	<input type="checkbox" name="xxx" value="종일반 [09:30~16:30]" onclick="doOpenCheck(this);">&nbsp;&nbsp;종일반&nbsp;&nbsp;[09:30~16:30]
+     	 </td>
         </tr>
       </table>
-      <table class="table-striped" style="width: 530px;">
-        <tr class="danger" style="height:40px">
+      <table class="table-striped" style="width: 700px; border:1px solid #ddd;">
+        <tr class="danger" style="height:40px;">
           <c:forEach var="str" items="${strWeek }" varStatus="s">
             <c:choose>
               <c:when test="${s.index==0 }">
@@ -169,7 +192,7 @@ function ch_color(target,bgcolor){
               </c:otherwise>
             </c:choose>
            <c:if test="${i==1 }">
-             <tr style="height:40px">
+             <tr style="height:40px; border:1px solid #ddd;">
              <c:forEach var="j" begin="1" end="${week }">
                <td>&nbsp;</td>
              </c:forEach>
@@ -182,7 +205,7 @@ function ch_color(target,bgcolor){
              <c:set var="bg" value="text-center"/>
            </c:if>
            
-           <td class="${bg } bg_data" bgcolor="" onClick="ch_color(this,'#50B4FF');" style="border-radius: 2em;"><font color="${color }" class="rdays_ok" data-year=${year } data-month=${month }>
+           <td class="${bg } bg_data" onClick="ch_color(this,'#50B4FF');" style="border:1px solid #ddd;"><font color="${color }" class="rdays_ok" data-year=${year } data-month=${month }>
             <c:if test="${i==rdays[i] }">
              <span class="rdays_ok"  data-year=${year } data-month=${month }>${i }</span>
             </c:if>

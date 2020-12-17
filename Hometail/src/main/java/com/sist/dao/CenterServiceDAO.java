@@ -2,6 +2,7 @@ package com.sist.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -72,4 +73,31 @@ public class CenterServiceDAO {
 		return mapper.count_clinic(city);
 	}
 	//================================================
+	
+	
+	// 메인에 띄울 그래프
+	public List<CenterVO> poster_count(String poster)
+	{
+		return mapper.poster_count(poster);
+	}
+	
+	public List<Center_reserveVO> reserve_shelter_count()
+	{
+		return mapper.reserve_shelter_count();
+	}
+	public List<Center_reserveVO> reserve_center_count()
+	{
+		return mapper.reserve_center_count();
+	}
+	
+	//보호소 센터 총 갯수.
+	public List<CenterVO> total_shelter_count()
+	{
+		return mapper.total_shelter_count();
+	}
+	
+	public int total_center_count()
+	{
+		return mapper.total_center_count();
+	}
 }	
