@@ -7,6 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script>
+  $(function(){
+	  $('#formId').on('submit',function(){
+		$('textarea[name="info"]').val($('textarea[name="info"]').val().replace(/\n/g, "<br/>"));
+	  });
+  });
+  </script>
+
+
 </head>
 <body>
 <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/paper.jpg');" data-stellar-background-ratio="0.5">
@@ -94,11 +103,11 @@
 		      <div class="panel-body">
 		       <h5 class="g-color-primary font-weight-bold g-mb-30">* 다음 양식을 채워주세요</h5>
 				
-                 <form action="process_ok.do" method="post">
+                 <form id="formId" method="post" >
 		        <table class="table table-boardered">
 		            <tr>
 		                <th>1. 신청인 성명</th>
-		                <td><input type="text" class="form-control" name="id"></td>        
+		                <td><input type="text" class="form-control" name="name"></td>        
 		            </tr>
 		            <tr>
 		                <th>2. 성별</th>
@@ -167,7 +176,7 @@
 		                <td>
 		                <input type="radio"  name="agree" value="모두 찬성">모두 찬성 &nbsp;&nbsp;
 		                <input type="radio"  name="agree" value="부분 찬성">부분 찬성 &nbsp;&nbsp;
-		                <input type="radio"  name="agree" value=" 본인제외 모두반대">본인제외 모두반대 &nbsp;&nbsp;
+		                <input type="radio"  name="agree" value="본인제외 모두반대">본인제외 모두반대 &nbsp;&nbsp;
 		                </td>     
 		            </tr>
 		            <tr>
@@ -188,6 +197,9 @@
 		                <td colspan="2">
 		                <input type="submit" class="btn btn-primary" value="전송">
 		                <input type="reset" class="btn btn-danger" value="취소">
+		                <!-- <button type="submit">전송</button> -->
+
+		                
 		                </td>
 		            </tr>
 		             
