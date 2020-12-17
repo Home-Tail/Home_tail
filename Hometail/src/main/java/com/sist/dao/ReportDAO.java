@@ -11,10 +11,14 @@ import com.sist.vo.ReportVO;
 public class ReportDAO {
 	 @Autowired
      private ReportMapper mapper;
+	 
+	 public List<ReportVO> mainBoardList()
+     {
+    	 return mapper.mainBoardList();
+     }
      
 	 public List<ReportVO> reportListData(Map map)
      {
-		 System.out.println("test");
     	 return mapper.reportListData(map);
      }
 

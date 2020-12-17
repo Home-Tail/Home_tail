@@ -21,6 +21,8 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -182,7 +184,7 @@ public class ReportController {
 	}
 	
 	@RequestMapping("report/insert_ok.do")
-	public String report_insert_ok(ReportVO vo,HttpServletRequest request,HttpSession session)throws IOException{//String cate?
+	public String report_insert_ok(ReportVO vo,HttpServletRequest request,HttpSession session)throws IOException, ParseException{//String cate?
 		
 		System.out.println("report/insert_ok.do실행");
 		String path="C:\\springDev\\springStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Hometail\\reportposter";
@@ -202,7 +204,10 @@ public class ReportController {
 		vo.setMap_x(mr.getParameter("map_x"));
 		vo.setMap_y(mr.getParameter("map_y"));
 		vo.setPoster(mr.getFilesystemName("poster"));
-		vo.setPdate(mr.getParameter("pdate"));
+		String from = mr.getParameter("pdate");
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date to = transFormat.parse(from);
+		vo.setPdate(to);
 		vo.setSex(mr.getParameter("sex"));
 		vo.setAge(Integer.parseInt(mr.getParameter("age")));
 		vo.setWeight(mr.getParameter("weight"));
@@ -237,7 +242,7 @@ public class ReportController {
 	}
 	
 	@RequestMapping("report/update_ok.do")
-	public String report_update_ok(ReportVO vo,HttpServletRequest request)throws IOException{
+	public String report_update_ok(ReportVO vo,HttpServletRequest request)throws IOException, ParseException{
 		
 		System.out.println("report/update_ok.do 실행");
 		
@@ -258,7 +263,10 @@ public class ReportController {
 		vo.setMap_x(mr.getParameter("map_x"));
 		vo.setMap_y(mr.getParameter("map_y"));
 		vo.setPoster(mr.getFilesystemName("poster"));
-		vo.setPdate(mr.getParameter("pdate"));
+		String from = mr.getParameter("pdate");
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date to = transFormat.parse(from);
+		vo.setPdate(to);
 		vo.setSex(mr.getParameter("sex"));
 		vo.setAge(Integer.parseInt(mr.getParameter("age")));
 		vo.setWeight(mr.getParameter("weight"));

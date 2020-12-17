@@ -194,9 +194,16 @@ $(function(){
                 <td width=80%>${vo.point }</td>
               </tr>
               <tr>
+              <c:if test="${vo.cate==1 }">
                 <td width=20%>실종일</td>
-                <td width=80%>${vo.pdate }</td>
-<%--                 <fmt:formatDate value="${vo.pdate }" pattern="yyyy-MM-dd"/></td>   --%>
+              </c:if>  
+              <c:if test="${vo.cate==2 }">
+                <td width=20%>목격일</td>
+              </c:if>  
+              <c:if test="${vo.cate==3 }">
+                <td width=20%>발생일</td>
+              </c:if> 
+                <td width=80%><fmt:formatDate pattern="yyyy-MM-dd " value="${vo.pdate}" /></td>
               </tr>
               <tr>
                 <td width=20%>실종장소</td>

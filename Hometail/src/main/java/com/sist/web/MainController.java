@@ -9,11 +9,13 @@ import com.sist.dao.BoardDAO;
 import com.sist.dao.CenterServiceDAO;
 import com.sist.dao.ClinicDAO;
 import com.sist.dao.MemberDAO;
+import com.sist.dao.ReportDAO;
 import com.sist.dao.TempDAO;
 import com.sist.vo.BoardVO;
 import com.sist.vo.CenterVO;
 import com.sist.vo.Center_reserveVO;
 import com.sist.vo.ClinicVO;
+import com.sist.vo.ReportVO;
 import com.sist.vo.TempVO;
 
 import java.util.*;
@@ -33,6 +35,9 @@ public class MainController {
 
 	@Autowired
 	private ClinicDAO cdao;
+	
+	@Autowired
+	private ReportDAO rdao;
 	
 	@RequestMapping("main/main.do")
 	public String main_main(String page, Model model, HttpSession session,Map map) {
@@ -91,8 +96,9 @@ public class MainController {
 	      }
 	      model.addAttribute("rlist",rlist);
 	      model.addAttribute("count",count);
+	   // ===========
 
-	      // 임시보호
+	    // 임시보호
 	      List<TempVO> tList = tdao.tempMainList(map);
 	      System.out.println("됩니당");
 	      model.addAttribute("tList",tList);
@@ -103,6 +109,13 @@ public class MainController {
 	      List<ClinicVO> cntlist=cdao.clinicCntList(map2);
 	      model.addAttribute("cntlist",cntlist);
 	    // ============
+	      
+	   // 석주 메인
+	      List<ReportVO> rList=rdao.mainBoardList();
+	      Collections.shuffle(rlist);
+	      model.addAttribute("rList", rList);
+	    // ============
+	      
 		model.addAttribute("total_shelter_service",total_shelter_service);
 		model.addAttribute("total_center_service",total_center_service);
 		model.addAttribute("total_shelter",total_shelter);

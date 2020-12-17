@@ -181,13 +181,21 @@ function drawAnthonyChart() {
 <!-- 입양후기 시작 -->
 	 <section class="ftco-section">
          <div class="container">
-            <div class="row justify-content-center mb-5 pb-3">
-                   <div class="col-md-7 heading-section ftco-animate">
-                      <span class="subheading subheading-with-line"><span class="pr-2 bg-white">커뮤니티</span></span>
-                      <h2 class="mb-4" style="color:#EDA900;">입양후기</h2>
-                        <p>귀엽고 사랑스러운 유기견, 유기묘 친구들을 입양한 분들의 다양한 입양후기를 만나보세요.</p>
-                   </div>
-              </div>   
+         
+         <div class="col-md-4 heading-section ftco-animate">
+             <span class="subheading subheading-with-line"><small class="pr-2 bg-light">커뮤니티</small></span>
+            <h2 class="mb-4" style="color:#EDA900; font-size: 50px">입양후기</h2>
+            <p style="width: 1000px">귀엽고 사랑스러운 유기견, 유기묘 친구들을 입양한 분들의 다양한 입양후기를 만나보세요.</p>
+         </div> 
+         
+<!--             <div class="row justify-content-center mb-5 pb-3"> -->
+<!--                    <div class="col-md-7 heading-section ftco-animate"> -->
+<!--                       <span class="subheading subheading-with-line"><span class="pr-2 bg-white">커뮤니티</span></span> -->
+<!--                       <h2 class="mb-4" style="color:#EDA900;">입양후기</h2> -->
+<!--                         <p>귀엽고 사랑스러운 유기견, 유기묘 친구들을 입양한 분들의 다양한 입양후기를 만나보세요.</p> -->
+<!--                    </div> -->
+<!--               </div>    -->
+              
             <div class="row">
                <c:forEach var="bvo" items="${bList }">
                   <div class="col-md-6 col-lg-3 ftco-animate">
@@ -253,14 +261,22 @@ function drawAnthonyChart() {
 <!-- 봉사 현황 시작 -->
 		<section class="ftco-services">
 			<div class="container">
-				<div class="row justify-content-start">
-          <div class="col-md-12 heading-section ftco-animate">
-            <h2 class="mb-4">현재 봉사/요청 참여 현황</h2>
-          	<div class="pl-md-4 border-line">
-	          	<p>현재의 참여중인 봉사 인원, 보호소에서 요청하는 물품</p>
-          	</div>
-          </div>
-        </div>
+			
+         <div class="col-md-4 heading-section ftco-animate">
+             <span class="subheading subheading-with-line"><small class="pr-2 bg-light">현재 봉사/요청 참여 현황</small></span>
+            <h2 class="mb-4" style="color:#EDA900; font-size: 50px">봉사 및 후원</h2>
+            <p style="width: 1000px">현재의 참여중인 봉사 인원, 보호소에서 요청하는 물품</p>
+         </div> 
+			
+<!-- 				<div class="row justify-content-start"> -->
+<!--           <div class="col-md-12 heading-section ftco-animate"> -->
+<!--             <h2 class="mb-4" style="color:#EDA900;">현재 봉사/요청 참여 현황</h2> -->
+<!--           	<div class="pl-md-4 border-line"> -->
+<!-- 	          	<p>현재의 참여중인 봉사 인원, 보호소에서 요청하는 물품</p> -->
+<!--           	</div> -->
+<!--           </div> -->
+<!--         </div> -->
+        
 		<div class="row">
           <div class="col-md-4 d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services d-block">
@@ -299,13 +315,20 @@ function drawAnthonyChart() {
 <!-- 임시보호 시작 -->
 		  <section class="ftco-section">
          <div class="container">
-            <div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate">
-             <span class="subheading subheading-with-line"><small class="pr-2 bg-white">Temporary protection</small></span>
-            <h2 class="mb-4">임시보호</h2>
-            <p>유기동물들을 임시보호중입니다. 임시보호 중인 동물 확인이 가능하며 임시보호가 가능하신 분들은 사진을 클릭해주세요!</p>
-          </div>
-        </div>   
+         
+         <div class="col-md-4 heading-section ftco-animate">
+             <span class="subheading subheading-with-line"><small class="pr-2 bg-light">유기동물</small></span>
+            <h2 class="mb-4" style="color:#EDA900; font-size: 50px">임시보호</h2>
+            <p style="width: 1000px">유기동물들을 임시보호중입니다. 임시보호 중인 동물 확인이 가능하며 임시보호가 가능하신 분들은 사진을 클릭해주세요!</p>
+         </div> 
+         
+<!--             <div class="row justify-content-center mb-5 pb-3"> -->
+<!-- 	          <div class="col-md-7 heading-section ftco-animate"> -->
+<!-- 	             <span class="subheading subheading-with-line"><small class="pr-2 bg-white">Temporary protection</small></span> -->
+<!-- 	           <h2 class="mb-4" style="color:#EDA900;">임시보호</h2> -->
+<!-- 	            <p>유기동물들을 임시보호중입니다. 임시보호 중인 동물 확인이 가능하며 임시보호가 가능하신 분들은 사진을 클릭해주세요!</p> -->
+<!-- 	          </div> -->
+<!--         	</div>    -->
             <div class="row">
                  <c:forEach items="${tList }" var="tvo">
                   <div class="col-md-6 col-lg-3 ftco-animate">
@@ -353,7 +376,7 @@ function drawAnthonyChart() {
           <div class="row justify-content-start">
           <div class="col-md-4 heading-section ftco-animate">
              <span class="subheading subheading-with-line"><small class="pr-2 bg-light">댓글이 많이 달린</small></span>
-            <h2 class="mb-4">동물병원 리스트</h2>
+            <h2 class="mb-4" style="color:#EDA900; font-size: 50px">동물병원 리스트</h2>
           </div>
           <div class="col-md-8 pl-md-6 heading-section ftco-animate">
           <div>
@@ -380,6 +403,10 @@ function drawAnthonyChart() {
  <!-- 입양차트 시작 -->
        <section class="ftco-section">
        <div class="container">
+              <div class="col-md-4 heading-section ftco-animate">
+             <span class="subheading subheading-with-line"><small class="pr-2 bg-light">축종 및 상태별</small></span>
+           <h2 class="mb-4" style="color:#EDA900; font-size: 50px">입양차트</h2>
+          </div> 
          <div class="row">
           <table class="columns">
 		      <tr>
@@ -390,6 +417,41 @@ function drawAnthonyChart() {
 		</div>
 		</div>
        </section>
- <!-- 입양차트 끝 -->       
+ <!-- 입양차트 끝 -->
+ <!-- 신고/제보 시작 -->
+		  <section class="ftco-section" style="padding-top: 0px;">
+         <div class="container">
+          <div class="col-md-4 heading-section ftco-animate">
+             <span class="subheading subheading-with-line"><small class="pr-2 bg-light">최근 게시물 random</small></span>
+            <h2 class="mb-4" style="color:#EDA900; font-size: 50px">신고/제보</h2>
+          </div> 
+            <div class="row">
+                 <c:forEach items="${rList }" var="vo" begin="0" end="3">
+                  <div class="col-md-6 col-lg-3 ftco-animate">
+                  <div class="staff">
+                  <a href="../report/detail.do?no=${vo.petno }" style="color: black;" ><div class="img" style="background-image: url(${vo.poster});"></div></a>
+                     <div class="text px-4 pt-4">
+                        
+                        <c:choose>
+                           <c:when test="${vo.cate==1}">
+                              <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;" ><b><span style="color: red;">[신고]</span>${vo.title }</b></a></h6>
+                              <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">${vo.loc }</h6>
+                           	  <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">실종날짜 : <fmt:formatDate pattern="yyyy-MM-dd " value="${vo.pdate}" /></a></h6>
+                           </c:when>
+                           <c:otherwise>
+                              <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;" ><b><span style="color: green;">[제보]</span>${vo.title }</b></a></h6>
+                              <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">${vo.loc }</a></h6>
+                              <h6><a href="../report/detail.do?no=${vo.petno }" style="color: black;">발견날짜 :  <fmt:formatDate pattern="yyyy-MM-dd " value="${vo.pdate}" /></a></h6>
+                           </c:otherwise>
+                        </c:choose>
+                      
+                      </div>
+                     </div>
+                  </div>
+                  </c:forEach>
+               </div>
+               </div>
+               </section>
+<!-- 신고/제보 끝 -->
 	</body>
 </html>

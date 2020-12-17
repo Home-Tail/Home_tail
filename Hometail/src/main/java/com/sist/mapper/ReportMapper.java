@@ -30,6 +30,13 @@ public interface ReportMapper {
 	@Select("SELECT CEIL(COUNT(*)/8.0) FROM pet_board WHERE cate=#{cate}")
 	public int reportCateTotalPage(int cate);
 	
+	@Select("SELECT petno,id,title,cate,kind,sub_kind,poster,sex,age,weight,color,pdate,loc,num "
+			+ "FROM (SELECT petno,id,title,cate,kind,sub_kind,poster,sex,age,weight,color,pdate,loc,rownum as num "
+	  		+ "FROM (SELECT petno,id,title,cate,kind,sub_kind,poster,sex,age,weight,color,pdate,loc "
+	  		+ "FROM pet_board WHERE cate BETWEEN 1 AND 2 ORDER BY petno DESC)) "
+	  		+"WHERE num BETWEEN 1 AND 10")
+	public List<ReportVO> mainBoardList();
+	
 	@Select("SELECT * FROM pet_board WHERE petno=#{petno}")
 	public ReportVO reportDetailData(int petno);
 	
