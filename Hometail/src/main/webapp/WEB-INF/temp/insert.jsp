@@ -109,11 +109,9 @@
 		                            var latlng = mouseEvent.latLng; 
 		                            document.getElementById("map_x").value=latlng.getLat();
 		                            document.getElementById("map_y").value=latlng.getLng();
-
 					                // 마커를 클릭한 위치에 표시합니다 
 					                marker.setPosition(mouseEvent.latLng);
 					                marker.setMap(map);
-
 					                // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
 					                infowindow.setContent(content);
 					                infowindow.open(map, marker);
@@ -128,7 +126,6 @@
 					        // 좌표로 행정동 주소 정보를 요청합니다
 					        geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
 					    }
-
 					    function searchDetailAddrFromCoords(coords, callback) {
 					        // 좌표로 법정동 상세 주소 정보를 요청합니다
 					        geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
@@ -207,13 +204,9 @@
         </td>
        </tr>
        
-       
    </table>
   </form>
  </div>
  </div>
 </body>
 </html>
-
-       
-       
